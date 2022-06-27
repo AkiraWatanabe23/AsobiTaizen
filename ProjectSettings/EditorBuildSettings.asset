@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/3DTetris.unity
     guid: 7b720388880475047b0c5ce45da5d6bb
   - enabled: 1
-    path: Assets/Scenes/Game3Scene.unity
+    path: Assets/Scenes/BlockDoku.unity
     guid: bb870190fe869184f9513c199621ecde
   m_configObjects: {}
