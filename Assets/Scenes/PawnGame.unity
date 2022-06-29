@@ -1458,13 +1458,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: ToTitle
+    - m_Text: Help
       m_Image: {fileID: 0}
-    - m_Text: Back
-      m_Image: {fileID: 0}
-    - m_Text: Piece Move
+    - m_Text: Moving
       m_Image: {fileID: 0}
     - m_Text: Rule
+      m_Image: {fileID: 0}
+    - m_Text: To Title
+      m_Image: {fileID: 0}
+    - m_Text: Back
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1672,8 +1674,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 393246426}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
+        m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
+        m_MethodName: OnClickStartButton
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3084,7 +3086,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: ToTitle
+  m_Text: Help
 --- !u!222 &628228996
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3585,6 +3587,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 112072490}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1004594774}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -7212,6 +7226,7 @@ MonoBehaviour:
   dropDown: {fileID: 335746640}
   _ruleImage: {fileID: 1024074808}
   _moveImage: {fileID: 35270921}
+  _toTitleImage: {fileID: 1004594776}
   _helpPanel: {fileID: 112072492}
 --- !u!4 &1576547792
 Transform:

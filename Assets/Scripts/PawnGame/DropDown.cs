@@ -12,58 +12,60 @@ public class DropDown : MonoBehaviour
     //[SerializeField] Images images = Images.Help;
     [SerializeField] Image _ruleImage;
     [SerializeField] Image _moveImage;
+    [SerializeField] Image _toTitleImage;
     [SerializeField] Image _helpPanel;
 
-    // Start is called before the first frame update
     void Start()
     {
-
+        _moveImage.gameObject.SetActive(false);
+        _ruleImage.gameObject.SetActive(false);
+        _toTitleImage.gameObject.SetActive(false);
+        _helpPanel.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //DropDownButton の Value が0("to title"が選択されている)の時
         if (dropDown.value == 0)
         {
-            //Images images = Images.Help;
             _moveImage.gameObject.SetActive(false);
             _ruleImage.gameObject.SetActive(false);
-
+            _toTitleImage.gameObject.SetActive(false);
+            Debug.Log("none");
         }
-        //DropDownButton の Value が1("back"が選択されている)の時
+        //DropDownButton の Value が1("moving"が選択されている)の時
         else if (dropDown.value == 1)
         {
-            //Images images = Images.Rule;
-            _moveImage.gameObject.SetActive(false);
-            _ruleImage.gameObject.SetActive(false);
-            _helpPanel.gameObject.SetActive(false);
+            _moveImage.gameObject.SetActive(true);
+            _ruleImage.gameObject.SetActive(false); 
+            _toTitleImage.gameObject.SetActive(false);
+            Debug.Log("moving");
         }
-        //DropDownButton の Value が2("help"が選択されている)の時
+        //DropDownButton の Value が2("rule"が選択されている)の時
         else if (dropDown.value == 2)
         {
-            //Images images = Images.ToTitle;
-            _moveImage.gameObject.SetActive(true);
-            _ruleImage.gameObject.SetActive(false);
-        }
-        //DropDownButton の Value が3("rule"が選択されている)の時
-        else if (dropDown.value == 3)
-        {
-            //Images images = Images.Back;
             _moveImage.gameObject.SetActive(false);
             _ruleImage.gameObject.SetActive(true);
+            _toTitleImage.gameObject.SetActive(false);
+            Debug.Log("rule");
+        }
+        //DropDownButton の Value が3("to title"が選択されている)の時
+        else if (dropDown.value == 3)
+        {
+            _moveImage.gameObject.SetActive(false);
+            _ruleImage.gameObject.SetActive(false);
+            _toTitleImage.gameObject.SetActive(true);
+            Debug.Log("to title");
+        }
+        //DropDownButton の Value が4("back"が選択されている)の時
+        else if (dropDown.value == 4)
+        {
+            _moveImage.gameObject.SetActive(false);
+            _ruleImage.gameObject.SetActive(false);
+            _toTitleImage.gameObject.SetActive(false);
+            _helpPanel.gameObject.SetActive(false);
+            dropDown.gameObject.SetActive(false);
+            Debug.Log("back");
         }
     }
-
-    //public enum Images
-    //{
-    //    /// <summary> HelpPage </summary>
-    //    Help,
-    //    /// <summary> RulePage </summary>
-    //    Rule,
-    //    /// <summary> ToTitlePage </summary>
-    //    ToTitle,
-    //    /// <summary> BackButton </summary>
-    //    Back,
-    //}
 }
