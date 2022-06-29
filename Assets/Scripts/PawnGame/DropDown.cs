@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// DropdownButton ‚ª‰Ÿ‚³‚ê‚½‚Ìˆ—
+/// DropdownButton ‚ª‰Ÿ‚³‚ê‚½(HelpPanel‚ªŠJ‚©‚ê‚½)‚Ìˆ—
 /// </summary>
 public class DropDown : MonoBehaviour
 {
     [SerializeField] Dropdown dropDown;
-    //[SerializeField] Images images = Images.Help;
     [SerializeField] Image _ruleImage;
     [SerializeField] Image _moveImage;
     [SerializeField] Image _toTitleImage;
@@ -24,7 +23,7 @@ public class DropDown : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void ChangeImage()
     {
         if (dropDown.value == 0)
         {
@@ -64,7 +63,6 @@ public class DropDown : MonoBehaviour
             _ruleImage.gameObject.SetActive(false);
             _toTitleImage.gameObject.SetActive(false);
             _helpPanel.gameObject.SetActive(false);
-            dropDown.gameObject.SetActive(false);
             Debug.Log("back");
         }
     }
