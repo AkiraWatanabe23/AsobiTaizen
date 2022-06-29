@@ -8,11 +8,11 @@ using UnityEngine.UI;
 /// </summary>
 public class DropDown : MonoBehaviour
 {
-    [SerializeField] Dropdown dropDown;
-    [SerializeField] Image _ruleImage;
-    [SerializeField] Image _moveImage;
-    [SerializeField] Image _toTitleImage;
-    [SerializeField] Image _helpPanel;
+    public Dropdown dropDown;
+    public Image _ruleImage;
+    public Image _moveImage;
+    public Image _toTitleImage;
+    public Image _helpPanel;
 
     void Start()
     {
