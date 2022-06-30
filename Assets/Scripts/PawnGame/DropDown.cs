@@ -25,6 +25,7 @@ public class DropDown : MonoBehaviour
     // Update is called once per frame
     public void ChangeImage() //Updateでやると、書いて実行したことが上書きされてしまうので注意!!
     {
+        //DropDownButton の Value が0("help"が選択されている ... 何も選択されていない)の時
         if (dropDown.value == 0)
         {
             _moveImage.gameObject.SetActive(false);

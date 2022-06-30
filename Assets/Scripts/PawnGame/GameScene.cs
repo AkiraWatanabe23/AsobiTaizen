@@ -63,7 +63,7 @@ public class GameScene : MonoBehaviour
                 int _pieceType = pieceType[i, j] % 10;
                 int _player = pieceType[i, j] / 10;
 
-                GameObject prefab = getPrefabPiece(_player, (PieceController.Type)_pieceType);
+                //GameObject prefab = getPrefabPiece(_player, (PieceController.Type)_pieceType);
                 GameObject piece = null;
                 PieceController ctrl = null;
 
