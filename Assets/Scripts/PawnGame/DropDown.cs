@@ -23,7 +23,7 @@ public class DropDown : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void ChangeImage()
+    public void ChangeImage() //Update‚Å‚â‚é‚ÆA‘‚¢‚ÄÀs‚µ‚½‚±‚Æ‚ªã‘‚«‚³‚ê‚Ä‚µ‚Ü‚¤‚Ì‚Å’ˆÓ!!
     {
         if (dropDown.value == 0)
         {
