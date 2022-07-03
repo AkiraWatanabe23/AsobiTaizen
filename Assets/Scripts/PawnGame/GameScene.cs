@@ -143,8 +143,64 @@ public class GameScene : MonoBehaviour
         //駒選択
         if (null != _piece && _selectPiece != _piece)
         {
-
+            _setSelectCursors(_piece);
         }
+        //駒の移動
+        else if (null != _selectPiece)
+        {
+            _movePiece(_selectPiece, _tilePos);
+        }
+    }
+
+    void _setSelectCursors(PieceController piece = null, bool setPiece = true)
+    {
+        // TODO カーソル解除
+
+
+        //駒の非選択状態
+        if (null != _selectPiece)
+        {
+            _selectPiece.SelectPiece(false);
+            _selectPiece = null;
+        }
+
+        //駒を何もセットしないなら、終わり
+        if (null == piece)
+        {
+            return;
+        }
+
+        // TODO カーソル作成
+
+
+        //駒の選択状態
+        if (setPiece)
+        {
+            _selectPiece = piece;
+            _selectPiece.SelectPiece(setPiece);
+        }
+    }
+
+    bool _movePiece(PieceController piece, Vector2Int tilePos)
+    {
+        Vector2Int _piecePos = piece.Pos;
+
+        //駒を新しい位置に移動
+        piece.MovePiece(boards[tilePos.x, tilePos.y]);
+
+        //配列データの更新(もともと駒がいた位置)
+        units[_piecePos.x, _piecePos.y] = null;
+
+        //駒があったら消す
+        if (null != units[tilePos.x, tilePos.y])
+        {
+            Destroy(units[tilePos.x, tilePos.y].gameObject);
+        }
+
+        //配列データの更新(新しく置いた位置)
+        units[tilePos.x, tilePos.y] = piece;
+
+        return true;
     }
 
     //駒のプレハブを返す
