@@ -60,7 +60,7 @@ public class PieceController : MonoBehaviour
     //‹î‚ª‘I‘ğ‚³‚ê‚½‚Ìˆ—
     public void SelectPiece(bool select = true)
     {
-        Vector3 _pos = transform.position;
+        Vector3 _pos = transform.localPosition;
         _pos.y += 2;
         GetComponent<Rigidbody>().isKinematic = true;
 
@@ -71,7 +71,7 @@ public class PieceController : MonoBehaviour
             GetComponent<Rigidbody>().isKinematic = false;
         }
 
-        transform.position = _pos;
+        transform.localPosition = _pos;
     }
 
     //ˆÚ“®ˆ—
@@ -82,8 +82,8 @@ public class PieceController : MonoBehaviour
 
         //board‚Ì”Ô†‚©‚ç”z—ñ”Ô†‚É•ÏŠ·
         Vector2Int idx = new Vector2Int
-            ((int)tile.transform.position.x + GameScene._boardWidth / 2,
-             (int)tile.transform.position.z + GameScene._boardHeight / 2);
+            ((int)tile.transform.localPosition.x + GameScene._boardWidth / 2,
+             (int)tile.transform.localPosition.z + GameScene._boardHeight / 2);
 
         //êŠ‚ÌˆÚ“®
         Vector3 _pos = tile.transform.localPosition;
