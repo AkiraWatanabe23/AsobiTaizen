@@ -38,9 +38,28 @@ public class GameScene : MonoBehaviour
         {1, 0, 0, 0, 0, 0, 0, 11},
     };
 
+    //UI関連
+    GameObject _textTurnInfo; //アンカー左上
+    GameObject _textResultInfo; //アンカー真上
+    GameObject _buttonApply; //Retry
+    GameObject _buttonCancel; //ToTitle
+
+    //選択中の駒
+    PieceController _selectPiece;
+
     // Start is called before the first frame update
     void Start()
     {
+        //UIオブジェクト取得
+        _textTurnInfo = GameObject.Find("TextTurnInfo");
+        _textResultInfo = GameObject.Find("TextResultInfo");
+        _buttonApply = GameObject.Find("ButtonApply");
+        _buttonCancel = GameObject.Find("ButtonCancel");
+
+        //Result関連のものは最初は消しておく
+        _buttonApply.SetActive(false);
+        _buttonCancel.SetActive(false);
+
         boards = new GameObject[_boardWidth, _boardHeight];
         units = new PieceController[_boardWidth, _boardHeight];
 
@@ -88,7 +107,44 @@ public class GameScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject _tile = null;
+        PieceController _piece = null;
+
+        //PLAYER
+        if (Input.GetMouseButtonUp(0))
+        {
+            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            //駒にも当たり判定がある ... ヒットした全てのオブジェクト情報を取得
+            foreach (RaycastHit hit in Physics.RaycastAll(_ray))
+            {
+                if (hit.transform.name.Contains("Tile"))
+                {
+                    _tile = hit.transform.gameObject;
+                    break;
+                }
+            }
+        }
+
+        //タイルが押されていない(選択されていない)ならば、処理しない
+        if (null == _tile)
+        {
+            return;
+        }
+
+        //選んだタイルから駒を取得
+        Vector2Int _tilePos = new Vector2Int(
+            (int)_tile.transform.position.x + _boardWidth / 2,
+            (int)_tile.transform.position.z + _boardHeight / 2);
+
+        //タイルにのっている駒
+        _piece = units[_tilePos.x, _tilePos.y];
+
+        //駒選択
+        if (null != _piece && _selectPiece != _piece)
+        {
+
+        }
     }
 
     //駒のプレハブを返す
