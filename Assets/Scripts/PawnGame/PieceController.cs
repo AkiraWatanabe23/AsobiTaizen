@@ -31,6 +31,8 @@ public class PieceController : MonoBehaviour
     public enum Status
     {
         None = -1,
+        EnPassant = 1, //アンパッサン
+        Check,
     }
 
     // Start is called before the first frame update
@@ -52,7 +54,7 @@ public class PieceController : MonoBehaviour
         Player = player;
         _type = type;
         MovePiece(tile);
-        _turnCount = -1;
+        _turnCount = -1; //初動に戻す
     }
 
     public void MovePiece(GameObject tile)
@@ -64,11 +66,14 @@ public class PieceController : MonoBehaviour
 
         //場所の移動
         Vector3 _pos = tile.transform.localPosition;
-        _pos.y = 1.25f;
+        _pos.y = 21.25f;
         transform.localPosition = _pos;
 
         //移動状態をセット
         _status.Clear();
+
+        //アンパッサンの処理
+
 
         //インデックスの更新
         _oldPos = Pos;

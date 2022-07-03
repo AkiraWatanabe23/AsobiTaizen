@@ -14,7 +14,7 @@ public class GameScene : MonoBehaviour
 
     //チェス盤の配列
     public GameObject[] board;
-    //駒選択のためのカーソル
+    //駒選択のためのカーソル ... 駒を選択した時に、移動可能な範囲を表示する
     public GameObject cursor;
 
     GameObject[,] boards;
@@ -45,9 +45,9 @@ public class GameScene : MonoBehaviour
         units = new PieceController[_boardWidth, _boardHeight];
 
 
-        for (int i = 0; i < _boardWidth; i++)
+        for (int i = 1; i <= _boardWidth; i++)
         {
-            for (int j = 0; j < _boardHeight; j++)
+            for (int j = 1; j <= _boardHeight; j++)
             {
                 float x = i - _boardWidth / 2;
                 float z = j - _boardHeight / 2;
@@ -63,10 +63,23 @@ public class GameScene : MonoBehaviour
                 int _pieceType = pieceType[i, j] % 10;
                 int _player = pieceType[i, j] / 10;
 
-                //GameObject prefab = getPrefabPiece(_player, (PieceController.Type)_pieceType);
+                GameObject prefab = getPrefabPiece(_player, _pieceType);
                 GameObject piece = null;
                 PieceController ctrl = null;
 
+                if (null == prefab)
+                {
+                    continue;
+                }
+
+                _pos.y += 1.5f;
+                piece = Instantiate(prefab, _pos, Quaternion.identity);
+
+                //初期設定
+                ctrl = piece.GetComponent<PieceController>();
+                ctrl.SetPiece(_player, (PieceController.Type)_pieceType, tile);
+
+                //内部データのセット
 
             }
         }
@@ -76,5 +89,23 @@ public class GameScene : MonoBehaviour
     void Update()
     {
         
+    }
+
+    //駒のプレハブを返す
+    GameObject getPrefabPiece(int _player, int _type)
+    {
+        int idx = _type - 1;
+
+        if (0 > idx)
+        {
+            return null;
+        }
+
+        GameObject _prefab = prefabWhitePieces[idx];
+        if (1 == _player)
+        {
+            _prefab = prefabBlackPieces[idx];
+        }
+        return _prefab;
     }
 }
