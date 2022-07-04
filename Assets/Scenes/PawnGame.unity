@@ -5920,6 +5920,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 916274557}
     m_Modifications:
+    - target: {fileID: -5524848628926070580, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
+      propertyPath: _status.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1213357437349106, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_Name
       value: pawn white

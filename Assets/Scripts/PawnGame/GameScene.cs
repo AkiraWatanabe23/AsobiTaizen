@@ -10,7 +10,7 @@ public class GameScene : MonoBehaviour
 
     public const int _boardWidth = 8; //const ... 数値の定数化
     public const int _boardHeight = 8;
-    const int _players = 2; //プレイ時の最大人数
+    const int _playersMax = 2; //プレイ時の最大人数
 
     //チェス盤の配列
     public GameObject[] board;
@@ -29,9 +29,9 @@ public class GameScene : MonoBehaviour
     //下記は初期配置
     public int[,] pieceType =
     {
-        {1, 0, 0, 0, 0, 0, 0, 11},
-        {1, 0, 0, 0, 0, 0, 0, 11},
-        {1, 0, 0, 0, 0, 0, 0, 11},
+        {1, 0, 0, 0, 0, 0, 0, 11}, // 1...白ポーン
+        {1, 0, 0, 0, 0, 0, 0, 11}, // 0...何も置かれていない
+        {1, 0, 0, 0, 0, 0, 0, 11}, //11...黒ポーン
         {1, 0, 0, 0, 0, 0, 0, 11},
         {1, 0, 0, 0, 0, 0, 0, 11},
         {1, 0, 0, 0, 0, 0, 0, 11},
@@ -40,10 +40,10 @@ public class GameScene : MonoBehaviour
     };
 
     //UI関連
-    GameObject _textTurnInfo; //アンカー左上
-    GameObject _textResultInfo; //アンカー真上
-    GameObject _buttonApply; //Retry
-    GameObject _buttonCancel; //ToTitle
+    //GameObject _textTurnInfo; //アンカー左上
+    //GameObject _textResultInfo; //アンカー真上
+    //GameObject _buttonApply; //Retry
+    //GameObject _buttonCancel; //ToTitle
 
     //選択中の駒
     PieceController _selectPiece;
@@ -51,19 +51,18 @@ public class GameScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //UIオブジェクト取得
-        _textTurnInfo = GameObject.Find("TextTurnInfo");
-        _textResultInfo = GameObject.Find("TextResultInfo");
-        _buttonApply = GameObject.Find("ButtonApply");
-        _buttonCancel = GameObject.Find("ButtonCancel");
+    //    UIオブジェクト取得
+    //    _textTurnInfo = GameObject.Find("TextTurnInfo");
+    //    _textResultInfo = GameObject.Find("TextResultInfo");
+    //    _buttonApply = GameObject.Find("ButtonApply");
+    //    _buttonCancel = GameObject.Find("ButtonCancel");
 
-        //Result関連のものは最初は消しておく
-        _buttonApply.SetActive(false);
-        _buttonCancel.SetActive(false);
+    //    //Result関連のものは最初は消しておく
+    //    _buttonApply.SetActive(false);
+    //    _buttonCancel.SetActive(false);
 
         boards = new GameObject[_boardWidth, _boardHeight];
         units = new PieceController[_boardWidth, _boardHeight];
-
 
         for (int i = 0; i < _boardWidth; i++)
         {
@@ -112,14 +111,14 @@ public class GameScene : MonoBehaviour
         PieceController _piece = null;
 
         //PLAYER
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) //MouseButton(0)...左クリック　Up...離れた時
         {
-            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //マウス座標からのRayの設定
 
             //駒にも当たり判定がある ... ヒットした全てのオブジェクト情報を取得
             foreach (RaycastHit hit in Physics.RaycastAll(_ray))
             {
-                if (hit.transform.name.Contains("Tile"))
+                if (hit.transform.name.Contains("Board"))
                 {
                     _tile = hit.transform.gameObject;
                     break;
@@ -127,7 +126,7 @@ public class GameScene : MonoBehaviour
             }
         }
 
-        //タイルが押されていない(選択されていない)ならば、処理しない
+        //タイルが押されていない(選択されていない)ならば、処理を行わない
         if (null == _tile)
         {
             return;
@@ -155,7 +154,7 @@ public class GameScene : MonoBehaviour
 
     void _setSelectCursors(PieceController piece = null, bool setPiece = true)
     {
-        // TODO カーソル解除
+        //カーソル解除
 
 
         //駒の非選択状態
@@ -171,7 +170,7 @@ public class GameScene : MonoBehaviour
             return;
         }
 
-        // TODO カーソル作成
+        //カーソル作成
 
 
         //駒の選択状態
