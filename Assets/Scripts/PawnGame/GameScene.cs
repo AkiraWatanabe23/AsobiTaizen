@@ -8,7 +8,7 @@ using UnityEngine;
 public class GameScene : MonoBehaviour
 {
 
-    public const int _boardWidth = 8; //const ... 数値の定数化
+    public const int _boardWidth = 8; //const ... 数値を定数にする
     public const int _boardHeight = 8;
     const int _playersMax = 2; //プレイ時の最大人数
 
@@ -57,7 +57,7 @@ public class GameScene : MonoBehaviour
     //    _buttonApply = GameObject.Find("ButtonApply");
     //    _buttonCancel = GameObject.Find("ButtonCancel");
 
-    //    //Result関連のものは最初は消しておく
+    //    Result関連のものは最初は消しておく
     //    _buttonApply.SetActive(false);
     //    _buttonCancel.SetActive(false);
 
@@ -74,7 +74,7 @@ public class GameScene : MonoBehaviour
                 Vector3 _pos = new Vector3(x, 0, z);
 
                 int _idx = (i + j) % 2;
-                GameObject tile = Instantiate(board[_idx], _pos, Quaternion.identity);
+                GameObject tile = Instantiate(board[_idx], _pos, Quaternion.identity); //盤のプレハブを生成
 
                 boards[i, j] = tile;
 
@@ -92,7 +92,7 @@ public class GameScene : MonoBehaviour
                 }
 
                 _pos.y += 1.5f;
-                piece = Instantiate(prefab, _pos, Quaternion.identity);
+                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成(ポーンが1つ生成されている)
 
                 //初期設定
                 ctrl = piece.GetComponent<PieceController>();
@@ -143,16 +143,16 @@ public class GameScene : MonoBehaviour
         //駒選択
         if (null != _piece && _selectPiece != _piece)
         {
-            _setSelectCursors(_piece);
+            SetSelectCursors(_piece);
         }
         //駒の移動
         else if (null != _selectPiece)
         {
-            _movePiece(_selectPiece, _tilePos);
+            MovePiece(_selectPiece, _tilePos);
         }
     }
 
-    void _setSelectCursors(PieceController piece = null, bool setPiece = true)
+    void SetSelectCursors(PieceController piece = null, bool setPiece = true)
     {
         //カーソル解除
 
@@ -181,7 +181,7 @@ public class GameScene : MonoBehaviour
         }
     }
 
-    bool _movePiece(PieceController piece, Vector2Int tilePos)
+    bool MovePiece(PieceController piece, Vector2Int tilePos)
     {
         Vector2Int _piecePos = piece.Pos;
 
