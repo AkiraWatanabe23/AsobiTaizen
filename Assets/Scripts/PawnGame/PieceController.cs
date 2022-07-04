@@ -32,7 +32,7 @@ public class PieceController : MonoBehaviour
     {
         None = -1,
         EnPassant = 1, //アンパッサン
-        Check,
+        Check, //チェック(クイーンに対して)
     }
 
     // Start is called before the first frame update
@@ -82,13 +82,13 @@ public class PieceController : MonoBehaviour
 
         //boardの番号から配列番号に変換
         Vector2Int idx = new Vector2Int
-            ((int)tile.transform.localPosition.x + GameScene._boardWidth / 2,
-             (int)tile.transform.localPosition.z + GameScene._boardHeight / 2);
+            ((int)tile.transform.position.x + GameScene._boardWidth / 2,
+             (int)tile.transform.position.z + GameScene._boardHeight / 2);
 
         //場所の移動
-        Vector3 _pos = tile.transform.localPosition;
+        Vector3 _pos = tile.transform.position;
         _pos.y = 21.25f;
-        transform.localPosition = _pos;
+        transform.position = _pos;
 
         //移動状態をリセット
         _status.Clear();

@@ -17,6 +17,7 @@ public class GameScene : MonoBehaviour
     //駒選択のためのカーソル ... 駒を選択した時に、移動可能な範囲を表示する
     public GameObject cursor;
 
+    //内部データ
     GameObject[,] boards;
     PieceController[,] units;
 
@@ -41,8 +42,8 @@ public class GameScene : MonoBehaviour
     //UI関連
     GameObject _textTurnInfo; //アンカー左上
     GameObject _textResultInfo; //アンカー真上
-    //GameObject _buttonApply; //Retry
-    //GameObject _buttonCancel; //ToTitle
+    GameObject _buttonApply; //Retry
+    GameObject _buttonCancel; //ToTitle
 
     //選択中の駒
     PieceController _selectPiece;
@@ -53,20 +54,20 @@ public class GameScene : MonoBehaviour
         //UIオブジェクト取得
         _textTurnInfo = GameObject.Find("TextTurnInfo");
         _textResultInfo = GameObject.Find("TextResultInfo");
-        //_buttonApply = GameObject.Find("ButtonApply");
-        //_buttonCancel = GameObject.Find("ButtonCancel");
+        _buttonApply = GameObject.Find("ButtonApply");
+        _buttonCancel = GameObject.Find("ButtonCancel");
 
         //Result関連のものは最初は消しておく
-        //_buttonApply.SetActive(false);
-        //_buttonCancel.SetActive(false);
+        _buttonApply.SetActive(false);
+        _buttonCancel.SetActive(false);
 
         boards = new GameObject[_boardWidth, _boardHeight];
         units = new PieceController[_boardWidth, _boardHeight];
 
 
-        for (int i = 1; i <= _boardWidth; i++)
+        for (int i = 0; i < _boardWidth; i++)
         {
-            for (int j = 1; j <= _boardHeight; j++)
+            for (int j = 0; j < _boardHeight; j++)
             {
                 float x = i - _boardWidth / 2;
                 float z = j - _boardHeight / 2;
@@ -134,8 +135,8 @@ public class GameScene : MonoBehaviour
 
         //選んだタイルから駒を取得
         Vector2Int _tilePos = new Vector2Int(
-            (int)_tile.transform.localPosition.x + _boardWidth / 2,
-            (int)_tile.transform.localPosition.z + _boardHeight / 2);
+            (int)_tile.transform.position.x + _boardWidth / 2,
+            (int)_tile.transform.position.z + _boardHeight / 2);
 
         //タイルにのっている駒
         _piece = units[_tilePos.x, _tilePos.y];
