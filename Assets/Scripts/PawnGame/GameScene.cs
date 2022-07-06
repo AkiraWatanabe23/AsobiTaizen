@@ -13,7 +13,7 @@ public class GameScene : MonoBehaviour
     const int _playersMax = 2; //プレイ時の最大人数
 
     //チェス盤の配列
-    public GameObject[] board;
+    public GameObject board;
     //駒選択のためのカーソル ... 駒を選択した時に、移動可能な範囲を表示する
     public GameObject cursor;
 
@@ -74,8 +74,9 @@ public class GameScene : MonoBehaviour
                 Vector3 _pos = new Vector3(x, 0, z);
 
                 int _idx = (i + j) % 2;
-                GameObject tile = Instantiate(board[_idx], _pos, Quaternion.identity); //盤のプレハブを生成
 
+                GameObject tile = Instantiate(board, _pos, Quaternion.identity); //盤のプレハブを生成(?)
+                                                                                 // Z軸の値のみが変化して、大量(多分60くらい)生成されている
                 boards[i, j] = tile;
 
                 //駒の作成
@@ -92,8 +93,8 @@ public class GameScene : MonoBehaviour
                 }
 
                 _pos.y += 1.5f;
-                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成(ポーンが1つしか生成されていない)...why?
-
+                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成(?)
+                                                                        // X軸のみが変化して、白黒8ずつ生成されている
                 //初期設定
                 ctrl = piece.GetComponent<PieceController>();
                 ctrl.SetPiece(_player, (PieceController.Type)_pieceType, tile);
