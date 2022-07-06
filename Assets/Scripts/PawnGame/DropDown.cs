@@ -8,10 +8,15 @@ using UnityEngine.UI;
 /// </summary>
 public class DropDown : MonoBehaviour
 {
+    /// <summary> Dropdownボタン </summary>
     public Dropdown dropDown;
+    /// <summary> ルール説明の Image </summary>
     public Image _ruleImage;
+    /// <summary> 駒の動きに関する Image </summary>
     public Image _moveImage;
+    /// <summary> タイトル遷移選択の Image </summary>
     public Image _toTitleImage;
+    /// <summary> Dropdownボタンを押した時に表示される低α値の Panel </summary>
     public Image _helpPanel;
 
     void Start()

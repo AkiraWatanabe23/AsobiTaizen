@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> 
+/// 駒の動きに関する class
+/// </summary>
 public class PieceController : MonoBehaviour
 {
-    //プレイヤー
+    ///<summary>プレイヤー </summary>
     public int Player;
-    //駒の種類
+    /// <summary> 駒の種類 </summary>
     public Type _type;
-    //何手経過したか
+    /// <summary> 何手経過したか </summary>
     public int _turnCount;
-    //駒の配置位置
+    /// <summary> 駒の配置されている位置 </summary>
     public Vector2Int Pos, _oldPos;
-    //移動状態
+    /// <summary> 移動状態 </summary>
     public List<Status> _status;
 
 

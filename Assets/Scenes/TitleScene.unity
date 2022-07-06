@@ -766,7 +766,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 3DTetris
+  m_Text: Connect Four
 --- !u!222 &859093260
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -868,7 +868,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 3DTetris
+          m_StringArgument: ConnectFour
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1135052743

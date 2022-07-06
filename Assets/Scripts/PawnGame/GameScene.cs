@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ゲーム全体の設定
+/// ゲーム全体の設定を統括する
 /// </summary>
 public class GameScene : MonoBehaviour
 {
