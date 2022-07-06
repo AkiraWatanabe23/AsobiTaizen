@@ -92,7 +92,7 @@ public class GameScene : MonoBehaviour
                 }
 
                 _pos.y += 1.5f;
-                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成(ポーンが1つ生成されている)
+                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成(ポーンが1つしか生成されていない)...why?
 
                 //初期設定
                 ctrl = piece.GetComponent<PieceController>();
@@ -214,6 +214,7 @@ public class GameScene : MonoBehaviour
         }
 
         GameObject _prefab = prefabWhitePieces[idx];
+
         if (1 == _player)
         {
             _prefab = prefabBlackPieces[idx];
