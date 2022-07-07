@@ -4,6 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - board: {fileID: 1390600257221694, guid: aaded257b0fbf496b9b7f8a03a3bfe0d, type: 3}
   - cursor: {fileID: 6668636158226337892, guid: f0e7e052ce9ff07479fe8246ca760702, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
