@@ -25,7 +25,7 @@ public class GameScene : MonoBehaviour
     public List<GameObject> prefabWhitePieces;
     public List<GameObject> prefabBlackPieces;
 
-    [SerializeField] float _bairitu;
+    [SerializeField] float _boardMagnification; //magnification...倍率
 
     //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
     //下記は初期配置
@@ -41,50 +41,28 @@ public class GameScene : MonoBehaviour
         {1, 0, 0, 0, 0, 0, 0, 11},
     };
 
-    //UI関連
-    //GameObject _textTurnInfo; //アンカー左上
-    //GameObject _textResultInfo; //アンカー真上
-    //GameObject _buttonApply; //Retry
-    //GameObject _buttonCancel; //ToTitle
-
     //選択中の駒
     PieceController _selectPiece;
 
     // Start is called before the first frame update
     void Start()
     {
-        //    UIオブジェクト取得
-        //    _textTurnInfo = GameObject.Find("TextTurnInfo");
-        //    _textResultInfo = GameObject.Find("TextResultInfo");
-        //    _buttonApply = GameObject.Find("ButtonApply");
-        //    _buttonCancel = GameObject.Find("ButtonCancel");
-
-        //    Result関連のものは最初は消しておく
-        //    _buttonApply.SetActive(false);
-        //    _buttonCancel.SetActive(false);
-
         boards = new GameObject[_boardWidth, _boardHeight];
         units = new PieceController[_boardWidth, _boardHeight];
 
-
         //各マスの中心に空のオブジェクトを配置する
-        for (int i = 0; i < _boardWidth; i++)//横のインデックス
+        for (int i = 0; i < _boardWidth; i++)      //横のインデックス
         {
-            for (int j = 0; j < _boardHeight; j++)//縦のインデックス
+            for (int j = 0; j < _boardHeight; j++) //縦のインデックス
             {
                 //
-                float x = i - _boardWidth / 2;//横の座標を設定・-4,-3,-2,-1,0,1,2,3
-                float z = j - _boardHeight / 2;//縦の座標を設定・-4,-3,-2,-1,0,1,2,3
+                float x = i; //横の座標を設定
+                float z = j; //縦の座標を設定
 
-                Vector3 _pos = new Vector3(x, 8, z) * _bairitu;
-
-                //この変数については、今はまだ分からない
-                int _idx = (i + j) % 2;
+                Vector3 _pos = new Vector3(x, 1, z) * _boardMagnification;
 
                 //タイルを生成
-                GameObject tile = Instantiate(board, _pos, Quaternion.identity); // 盤のマスに空のオブジェクトを置き、そこに二次元配列を設定する
-                                                                                 // Z軸の値のみが変化して、大量(多分60くらい)生成されている
-                                                                                 //タイルを保存
+                GameObject tile = Instantiate(board, _pos, Quaternion.identity); // 盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
                 boards[i, j] = tile;
 
                 //駒の作成
@@ -101,8 +79,7 @@ public class GameScene : MonoBehaviour
                 }
 
                 _pos.y += 1.5f;
-                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成(?)
-                                                                        // X軸のみが変化して、白黒8ずつ生成されている
+                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成
                                                                         //初期設定
                 ctrl = piece.GetComponent<PieceController>();
                 ctrl.SetPiece(_player, (PieceController.Type)_pieceType, tile);
