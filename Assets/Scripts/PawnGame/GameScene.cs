@@ -3,52 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ゲーム全体の設定を統括する
+/// ゲーム全体の設定を統括する...駒やマスの生成、配置
 /// </summary>
 public class GameScene : MonoBehaviour
 {
-
-    public const int _boardWidth = 8; //const ... 数値を定数にする
+    //盤を二次元配列で管理する
+    public const int _boardWidth  = 8; //const...数値を定数にする
     public const int _boardHeight = 8;
-    const int _playersMax = 2; //プレイ時の最大人数
+    public const int _playersMax  = 2; //プレイ時の最大人数
 
-    //チェス盤の配列
-    public GameObject board;
-    //駒選択のためのカーソル ... 駒を選択した時に、移動可能な範囲を表示する
-    public GameObject cursor;
+    //チェス盤(マス)の配列
+    public GameObject boardTile;
 
     //内部データ
     GameObject[,] boards;
-    PieceController[,] units;
 
     //駒のプレハブ(白黒それぞれ)
     public List<GameObject> prefabWhitePieces;
     public List<GameObject> prefabBlackPieces;
 
-    [SerializeField] float _boardMagnification; //magnification...倍率
+    [SerializeField, Range(1, 5)] float _boardMagnification; //magnification...倍率
 
     //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
     //下記は初期配置
     public int[,] pieceType =
     {
-        {1, 0, 0, 0, 0, 0, 0, 11}, // 1...白ポーン
-        {1, 0, 0, 0, 0, 0, 0, 11}, // 0...何も置かれていない
-        {1, 0, 0, 0, 0, 0, 0, 11}, //11...黒ポーン
-        {1, 0, 0, 0, 0, 0, 0, 11},
-        {1, 0, 0, 0, 0, 0, 0, 11},
-        {1, 0, 0, 0, 0, 0, 0, 11},
-        {1, 0, 0, 0, 0, 0, 0, 11},
-        {1, 0, 0, 0, 0, 0, 0, 11},
-    };
+        // 1...白ポーン、0...何も置かれていない、11...黒ポーン
 
-    //選択中の駒
-    PieceController _selectPiece;
+        {1, 0, 0, 0, 0, 0, 0, 11},  // a1～a8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // b1～b8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // c1～c8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // d1～d8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // e1～e8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // f1～f8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // g1～g8
+        {1, 0, 0, 0, 0, 0, 0, 11},  // h1～h8
+    };
 
     // Start is called before the first frame update
     void Start()
     {
         boards = new GameObject[_boardWidth, _boardHeight];
-        units = new PieceController[_boardWidth, _boardHeight];
 
         //各マスの中心に空のオブジェクトを配置する
         for (int i = 0; i < _boardWidth; i++)      //横のインデックス
@@ -59,10 +54,13 @@ public class GameScene : MonoBehaviour
                 float x = i; //横の座標を設定
                 float z = j; //縦の座標を設定
 
-                Vector3 _pos = new Vector3(x, 1, z) * _boardMagnification;
+                Vector3 _posTile = new Vector3(x, 8, z) * _boardMagnification;
+                Vector3 _posPiece = new Vector3(x, (float)7.5, z) * _boardMagnification;
+                
 
                 //タイルを生成
-                GameObject tile = Instantiate(board, _pos, Quaternion.identity); // 盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
+                //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
+                GameObject tile = Instantiate(boardTile, _posTile, Quaternion.identity);
                 boards[i, j] = tile;
 
                 //駒の作成
@@ -70,22 +68,15 @@ public class GameScene : MonoBehaviour
                 int _player = pieceType[i, j] / 10;
 
                 GameObject prefab = getPrefabPiece(_player, _pieceType);
-                GameObject piece = null;
-                PieceController ctrl = null;
+                GameObject piece;
 
                 if (null == prefab)
                 {
                     continue;
                 }
 
-                _pos.y += 1.5f;
-                piece = Instantiate(prefab, _pos, Quaternion.identity); //駒のプレハブを生成
-                                                                        //初期設定
-                ctrl = piece.GetComponent<PieceController>();
-                ctrl.SetPiece(_player, (PieceController.Type)_pieceType, tile);
-
-                //内部データのセット
-
+                _posPiece.y += 1.5f;
+                piece = Instantiate(prefab, _posPiece, Quaternion.identity); //駒のプレハブを初期位置に生成
             }
         }
     }
@@ -93,100 +84,7 @@ public class GameScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject _tile = null;
-        PieceController _piece = null;
 
-        //PLAYER
-        if (Input.GetMouseButtonUp(0)) //MouseButton(0)...左クリック　Up...離れた時
-        {
-            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //マウス座標からのRayの設定
-
-            //駒にも当たり判定がある ... ヒットした全てのオブジェクト情報を取得
-            foreach (RaycastHit hit in Physics.RaycastAll(_ray))
-            {
-                if (hit.transform.name.Contains("Board"))
-                {
-                    _tile = hit.transform.gameObject;
-                    break;
-                }
-            }
-        }
-
-        //タイルが押されていない(選択されていない)ならば、処理を行わない
-        if (null == _tile)
-        {
-            return;
-        }
-
-        //選んだタイルから駒を取得
-        Vector2Int _tilePos = new Vector2Int(
-            (int)_tile.transform.position.x + _boardWidth / 2,
-            (int)_tile.transform.position.z + _boardHeight / 2);
-
-        //タイルにのっている駒
-        _piece = units[_tilePos.x, _tilePos.y];
-
-        //駒選択
-        if (null != _piece && _selectPiece != _piece)
-        {
-            SetSelectCursors(_piece);
-        }
-        //駒の移動
-        else if (null != _selectPiece)
-        {
-            MovePiece(_selectPiece, _tilePos);
-        }
-    }
-
-    void SetSelectCursors(PieceController piece = null, bool setPiece = true)
-    {
-        //カーソル解除
-
-
-        //駒の非選択状態
-        if (null != _selectPiece)
-        {
-            _selectPiece.SelectPiece(false);
-            _selectPiece = null;
-        }
-
-        //駒を何もセットしないなら、終わり
-        if (null == piece)
-        {
-            return;
-        }
-
-        //カーソル作成
-
-
-        //駒の選択状態
-        if (setPiece)
-        {
-            _selectPiece = piece;
-            _selectPiece.SelectPiece(setPiece);
-        }
-    }
-
-    bool MovePiece(PieceController piece, Vector2Int tilePos)
-    {
-        Vector2Int _piecePos = piece.Pos;
-
-        //駒を新しい位置に移動
-        piece.MovePiece(boards[tilePos.x, tilePos.y]);
-
-        //配列データの更新(もともと駒がいた位置)
-        units[_piecePos.x, _piecePos.y] = null;
-
-        //駒があったら消す
-        if (null != units[tilePos.x, tilePos.y])
-        {
-            Destroy(units[tilePos.x, tilePos.y].gameObject);
-        }
-
-        //配列データの更新(新しく置いた位置)
-        units[tilePos.x, tilePos.y] = piece;
-
-        return true;
     }
 
     //駒のプレハブを返す
