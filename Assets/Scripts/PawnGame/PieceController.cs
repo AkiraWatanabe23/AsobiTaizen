@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary> 
-/// 駒の動きに関するクラス...「選んで、動く」「奪われたら、破棄」の駒全体で統一された動き
+/// 全ての駒に統一された動き
 /// </summary>
 public class PieceController : MonoBehaviour
 {

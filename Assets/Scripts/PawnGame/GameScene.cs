@@ -12,14 +12,15 @@ public class GameScene : MonoBehaviour
     public const int _boardHeight = 8;
     public const int _playersMax  = 2; //プレイ時の最大人数
 
-    //チェス盤(マス)の配列
+    /// <summary> チェス盤(マス)の配列 </summary>
     public GameObject boardTile;
 
     //内部データ
     GameObject[,] boards;
 
-    //駒のプレハブ(白黒それぞれ)
+    /// <summary> 駒のプレハブ(白) </summary>
     public List<GameObject> prefabWhitePieces;
+    /// <summary> 駒のプレハブ(黒) </summary>
     public List<GameObject> prefabBlackPieces;
 
     [SerializeField, Range(1, 5)] float _boardMagnification; //magnification...倍率
@@ -68,7 +69,6 @@ public class GameScene : MonoBehaviour
                 int _player = pieceType[i, j] / 10;
 
                 GameObject prefab = getPrefabPiece(_player, _pieceType);
-                GameObject piece;
 
                 if (null == prefab)
                 {
@@ -76,15 +76,9 @@ public class GameScene : MonoBehaviour
                 }
 
                 _posPiece.y += 1.5f;
-                piece = Instantiate(prefab, _posPiece, Quaternion.identity); //駒のプレハブを初期位置に生成
+                GameObject piece = Instantiate(prefab, _posPiece, Quaternion.identity); //駒(ポーン)のプレハブを初期位置に生成
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     //駒のプレハブを返す

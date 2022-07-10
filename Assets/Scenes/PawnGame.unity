@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &14184413
 GameObject:
@@ -4337,7 +4337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4340020414422934, guid: aaded257b0fbf496b9b7f8a03a3bfe0d, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4340020414422934, guid: aaded257b0fbf496b9b7f8a03a3bfe0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5138,7 +5138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd920310376d45744a21003981f32302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardTile: {fileID: 5943059952906986998, guid: 8534d066f2fa1804ba9a33897e724316, type: 3}
+  boardTile: {fileID: 6441393769814730963, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
   prefabWhitePieces:
   - {fileID: 1213357437349106, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
   - {fileID: 1943414466066380, guid: 45e10aea18beb495d9489aed31b95270, type: 3}
