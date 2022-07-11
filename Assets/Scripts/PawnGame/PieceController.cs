@@ -15,10 +15,10 @@ public class PieceController : MonoBehaviour
     private int _currentPlayer = _playerOne; //current...現在(の)
     /// <summary> 駒の種類 </summary>
     public Type _type;
-    /// <summary> 移動状態 </summary>
-    public List<Status> _status;
     /// <summary> 移動判定をとるためのフラグ </summary>
     public bool _select;
+    /// <summary> Rayの衝突を確かめる </summary>
+    public RaycastHit _hitTile;
 
     //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
     public enum Type
@@ -31,18 +31,9 @@ public class PieceController : MonoBehaviour
         Queen,
     }
 
-    //移動状態
-    public enum Status
-    {
-        None = -1,
-        EnPassant = 1, //アンパッサン
-        Check,         //チェック(クイーンに対して)
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        _status = new List<Status>();
         Debug.Log(_select);
     }
 
@@ -54,12 +45,15 @@ public class PieceController : MonoBehaviour
         {
             //マウスの位置を取得し、Rayに代入
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit _hitTile;
             Debug.DrawRay(_ray.origin, _ray.direction * 10, Color.green, 10, false); //Rayが黒番のカメラの方から出ている...Tag変えたらMainCameraの方に変わった
             _select = true;
             Debug.Log(_select);
             /*↑ここまでは呼ばれている*/
-            /*↓ここからが呼ばれていない*/
+
+            if (_hitTile.collider.gameObject.tag == "WhitePiece")
+            {
+                Debug.Log("SelectWhitePiece");
+            }
 
             //マウスのポジションからRayを伸ばし、何かに当たったら_hitTileに代入する
             if (Physics.Raycast(_ray, out _hitTile)) //←多分ここがダメ...

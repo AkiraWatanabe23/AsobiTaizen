@@ -63,6 +63,7 @@ public class GameScene : MonoBehaviour
 
                 //タイルを生成
                 //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
+                _posTile.y += 0.7f;
                 GameObject tile = Instantiate(boardTile, _posTile, Quaternion.identity);
                 boards[i, j] = tile;
 
