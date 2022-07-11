@@ -46,17 +46,11 @@ public class PieceController : MonoBehaviour
             //マウスの位置を取得し、Rayに代入
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(_ray.origin, _ray.direction * 10, Color.green, 10, false); //Rayが黒番のカメラの方から出ている...Tag変えたらMainCameraの方に変わった
-            _select = true;
-            Debug.Log(_select);
             /*↑ここまでは呼ばれている*/
 
-            if (_hitTile.collider.gameObject.tag == "WhitePiece")
-            {
-                Debug.Log("SelectWhitePiece");
-            }
-
             //マウスのポジションからRayを伸ばし、何かに当たったら_hitTileに代入する
-            if (Physics.Raycast(_ray, out _hitTile)) //←多分ここがダメ...
+            //↓多分ここがダメ...
+            if (Physics.Raycast(_ray /*投射対象のRay*/, out _hitTile /*衝突した相手オブジェクトの情報*/ /*, 第3引数...Rayの長さ(省略した場合、無限長)*/ /*, 第4引数...衝突対象になるレイヤー*/))
             {
                 Debug.Log("SelectPosition");
 
