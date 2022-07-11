@@ -10,7 +10,6 @@ public class GameScene : MonoBehaviour
     //盤を二次元配列で管理する
     public const int _boardWidth  = 8; //const...数値を定数にする
     public const int _boardHeight = 8;
-    public const int _playersMax  = 2; //プレイ時の最大人数
 
     /// <summary> チェス盤(マス)の配列 </summary>
     public GameObject boardTile;
@@ -45,19 +44,22 @@ public class GameScene : MonoBehaviour
     void Start()
     {
         boards = new GameObject[_boardWidth, _boardHeight];
+        SetPrefab();
+    }
 
+    //マスにキューブのプレハブ、初期位置に駒(ポーン)を配置する
+    private void SetPrefab()
+    {
         //各マスの中心に空のオブジェクトを配置する
         for (int i = 0; i < _boardWidth; i++)      //横のインデックス
         {
             for (int j = 0; j < _boardHeight; j++) //縦のインデックス
             {
-                //
                 float x = i; //横の座標を設定
                 float z = j; //縦の座標を設定
 
                 Vector3 _posTile = new Vector3(x, 8, z) * _boardMagnification;
                 Vector3 _posPiece = new Vector3(x, (float)7.5, z) * _boardMagnification;
-                
 
                 //タイルを生成
                 //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
@@ -75,7 +77,7 @@ public class GameScene : MonoBehaviour
                     continue;
                 }
 
-                _posPiece.y += 1.5f;
+                _posPiece.y += 1.8f;
                 GameObject piece = Instantiate(prefab, _posPiece, Quaternion.identity); //駒(ポーン)のプレハブを初期位置に生成
             }
         }

@@ -7,16 +7,18 @@ using UnityEngine;
 /// </summary>
 public class PieceController : MonoBehaviour
 {
-    ///<summary>プレイヤー </summary>
-    public int _player;
+    ///<summary> プレイヤー1(白番) </summary>
+    private const int _playerOne = 1;
+    ///<summary> プレイヤー2(黒番) </summary>
+    private const int _playerTwo = 2;
+    ///<summary> 現在のプレイヤー </summary>
+    private int _currentPlayer = _playerOne; //current...現在(の)
     /// <summary> 駒の種類 </summary>
     public Type _type;
     /// <summary> 移動状態 </summary>
     public List<Status> _status;
     /// <summary> 移動判定をとるためのフラグ </summary>
     public bool _select;
-    /// <summary> 移動時のマス選択 </summary>
-    public RaycastHit _hitTile;
 
     //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
     public enum Type
@@ -34,13 +36,14 @@ public class PieceController : MonoBehaviour
     {
         None = -1,
         EnPassant = 1, //アンパッサン
-        Check, //チェック(クイーンに対して)
+        Check,         //チェック(クイーンに対して)
     }
 
     // Start is called before the first frame update
     void Start()
     {
         _status = new List<Status>();
+        Debug.Log(_select);
     }
 
     // Update is called once per frame
@@ -49,35 +52,29 @@ public class PieceController : MonoBehaviour
         //マウス左クリックで駒を選び、二度目のクリックで配置場所を確定する
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 _mousePos = Input.mousePosition;
-            Vector3 _cameraPos = Camera.main.transform.position;
+            //マウスの位置を取得し、Rayに代入
+            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit _hitTile;
+            Debug.DrawRay(_ray.origin, _ray.direction * 10, Color.green, 10, false); //Rayが黒番のカメラの方から出ている...Tag変えたらMainCameraの方に変わった
+            _select = true;
+            Debug.Log(_select);
+            /*↑ここまでは呼ばれている*/
+            /*↓ここからが呼ばれていない*/
 
-            if (Physics.Linecast(_cameraPos, _mousePos)) //ここ呼ばれてない...
+            //マウスのポジションからRayを伸ばし、何かに当たったら_hitTileに代入する
+            if (Physics.Raycast(_ray, out _hitTile)) //←多分ここがダメ...
             {
-                //Rayを飛ばし、タグが自分自身と同じだった場合選択状態の変更
-                if (_hitTile.collider.gameObject.tag == gameObject.tag)
-                {
-                    _select = true;
-                }
-                //駒を選択中かつ、Rayがヒットしたオブジェクトがマスだった場合移動
+                Debug.Log("SelectPosition");
+
+                //駒を選択中、かつRayがヒットしたオブジェクトが盤面のマスならば移動する
                 if (_select && _hitTile.collider.gameObject.tag == "Tile")
                 {
-                    Vector3 _newPiecePos = _hitTile.collider.gameObject.transform.position;
-                    transform.position = new Vector3(_newPiecePos.x, transform.position.y, _newPiecePos.z);
+                    Vector3 _newPos = _hitTile.collider.gameObject.transform.position;
+                    transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
 
-                    //移動後は駒の選択状態を非選択にする
                     _select = false;
                 }
             }
-            Debug.Log(_mousePos);
-            Debug.Log(_cameraPos);
         }
-    }
-
-    //初期設定
-    public void SetPiece(int player, Type type)
-    {
-        _player = player;
-        _type = type;
     }
 }
