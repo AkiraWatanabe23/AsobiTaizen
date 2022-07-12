@@ -19,6 +19,8 @@ public class PieceController : MonoBehaviour
     public bool _select;
     /// <summary> Rayの衝突を確かめる </summary>
     public RaycastHit _hitTile;
+    /// <summary> レイヤーマスク </summary>
+    private LayerMask _pieceLay;
 
     //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
     public enum Type
@@ -45,12 +47,12 @@ public class PieceController : MonoBehaviour
         {
             //マウスの位置を取得し、Rayに代入
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(_ray.origin, _ray.direction * 10, Color.green, 10, false); //Rayが黒番のカメラの方から出ている...Tag変えたらMainCameraの方に変わった
+            Debug.DrawRay(_ray.origin, _ray.direction * 30, Color.green, 10, false); //Rayが黒番のカメラの方から出ている...Tag変えたらMainCameraの方に変わった
             /*↑ここまでは呼ばれている*/
 
             //マウスのポジションからRayを伸ばし、何かに当たったら_hitTileに代入する
-            //↓多分ここがダメ...
-            if (Physics.Raycast(_ray /*投射対象のRay*/, out _hitTile /*衝突した相手オブジェクトの情報*/ /*, 第3引数...Rayの長さ(省略した場合、無限長)*/ /*, 第4引数...衝突対象になるレイヤー*/))
+            //↓このif文が呼ばれてない...どの引数がダメ？
+            if (Physics.Raycast( _ray /*投射対象のRay*/, out _hitTile /*衝突した相手オブジェクトの情報*/, 50 /*Rayの長さ(省略した場合、無限長)*/, _pieceLay /*衝突対象になるレイヤー(レイヤーマスク)*/ ))
             {
                 Debug.Log("SelectPosition");
 
