@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 23056748769021182}
   - component: {fileID: -6505209770570090335}
   - component: {fileID: 8718519104576669384}
-  m_Layer: 6
+  - component: {fileID: -4773484469174539903}
+  m_Layer: 8
   m_Name: rook white
   m_TagString: WhitePiece
   m_Icon: {fileID: 0}
@@ -97,9 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 4
   _select: 0
-  _pieceLay:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!54 &8718519104576669384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,3 +114,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &-4773484469174539903
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037745782791696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.3179355
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.6617901, z: 0.049515545}

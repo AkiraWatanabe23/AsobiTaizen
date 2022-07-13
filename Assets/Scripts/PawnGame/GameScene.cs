@@ -63,7 +63,7 @@ public class GameScene : MonoBehaviour
 
                 //タイルを生成
                 //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
-                _posTile.y += 0.7f;
+                _posTile.y += 0.6f;
                 GameObject tile = Instantiate(boardTile, _posTile, Quaternion.identity);
                 boards[i, j] = tile;
 
@@ -78,7 +78,7 @@ public class GameScene : MonoBehaviour
                     continue;
                 }
 
-                _posPiece.y += 1.8f;
+                _posPiece.y += 2f;
                 GameObject piece = Instantiate(prefab, _posPiece, Quaternion.identity); //駒(ポーン)のプレハブを初期位置に生成
             }
         }
