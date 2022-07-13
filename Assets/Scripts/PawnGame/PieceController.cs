@@ -42,7 +42,7 @@ public class PieceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //マウス左クリックで駒を選び、二度目のクリックで配置場所を確定、移動する
+        //マウス左クリックで駒を選び、二度目のクリックで配置場所を確定、移動する(予定)
         if (Input.GetMouseButtonDown(0))
         {
             //マウスの位置を取得し、Rayに代入
@@ -57,10 +57,9 @@ public class PieceController : MonoBehaviour
 
             //マウスのポジションからRayを伸ばし、何かに当たったら_hitTileに代入する
             _select = !_select;
-            Debug.Log(_select);
             Debug.Log("SelectPosition");
 
-            //実行されたけど、駒が飛んでった...
+            //実行されたけど、駒が飛んでった...(多分、Tagで判定しているため、同じTagの全ての駒が反応して一ヶ所に移動して衝突している)
             //  ↓選択中　↓白番　　　　　　　　　　　　　↓Rayが"WhitePiece"タグのオブジェクトに当たった時
             if (_select && _currentPlayer == _playerOne && _hitTile.collider.gameObject.tag == "WhitePiece")
             {
