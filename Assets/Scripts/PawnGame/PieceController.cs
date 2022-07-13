@@ -60,6 +60,7 @@ public class PieceController : MonoBehaviour
             Debug.Log(_select);
             Debug.Log("SelectPosition");
 
+            //実行されたけど、駒が飛んでった...
             //  ↓選択中　↓白番　　　　　　　　　　　　　↓Rayが"WhitePiece"タグのオブジェクトに当たった時
             if (_select && _currentPlayer == _playerOne && _hitTile.collider.gameObject.tag == "WhitePiece")
             {
