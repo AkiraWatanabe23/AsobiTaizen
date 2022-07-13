@@ -33,12 +33,6 @@ public class PieceController : MonoBehaviour
         Queen,
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -49,32 +43,35 @@ public class PieceController : MonoBehaviour
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             //Rayの衝突を確かめる
-            RaycastHit _hitTile;
+            RaycastHit _hit;
 
-            Physics.Raycast(_ray.origin, _ray.direction * 30, out _hitTile, Mathf.Infinity, _pieceLay);
-            Debug.DrawRay(_ray.origin, _ray.direction * 30, Color.green, 30/*実行時間*/, false);
+            _select = !_select;
+
+            Debug.DrawRay(_ray.origin, _ray.direction * 30, Color.green, 30/*実行時間(秒)*/, false);
             Debug.Log(_ray);
 
-            //マウスのポジションからRayを伸ばし、何かに当たったら_hitTileに代入する
-            _select = !_select;
-            Debug.Log("SelectPosition");
+            if (Physics.Raycast(_ray.origin, _ray.direction * 30, out _hit, Mathf.Infinity, _pieceLay))
+            {
+                Debug.Log("SelectPosition");
 
-            //実行されたけど、駒が飛んでった...(多分、Tagで判定しているため、同じTagの全ての駒が反応して一ヶ所に移動して衝突している)
-            //  ↓選択中　↓白番　　　　　　　　　　　　　↓Rayが"WhitePiece"タグのオブジェクトに当たった時
-            if (_select && _currentPlayer == _playerOne && _hitTile.collider.gameObject.tag == "WhitePiece")
-            {
-                Vector3 _newPos = _hitTile.collider.gameObject.transform.position;
-                transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
-                _currentPlayer = _playerTwo;
-                _select = false;
-            }
-            //       ↓選択中　↓黒番　　　　　　　　　　　　　↓Rayが"BlackPiece"タグのオブジェクトに当たった時
-            else if (_select && _currentPlayer == _playerTwo && _hitTile.collider.gameObject.tag == "BlackPiece")
-            {
-                Vector3 _newPos = _hitTile.collider.gameObject.transform.position;
-                transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
-                _currentPlayer = _playerOne;
-                _select = false;
+                //  ↓選択中　↓白番　　　　　　　　　　　　　↓Rayが"WhitePiece"タグのオブジェクトに当たった時
+                if (_select && _currentPlayer == _playerOne && _hit.collider.gameObject.tag == "WhitePiece")
+                {
+                    //↓の処理をすべての駒が行っているため、一ヶ所に駒が集まって衝突してしまう
+                    Vector3 _newPos = _hit.collider.gameObject.transform.position;
+                    transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
+                    _currentPlayer = _playerTwo;
+                    _select = false;
+                }
+                //       ↓選択中　↓黒番　　　　　　　　　　　　　↓Rayが"BlackPiece"タグのオブジェクトに当たった時
+                else if (_select && _currentPlayer == _playerTwo && _hit.collider.gameObject.tag == "BlackPiece")
+                {
+                    //↓の処理をすべての駒が行っているため、一ヶ所に駒が集まって衝突してしまう
+                    Vector3 _newPos = _hit.collider.gameObject.transform.position;
+                    transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
+                    _currentPlayer = _playerOne;
+                    _select = false;
+                }
             }
         }
     }
