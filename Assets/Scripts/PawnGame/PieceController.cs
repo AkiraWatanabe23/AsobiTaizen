@@ -36,7 +36,8 @@ public class PieceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //マウス左クリックで駒を選び、二度目のクリックで配置場所を確定、移動する(予定)
+        //一回目のマウス左クリックで駒を選び、二度目のクリックで配置場所を確定、移動する(予定)
+        //同じ処理で処理を分かられる?
         if (Input.GetMouseButtonDown(0))
         {
             //マウスの位置を取得し、Rayに代入

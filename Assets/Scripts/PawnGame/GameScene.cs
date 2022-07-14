@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ゲーム全体の設定を統括する...駒やマスの生成、配置
+/// ゲーム全体の設定を統括する...マスの生成、配置
 /// </summary>
 public class GameScene : MonoBehaviour
 {
@@ -47,7 +47,7 @@ public class GameScene : MonoBehaviour
         SetPrefab();
     }
 
-    //マスにキューブのプレハブ、初期位置に駒(ポーン)を配置する
+    //マスにキューブのプレハブを配置する
     private void SetPrefab()
     {
         //各マスの中心に空のオブジェクトを配置する
@@ -59,7 +59,6 @@ public class GameScene : MonoBehaviour
                 float z = j; //縦の座標を設定
 
                 Vector3 _posTile = new Vector3(x, 8, z) * _boardMagnification;
-                Vector3 _posPiece = new Vector3(x, (float)7.5, z) * _boardMagnification;
 
                 //タイルを生成
                 //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
@@ -77,9 +76,6 @@ public class GameScene : MonoBehaviour
                 {
                     continue;
                 }
-
-                _posPiece.y += 2f;
-                GameObject piece = Instantiate(prefab, _posPiece, Quaternion.identity); //駒(ポーン)のプレハブを初期位置に生成
             }
         }
     }
