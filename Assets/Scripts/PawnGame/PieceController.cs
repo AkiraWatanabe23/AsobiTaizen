@@ -37,27 +37,25 @@ public class PieceController : MonoBehaviour
     void Update()
     {
         //一回目のマウス左クリックで駒を選び、二度目のクリックで配置場所を確定、移動する(予定)
-        //同じ処理で処理を分かられる?
+        //同じ行動で別の処理にできる?
         if (Input.GetMouseButtonDown(0))
         {
             //マウスの位置を取得し、Rayに代入
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
             //Rayの衝突を確かめる
             RaycastHit _hit;
-
-            _select = !_select;
+            //駒を選択状態にする
+            _select = !_select; //false → true
 
             Debug.DrawRay(_ray.origin, _ray.direction * 30, Color.green, 30/*実行時間(秒)*/, false);
             Debug.Log(_ray);
 
             if (Physics.Raycast(_ray.origin, _ray.direction * 30, out _hit, Mathf.Infinity, _pieceLay))
             {
-                Debug.Log("SelectPosition");
-
                 //  ↓選択中　↓白番　　　　　　　　　　　　　↓Rayが"WhitePiece"タグのオブジェクトに当たった時
                 if (_select && _currentPlayer == _playerOne && _hit.collider.gameObject.tag == "WhitePiece")
                 {
+                    Debug.Log("select");
                     //↓の処理をすべての駒が行っているため、一ヶ所に駒が集まって衝突してしまう
                     Vector3 _newPos = _hit.collider.gameObject.transform.position;
                     transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
