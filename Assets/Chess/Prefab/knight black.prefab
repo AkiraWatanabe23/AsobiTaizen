@@ -98,6 +98,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 2
   _select: 0
+  _rayDistance: 100
+  _tileLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _offset: {x: 0, y: 0.1, z: 0}
 --- !u!54 &-8577209316856004802
 Rigidbody:
   m_ObjectHideFlags: 0
