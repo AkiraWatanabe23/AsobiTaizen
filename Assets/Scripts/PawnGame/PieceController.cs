@@ -20,11 +20,14 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     public bool _select;
     /// <summary> Rayの長さ </summary>
     [SerializeField] public float _rayDistance = 100;
-    /// <summary> レイヤーマスク(Inspector内のLayerの番号) </summary>
-    // ※レイヤーマスクの値は2bit値(2進数)で管理しているため、10進数で表示は×
+    /// <summary> レイヤーマスク </summary>
     [SerializeField] LayerMask _tileLayer;
     /// <summary> 駒を移動した時にcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
+    /// <summary> 通常状態、移動状態の駒のマテリアル </summary>
+    [SerializeField] Material _normalMaterial;
+    [SerializeField] Material _moveMaterial;
+    Renderer _renderer;
 
     Status _status = Status.Normal;
 
@@ -40,10 +43,12 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         if (_status == Status.Normal)
         {
             _status = Status.Move;
+            _renderer.material = _moveMaterial;
         }
         else if (_status == Status.Move)
         {
             _status = Status.Normal;
+            _renderer.material = _normalMaterial;
         }
     }
 
@@ -51,9 +56,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     {
         //マウスの位置を取得し、Rayに代入
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Debug.DrawRay(_ray.origin, _ray.direction * 30, Color.green, 30/*実行時間(秒)*/, false);
-        Debug.Log(_ray);
+        //Ray _ray2 = Camera.current.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _tileLayer))
         {
@@ -68,7 +71,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        
+        _renderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
