@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class PieceController : MonoBehaviour
 {
-    ///<summary> プレイヤー1(白番) </summary>
+    ///<summary> プレイヤー(白番) </summary>
     private const int _playerOne = 1;
-    ///<summary> プレイヤー2(黒番) </summary>
+    ///<summary> プレイヤー(黒番) </summary>
     private const int _playerTwo = 2;
     ///<summary> current(現在の)プレイヤー </summary>
     private int _currentPlayer = _playerOne;
@@ -20,17 +20,11 @@ public class PieceController : MonoBehaviour
     /// <summary> レイヤーマスク(Inspector内のLayerの番号) </summary>
     // ※レイヤーマスクの値は2bit値(2進数)で管理しているため、10進数で表示は×
     private LayerMask _pieceLay = 1 << 8; //2進数で「1000」
-                              //= LayerMask.NameToLayer(Layer名(string)); でもOK
+                                          //= LayerMask.NameToLayer(Layer名(string));
 
-    //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
-    public enum Type
+    void Start()
     {
-        None = -1,
-        Pawn = 1,
-        Knight,
-        Bishop,
-        Rook,
-        Queen,
+        
     }
 
     // Update is called once per frame
@@ -45,7 +39,7 @@ public class PieceController : MonoBehaviour
             //Rayの衝突を確かめる
             RaycastHit _hit;
             //駒を選択状態にする
-            _select = !_select; //false → true
+            _select = !_select; //false → true (_select = true;)
 
             Debug.DrawRay(_ray.origin, _ray.direction * 30, Color.green, 30/*実行時間(秒)*/, false);
             Debug.Log(_ray);
@@ -59,7 +53,7 @@ public class PieceController : MonoBehaviour
                     //↓の処理をすべての駒が行っているため、一ヶ所に駒が集まって衝突してしまう
                     Vector3 _newPos = _hit.collider.gameObject.transform.position;
                     transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
-                    _currentPlayer = _playerTwo;
+                    _currentPlayer = _playerTwo; //手番の変更(白番→黒番)
                     _select = false;
                 }
                 //       ↓選択中　↓黒番　　　　　　　　　　　　　↓Rayが"BlackPiece"タグのオブジェクトに当たった時
@@ -68,10 +62,28 @@ public class PieceController : MonoBehaviour
                     //↓の処理をすべての駒が行っているため、一ヶ所に駒が集まって衝突してしまう
                     Vector3 _newPos = _hit.collider.gameObject.transform.position;
                     transform.position = new Vector3(_newPos.x, _newPos.y, _newPos.z);
-                    _currentPlayer = _playerOne;
+                    _currentPlayer = _playerOne; //手番の変更(黒番→白番)
                     _select = false;
                 }
             }
         }
+    }
+
+    //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
+    public enum Type
+    {
+        None = -1,
+        Pawn = 1,
+        Knight,
+        Bishop,
+        Rook,
+        Queen,
+    }
+
+    //通常状態、移動状態
+    public enum Status
+    {
+        Normal, //通常状態
+        Move,   //移動状態
     }
 }
