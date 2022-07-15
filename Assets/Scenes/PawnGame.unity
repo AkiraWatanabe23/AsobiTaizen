@@ -1018,8 +1018,8 @@ GameObject:
   - component: {fileID: 172840672}
   - component: {fileID: 172840675}
   m_Layer: 0
-  m_Name: Camera BlackPlayer
-  m_TagString: MainCamera
+  m_Name: Camera (black)
+  m_TagString: SecondCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172840671}
-  m_LocalRotation: {x: 0, y: 0.8660254, z: -0.5, w: 0}
+  m_LocalRotation: {x: -0, y: 0.8660254, z: -0.5, w: 0}
   m_LocalPosition: {x: 9, y: 33, z: 15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

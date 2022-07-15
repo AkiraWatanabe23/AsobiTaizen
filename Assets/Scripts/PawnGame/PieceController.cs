@@ -13,7 +13,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     ///<summary> プレイヤー(黒番) </summary>
     private const int _playerTwo = 2;
     ///<summary> current(現在の)プレイヤー </summary>
-    private int _currentPlayer = _playerOne;
+    private int _currentPlayer;
     /// <summary> 駒の種類 </summary>
     public Type _type;
     /// <summary> 移動判定をとるためのフラグ </summary>
@@ -56,7 +56,6 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     {
         //マウスの位置を取得し、Rayに代入
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //Ray _ray2 = Camera.current.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _tileLayer))
         {
@@ -71,6 +70,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
+        _currentPlayer = _playerOne;
         _renderer = GetComponent<Renderer>();
     }
 
