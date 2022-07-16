@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// オブジェクトを選択し、移動させる処理(テスト)
+/// </summary>
 public class ClickTest : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] Material _normal;
