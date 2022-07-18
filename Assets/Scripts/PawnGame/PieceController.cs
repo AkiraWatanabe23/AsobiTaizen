@@ -64,33 +64,21 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //ƒƒCƒ“ƒJƒƒ‰(”’”Ô–Úü)‚©‚çRay‚ğ‚Æ‚Î‚·
         Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //secondƒJƒƒ‰(•”Ô–Úü)‚©‚çRay‚ğ‚Æ‚Î‚·
 
-        //”’”Ô
-        if (_currentPlayer == _playerOne)
+        //”’”Ô–Úü‚ÌRay‚Ìˆ—
+        if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _tileLayer))
         {
-            //”’”Ô–Úü‚ÌRay‚Ìˆ—
-            if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _tileLayer))
-            {
-                GameObject _target = hit.collider.gameObject;
-                this.transform.position = _target.transform.position + _offset;
-                print($"Ray ‚Í {_target.name} ‚É“–‚½‚Á‚½"); // print($"..."); = Debug.Log("..."); ‚Æ“¯‚¶
-                _currentPlayer = _playerTwo;
-                Debug.Log(_currentPlayer);
-                return true;
-            }
+            GameObject _target = hit.collider.gameObject;
+            this.transform.position = _target.transform.position + _offset;
+            print($"Ray ‚Í {_target.name} ‚É“–‚½‚Á‚½"); // print($"..."); = Debug.Log("..."); ‚Æ“¯‚¶
+            return true;
         }
-        //•”Ô
-        else if (_currentPlayer == _playerTwo)
+        //•”Ô–Úü‚ÌRay‚Ìˆ—
+        else if (Physics.Raycast(_ray2, out RaycastHit hit2, _rayDistance, _tileLayer))
         {
-            //•”Ô–Úü‚ÌRay‚Ìˆ—
-            if (Physics.Raycast(_ray2, out RaycastHit hit2, _rayDistance, _tileLayer))
-            {
-                GameObject _target = hit2.collider.gameObject;
-                this.transform.position = _target.transform.position + _offset;
-                print($"Ray ‚Í {_target.name} ‚É“–‚½‚Á‚½");
-                _currentPlayer = _playerOne;
-                Debug.Log(_currentPlayer);
-                return true;
-            }
+            GameObject _target = hit2.collider.gameObject;
+            this.transform.position = _target.transform.position + _offset;
+            print($"Ray ‚Í {_target.name} ‚É“–‚½‚Á‚½");
+            return true;
         }
 
         return false;

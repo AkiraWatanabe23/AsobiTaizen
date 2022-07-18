@@ -51,33 +51,33 @@ public class GameScene : MonoBehaviour
     private void SetPrefab()
     {
         //各マスの中心に空のオブジェクトを配置する
-        for (int i = 0; i < _boardWidth; i++)      //横のインデックス
-        {
-            for (int j = 0; j < _boardHeight; j++) //縦のインデックス
-            {
-                float x = i; //横の座標を設定
-                float z = j; //縦の座標を設定
+        //for (int i = 0; i < _boardWidth; i++)      //横のインデックス
+        //{
+        //    for (int j = 0; j < _boardHeight; j++) //縦のインデックス
+        //    {
+        //        float x = i; //横の座標を設定
+        //        float z = j; //縦の座標を設定
 
-                Vector3 _posTile = new Vector3(x, 8, z) * _boardMagnification;
+        //        Vector3 _posTile = new Vector3(x, 8, z) * _boardMagnification;
 
-                //タイルを生成
-                //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
-                _posTile.y += 0.6f;
-                GameObject tile = Instantiate(boardTile, _posTile, Quaternion.identity);
-                boards[i, j] = tile;
+        //        //タイルを生成
+        //        //盤のマスに空のオブジェクトを置き、そこに二次元配列を設定し、保存する
+        //        _posTile.y += 0.6f;
+        //        GameObject tile = Instantiate(boardTile, _posTile, Quaternion.identity);
+        //        boards[i, j] = tile;
 
-                //駒の作成
-                int _pieceType = pieceType[i, j] % 10;
-                int _player = pieceType[i, j] / 10;
+        //        //駒の作成
+        //        int _pieceType = pieceType[i, j] % 10;
+        //        int _player = pieceType[i, j] / 10;
 
-                GameObject prefab = getPrefabPiece(_player, _pieceType);
+        //        GameObject prefab = getPrefabPiece(_player, _pieceType);
 
-                if (null == prefab)
-                {
-                    continue;
-                }
-            }
-        }
+        //        if (null == prefab)
+        //        {
+        //            continue;
+        //        }
+        //    }
+        //}
     }
 
     //駒のプレハブを返す
