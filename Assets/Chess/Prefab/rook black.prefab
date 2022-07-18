@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _select: 0
   _rayDistance: 100
   _tileLayer:
     serializedVersion: 2
@@ -105,6 +104,8 @@ MonoBehaviour:
   _offset: {x: 0, y: 0.1, z: 0}
   _normalMaterial: {fileID: 2100000, guid: 4e0a16e7ff30642b8901637e8aea5b37, type: 2}
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
+  _status: 0
+  _movePosition: {fileID: 6668636158226337892, guid: f0e7e052ce9ff07479fe8246ca760702, type: 3}
 --- !u!54 &-4738416354575551098
 Rigidbody:
   m_ObjectHideFlags: 0
