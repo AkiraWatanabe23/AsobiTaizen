@@ -77,7 +77,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _offset;
+            _currentPlayer = _playerTwo;
             print($"Ray は {_target.name} に当たった");
+            Debug.Log(_currentPlayer);
             return true;
         }
         //白番目線のRayの処理(移動のみ)
@@ -85,7 +87,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit2.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
+            _currentPlayer = _playerTwo;
             print($"Ray は {_target.name} に当たった"); // print($"..."); = Debug.Log("..."); と同じ
+            Debug.Log(_currentPlayer);
             return true;
         }
         //黒番目線のRayの処理(駒を奪う場合)
@@ -99,7 +103,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _offset;
+            _currentPlayer = _playerOne;
             print($"Ray は {_target.name} に当たった");
+            Debug.Log(_currentPlayer);
             return true;
         }
         //黒番目線のRayの処理(移動のみ)
@@ -107,7 +113,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit4.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
+            _currentPlayer = _playerOne;
             print($"Ray は {_target.name} に当たった");
+            Debug.Log(_currentPlayer);
             return true;
         }
 
@@ -116,7 +124,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        _currentPlayer = _playerOne;                                       //最初は白番から
+        _currentPlayer = _playerOne;                                       //白番から始める
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを見つけてくる
         _renderer = GetComponent<Renderer>();                              //駒のRenderer(コンポーネント)をとってくる
     }
