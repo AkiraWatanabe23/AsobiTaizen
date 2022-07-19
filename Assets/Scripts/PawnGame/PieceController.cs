@@ -66,11 +66,13 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //メインカメラ(白番目線)からRayをとばす
         Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //secondカメラ(黒番目線)からRayをとばす
 
+        //白番目線の駒の移動
         //白番目線のRayの処理(駒を奪う場合)
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
         {
             GameObject _target = hit.collider.gameObject;
 
+            //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
                 _target.SetActive(false);
@@ -88,15 +90,18 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             GameObject _target = hit2.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerTwo;
-            print($"Ray は {_target.name} に当たった"); // print($"..."); = Debug.Log("..."); と同じ
+            print($"Ray は {_target.name} に当たった"); // print($"..."); ←→ Debug.Log("..."); と同じ
             Debug.Log(_currentPlayer);
             return true;
         }
+
+        //黒番目線の駒の移動
         //黒番目線のRayの処理(駒を奪う場合)
-        else if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
+        if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
         {
             GameObject _target = hit3.collider.gameObject;
 
+            //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
                 _target.SetActive(false);

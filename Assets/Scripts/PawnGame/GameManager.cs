@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Tooltip("白番の得点"),SerializeField] public static int _scoreWhite = 0;
-    [Tooltip("黒番の得点"),SerializeField] public static int _scoreBlack = 0;
+    [SerializeField] public static int _scoreWhite = 0; //白番の得点
+    [SerializeField] public static int _scoreBlack = 0; //黒番の得点
 
     // Start is called before the first frame update
     void Start()
