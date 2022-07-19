@@ -20,6 +20,8 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     [SerializeField] float _rayDistance = 100;
     /// <summary> レイヤーマスク(InspectorのLayerから選択する) </summary>
     [SerializeField] LayerMask _tileLayer;
+    [SerializeField] LayerMask _whiteLayer;
+    [SerializeField] LayerMask _blackLayer;
     /// <summary> 駒を移動した時にcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
     /// <summary> 通常状態、移動状態の駒のマテリアル </summary>
@@ -64,18 +66,46 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //メインカメラ(白番目線)からRayをとばす
         Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //secondカメラ(黒番目線)からRayをとばす
 
-        //白番目線のRayの処理
-        if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _tileLayer))
+        //白番目線のRayの処理(駒を奪う場合)
+        if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
         {
             GameObject _target = hit.collider.gameObject;
+
+            if (_target.tag == "BlackPiece")
+            {
+                _target.SetActive(false);
+            }
+
+            this.transform.position = _target.transform.position + _offset;
+            print($"Ray は {_target.name} に当たった");
+            return true;
+        }
+        //白番目線のRayの処理(移動のみ)
+        else if (Physics.Raycast(_ray, out RaycastHit hit2, _rayDistance, _tileLayer))
+        {
+            GameObject _target = hit2.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             print($"Ray は {_target.name} に当たった"); // print($"..."); = Debug.Log("..."); と同じ
             return true;
         }
-        //黒番目線のRayの処理
-        else if (Physics.Raycast(_ray2, out RaycastHit hit2, _rayDistance, _tileLayer))
+        //黒番目線のRayの処理(駒を奪う場合)
+        else if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
         {
-            GameObject _target = hit2.collider.gameObject;
+            GameObject _target = hit3.collider.gameObject;
+
+            if (_target.tag == "WhitePiece")
+            {
+                _target.SetActive(false);
+            }
+
+            this.transform.position = _target.transform.position + _offset;
+            print($"Ray は {_target.name} に当たった");
+            return true;
+        }
+        //黒番目線のRayの処理(移動のみ)
+        else if (Physics.Raycast(_ray2, out RaycastHit hit4, _rayDistance, _tileLayer))
+        {
+            GameObject _target = hit4.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             print($"Ray は {_target.name} に当たった");
             return true;

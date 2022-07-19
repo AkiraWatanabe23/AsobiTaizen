@@ -101,11 +101,16 @@ MonoBehaviour:
   _tileLayer:
     serializedVersion: 2
     m_Bits: 128
+  _whiteLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _blackLayer:
+    serializedVersion: 2
+    m_Bits: 512
   _offset: {x: 0, y: 0.1, z: 0}
   _normalMaterial: {fileID: 2100000, guid: 95607dbe2e7c3481c90296c75fb23104, type: 2}
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
   _status: 0
-  _movePosition: {fileID: 6668636158226337892, guid: f0e7e052ce9ff07479fe8246ca760702, type: 3}
 --- !u!54 &-1963260024508532799
 Rigidbody:
   m_ObjectHideFlags: 0
