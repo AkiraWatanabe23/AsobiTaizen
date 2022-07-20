@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 /// <summary> 
 /// 全ての駒に統一された動き(駒の選択、移動)
@@ -34,8 +35,13 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     /// <summary> 駒の状態 </summary>
     public Status _status = Status.Normal;
 
+    /// <summary> どっちのターンか(白) </summary>
     Text _whiteTurn;
+    /// <summary> どっちのターンか(黒) </summary>
     Text _blackTurn;
+
+    [DllImport("user32.dll")]
+    public static extern bool SetCursorPos(int x, int y);
 
     /// <summary>
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
@@ -43,7 +49,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        print($"{ name } をクリックした");
+        print($"{ name } を選んだ");
         ChangeState();
     }
 
@@ -86,6 +92,8 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             _currentPlayer = _playerTwo;
             _whiteTurn.color = Color.white;
             _blackTurn.color = Color.yellow;
+            SetCursorPos(950, 400);
+
             print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
@@ -98,6 +106,8 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             _currentPlayer = _playerTwo;
             _whiteTurn.color = Color.white;
             _blackTurn.color = Color.yellow;
+            SetCursorPos(950, 400);
+
             print($"Ray は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
             Debug.Log(_currentPlayer);
             return true;
@@ -119,6 +129,8 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             _currentPlayer = _playerOne;
             _whiteTurn.color = Color.yellow;
             _blackTurn.color = Color.white;
+            SetCursorPos(950, 400);
+
             print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
@@ -131,6 +143,8 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             _currentPlayer = _playerOne;
             _whiteTurn.color = Color.yellow;
             _blackTurn.color = Color.white;
+            SetCursorPos(950, 400);
+
             print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
@@ -141,15 +155,14 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        _currentPlayer = _playerOne;
+        _currentPlayer = _playerOne;                                       //白番から始める
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを見つけてくる
         _renderer = GetComponent<Renderer>();                              //駒のRenderer(コンポーネント)をとってくる
 
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
-
-        _whiteTurn.color = Color.yellow;
-
+        _whiteTurn.color = Color.yellow;                                   //白番から始める
+        Debug.Log(Input.mousePosition);
     }
 
     // Update is called once per frame
