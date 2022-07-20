@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary> 
 /// 全ての駒に統一された動き(駒の選択、移動)
 /// </summary>
 public class PieceController : MonoBehaviour, IPointerClickHandler
 {
-    ///<summary> プレイヤー(白番) </summary>
-    public readonly int _playerOne = 1;
-    ///<summary> プレイヤー(黒番) </summary>
-    public readonly int _playerTwo = 2;
-    ///<summary> current(現在の)プレイヤー </summary>
+    /// <summary> プレイヤー(白) </summary>
+    public const int _playerOne = 1;
+    /// <summary> プレイヤー(黒) </summary>
+    public const int _playerTwo = 2;
+    /// <summary> current(現在の)プレイヤー </summary>
     public int _currentPlayer;
     /// <summary> 駒の種類 </summary>
     public Type _type;
@@ -32,6 +33,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     Camera _camera;
     /// <summary> 駒の状態 </summary>
     public Status _status = Status.Normal;
+
+    Text _whiteTurn;
+    Text _blackTurn;
 
     /// <summary>
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
@@ -80,7 +84,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerTwo;
-            print($"Ray は {_target.name} に当たった");
+            _whiteTurn.color = Color.white;
+            _blackTurn.color = Color.yellow;
+            print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
         }
@@ -90,7 +96,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             GameObject _target = hit2.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerTwo;
-            print($"Ray は {_target.name} に当たった"); // print($"..."); ←→ Debug.Log("..."); と同じ
+            _whiteTurn.color = Color.white;
+            _blackTurn.color = Color.yellow;
+            print($"Ray は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
             Debug.Log(_currentPlayer);
             return true;
         }
@@ -109,7 +117,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerOne;
-            print($"Ray は {_target.name} に当たった");
+            _whiteTurn.color = Color.yellow;
+            _blackTurn.color = Color.white;
+            print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
         }
@@ -119,7 +129,9 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             GameObject _target = hit4.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerOne;
-            print($"Ray は {_target.name} に当たった");
+            _whiteTurn.color = Color.yellow;
+            _blackTurn.color = Color.white;
+            print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
         }
@@ -129,9 +141,15 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        _currentPlayer = _playerOne;                                       //白番から始める
+        _currentPlayer = _playerOne;
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを見つけてくる
         _renderer = GetComponent<Renderer>();                              //駒のRenderer(コンポーネント)をとってくる
+
+        _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
+        _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
+
+        _whiteTurn.color = Color.yellow;
+
     }
 
     // Update is called once per frame
@@ -151,18 +169,21 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    //Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
+    /// <summary>
+    /// Queen = 5, Rook = 4, Bishop = 3, Knight = 2, Pawn = 1 と数字を振る
+    /// </summary>
     public enum Type
     {
-        None,
-        Pawn,
+        Pawn = 1,
         Knight,
         Bishop,
         Rook,
         Queen,
     }
 
-    //通常状態、移動状態
+    /// <summary>
+    /// 通常状態、移動状態
+    /// </summary>
     public enum Status
     {
         Normal, //通常状態
