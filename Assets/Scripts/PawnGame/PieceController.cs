@@ -9,11 +9,11 @@ using UnityEngine.EventSystems;
 public class PieceController : MonoBehaviour, IPointerClickHandler
 {
     ///<summary> プレイヤー(白番) </summary>
-    private const int _playerOne = 1;
+    public readonly int _playerOne = 1;
     ///<summary> プレイヤー(黒番) </summary>
-    private const int _playerTwo = 2;
+    public readonly int _playerTwo = 2;
     ///<summary> current(現在の)プレイヤー </summary>
-    private int _currentPlayer;
+    public int _currentPlayer;
     /// <summary> 駒の種類 </summary>
     public Type _type;
     /// <summary> Rayの長さ </summary>
