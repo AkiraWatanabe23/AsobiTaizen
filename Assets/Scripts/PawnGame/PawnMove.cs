@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PawnMove : PieceController, IPointerClickHandler
+public class PawnMove : PieceController//, IPointerClickHandler
 {
     /// <summary> 駒の移動可能範囲のマスを表示 </summary>
     [SerializeField] public GameObject _movePosition;
