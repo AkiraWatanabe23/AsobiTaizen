@@ -10,26 +10,26 @@ using UnityEngine.UI;
 /// </summary>
 public class PieceController : MonoBehaviour //IPointerClickHandler
 {
-    /// <summary> プレイヤー(白) </summary>
-    public const int _playerOne = 1;
-    /// <summary> プレイヤー(黒) </summary>
-    public const int _playerTwo = 2;
-    /// <summary> current(現在の)プレイヤー </summary>
-    public int _currentPlayer;
+    ///// <summary> プレイヤー(白) </summary>
+    //public const int _playerOne = 1;
+    ///// <summary> プレイヤー(黒) </summary>
+    //public const int _playerTwo = 2;
+    ///// <summary> current(現在の)プレイヤー </summary>
+    //public int _currentPlayer;
     /// <summary> 駒の種類 </summary>
     public Type _type;
-    /// <summary> レイヤーマスク(InspectorのLayerから選択する) </summary>
-    [SerializeField] LayerMask _tileLayer;
-    [SerializeField] LayerMask _whiteLayer;
-    [SerializeField] LayerMask _blackLayer;
-    /// <summary> 駒を移動した時にcolliderの上に置く </summary>
-    [SerializeField] Vector3 _offset = Vector3.up;
+    ///// <summary> レイヤーマスク(InspectorのLayerから選択する) </summary>
+    //[SerializeField] LayerMask _tileLayer;
+    //[SerializeField] LayerMask _whiteLayer;
+    //[SerializeField] LayerMask _blackLayer;
+    ///// <summary> 駒を移動した時にcolliderの上に置く </summary>
+    //[SerializeField] Vector3 _offset = Vector3.up;
     /// <summary> 通常状態、移動状態の駒のマテリアル </summary>
     [SerializeField] Material _normalMaterial;
     [SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    /// <summary> 黒番目線のカメラ </summary>
-    Camera _camera;
+    ///// <summary> 黒番目線のカメラ </summary>
+    //Camera _camera;
     /// <summary> 駒の状態 </summary>
     public Status _status = Status.Normal;
 
@@ -202,13 +202,11 @@ public class PieceController : MonoBehaviour //IPointerClickHandler
 
     void Start()
     {
-        _renderer = GetComponent<Renderer>();                              //駒のRenderer(コンポーネント)をとってくる
+        _renderer = GetComponent<Renderer>(); //駒のRenderer(コンポーネント)をとってくる
 
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
-        _whiteTurn.color = UnityEngine.Color.yellow;                                   //白番から始める
-
-        _managerMove = GameObject.Find("Piece").GetComponent<PieceManager>();
+        _whiteTurn.color = UnityEngine.Color.yellow; //白番から始める
     }
 
     // Update is called once per frame

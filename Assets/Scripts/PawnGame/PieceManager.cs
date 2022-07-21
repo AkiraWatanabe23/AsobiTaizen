@@ -21,6 +21,8 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
     /// <summary> 駒を移動した時にcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
 
+    PieceController _phase;
+
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる(C++でいうと「::」と同じらしい)
     //[DllImport("user32.dll")]...外のどのファイル(今回は「user32.dll」)からとってくるのか
     //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
@@ -77,7 +79,7 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerTwo;
 
-            PhaseChange(_target);
+            _phase.PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
             print($"Ray は {_target.name} に移動した");
@@ -91,7 +93,7 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerTwo;
 
-            PhaseChange(_target);
+            _phase.PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
             print($"Ray は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
@@ -114,7 +116,7 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerOne;
 
-            PhaseChange(_target);
+            _phase.PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
             print($"Ray は {_target.name} に移動した");
@@ -128,7 +130,7 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
             this.transform.position = _target.transform.position + _offset;
             _currentPlayer = _playerOne;
 
-            PhaseChange(_target);
+            _phase.PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
             print($"Ray は {_target.name} に移動した");
