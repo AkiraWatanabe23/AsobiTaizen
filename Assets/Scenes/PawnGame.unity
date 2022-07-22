@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 896
   m_MaxRayIntersections: 0
 --- !u!1 &176633681
 GameObject:
@@ -7020,7 +7020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 896
   m_MaxRayIntersections: 0
 --- !u!4 &964233769 stripped
 Transform:
@@ -12471,7 +12471,7 @@ MonoBehaviour:
   _blackLayer:
     serializedVersion: 2
     m_Bits: 512
-  _offset: {x: 0, y: 0.1, z: 0}
+  _offset: {x: 0, y: -21.4, z: 0}
 --- !u!1001 &1925623805
 PrefabInstance:
   m_ObjectHideFlags: 0
