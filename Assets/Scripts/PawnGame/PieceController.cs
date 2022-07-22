@@ -104,6 +104,9 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
+            _state = Color.Black;
+            GameManager._state = Phase.Black;
+
             print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
@@ -117,6 +120,9 @@ public class PieceController : MonoBehaviour
 
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
+
+            _state = Color.Black;
+            GameManager._state = Phase.Black;
 
             print($"Ray は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
             Debug.Log(_currentPlayer);
@@ -141,6 +147,9 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
+            _state = Color.White;
+            GameManager._state = Phase.White;
+
             print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
@@ -155,6 +164,9 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
+            _state = Color.White;
+            GameManager._state = Phase.White;
+
             print($"Ray は {_target.name} に移動した");
             Debug.Log(_currentPlayer);
             return true;
@@ -167,7 +179,15 @@ public class PieceController : MonoBehaviour
     /// </summary>
     public void ChangeState() //右クリックをすると移動状態→通常状態にできる
     {
+        //白駒の切り替え
         if (_status == Status.Normal && _state == Color.White && GameManager._state == Phase.White)
+        {
+            _status = Status.Move;
+            _renderer.material = _moveMaterial;
+            isMove = true;
+        }
+        //黒駒の切り替え
+        else if (_status == Status.Normal && _state == Color.Black && GameManager._state == Phase.Black)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
