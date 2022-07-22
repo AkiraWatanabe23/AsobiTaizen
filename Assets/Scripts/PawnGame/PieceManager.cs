@@ -20,10 +20,15 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
     Camera _camera;
     /// <summary> 駒を移動した時にcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
-
+    /// <summary> PieceControllerを取得 </summary>
     PieceController _phase;
+    /// <summary> 駒をまとめている親オブジェクトを取得 </summary>
+    GameObject _pieceParent;
+    /// <summary> 駒(子オブジェクト達)を配列として取得 </summary>
+    Transform[] _pieceChildrens;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる(C++でいうと「::」と同じらしい)
+    //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
     //[DllImport("user32.dll")]...外のどのファイル(今回は「user32.dll」)からとってくるのか
     //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
     [DllImport("user32.dll")]
@@ -48,6 +53,18 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
         _currentPlayer = _playerOne;                                       //白番から始める
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを見つけてくる
 
+        _phase = GetComponentInChildren<PieceController>();
+
+        ///<summary> 駒をまとめている親オブジェクトを検索する </summary>
+        _pieceParent = GameObject.Find("Piece");
+        ///<summary> 子オブジェクト達の配列を初期化 </summary>
+        _pieceChildrens = new Transform[_pieceParent.transform.childCount];
+        ///<summary> 子オブジェクトを取得 </summary>
+        for (int i = 0; i < _pieceParent.transform.childCount; i++)
+        {
+            _pieceChildrens[i] = _pieceParent.transform.GetChild(i);
+            Debug.Log(i + "番目の駒は" + _pieceChildrens[i].name + "です");
+        }
     }
 
     // Update is called once per frame
