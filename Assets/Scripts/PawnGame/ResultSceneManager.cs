@@ -32,12 +32,12 @@ public class ResultSceneManager : MonoBehaviour
 
         if (GameManager._scoreWhite == 5)
         {
-            _whiteWinText.gameObject.SetActive(true); //「白の勝ち!!」のText を表示
+            _whiteWinText.gameObject.SetActive(true); //「白の勝ち」のText を表示
             _blackWinText.gameObject.SetActive(false);
         }
         else if (GameManager._scoreBlack == 5)
         {
-            _whiteWinText.gameObject.SetActive(false);  //「黒の勝ち!!」のText を表示
+            _whiteWinText.gameObject.SetActive(false); //「黒の勝ち」のText を表示
             _blackWinText.gameObject.SetActive(true);
         }
     }

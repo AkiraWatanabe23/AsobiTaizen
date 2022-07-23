@@ -42,7 +42,7 @@ public class PieceController : MonoBehaviour
     /// <summary> どっちのターンかの表示(黒) </summary>
     Text _blackTurn;
     /// <summary> 白駒か黒駒か </summary>
-    public Color _state = Color.White;
+    public PieceColor _state = PieceColor.White;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる(C++でいうと「::」と同じらしい)
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
@@ -58,7 +58,7 @@ public class PieceController : MonoBehaviour
 
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
-        _whiteTurn.color = UnityEngine.Color.yellow;
+        _whiteTurn.color = Color.yellow;
 
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを取得
     }
@@ -192,14 +192,14 @@ public class PieceController : MonoBehaviour
     public void ChangeState() //右クリックをすると移動状態→通常状態にできる
     {
         //白駒の切り替え
-        if (_status == Status.Normal && _state == Color.White && GameManager._state == Phase.White)
+        if (_status == Status.Normal && _state == PieceColor.White && GameManager._state == Phase.White)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             isMove = true;
         }
         //黒駒の切り替え
-        else if (_status == Status.Normal && _state == Color.Black && GameManager._state == Phase.Black)
+        else if (_status == Status.Normal && _state == PieceColor.Black && GameManager._state == Phase.Black)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
@@ -235,7 +235,7 @@ public class PieceController : MonoBehaviour
                 }
                 break;
 
-            case (Color)1: //Color.Black
+            case (PieceColor)1: //Color.Black
                 _whiteTurn.color = UnityEngine.Color.yellow;
                 _blackTurn.color = UnityEngine.Color.white;
                 if (_target.tag == "BlackPiece")
@@ -275,7 +275,7 @@ public class PieceController : MonoBehaviour
     /// <summary>
     /// 白駒or黒駒
     /// </summary>
-    public enum Color
+    public enum PieceColor
     {
         White = 0,
         Black = 1,

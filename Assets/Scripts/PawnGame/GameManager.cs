@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         if (_scoreWhite == 5 || _scoreBlack == 5) //どちらかの得点が目標点に届いたら
         {
+            //シーン遷移はもう少し時間空ける
             SceneManager.LoadScene("ResultScene");
         }
     }
