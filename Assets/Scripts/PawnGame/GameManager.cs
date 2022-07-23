@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum Phase
 {
@@ -36,5 +37,10 @@ public class GameManager : MonoBehaviour
     {
         _scoreWhiteText.text = _scoreWhite.ToString();
         _scoreBlackText.text = _scoreBlack.ToString();
+
+        if (_scoreWhite == 5 || _scoreBlack == 5)
+        {
+            SceneManager.LoadScene("ResultScene");
+        }
     }
 }

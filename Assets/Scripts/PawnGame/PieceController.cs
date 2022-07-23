@@ -95,7 +95,7 @@ public class PieceController : MonoBehaviour
             if (_target.tag == "BlackPiece")
             {
                 //白にスコアを追加
-                //ToDo...とった駒の種類によって点数が異なる
+                //ToDo...とった駒の種類によって獲得する点数が異なる
                 GameManager._scoreWhite++;
 
                 //敵の駒を消す
@@ -144,7 +144,7 @@ public class PieceController : MonoBehaviour
             if (_target.tag == "WhitePiece")
             {
                 //黒にスコアを追加
-                //ToDo...とった駒の種類によって点数が異なる
+                //ToDo...とった駒の種類によって獲得する点数が異なる
                 GameManager._scoreBlack++;
 
                 //敵の駒を消す
