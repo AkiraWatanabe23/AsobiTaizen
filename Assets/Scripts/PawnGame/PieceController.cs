@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Runtime.InteropServices;
 
@@ -182,14 +181,14 @@ public class PieceController : MonoBehaviour
     public void ChangeState() //右クリックをすると移動状態→通常状態にできる
     {
         //白駒の切り替え
-        if (_status == Status.Normal /*&& _state == Color.White*/ && GameManager._state == Phase.White)
+        if (_status == Status.Normal && _state == Color.White && GameManager._state == Phase.White)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             isMove = true;
         }
         //黒駒の切り替え
-        else if (_status == Status.Normal /*&& _state == Color.Black*/ && GameManager._state == Phase.Black)
+        else if (_status == Status.Normal && _state == Color.Black && GameManager._state == Phase.Black)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;

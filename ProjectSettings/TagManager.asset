@@ -9,8 +9,10 @@ TagManager:
   - BlackPiece
   - Tile
   - SecondCamera
-  - SelectPos
   - GetPiece
+  - SelectPiece
+  - Undefined
+  - MovePos
   layers:
   - Default
   - TransparentFX
