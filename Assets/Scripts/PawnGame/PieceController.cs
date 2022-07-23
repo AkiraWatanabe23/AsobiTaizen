@@ -96,6 +96,8 @@ public class PieceController : MonoBehaviour
             {
                 //敵の駒を消す
                 _target.SetActive(false);
+                //白にスコアを追加
+                GameManager._scoreWhite++;
             }
 
             this.transform.position = _target.transform.position + _offset;
@@ -140,6 +142,8 @@ public class PieceController : MonoBehaviour
             {
                 //敵の駒を消す
                 _target.SetActive(false);
+                //黒にスコアを追加
+                GameManager._scoreBlack++;
             }
 
             this.transform.position = _target.transform.position + _offset;
