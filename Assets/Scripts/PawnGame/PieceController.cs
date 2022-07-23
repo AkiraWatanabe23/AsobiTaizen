@@ -37,12 +37,12 @@ public class PieceController : MonoBehaviour
 
     bool isMove = false;
 
-    /// <summary> どっちのターンか(白) </summary>
+    /// <summary> どっちのターンかの表示(白) </summary>
     Text _whiteTurn;
-    /// <summary> どっちのターンか(黒) </summary>
+    /// <summary> どっちのターンかの表示(黒) </summary>
     Text _blackTurn;
     /// <summary> 白駒か黒駒か </summary>
-    [SerializeField] public Color _state = Color.White;
+    public Color _state = Color.White;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる(C++でいうと「::」と同じらしい)
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
@@ -95,6 +95,7 @@ public class PieceController : MonoBehaviour
             //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
+                //敵の駒を消す
                 _target.SetActive(false);
             }
 
@@ -104,11 +105,11 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
-            _state = Color.Black;
+            //_state = Color.Black;
             GameManager._state = Phase.Black;
 
             print($"Ray は {_target.name} に移動した");
-            Debug.Log(_currentPlayer);
+            Debug.Log("黒のターン");
             return true;
         }
         //白番目線のRayの処理(移動のみ)
@@ -121,11 +122,11 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
-            _state = Color.Black;
+            //_state = Color.Black;
             GameManager._state = Phase.Black;
 
             print($"Ray は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
-            Debug.Log(_currentPlayer);
+            Debug.Log("黒のターン");
             return true;
         }
 
@@ -138,6 +139,7 @@ public class PieceController : MonoBehaviour
             //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
+                //敵の駒を消す
                 _target.SetActive(false);
             }
 
@@ -147,11 +149,11 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
-            _state = Color.White;
+            //_state = Color.White;
             GameManager._state = Phase.White;
 
             print($"Ray は {_target.name} に移動した");
-            Debug.Log(_currentPlayer);
+            Debug.Log("白のターン");
             return true;
         }
         //黒番目線のRayの処理(移動のみ)
@@ -164,11 +166,11 @@ public class PieceController : MonoBehaviour
             PhaseChange(_target);
             SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
 
-            _state = Color.White;
+            //_state = Color.White;
             GameManager._state = Phase.White;
 
             print($"Ray は {_target.name} に移動した");
-            Debug.Log(_currentPlayer);
+            Debug.Log("白のターン");
             return true;
         }
 
@@ -180,19 +182,20 @@ public class PieceController : MonoBehaviour
     public void ChangeState() //右クリックをすると移動状態→通常状態にできる
     {
         //白駒の切り替え
-        if (_status == Status.Normal && _state == Color.White && GameManager._state == Phase.White)
+        if (_status == Status.Normal /*&& _state == Color.White*/ && GameManager._state == Phase.White)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             isMove = true;
         }
         //黒駒の切り替え
-        else if (_status == Status.Normal && _state == Color.Black && GameManager._state == Phase.Black)
+        else if (_status == Status.Normal /*&& _state == Color.Black*/ && GameManager._state == Phase.Black)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             isMove = true;
         }
+        //移動状態→通常状態
         else if (_status == Status.Move && isMove == true)
         {
             _status = Status.Normal;

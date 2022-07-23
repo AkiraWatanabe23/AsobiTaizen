@@ -19,8 +19,6 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
         var go = eventData.pointerCurrentRaycast.gameObject;
         var piece = go.GetComponent<PieceController>();
 
-        //name...マウスクリックした時に当たったオブジェクトの名前(子オブジェクトをクリックした場合、親オブジェクトをクリックした判定になる)
-        //       　　　　　　　　　　　　　　　　　　　　　　　　 ↑(子オブジェクトがとれてない?)←これが困る
         print($"{ name } を選んだ");
         piece.ChangeState();
     }
@@ -38,11 +36,5 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
             _pieceChildrens[i] = _pieceParent.transform.GetChild(i);
             Debug.Log(i + "番目の駒は" + _pieceChildrens[i].name + "です");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
