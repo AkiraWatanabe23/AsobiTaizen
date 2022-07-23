@@ -56,9 +56,9 @@ public class PieceController : MonoBehaviour
 
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
-        _whiteTurn.color = UnityEngine.Color.yellow; //白番から始める
+        _whiteTurn.color = UnityEngine.Color.yellow;
 
-        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
+        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを取得
     }
 
     // Update is called once per frame
@@ -94,10 +94,13 @@ public class PieceController : MonoBehaviour
             //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
+                //白にスコアを追加
+                //ToDo...とった駒の種類によって点数が異なる
+                GameManager._scoreWhite++;
+
                 //敵の駒を消す
                 _target.SetActive(false);
-                //白にスコアを追加
-                GameManager._scoreWhite++;
+                
             }
 
             this.transform.position = _target.transform.position + _offset;
@@ -109,7 +112,7 @@ public class PieceController : MonoBehaviour
             //_state = Color.Black;
             GameManager._state = Phase.Black;
 
-            print($"Ray は {_target.name} に移動した");
+            print($"Ray は {_target.name} をとった");
             Debug.Log("黒のターン");
             return true;
         }
@@ -140,10 +143,12 @@ public class PieceController : MonoBehaviour
             //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
+                //黒にスコアを追加
+                //ToDo...とった駒の種類によって点数が異なる
+                GameManager._scoreBlack++;
+
                 //敵の駒を消す
                 _target.SetActive(false);
-                //黒にスコアを追加
-                GameManager._scoreBlack++;
             }
 
             this.transform.position = _target.transform.position + _offset;
@@ -155,7 +160,7 @@ public class PieceController : MonoBehaviour
             //_state = Color.White;
             GameManager._state = Phase.White;
 
-            print($"Ray は {_target.name} に移動した");
+            print($"Ray は {_target.name} をとった");
             Debug.Log("白のターン");
             return true;
         }
