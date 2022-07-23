@@ -17,7 +17,9 @@ public class PieceManager : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         var go = eventData.pointerCurrentRaycast.gameObject;
+        //↑カメラから現在のマウスカーソルの位置にRayを飛ばし、当たったオブジェクトを代入する
         var piece = go.GetComponent<PieceController>();
+        //↑当たったオブジェクトの「PieceController」を見つけてくる
 
         print($"{ name } を選んだ");
         piece.ChangeState();

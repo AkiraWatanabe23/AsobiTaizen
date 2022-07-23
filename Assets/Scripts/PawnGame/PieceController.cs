@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//↓マウスカーソルポジションの強制移動させるのに宣言する必要がある(らしい)
 using System.Runtime.InteropServices;
 
 /// <summary> 
@@ -47,6 +48,7 @@ public class PieceController : MonoBehaviour
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
     //[DllImport("user32.dll")]...外のどのファイル(今回は「user32.dll」)からとってくるのか
     //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
+    //以下2行はセットで書かないとコンパイルエラー発生
     [DllImport("user32.dll")]
     public static extern bool SetCursorPos(int x, int y);
 
@@ -94,8 +96,8 @@ public class PieceController : MonoBehaviour
             //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
-                //白にスコアを追加
-                //ToDo...とった駒の種類によって獲得する点数が異なる
+                //白のスコアを加算
+                //ToDo...とった駒の種類によって獲得する点数が異なるようにする
                 GameManager._scoreWhite++;
 
                 //敵の駒を消す
@@ -143,8 +145,8 @@ public class PieceController : MonoBehaviour
             //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
-                //黒にスコアを追加
-                //ToDo...とった駒の種類によって獲得する点数が異なる
+                //黒のスコアを加算
+                //ToDo...とった駒の種類によって獲得する点数が異なるようにする
                 GameManager._scoreBlack++;
 
                 //敵の駒を消す
@@ -185,7 +187,7 @@ public class PieceController : MonoBehaviour
         return false;
     }
     /// <summary>
-    /// マウスクリックをした時に実行される処理
+    /// マウスクリックをした(駒を選んだ、動かした)時に実行される処理
     /// </summary>
     public void ChangeState() //右クリックをすると移動状態→通常状態にできる
     {
