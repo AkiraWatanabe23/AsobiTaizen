@@ -15,10 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public static int _scoreWhite; //白番の得点
     [SerializeField] public static int _scoreBlack; //黒番の得点
 
-    [Header("Canvasから白のスコアを表示しているTextObjectをアタッチ")]
-    [SerializeField] public Text _scoreWhiteText;
-    [Header("Canvasから黒のスコアを表示しているTextObjectをアタッチ")]
-    [SerializeField] public Text _scoreBlackText;
+    [Header("白のスコアをシーンに表示する"), SerializeField] public Text _scoreWhiteText;
+    [Header("黒のスコアをシーンに表示する"), SerializeField] public Text _scoreBlackText;
 
     [SerializeField] public static Phase _state = Phase.White;
 
@@ -35,10 +33,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _scoreWhiteText.text = _scoreWhite.ToString();
+        _scoreWhiteText.text = _scoreWhite.ToString(); //得点をシーンに表示
         _scoreBlackText.text = _scoreBlack.ToString();
 
-        if (_scoreWhite == 5 || _scoreBlack == 5)
+        if (_scoreWhite == 5 || _scoreBlack == 5) //どちらかの得点が目標点に届いたら
         {
             SceneManager.LoadScene("ResultScene");
         }
