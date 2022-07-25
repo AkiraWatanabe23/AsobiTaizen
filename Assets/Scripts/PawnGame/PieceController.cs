@@ -99,9 +99,13 @@ public class PieceController : MonoBehaviour
                 //白のスコアを加算
                 //ToDo...とった駒の種類によって獲得する点数が異なるようにする
                 GameManager._scoreWhite++;
+                //盤上にある駒のカウントを減らす
+                GameManager._bPieceCount--;
+                Debug.Log(GameManager._bPieceCount);
 
                 //敵の駒を消す
                 _target.SetActive(false);
+                //↑Destroyでもいいかも?
                 
             }
 
@@ -148,6 +152,9 @@ public class PieceController : MonoBehaviour
                 //黒のスコアを加算
                 //ToDo...とった駒の種類によって獲得する点数が異なるようにする
                 GameManager._scoreBlack++;
+                //盤上にある駒のカウントを減らす
+                GameManager._wPieceCount--;
+                Debug.Log(GameManager._wPieceCount);
 
                 //敵の駒を消す
                 _target.SetActive(false);
