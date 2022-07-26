@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         _scoreWhite = 0;
         _scoreBlack = 0;
-        _finalScore = 8;
+        _finalScore = 5;
 
         _state = Phase.White;
         _resultPanel.SetActive(false);

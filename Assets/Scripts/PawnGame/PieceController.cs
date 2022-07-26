@@ -97,26 +97,31 @@ public class PieceController : MonoBehaviour
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreWhite += 1;
+                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
                 //とった駒がナイトなら
                 else if (_target.name.Contains("knight"))
                 {
                     GameManager._scoreWhite += 2;
+                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
                 //とった駒がビショップなら
                 else if (_target.name.Contains("bishop"))
                 {
                     GameManager._scoreWhite += 3;
+                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
                 //とった駒がルークなら
                 else if (_target.name.Contains("rook"))
                 {
                     GameManager._scoreWhite += 4;
+                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
                 //とった駒がクイーンなら
                 else if (_target.name.Contains("queen"))
                 {
                     GameManager._scoreWhite += 5;
+                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
                 
                 //盤上にある駒のカウントを減らす
@@ -136,8 +141,13 @@ public class PieceController : MonoBehaviour
 
             //_state = Color.Black;
             GameManager._state = Phase.Black;
+            print($"駒は {_target.name} をとった");
 
-            print($"Ray は {_target.name} をとった");
+            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+            {
+                GameObject _hitTile = hitTile.collider.gameObject;
+                print($"駒は {_hitTile.name} に移動した");
+            }
             Debug.Log("黒のターン");
             return true;
         }
@@ -154,7 +164,7 @@ public class PieceController : MonoBehaviour
             //_state = Color.Black;
             GameManager._state = Phase.Black;
 
-            print($"Ray は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
+            print($"駒は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
             Debug.Log("黒のターン");
             return true;
         }
@@ -174,26 +184,31 @@ public class PieceController : MonoBehaviour
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreBlack += 1;
+                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
                 //とった駒がナイトなら
                 else if (_target.name.Contains("knight"))
                 {
                     GameManager._scoreBlack += 2;
+                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
                 //とった駒がビショップなら
                 else if (_target.name.Contains("bishop"))
                 {
                     GameManager._scoreBlack += 3;
+                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
                 //とった駒がルークなら
                 else if (_target.name.Contains("rook"))
                 {
                     GameManager._scoreBlack += 4;
+                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
                 //とった駒がクイーンなら
                 else if (_target.name.Contains("queen"))
                 {
                     GameManager._scoreBlack += 5;
+                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
 
                 //盤上にある駒のカウントを減らす
@@ -212,8 +227,13 @@ public class PieceController : MonoBehaviour
 
             //_state = Color.White;
             GameManager._state = Phase.White;
+            print($"駒は {_target.name} をとった");
 
-            print($"Ray は {_target.name} をとった");
+            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+            {
+                GameObject _hitTile = hitTile.collider.gameObject;
+                print($"駒は {_hitTile.name} に移動した");
+            }
             Debug.Log("白のターン");
             return true;
         }
@@ -230,7 +250,7 @@ public class PieceController : MonoBehaviour
             //_state = Color.White;
             GameManager._state = Phase.White;
 
-            print($"Ray は {_target.name} に移動した");
+            print($"駒は {_target.name} に移動した");
             Debug.Log("白のターン");
             return true;
         }
