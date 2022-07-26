@@ -30,13 +30,9 @@ public class PieceController : MonoBehaviour
     [SerializeField] Material _normalMaterial;
     [SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    ///// <summary> 黒番目線のカメラ </summary>
-    //Camera _camera;
     /// <summary> 駒の状態 </summary>
     public Status _status = Status.Normal;
-
     bool isMove = false;
-
     /// <summary> どっちのターンかの表示(白) </summary>
     Text _whiteTurn;
     /// <summary> どっちのターンかの表示(黒) </summary>
@@ -55,12 +51,11 @@ public class PieceController : MonoBehaviour
     void Start()
     {
         _renderer = GetComponent<Renderer>(); //駒のRenderer(コンポーネント)をとってくる
-
+        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを取得
+        //↓ターン表示のText
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
         _whiteTurn.color = Color.yellow;
-
-        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを取得
     }
 
     // Update is called once per frame
@@ -84,8 +79,7 @@ public class PieceController : MonoBehaviour
         //マウスの位置を取得し、Rayに代入
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //メインカメラ(白番目線)からRayをとばす
         Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //secondカメラ(黒番目線)からRayをとばす
-        //Rayの長さ
-        float _rayDistance = 100;
+        float _rayDistance = 100; //Rayの長さ
 
         //白番目線の駒の移動
         //白番目線のRayの処理(駒を奪う場合)
@@ -97,15 +91,40 @@ public class PieceController : MonoBehaviour
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //ToDo...とった駒の種類によって獲得する点数が異なるようにする
-                GameManager._scoreWhite++;
+                //とった駒の種類によって獲得する点数が異なるようにする
+                //word.Contains(string)...wordの中に、stringが含まれているか
+                //とった駒がポーンなら
+                if (_target.name.Contains("pawn"))
+                {
+                    GameManager._scoreWhite += 1;
+                }
+                //とった駒がナイトなら
+                else if (_target.name.Contains("knight"))
+                {
+                    GameManager._scoreWhite += 2;
+                }
+                //とった駒がビショップなら
+                else if (_target.name.Contains("bishop"))
+                {
+                    GameManager._scoreWhite += 3;
+                }
+                //とった駒がルークなら
+                else if (_target.name.Contains("rook"))
+                {
+                    GameManager._scoreWhite += 4;
+                }
+                //とった駒がクイーンなら
+                else if (_target.name.Contains("queen"))
+                {
+                    GameManager._scoreWhite += 5;
+                }
+                
                 //盤上にある駒のカウントを減らす
                 GameManager._bPieceCount--;
                 Debug.Log(GameManager._bPieceCount);
 
                 //敵の駒を消す
-                _target.SetActive(false);
-                //↑Destroyでもいいかも?
+                Destroy(_target);
                 
             }
 
@@ -150,14 +169,39 @@ public class PieceController : MonoBehaviour
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                //ToDo...とった駒の種類によって獲得する点数が異なるようにする
-                GameManager._scoreBlack++;
+                //とった駒の種類によって獲得する点数が異なるようにする
+                //とった駒がポーンなら
+                if (_target.name.Contains("pawn"))
+                {
+                    GameManager._scoreBlack += 1;
+                }
+                //とった駒がナイトなら
+                else if (_target.name.Contains("knight"))
+                {
+                    GameManager._scoreBlack += 2;
+                }
+                //とった駒がビショップなら
+                else if (_target.name.Contains("bishop"))
+                {
+                    GameManager._scoreBlack += 3;
+                }
+                //とった駒がルークなら
+                else if (_target.name.Contains("rook"))
+                {
+                    GameManager._scoreBlack += 4;
+                }
+                //とった駒がクイーンなら
+                else if (_target.name.Contains("queen"))
+                {
+                    GameManager._scoreBlack += 5;
+                }
+
                 //盤上にある駒のカウントを減らす
                 GameManager._wPieceCount--;
                 Debug.Log(GameManager._wPieceCount);
 
                 //敵の駒を消す
-                _target.SetActive(false);
+                Destroy(_target);
             }
 
             this.transform.position = _target.transform.position + _offset;
