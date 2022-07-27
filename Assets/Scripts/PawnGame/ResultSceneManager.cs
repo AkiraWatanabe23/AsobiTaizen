@@ -36,7 +36,7 @@ public class ResultSceneManager : MonoBehaviour
         _blackScoreText.text = GameManager._scoreBlack.ToString();
 
         //白の勝ち
-        //目標点獲得or敵駒0
+        //目標点達成or黒駒==0
         if (GameManager._scoreWhite == GameManager._finalScore || GameManager._bPieceCount == 0)
         {
             _whiteWinText.gameObject.SetActive(true); //「白の勝ち」のText を表示
@@ -44,11 +44,11 @@ public class ResultSceneManager : MonoBehaviour
             _drawText.gameObject.SetActive(false);
         }
         //黒の勝ち
-        //目標点獲得or敵駒0
+        //目標点達成or白駒==0
         else if (GameManager._scoreBlack == GameManager._finalScore || GameManager._wPieceCount == 0)
         {
-            _whiteWinText.gameObject.SetActive(false); //「黒の勝ち」のText を表示
-            _blackWinText.gameObject.SetActive(true);
+            _whiteWinText.gameObject.SetActive(false);
+            _blackWinText.gameObject.SetActive(true); //「黒の勝ち」のText を表示
             _drawText.gameObject.SetActive(false);
         }
         //引き分け(この時、スコア表示する?)
@@ -56,9 +56,9 @@ public class ResultSceneManager : MonoBehaviour
         //　　　　　(ステイルメイト...駒が動かせない場合は、得点の高い方の勝ち、かなぁ...)
         else
         {
-            _whiteWinText.gameObject.SetActive(false); //「引き分け」のText を表示
+            _whiteWinText.gameObject.SetActive(false);
             _blackWinText.gameObject.SetActive(false);
-            _drawText.gameObject.SetActive(true);
+            _drawText.gameObject.SetActive(true); //「引き分け」のText を表示
         }
     }
 }

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 //↓マウスカーソルポジションの強制移動させるのに宣言する必要がある(らしい)
 using System.Runtime.InteropServices;
 
 /// <summary> 
 /// 全ての駒に統一された動き(駒の選択、移動)
 /// </summary>
-public class PieceController : MonoBehaviour
+public class PieceController : MonoBehaviour, IPointerClickHandler
 {
     /// <summary> プレイヤー(白) </summary>
     public const int _playerOne = 1;
@@ -21,24 +22,24 @@ public class PieceController : MonoBehaviour
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
     /// <summary> 黒番目線のカメラ </summary>
-    Camera _camera;
+    public static Camera _camera;
     /// <summary> 駒を移動した時にcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
-    /// <summary> 駒の種類 </summary>
-    public Type _type;
     /// <summary> 通常状態、移動状態の駒のマテリアル </summary>
     [SerializeField] Material _normalMaterial;
     [SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    /// <summary> 駒の状態 </summary>
-    public Status _status = Status.Normal;
-    bool isMove = false;
     /// <summary> どっちのターンかの表示(白) </summary>
     Text _whiteTurn;
     /// <summary> どっちのターンかの表示(黒) </summary>
     Text _blackTurn;
     /// <summary> 白駒か黒駒か </summary>
     public PieceColor _state = PieceColor.White;
+    /// <summary> 駒の種類 </summary>
+    public Type _type;
+    /// <summary> 駒の状態 </summary>
+    public Status _status = Status.Normal;
+    bool isMove = false;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる(C++でいうと「::」と同じらしい)
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
@@ -47,6 +48,21 @@ public class PieceController : MonoBehaviour
     //以下2行はセットで書かないとコンパイルエラー発生
     [DllImport("user32.dll")]
     public static extern bool SetCursorPos(int x, int y);
+
+    /// <summary>
+    /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        var go = eventData.pointerCurrentRaycast.gameObject;
+        //↑カメラから現在のマウスカーソルの位置にRayを飛ばし、当たったオブジェクトを代入する
+        var piece = go.GetComponent<PieceController>();
+        //↑当たったオブジェクトの「PieceController」を見つけてくる
+
+        print($"{ name } を選んだ");
+        piece.ChangeState();
+    }
 
     void Start()
     {
@@ -62,7 +78,7 @@ public class PieceController : MonoBehaviour
     void Update()
     {
         //一回目のマウスクリックで駒を選び、二回目のクリックで配置場所を確定、移動する
-        //マウスクリックの中でも、左クリックが行われた場合に以下の処理を行う
+        //左クリックが行われた場合に以下の処理を行う
         if (Input.GetMouseButtonDown(0))
         {
             if (_status == Status.Move)
@@ -77,8 +93,8 @@ public class PieceController : MonoBehaviour
     public bool Move()
     {
         //マウスの位置を取得し、Rayに代入
-        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //メインカメラ(白番目線)からRayをとばす
-        Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //secondカメラ(黒番目線)からRayをとばす
+        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //白番カメラからRayをとばす
+        Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //黒番カメラからRayをとばす
         float _rayDistance = 100; //Rayの長さ
 
         //白番目線の駒の移動
@@ -91,46 +107,41 @@ public class PieceController : MonoBehaviour
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //とった駒の種類によって獲得する点数が異なるようにする
-                //word.Contains(string)...wordの中に、stringが含まれているか
+                //とった駒の種類によって獲得する点数が異なる
+                //word.Contains(string)...wordの中に、string(文字列)が含まれているか
                 //とった駒がポーンなら
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreWhite += 1;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //とった駒がナイトなら
+                //ナイトなら
                 else if (_target.name.Contains("knight"))
                 {
                     GameManager._scoreWhite += 2;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //とった駒がビショップなら
+                //ビショップなら
                 else if (_target.name.Contains("bishop"))
                 {
                     GameManager._scoreWhite += 3;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //とった駒がルークなら
+                //ルークなら
                 else if (_target.name.Contains("rook"))
                 {
                     GameManager._scoreWhite += 4;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //とった駒がクイーンなら
+                //クイーンなら
                 else if (_target.name.Contains("queen"))
                 {
                     GameManager._scoreWhite += 5;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                
-                //盤上にある駒のカウントを減らす
+                //盤上にある敵駒のカウントを減らす
                 GameManager._bPieceCount--;
-                Debug.Log(GameManager._bPieceCount);
-
-                //敵の駒を消す
                 Destroy(_target);
-                
             }
 
             this.transform.position = _target.transform.position + _offset;
@@ -148,7 +159,6 @@ public class PieceController : MonoBehaviour
                 GameObject _hitTile = hitTile.collider.gameObject;
                 print($"駒は {_hitTile.name} に移動した");
             }
-            Debug.Log("黒のターン");
             return true;
         }
         //白番目線のRayの処理(移動のみ)
@@ -165,7 +175,6 @@ public class PieceController : MonoBehaviour
             GameManager._state = Phase.Black;
 
             print($"駒は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
-            Debug.Log("黒のターン");
             return true;
         }
 
@@ -179,32 +188,32 @@ public class PieceController : MonoBehaviour
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                //とった駒の種類によって獲得する点数が異なるようにする
+                //とった駒の種類によって獲得する点数が異なる
                 //とった駒がポーンなら
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreBlack += 1;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //とった駒がナイトなら
+                //ナイトなら
                 else if (_target.name.Contains("knight"))
                 {
                     GameManager._scoreBlack += 2;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //とった駒がビショップなら
+                //ビショップなら
                 else if (_target.name.Contains("bishop"))
                 {
                     GameManager._scoreBlack += 3;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //とった駒がルークなら
+                //ルークなら
                 else if (_target.name.Contains("rook"))
                 {
                     GameManager._scoreBlack += 4;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //とった駒がクイーンなら
+                //クイーンなら
                 else if (_target.name.Contains("queen"))
                 {
                     GameManager._scoreBlack += 5;
@@ -213,9 +222,6 @@ public class PieceController : MonoBehaviour
 
                 //盤上にある駒のカウントを減らす
                 GameManager._wPieceCount--;
-                Debug.Log(GameManager._wPieceCount);
-
-                //敵の駒を消す
                 Destroy(_target);
             }
 
@@ -234,7 +240,6 @@ public class PieceController : MonoBehaviour
                 GameObject _hitTile = hitTile.collider.gameObject;
                 print($"駒は {_hitTile.name} に移動した");
             }
-            Debug.Log("白のターン");
             return true;
         }
         //黒番目線のRayの処理(移動のみ)
@@ -251,10 +256,8 @@ public class PieceController : MonoBehaviour
             GameManager._state = Phase.White;
 
             print($"駒は {_target.name} に移動した");
-            Debug.Log("白のターン");
             return true;
         }
-
         return false;
     }
     /// <summary>
@@ -276,7 +279,7 @@ public class PieceController : MonoBehaviour
             _renderer.material = _moveMaterial;
             isMove = true;
         }
-        //移動状態→通常状態
+        //移動状態→通常状態(駒が移動した後の処理)
         else if (_status == Status.Move && isMove == true)
         {
             _status = Status.Normal;
@@ -293,8 +296,8 @@ public class PieceController : MonoBehaviour
         switch (_state)
         {
             case 0: //Color.White
-                _whiteTurn.color = UnityEngine.Color.white;
-                _blackTurn.color = UnityEngine.Color.yellow;
+                _whiteTurn.color = Color.white;
+                _blackTurn.color = Color.yellow;
                 if (_target.tag == "WhitePiece")
                 {
                     _status = Status.Normal;
@@ -307,8 +310,8 @@ public class PieceController : MonoBehaviour
                 break;
 
             case (PieceColor)1: //Color.Black
-                _whiteTurn.color = UnityEngine.Color.yellow;
-                _blackTurn.color = UnityEngine.Color.white;
+                _whiteTurn.color = Color.yellow;
+                _blackTurn.color = Color.white;
                 if (_target.tag == "BlackPiece")
                 {
                     _status = Status.Normal;

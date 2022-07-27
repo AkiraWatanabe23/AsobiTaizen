@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Text _scoreWhiteText;
     [Header("黒のスコアをシーンに表示する")]
     [SerializeField] public Text _scoreBlackText;
-    [SerializeField] public GameObject _resultPanel; //Panel(UI)は、UIではなく、GameObjectとして扱う
+    [SerializeField] public Image _resultPanel; //Panel(UI)は、Panel(UI)として扱う
 
     [SerializeField] public static Phase _state = Phase.White;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         _finalScore = 5;
 
         _state = Phase.White;
-        _resultPanel.SetActive(false);
+        _resultPanel.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,20 +54,20 @@ public class GameManager : MonoBehaviour
         //一定点獲得したら
         if (_scoreWhite == _finalScore || _scoreBlack == _finalScore)
         {
-            _resultPanel.SetActive(true);
+            _resultPanel.gameObject.SetActive(true);
             Invoke("GoResult", 2f); //2秒後にChangeResultの処理を実行する
         }
         //敵の駒が0になったら
         else if (_wPieceCount == 0 || _bPieceCount == 0)
         {
-            _resultPanel.SetActive(true);
+            _resultPanel.gameObject.SetActive(true);
             Invoke("GoResult", 2f);
         }
 
         //引き分け時のシーン遷移
         if (_wPieceCount == 1 && _bPieceCount == 1)
         {
-            _resultPanel.SetActive(true);
+            _resultPanel.gameObject.SetActive(true);
             Invoke("GoResult", 2f); //2秒後にChangeResultの処理を実行する
         }
     }

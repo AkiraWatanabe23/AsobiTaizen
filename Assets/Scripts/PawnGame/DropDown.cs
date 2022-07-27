@@ -28,7 +28,7 @@ public class DropDown : MonoBehaviour
         _helpPanel.gameObject.SetActive(false);
     }
 
-    public void ChangeImage() //Updateでやると、書いて実行したことが上書きされてしまう(実行されていないように見える)ので注意!!
+    public void ChangeImage() //Updateでやると、書いて実行したことが上書きされてしまう(実行されていないように見える)!!
     {
         //DropDownButton の Value が0("help"が選択されている ... 何も選択されていない)の時
         if (dropDown.value == 0)
