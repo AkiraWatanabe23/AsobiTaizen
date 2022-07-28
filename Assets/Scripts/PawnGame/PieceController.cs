@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 //↓マウスカーソルポジションの強制移動させるのに宣言する必要がある(らしい)
 using System.Runtime.InteropServices;
 
 /// <summary> 
 /// 全ての駒に統一された動き(駒の選択、移動)
 /// </summary>
-public class PieceController : MonoBehaviour, IPointerClickHandler
+public class PieceController : MonoBehaviour
 {
     /// <summary> プレイヤー(白) </summary>
     public const int _playerOne = 1;
@@ -49,25 +48,11 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     [DllImport("user32.dll")]
     public static extern bool SetCursorPos(int x, int y);
 
-    /// <summary>
-    /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        var go = eventData.pointerCurrentRaycast.gameObject;
-        //↑カメラから現在のマウスカーソルの位置にRayを飛ばし、当たったオブジェクトを代入する
-        var piece = go.GetComponent<PieceController>();
-        //↑当たったオブジェクトの「PieceController」を見つけてくる
-
-        print($"{ name } を選んだ");
-        piece.ChangeState();
-    }
 
     void Start()
     {
-        _renderer = GetComponent<Renderer>(); //駒のRenderer(コンポーネント)をとってくる
-        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>(); //黒番目線のカメラを取得
+        _renderer = GetComponent<Renderer>();
+        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
         //↓ターン表示のText
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
@@ -77,7 +62,6 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        //一回目のマウスクリックで駒を選び、二回目のクリックで配置場所を確定、移動する
         //左クリックが行われた場合に以下の処理を行う
         if (Input.GetMouseButtonDown(0))
         {
@@ -95,7 +79,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         //マウスの位置を取得し、Rayに代入
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //白番カメラからRayをとばす
         Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //黒番カメラからRayをとばす
-        float _rayDistance = 100; //Rayの長さ
+        float _rayDistance = 100;
 
         //白番目線の駒の移動
         //白番目線のRayの処理(駒を奪う場合)
@@ -103,37 +87,31 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit.collider.gameObject;
 
-            //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
+            //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //とった駒の種類によって獲得する点数が異なる
                 //word.Contains(string)...wordの中に、string(文字列)が含まれているか
-                //とった駒がポーンなら
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreWhite += 1;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //ナイトなら
                 else if (_target.name.Contains("knight"))
                 {
                     GameManager._scoreWhite += 2;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //ビショップなら
                 else if (_target.name.Contains("bishop"))
                 {
                     GameManager._scoreWhite += 3;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //ルークなら
                 else if (_target.name.Contains("rook"))
                 {
                     GameManager._scoreWhite += 4;
                     Debug.Log("今は " + GameManager._scoreWhite + " 点");
                 }
-                //クイーンなら
                 else if (_target.name.Contains("queen"))
                 {
                     GameManager._scoreWhite += 5;
@@ -174,7 +152,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             //_state = Color.Black;
             GameManager._state = Phase.Black;
 
-            print($"駒は {_target.name} に移動した"); // print($"..."); ←→ Debug.Log("..."); と同じ
+            print($"駒は {_target.name} に移動した");
             return true;
         }
 
@@ -184,36 +162,30 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit3.collider.gameObject;
 
-            //Rayが当たったオブジェクトが敵の駒だった場合、駒を奪ってそのマスに移動する
+            //Rayが当たったオブジェクトが白駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                //とった駒の種類によって獲得する点数が異なる
-                //とった駒がポーンなら
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreBlack += 1;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //ナイトなら
                 else if (_target.name.Contains("knight"))
                 {
                     GameManager._scoreBlack += 2;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //ビショップなら
                 else if (_target.name.Contains("bishop"))
                 {
                     GameManager._scoreBlack += 3;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //ルークなら
                 else if (_target.name.Contains("rook"))
                 {
                     GameManager._scoreBlack += 4;
                     Debug.Log("今は " + GameManager._scoreBlack + " 点");
                 }
-                //クイーンなら
                 else if (_target.name.Contains("queen"))
                 {
                     GameManager._scoreBlack += 5;
@@ -229,7 +201,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             _currentPlayer = _playerOne;
 
             PhaseChange(_target);
-            SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
+            SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
 
             //_state = Color.White;
             GameManager._state = Phase.White;
@@ -250,7 +222,7 @@ public class PieceController : MonoBehaviour, IPointerClickHandler
             _currentPlayer = _playerOne;
 
             PhaseChange(_target);
-            SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルをゲーム画面の中央辺りに強制移動させる
+            SetCursorPos(950, 400); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
 
             //_state = Color.White;
             GameManager._state = Phase.White;

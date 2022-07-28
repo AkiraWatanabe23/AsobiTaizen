@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Text _scoreWhiteText;
     [Header("黒のスコアをシーンに表示する")]
     [SerializeField] public Text _scoreBlackText;
-    [SerializeField] public Image _resultPanel; //Panel(UI)は、Panel(UI)として扱う
+    //↓Panel(UI)は、Image(UI)として扱う
+    [SerializeField] public Image _resultPanel;
 
     [SerializeField] public static Phase _state = Phase.White;
     
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _scoreWhite = 0;
+        _scoreWhite = 0; //初期情報を宣言
         _scoreBlack = 0;
         _finalScore = 5;
 
@@ -46,16 +47,16 @@ public class GameManager : MonoBehaviour
         _scoreBlackText.text = _scoreBlack.ToString();
 
         //ゲーム開始時に、白黒それぞれの駒の数を取得する
-        //Startでやると、駒の数が変わった時に変更を取得出来ない...
+        //Startでやると、駒の数が変わった時に変更を取得出来ないため、Updateで行う
         _wPieceCount = GameObject.FindGameObjectsWithTag("WhitePiece").Length;
         _bPieceCount = GameObject.FindGameObjectsWithTag("BlackPiece").Length;
 
         //勝利時(得点による)のシーン遷移
-        //一定点獲得したら
+        //目標点まで獲得したら
         if (_scoreWhite == _finalScore || _scoreBlack == _finalScore)
         {
             _resultPanel.gameObject.SetActive(true);
-            Invoke("GoResult", 2f); //2秒後にChangeResultの処理を実行する
+            Invoke("GoResult", 2f); //2秒後にGoResultの処理を実行する(処理を遅らせる)
         }
         //敵の駒が0になったら
         else if (_wPieceCount == 0 || _bPieceCount == 0)
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
         if (_wPieceCount == 1 && _bPieceCount == 1)
         {
             _resultPanel.gameObject.SetActive(true);
-            Invoke("GoResult", 2f); //2秒後にChangeResultの処理を実行する
+            Invoke("GoResult", 2f); //2秒後にGoResultの処理を実行する
         }
     }
 
