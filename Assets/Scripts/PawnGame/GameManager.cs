@@ -12,10 +12,16 @@ public enum Phase
 
 public class GameManager : MonoBehaviour
 {
+    /// <summary> プレイヤー(白) </summary>
+    public const int _playerOne = 1;
+    /// <summary> プレイヤー(黒) </summary>
+    public const int _playerTwo = 2;
+    /// <summary> current(現在の)プレイヤー </summary>
+    public static int _currentPlayer;
     [SerializeField] public static int _scoreWhite; //白番の得点
     [SerializeField] public static int _scoreBlack; //黒番の得点
     [SerializeField] public static int _finalScore; //目標点
-    //駒の数(白、黒それぞれ)を取得する
+    //盤にある駒の数(白、黒それぞれ)を取得する
     public static int _wPieceCount = 0;
     public static int _bPieceCount = 0;
 

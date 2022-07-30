@@ -28,7 +28,7 @@ public class DropDown : MonoBehaviour
         _helpPanel.gameObject.SetActive(false);
     }
 
-    public void ChangeImage() //Updateでやると、書いて実行したことが上書きされてしまう(実行されていないように見える)!!
+    public void ChangeImage() //Updateでやると、書いて実行したことが上書きされてしまう(実行されていないように見える)
     {
         //DropDownButton の Value が0("help"が選択されている ... 何も選択されていない)の時
         if (dropDown.value == 0)
@@ -37,7 +37,6 @@ public class DropDown : MonoBehaviour
             _ruleImage.gameObject.SetActive(false);
             _toTitleImage.gameObject.SetActive(false);
             Debug.Log("none");
-            //全てのHelpImage を表示しない
         }
         //DropDownButton の Value が1("moving"が選択されている)の時
         else if (dropDown.value == 1)
@@ -46,7 +45,6 @@ public class DropDown : MonoBehaviour
             _ruleImage.gameObject.SetActive(false); 
             _toTitleImage.gameObject.SetActive(false);
             Debug.Log("moving");
-            //PieceMoveImage を表示する
         }
         //DropDownButton の Value が2("rule"が選択されている)の時
         else if (dropDown.value == 2)
@@ -55,7 +53,6 @@ public class DropDown : MonoBehaviour
             _ruleImage.gameObject.SetActive(true);
             _toTitleImage.gameObject.SetActive(false);
             Debug.Log("rule");
-            //RuleImage を表示する
         }
         //DropDownButton の Value が3("to title"が選択されている)の時
         else if (dropDown.value == 3)
@@ -64,7 +61,6 @@ public class DropDown : MonoBehaviour
             _ruleImage.gameObject.SetActive(false);
             _toTitleImage.gameObject.SetActive(true);
             Debug.Log("to title");
-            //ToTitleImage を表示する
         }
         //DropDownButton の Value が4("back"が選択されている)の時
         else if (dropDown.value == 4)
@@ -74,7 +70,6 @@ public class DropDown : MonoBehaviour
             _toTitleImage.gameObject.SetActive(false);
             _helpPanel.gameObject.SetActive(false);
             Debug.Log("back");
-            //全てのHelpImage を表示しない(ゲームに戻る)
         }
     }
 }
