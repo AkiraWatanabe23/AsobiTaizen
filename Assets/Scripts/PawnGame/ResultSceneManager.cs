@@ -36,7 +36,6 @@ public class ResultSceneManager : MonoBehaviour
         _blackScoreText.text = GameManager._scoreBlack.ToString();
 
         //白の勝ち
-        //目標点達成or黒駒==0
         if (GameManager._scoreWhite == GameManager._finalScore || GameManager._bPieceCount == 0)
         {
             _whiteWinText.gameObject.SetActive(true); //「白の勝ち」のText を表示
@@ -44,7 +43,6 @@ public class ResultSceneManager : MonoBehaviour
             _drawText.gameObject.SetActive(false);
         }
         //黒の勝ち
-        //目標点達成or白駒==0
         else if (GameManager._scoreBlack == GameManager._finalScore || GameManager._wPieceCount == 0)
         {
             _whiteWinText.gameObject.SetActive(false);

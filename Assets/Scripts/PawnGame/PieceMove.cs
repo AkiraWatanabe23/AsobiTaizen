@@ -129,12 +129,12 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _offset;
-            GameManager._currentPlayer = GameManager._playerTwo;
+            GameManager._player = GameManager._playerTwo;
 
             PhaseChange(_target);
             SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
-
             GameManager._state = Phase.Black;
+
             print($"駒は {_target.name} をとった");
 
             if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
@@ -149,11 +149,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit2.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
-            GameManager._currentPlayer = GameManager._playerTwo;
+            GameManager._player = GameManager._playerTwo;
 
             PhaseChange(_target);
             SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
-
             GameManager._state = Phase.Black;
 
             print($"駒は {_target.name} に移動した");
@@ -202,12 +201,12 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _offset;
-            GameManager._currentPlayer = GameManager._playerOne;
+            GameManager._player = GameManager._playerOne;
 
             PhaseChange(_target);
             SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
-
             GameManager._state = Phase.White;
+
             print($"駒は {_target.name} をとった");
 
             if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
@@ -222,11 +221,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit4.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
-            GameManager._currentPlayer = GameManager._playerOne;
+            GameManager._player = GameManager._playerOne;
 
             PhaseChange(_target);
             SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
-
             GameManager._state = Phase.White;
 
             print($"駒は {_target.name} に移動した");

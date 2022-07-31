@@ -10,6 +10,9 @@ public enum Phase
     Black = 1,
 }
 
+/// <summary>
+/// ゲーム全体の管理
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     /// <summary> プレイヤー(白) </summary>
@@ -17,7 +20,7 @@ public class GameManager : MonoBehaviour
     /// <summary> プレイヤー(黒) </summary>
     public const int _playerTwo = 2;
     /// <summary> current(現在の)プレイヤー </summary>
-    public static int _currentPlayer;
+    public static int _player;
     [SerializeField] public static int _scoreWhite; //白番の得点
     [SerializeField] public static int _scoreBlack; //黒番の得点
     [SerializeField] public static int _finalScore; //目標点
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
         _bPieceCount = GameObject.FindGameObjectsWithTag("BlackPiece").Length;
 
         //勝利時(得点による)のシーン遷移
-        //目標点まで獲得したら
+        //どちらかが目標点まで獲得したら
         if (_scoreWhite == _finalScore || _scoreBlack == _finalScore)
         {
             _resultPanel.gameObject.SetActive(true);
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviour
             Invoke("GoResult", 2f);
         }
 
-        //引き分け時のシーン遷移
+        //引き分け時(駒の数が同じになった時)のシーン遷移
         if (_wPieceCount == 1 && _bPieceCount == 1)
         {
             _resultPanel.gameObject.SetActive(true);

@@ -9,7 +9,6 @@ public class PieceManager : MonoBehaviour
     /// <summary> 駒(子オブジェクト達)を配列として取得 </summary>
     Transform[] _pieceChildrens;
 
-
     // Start is called before the first frame update
     void Start()
     {
