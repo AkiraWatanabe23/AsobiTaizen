@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public const int _playerOne = 1;
     /// <summary> プレイヤー(黒) </summary>
     public const int _playerTwo = 2;
-    /// <summary> current(現在の)プレイヤー </summary>
+    /// <summary> 現在の(current)プレイヤー </summary>
     public static int _player;
     [SerializeField] public static int _scoreWhite; //白番の得点
     [SerializeField] public static int _scoreBlack; //黒番の得点
@@ -28,12 +28,12 @@ public class GameManager : MonoBehaviour
     public static int _wPieceCount = 0;
     public static int _bPieceCount = 0;
 
-    [Header("白のスコアをシーンに表示する")]
-    [SerializeField] public Text _scoreWhiteText;
-    [Header("黒のスコアをシーンに表示する")]
-    [SerializeField] public Text _scoreBlackText;
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] public Image _resultPanel;
+    [Header("白のスコアをシーンに表示する↓")]
+    [SerializeField] public Text _scoreWhiteText;
+    [Header("黒のスコアをシーンに表示する↓")]
+    [SerializeField] public Text _scoreBlackText;
 
     [SerializeField] public static Phase _state = Phase.White;
     

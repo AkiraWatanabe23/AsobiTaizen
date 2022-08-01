@@ -34,7 +34,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
-    //[DllImport("user32.dll")]...外のどのファイル(今回は「user32.dll」)からとってくるのか
+    //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
     //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
     //以下2行はセットで書かないとコンパイルエラー発生
     [DllImport("user32.dll")]
@@ -70,10 +70,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //左クリックが行われた場合に以下の処理を行う
         if (Input.GetMouseButtonDown(0))
         {
+            //駒を移動状態にする
             if (_status == Status.Move)
             {
+                //移動処理
                 if (Move())
                 {
+                    //移動状態→通常状態
                     ChangeState();
                 }
             }
@@ -265,7 +268,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     {
         switch (_color)
         {
-            case 0: //Color.White //case int: の下[break;]まで実行される({ }は書かない)                                                                                                                       
+            //case int: の下[break;]まで実行される({ }は書かない)
+            case 0: //Color.White                                                                                                                       
                 _whiteTurn.color = Color.white;
                 _blackTurn.color = Color.yellow;
                 if (_target.tag == "WhitePiece")

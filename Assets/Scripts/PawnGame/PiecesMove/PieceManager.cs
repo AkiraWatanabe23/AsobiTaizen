@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class PieceManager : MonoBehaviour
 {
+    /// <summary> 他のスクリプトで関数を呼び出す用 </summary>
+    public static PieceManager _manager;
     /// <summary> 駒をまとめている親オブジェクトを取得 </summary>
     GameObject _pieceParent;
-    /// <summary> 駒(子オブジェクト達)を配列として取得 </summary>
+    /// <summary> 駒(子オブジェクト達)を一次元配列として取得 </summary>
     Transform[] _pieceChildrens;
 
+    public void Awake()
+    {
+        if (_manager == null)
+        {
+            _manager = this;
+        }
+    }
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         ///<summary> 駒をまとめている親オブジェクトを検索する </summary>
         _pieceParent = GameObject.Find("Piece");
