@@ -6,9 +6,18 @@ using UnityEngine;
 /// マスについて
 /// </summary>
 public class BoardManager : MonoBehaviour
-{
+{/// <summary> 他のスクリプトで関数を呼び出す用 </summary>
+    public static BoardManager _managerB;
     //マスの二次元配列を宣言
     GameObject[,] _tiles = new GameObject[8, 8];
+
+    public void Awake()
+    {
+        if (_managerB == null)
+        {
+            _managerB = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

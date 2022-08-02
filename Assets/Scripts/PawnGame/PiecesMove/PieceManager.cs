@@ -5,7 +5,7 @@ using UnityEngine;
 public class PieceManager : MonoBehaviour
 {
     /// <summary> 他のスクリプトで関数を呼び出す用 </summary>
-    public static PieceManager _manager;
+    public static PieceManager _managerP;
     /// <summary> 駒をまとめている親オブジェクトを取得 </summary>
     GameObject _pieceParent;
     /// <summary> 駒(子オブジェクト達)を一次元配列として取得 </summary>
@@ -13,9 +13,9 @@ public class PieceManager : MonoBehaviour
 
     public void Awake()
     {
-        if (_manager == null)
+        if (_managerP == null)
         {
-            _manager = this;
+            _managerP = this;
         }
     }
 
