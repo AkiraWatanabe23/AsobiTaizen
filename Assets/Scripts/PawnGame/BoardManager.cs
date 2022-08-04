@@ -10,6 +10,7 @@ public class BoardManager : MonoBehaviour
     public static BoardManager _managerB;
     //マスの二次元配列を宣言
     GameObject[,] _tiles = new GameObject[8, 8];
+    //マスの番号を剰余で判断する(のがありかなぁ...)
 
     public void Awake()
     {
@@ -28,8 +29,7 @@ public class BoardManager : MonoBehaviour
     void Get_Masu()
     {
         //自身の子にタイルを持たせるやり方。少し無駄な処理をしている感がある
-        //1次元配列で取得したものを無理やり2次元に変換しているので...
-        //少しでも人間に見やすいコードを書くならこっちかも←→しかし、PCにとっては無駄な処理かと...
+        //1次元配列で取得したものを無理やり2次元に変換している
         int count = 0;
         Collider[] itizigenn = transform.GetComponentsInChildren<Collider>();
         for (int i = 0; i < 8; i++)

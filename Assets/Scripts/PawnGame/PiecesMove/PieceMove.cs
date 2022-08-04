@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 /// </summary>
 public class PieceMove : MonoBehaviour, IPointerClickHandler
 {
-    /// <summary> レイヤーマスク(InspectorのLayerから選択する) </summary>
+    //レイヤーマスク(InspectorのLayerから選択する)
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
@@ -19,14 +19,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public static Camera _camera;
     /// <summary> 駒を移動した時にcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
-    /// <summary> 通常状態、移動状態の駒のマテリアル </summary>
+    /// <summary> 通常状態の駒のマテリアル </summary>
     [SerializeField] Material _normalMaterial;
+    /// <summary> 移動状態の駒のマテリアル </summary>
     [SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    /// <summary> どっちのターンかの表示(白) </summary>
-    Text _whiteTurn;
-    /// <summary> どっちのターンかの表示(黒) </summary>
-    Text _blackTurn;
+    [Tooltip("どっちのターンかの表示(白)")] Text _whiteTurn;
+    [Tooltip("どっちのターンかの表示(黒)")] Text _blackTurn;
     /// <summary> 白駒か黒駒か </summary>
     public PieceColor _color = PieceColor.White;
     /// <summary> 駒の状態 </summary>
@@ -100,7 +99,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //word.Contains(string)...wordの中に、string(文字列)が含まれているか
+                //word.Contains(string)...wordの中に、string(指定の文字列)が含まれているか
                 if (_target.name.Contains("pawn"))
                 {
                     GameManager._scoreWhite += 1;
@@ -147,7 +146,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             return true;
         }
-        //白番目線のRayの処理(移動のみ)
+        //白番目線のRayの処理(移動処理)
         else if (Physics.Raycast(_ray, out RaycastHit hit2, _rayDistance, _tileLayer))
         {
             GameObject _target = hit2.collider.gameObject;
@@ -219,7 +218,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             return true;
         }
-        //黒番目線のRayの処理(移動のみ)
+        //黒番目線のRayの処理(移動処理)
         else if (Physics.Raycast(_ray2, out RaycastHit hit4, _rayDistance, _tileLayer))
         {
             GameObject _target = hit4.collider.gameObject;

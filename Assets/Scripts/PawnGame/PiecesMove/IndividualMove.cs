@@ -22,17 +22,9 @@ public class IndividualMove : MonoBehaviour
     public void MovableSpace(bool Move, int Space)
     {
         //ポーンの動き
-        if (Move == false && Space == 0)
-        {
-
-        }
         //ナイトの動き
         //ビショップの動き
         //ルークの動き
-        else if (Move == false && Space == 4)
-        {
-
-        }
         //クイーンの動き
     }
 }

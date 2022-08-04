@@ -10,6 +10,15 @@ public enum Phase
     Black = 1,
 }
 
+public enum PieceType
+{
+    Pawn = 1,
+    Knight,
+    Bishop,
+    Rook,
+    Queen,
+}
+
 /// <summary>
 /// ゲーム全体の管理
 /// </summary>
@@ -25,8 +34,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public static int _scoreBlack; //黒番の得点
     [SerializeField] public static int _finalScore; //目標点
     //盤にある駒の数(白、黒それぞれ)を取得する
-    public static int _wPieceCount = 0;
-    public static int _bPieceCount = 0;
+    public static int _wPieceCount = 8;
+    public static int _bPieceCount = 8;
+    //盤にある駒のポイント数(?)を白黒それぞれで取得(プロモーション制限用)
+    public static int _wFieldPiecePoints = 8;
+    public static int _bFieldPiecePoints = 8;
 
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] public Image _resultPanel;
@@ -55,7 +67,7 @@ public class GameManager : MonoBehaviour
         _scoreWhiteText.text = _scoreWhite.ToString(); //得点をシーンに表示
         _scoreBlackText.text = _scoreBlack.ToString();
 
-        //ゲーム開始時に、白黒それぞれの駒の数を取得する
+        //白黒それぞれの駒の数を取得する
         //Startでやると、駒の数が変わった時に変更を取得出来ないため、Updateで行う
         _wPieceCount = GameObject.FindGameObjectsWithTag("WhitePiece").Length;
         _bPieceCount = GameObject.FindGameObjectsWithTag("BlackPiece").Length;
@@ -74,11 +86,11 @@ public class GameManager : MonoBehaviour
             Invoke("GoResult", 2f);
         }
 
-        //引き分け時(駒の数が同じになった時)のシーン遷移
+        //引き分け時(駒の数がお互い1つになった時)のシーン遷移
         if (_wPieceCount == 1 && _bPieceCount == 1)
         {
             _resultPanel.gameObject.SetActive(true);
-            Invoke("GoResult", 2f); //2秒後にGoResultの処理を実行する
+            Invoke("GoResult", 2f); //2秒後にGoResult()の処理を実行する
         }
     }
 
