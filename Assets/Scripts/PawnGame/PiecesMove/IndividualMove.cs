@@ -5,18 +5,12 @@ using UnityEngine;
 /// <summary>
 /// ŒÂ•Ê(Individual)‚Ì“®‚«
 /// </summary>
-public class IndividualMove : MonoBehaviour
+public class IndividualMove : PieceMove
 {
-    BoardManager _managerB;
-    MeshRenderer _renderer;
-
-    public GameObject[] _masu;
-    public int[] _movablePos;
-
     // Start is called before the first frame update
     void Start()
     {
-        _managerB = GameObject.Find("Board,Tile").GetComponent<BoardManager>();
+        
     }
 
     public void MovableSpace(bool Move, int Space)

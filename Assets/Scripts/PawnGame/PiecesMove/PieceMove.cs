@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-//↓マウスカーソルポジションの強制移動させるのに宣言する必要がある(らしい)
+//↓マウスカーソルポジションの強制移動させる処理をするのに宣言する必要があるらしい
 using System.Runtime.InteropServices;
 
 /// <summary> 
@@ -17,7 +17,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] LayerMask _blackLayer;
     /// <summary> 黒番目線のカメラ </summary>
     public static Camera _camera;
-    /// <summary> 駒を移動した時にcolliderの上に置く </summary>
+    /// <summary> 駒を移動した時にマスのcolliderの上に置く </summary>
     [SerializeField] Vector3 _offset = Vector3.up;
     /// <summary> 通常状態の駒のマテリアル </summary>
     [SerializeField] Material _normalMaterial;
@@ -25,7 +25,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] Material _moveMaterial;
     Renderer _renderer;
     [Tooltip("どっちのターンかの表示(白)")] Text _whiteTurn;
+    [Tooltip("どっちのターンかの表示(白)")] Image _whiteTurnPanel;
     [Tooltip("どっちのターンかの表示(黒)")] Text _blackTurn;
+    [Tooltip("どっちのターンかの表示(黒)")] Image _blackTurnPanel;
     /// <summary> 白駒か黒駒か </summary>
     public PieceColor _color = PieceColor.White;
     /// <summary> 駒の状態 </summary>
@@ -61,6 +63,12 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
         _whiteTurn.color = Color.yellow;
+        //↓ターン表示のPanel
+        _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
+        _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
+        _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
+        /*↑enabled...オブジェクトの指定した[コンポーネント]のアクティブ、非アクティブを変更する
+         *  (SetActiveでオブジェクトをとってこれないのを回避する)*/
     }
 
     // Update is called once per frame
@@ -69,7 +77,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //左クリックが行われた場合に以下の処理を行う
         if (Input.GetMouseButtonDown(0))
         {
-            //駒を移動状態にする
+            //駒が移動状態になっていたら
             if (_status == Status.Move)
             {
                 //移動処理
@@ -131,10 +139,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager._playerTwo;
+            GameManager._player = GameManager.Player_Two;
 
             PhaseChange(_target);
-            SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
+            SetCursorPos(Screen.width/2, Screen.height/2);
             GameManager._state = Phase.Black;
 
             print($"駒は {_target.name} をとった");
@@ -151,10 +159,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit2.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager._playerTwo;
+            GameManager._player = GameManager.Player_Two;
 
             PhaseChange(_target);
-            SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
+            SetCursorPos(Screen.width / 2, Screen.height / 2);
             GameManager._state = Phase.Black;
 
             print($"駒は {_target.name} に移動した");
@@ -203,10 +211,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager._playerOne;
+            GameManager._player = GameManager.Player_One;
 
             PhaseChange(_target);
-            SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
+            SetCursorPos(Screen.width / 2, Screen.height / 2);
             GameManager._state = Phase.White;
 
             print($"駒は {_target.name} をとった");
@@ -223,10 +231,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = hit4.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager._playerOne;
+            GameManager._player = GameManager.Player_One;
 
             PhaseChange(_target);
-            SetCursorPos(950, 300); //駒を移動させた後、マウスカーソルを指定した位置に強制移動させる
+            SetCursorPos(Screen.width / 2, Screen.height / 2);
             GameManager._state = Phase.White;
 
             print($"駒は {_target.name} に移動した");
@@ -260,7 +268,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     }
 
     /// <summary>
-    /// ターン表示の切り替え、移動状態→通常状態
+    /// ターン表示の切り替え、駒の移動状態→通常状態
     /// </summary>
     /// <param name="_target"></param>
     public void PhaseChange(GameObject _target)
@@ -269,8 +277,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             //case int: の下[break;]まで実行される({ }は書かない)
             case 0: //Color.White                                                                                                                       
-                _whiteTurn.color = Color.white;
+                _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;
+                _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = false;
+                _blackTurnPanel.gameObject.GetComponent<Image>().enabled = true;
+
                 if (_target.tag == "WhitePiece")
                 {
                     _status = Status.Normal;
@@ -279,7 +290,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             case (PieceColor)1: //Color.Black
                 _whiteTurn.color = Color.yellow;
-                _blackTurn.color = Color.white;
+                _blackTurn.color = Color.black;
+                _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = true;
+                _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
+
                 if (_target.tag == "BlackPiece")
                 {
                     _status = Status.Normal;

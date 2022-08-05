@@ -25,9 +25,9 @@ public enum PieceType
 public class GameManager : MonoBehaviour
 {
     /// <summary> プレイヤー(白) </summary>
-    public const int _playerOne = 1;
+    public const int Player_One = 1;
     /// <summary> プレイヤー(黒) </summary>
-    public const int _playerTwo = 2;
+    public const int Player_Two = 2;
     /// <summary> 現在の(current)プレイヤー </summary>
     public static int _player;
     [SerializeField] public static int _scoreWhite; //白番の得点
