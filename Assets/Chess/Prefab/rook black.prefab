@@ -110,6 +110,7 @@ MonoBehaviour:
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
   _color: 1
   _status: 0
+  _getScore: 4
 --- !u!54 &-4738416354575551098
 Rigidbody:
   m_ObjectHideFlags: 0

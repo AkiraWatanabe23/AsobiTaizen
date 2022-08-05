@@ -32,6 +32,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public PieceColor _color = PieceColor.White;
     /// <summary> 駒の状態 </summary>
     public Status _status = Status.Normal;
+    //駒の得点(Inspectorで設定)
+    public int _getScore;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
@@ -107,32 +109,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //word.Contains(string)...wordの中に、string(指定の文字列)が含まれているか
-                if (_target.name.Contains("pawn"))
-                {
-                    GameManager._scoreWhite += 1;
-                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
-                }
-                else if (_target.name.Contains("knight"))
-                {
-                    GameManager._scoreWhite += 2;
-                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
-                }
-                else if (_target.name.Contains("bishop"))
-                {
-                    GameManager._scoreWhite += 3;
-                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
-                }
-                else if (_target.name.Contains("rook"))
-                {
-                    GameManager._scoreWhite += 4;
-                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
-                }
-                else if (_target.name.Contains("queen"))
-                {
-                    GameManager._scoreWhite += 5;
-                    Debug.Log("今は " + GameManager._scoreWhite + " 点");
-                }
+                GameManager._scoreWhite += _getScore; //←とった駒に設定した_getScoreが加算される
+                                                      //(×どの駒がとられたか　〇どの駒がとったか　になってる...逆になってほしい)
                 //盤上にある敵駒のカウントを減らす
                 GameManager._bPieceCount--;
                 Destroy(_target);
@@ -179,32 +157,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                if (_target.name.Contains("pawn"))
-                {
-                    GameManager._scoreBlack += 1;
-                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
-                }
-                else if (_target.name.Contains("knight"))
-                {
-                    GameManager._scoreBlack += 2;
-                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
-                }
-                else if (_target.name.Contains("bishop"))
-                {
-                    GameManager._scoreBlack += 3;
-                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
-                }
-                else if (_target.name.Contains("rook"))
-                {
-                    GameManager._scoreBlack += 4;
-                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
-                }
-                else if (_target.name.Contains("queen"))
-                {
-                    GameManager._scoreBlack += 5;
-                    Debug.Log("今は " + GameManager._scoreBlack + " 点");
-                }
-
+                GameManager._scoreBlack += _getScore;
                 //盤上にある駒のカウントを減らす
                 GameManager._wPieceCount--;
                 Destroy(_target);

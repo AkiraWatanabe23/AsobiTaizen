@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         _scoreWhite = 0; //‰Šúî•ñ‚ğéŒ¾
         _scoreBlack = 0;
-        _finalScore = 5;
+        _finalScore = 15;
 
         _state = Phase.White;
         _resultPanel.gameObject.SetActive(false);
