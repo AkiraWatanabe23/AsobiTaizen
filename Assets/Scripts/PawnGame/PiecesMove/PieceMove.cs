@@ -110,13 +110,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 //白のスコアを加算
                 GameManager._scoreWhite += _getScore; //←とった駒に設定した_getScoreが加算される
-                                                      //(×どの駒がとられたか　〇どの駒がとったか　になってる...逆になってほしい)
+                                                      //とられた駒に設定した_getScoreを加算してほしい
+                                                      //(×どの駒がとられたか　〇どの駒がとったか　になってる)
                 //盤上にある敵駒のカウントを減らす
                 GameManager._bPieceCount--;
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position + _offset;
+            this.transform.position = _target.transform.position;
             GameManager._player = GameManager.Player_Two;
 
             PhaseChange(_target);
@@ -163,7 +164,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position + _offset;
+            this.transform.position = _target.transform.position;
             GameManager._player = GameManager.Player_One;
 
             PhaseChange(_target);
@@ -228,7 +229,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     {
         switch (_color)
         {
-            //case int: の下[break;]まで実行される({ }は書かない)
+            //case int: の下[break;]まで実行される({ }で囲まない)
             case 0: //Color.White                                                                                                                       
                 _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;

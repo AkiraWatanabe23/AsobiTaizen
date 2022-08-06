@@ -13,7 +13,7 @@ public class IndividualMove : PieceMove
         
     }
 
-    public void MovableSpace(bool Move, int Space)
+    public void MovableSpace()
     {
         //ポーンの動き
         //ナイトの動き
