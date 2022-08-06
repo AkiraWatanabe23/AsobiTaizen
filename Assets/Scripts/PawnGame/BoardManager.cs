@@ -33,20 +33,4 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-
-    //void Get_Masu2()
-    //{
-    //    各Lineの子にタイルを持たせるやり方: テストしてないので動くかは知らない
-    //    int count = 0;
-    //    for (int i = 0; i < 8; i++)
-    //    {
-    //        int count2 = 0;
-    //        Transform child = transform.GetChild(count);
-    //        foreach (var j in child.transform.GetComponentsInChildren<Collider>())
-    //        {
-    //            _tiles[i, count2] = j.gameObject;
-    //        }
-    //    }
-    //}
-
 }

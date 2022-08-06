@@ -32,6 +32,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public PieceColor _color = PieceColor.White;
     /// <summary> 駒の状態 </summary>
     public Status _status = Status.Normal;
+    /// <summary> 駒の種類 </summary>
+    public PieceType _type;
     //駒の得点(Inspectorで設定)
     public int _getScore;
 
@@ -104,6 +106,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
         {
             GameObject _target = hit.collider.gameObject;
+            /*ダメだった*/
+            //int _targetScore = (int)_target.GetComponent<PieceType>(); ...エラーでた
+            //GameManager._scoreWhite += (int)hit.collider.gameObject.PieceType; ...PieceType使えない
 
             //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
@@ -111,8 +116,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 //白のスコアを加算
                 GameManager._scoreWhite += _getScore; //←とった駒に設定した_getScoreが加算される
                                                       //とられた駒に設定した_getScoreを加算してほしい
-                                                      //(×どの駒がとられたか　〇どの駒がとったか　になってる)
-                //盤上にある敵駒のカウントを減らす
+                //盤上にある敵駒のカウントを減らして、駒を破壊する
                 GameManager._bPieceCount--;
                 Destroy(_target);
             }
@@ -159,7 +163,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 //黒のスコアを加算
                 GameManager._scoreBlack += _getScore;
-                //盤上にある駒のカウントを減らす
+                //盤上にある駒のカウントを減らして、駒を破壊する
                 GameManager._wPieceCount--;
                 Destroy(_target);
             }
@@ -272,5 +276,17 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     {
         White = 0,
         Black = 1,
+    }
+
+    /// <summary>
+    /// 駒の種類
+    /// </summary>
+    public enum PieceType
+    {
+        Pawn = 1,
+        Knight,
+        Bishop,
+        Rook,
+        Queen,
     }
 }

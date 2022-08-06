@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         _scoreWhite = 0; //初期情報を宣言
         _scoreBlack = 0;
-        _finalScore = 15;
+        _finalScore = 10;
 
         _state = Phase.White;
         _resultPanel.gameObject.SetActive(false);
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         //勝利時(得点による)のシーン遷移
         //どちらかが目標点まで獲得したら
-        if (_scoreWhite == _finalScore || _scoreBlack == _finalScore)
+        if (_scoreWhite >= _finalScore || _scoreBlack >= _finalScore)
         {
             _resultPanel.gameObject.SetActive(true);
             Invoke("GoResult", 2f); //2秒後にGoResultの処理を実行する(処理を遅らせる)
