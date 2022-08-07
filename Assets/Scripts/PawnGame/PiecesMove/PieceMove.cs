@@ -108,7 +108,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             GameObject _target = hit.collider.gameObject;
             /*ダメだった*/
             //int _targetScore = (int)_target.GetComponent<PieceType>(); ...エラーでた
-            //GameManager._scoreWhite += (int)hit.collider.gameObject.PieceType; ...PieceType使えない
+            //GameManager._scoreWhite += (int)hit.collider.gameObject.PieceType; ...PieceType(駒の種類を指定するenum)使えない
 
             //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
