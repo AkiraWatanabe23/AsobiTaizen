@@ -35,7 +35,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// <summary> 駒の種類 </summary>
     public PieceType _type;
     //駒の得点(Inspectorで設定)
-    public int _getScore;
+    [SerializeField] public int _getScore;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる
     //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
@@ -106,16 +106,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
         {
             GameObject _target = hit.collider.gameObject;
-            /*ダメだった*/
-            //int _targetScore = (int)_target.GetComponent<PieceType>(); ...エラーでた
-            //GameManager._scoreWhite += (int)hit.collider.gameObject.PieceType; ...PieceType(駒の種類を指定するenum)使えない
+            int _targetScore = (int)_target.GetComponent<PieceMove>()._getScore;
 
             //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                GameManager._scoreWhite += _getScore; //←とった駒に設定した_getScoreが加算される
-                                                      //とられた駒に設定した_getScoreを加算してほしい
+                //敵駒に設定した_getScoreを加算する
+                GameManager._scoreWhite += _targetScore;
                 //盤上にある敵駒のカウントを減らして、駒を破壊する
                 GameManager._bPieceCount--;
                 Destroy(_target);
@@ -157,12 +155,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
         {
             GameObject _target = hit3.collider.gameObject;
+            int _targetScore = (int)_target.GetComponent<PieceMove>()._getScore;
 
             //Rayが当たったオブジェクトが白駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                GameManager._scoreBlack += _getScore;
+                //敵駒に設定した_getScoreを加算する
+                GameManager._scoreBlack += _targetScore;
                 //盤上にある駒のカウントを減らして、駒を破壊する
                 GameManager._wPieceCount--;
                 Destroy(_target);
