@@ -15,7 +15,13 @@ public class IndividualMove : PieceMove
 
     void Update()
     {
-        MovableSpace();
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (_status == Status.Normal)
+            {
+                MovableSpace();
+            }
+        }
     }
 
     public void MovableSpace()

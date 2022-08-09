@@ -10,15 +10,6 @@ public enum Phase
     Black = 1,
 }
 
-public enum PieceType
-{
-    Pawn = 1,
-    Knight,
-    Bishop,
-    Rook,
-    Queen,
-}
-
 /// <summary>
 /// ƒQ[ƒ€‘S‘Ì‚ÌŠÇ—
 /// </summary>

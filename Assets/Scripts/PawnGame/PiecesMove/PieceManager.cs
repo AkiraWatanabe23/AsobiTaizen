@@ -20,7 +20,7 @@ public class PieceManager : MonoBehaviour
         for (int i = 0; i < _pieceParent.transform.childCount; i++)
         {
             _pieceChildrens[i] = _pieceParent.transform.GetChild(i);
-            Debug.Log(i + "”Ô–Ú‚Ì‹î‚Í" + _pieceChildrens[i].name + "‚Å‚·");
+            Debug.Log(i+1 + "”Ô–Ú‚Ì‹î‚Í" + _pieceChildrens[i].name + "‚Å‚·");
         }
     }
 }

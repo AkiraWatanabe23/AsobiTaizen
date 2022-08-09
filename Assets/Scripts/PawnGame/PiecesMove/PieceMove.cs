@@ -106,7 +106,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
         {
             GameObject _target = hit.collider.gameObject;
-            int _targetScore = (int)_target.GetComponent<PieceMove>()._getScore;
+            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //奪う駒が持っている_getScoreを取得
 
             //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
@@ -155,7 +155,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
         {
             GameObject _target = hit3.collider.gameObject;
-            int _targetScore = (int)_target.GetComponent<PieceMove>()._getScore;
+            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //奪う駒が持っている_getScoreを取得
 
             //Rayが当たったオブジェクトが白駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
