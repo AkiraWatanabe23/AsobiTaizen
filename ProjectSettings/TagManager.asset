@@ -12,7 +12,7 @@ TagManager:
   - GetPiece
   - SelectPiece
   - Undefined
-  - MovePos
+  - EnPassant
   layers:
   - Default
   - TransparentFX

@@ -71,7 +71,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
         _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
         _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
-        /*↑enabled...オブジェクトの指定した[コンポーネント]のアクティブ、非アクティブを変更する
+        /*↑enabled...オブジェクトの指定した[コンポーネント(今回はImage)]のアクティブ、非アクティブを変更する
          *  (SetActiveでオブジェクトをとってこれないのを回避する)*/
     }
 
@@ -106,7 +106,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
         {
             GameObject _target = hit.collider.gameObject;
-            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //奪う駒が持っている_getScoreを取得
+            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
             //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
@@ -119,7 +119,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position;
+            this.transform.position = _target.transform.position + _offset;
             GameManager._player = GameManager.Player_Two;
 
             PhaseChange(_target);
@@ -155,7 +155,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
         {
             GameObject _target = hit3.collider.gameObject;
-            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //奪う駒が持っている_getScoreを取得
+            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
             //Rayが当たったオブジェクトが白駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
@@ -168,7 +168,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position;
+            this.transform.position = _target.transform.position + _offset;
             GameManager._player = GameManager.Player_One;
 
             PhaseChange(_target);
