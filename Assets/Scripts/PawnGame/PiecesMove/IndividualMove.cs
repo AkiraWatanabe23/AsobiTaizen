@@ -15,17 +15,21 @@ public class IndividualMove : PieceMove
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (_status == Status.Normal)
-            {
-                MovableSpace();
-            }
-        }
+        
     }
 
-    public void MovableSpace()
+    /// <summary>
+    /// 駒の個別の移動
+    /// </summary>
+    /// <param name="x">x座標</param>
+    /// <param name="z">z座標</param>
+    public void MovableSpace(float x, float z)
     {
+        List<float> BlockXPos = new List<float>();
+        List<float> BlockZPos = new List<float>();
+        BlockXPos.Add(z);
+        BlockZPos.Add(x);
+
         //ポーンの動き
         if (_type == PieceType.Pawn)
         {
