@@ -47,6 +47,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
     /// <summary>
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
+    /// ※このスクリプトをアタッチしたオブジェクトがクリックされた時の処理
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)

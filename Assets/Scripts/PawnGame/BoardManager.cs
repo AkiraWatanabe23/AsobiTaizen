@@ -17,6 +17,11 @@ public class BoardManager : MonoBehaviour
         Get_Masu();
     }
 
+    void Update()
+    {
+        
+    }
+
     void Get_Masu()
     {
         //自身の子にタイルを持たせるやり方。少し無駄な処理をしている感がある
