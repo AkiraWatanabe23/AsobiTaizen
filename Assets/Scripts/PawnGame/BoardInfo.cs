@@ -9,42 +9,35 @@ public class BoardInfo : MonoBehaviour
 {
     RaycastHit _hit;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         GetInfo();
     }
 
+    /// <summary>
+    /// それぞれのマスが上方向にRayを飛ばし、駒に当たったらその駒のtag("WhitePiece" or "BlackPiece")をマスに代入
+    /// なにもなければ"Tile"tagにする
+    /// </summary>
     void GetInfo()
     {
-        //それぞれのマスが上方向にRayを飛ばし、駒に当たったらその駒のtagをマスに代入
-        //駒があった時の代入はOK←→動かした後に[Tile]tagに戻らない
         if (Physics.Raycast(gameObject.transform.position, Vector3.up, out _hit, 5))
         {
-            if (_hit.collider != null)
+            //マスに白駒がある場合
+            if (_hit.collider.gameObject.tag == "WhitePiece")
             {
-                if (_hit.collider.gameObject.tag == "WhitePiece")
-                {
-                    this.gameObject.tag = "WhitePiece";
-                    Debug.Log("aaa");
-                }
-                else if (_hit.collider.gameObject.tag == "BlackPiece")
-                {
-                    this.gameObject.tag = "BlackPiece";
-                    Debug.Log("bbb");
-                }
+                this.gameObject.tag = "WhitePiece";
             }
-            else if (_hit.collider == null)
+            //マスに黒駒がある場合
+            else if (_hit.collider.gameObject.tag == "BlackPiece")
             {
-                this.gameObject.tag = "Tile";
-                Debug.Log("ccc");
+                this.gameObject.tag = "BlackPiece";
             }
+        }
+        //マスに駒がない場合
+        else if (_hit.collider == null)
+        {
+            this.gameObject.tag = "Tile";
         }
     }
 }
