@@ -21,6 +21,7 @@ public class BoardInfo : MonoBehaviour
     /// </summary>
     void GetInfo()
     {
+        //Rayを指定の方向に飛ばす処理(オブジェクトに当たるのが前提の書き方)
         if (Physics.Raycast(gameObject.transform.position, Vector3.up, out _hit, 5))
         {
             //マスに白駒がある場合

@@ -37,8 +37,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     //駒の得点(Inspectorで設定)
     [SerializeField] public int _getScore;
 
-    //extern...UnityやVisualStudioにはない機能(関数)をとってくる
-    //上記を訂正 : extern...外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令
+    //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
     //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
     //以下2行はセットで書かないとコンパイルエラー発生
@@ -47,7 +46,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
     /// <summary>
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
-    /// ※このスクリプトをアタッチしたオブジェクトがクリックされた時の処理
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
@@ -73,13 +71,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
         _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
         /*↑enabled...オブジェクトの指定した[コンポーネント(今回はImage)]のアクティブ、非アクティブを変更する
-         *  (SetActiveでオブジェクトをとってこれないのを回避する)*/
+         *  SetActive(false)でオブジェクトをとってこれないのを回避する*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        //左クリックが行われた場合に以下の処理を行う
+        //左クリックが行われた場合の処理
         if (Input.GetMouseButtonDown(0))
         {
             //駒が移動状態になっていたら
@@ -100,7 +98,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //白番カメラからRayをとばす
         Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //黒番カメラからRayをとばす
         float _rayDistance = 100;
-        /* ↑この関数内[Move()]全体で使う変数 */
 
         //白番目線の駒の移動
         //白番目線のRayの処理(駒を奪う場合)
@@ -109,11 +106,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             GameObject _target = hit.collider.gameObject;
             int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
-            //Rayが当たったオブジェクトが黒駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //敵駒に設定した_getScoreを加算する
                 GameManager._scoreWhite += _targetScore;
                 //盤上にある敵駒のカウントを減らして、駒を破壊する
                 GameManager._bPieceCount--;
@@ -158,11 +153,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             GameObject _target = hit3.collider.gameObject;
             int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
-            //Rayが当たったオブジェクトが白駒だった場合、駒を奪ってそのマスに移動する
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                //敵駒に設定した_getScoreを加算する
                 GameManager._scoreBlack += _targetScore;
                 //盤上にある駒のカウントを減らして、駒を破壊する
                 GameManager._wPieceCount--;
@@ -218,7 +211,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _status = Status.Move;
             _renderer.material = _moveMaterial;
         }
-        //移動状態→通常状態(駒が移動した後の処理)
+        //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
         {
             _status = Status.Normal;
@@ -235,7 +228,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         switch (_color)
         {
             //case int: の下[break;]まで実行される({ }で囲まない)
-            case 0: //Color.White                                                                                                                       
+            case 0:                                                                                                                      
                 _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = false;
@@ -247,7 +240,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 }
                 break;
 
-            case (PieceColor)1: //Color.Black
+            case (PieceColor)1:
                 _whiteTurn.color = Color.yellow;
                 _blackTurn.color = Color.black;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = true;
