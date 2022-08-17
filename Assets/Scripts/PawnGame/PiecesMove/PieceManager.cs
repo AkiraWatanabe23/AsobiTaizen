@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// start時に駒を取得
+/// </summary>
 public class PieceManager : MonoBehaviour
 {
     /// <summary> 駒をまとめている親オブジェクトを取得 </summary>

@@ -25,7 +25,7 @@ public class IndividualMove : PieceMove
     }
 
     /// <summary>
-    /// ‹î‚ÌŒÂ•Ê‚ÌˆÚ“®
+    /// ‹î‚ÌŒÂ•Ê‚ÌˆÚ“®(PieceMove‚ÌMove‚ğÀs‚µ‚Ä‚¢‚é•”•ª‚ÅÀs‚·‚é)
     /// </summary>
     public void MovableSpace()
     {

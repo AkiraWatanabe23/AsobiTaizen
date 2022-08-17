@@ -18,6 +18,7 @@ public class BoardInfo : MonoBehaviour
     /// <summary>
     /// それぞれのマスが上方向にRayを飛ばし、駒に当たったらその駒のtag("WhitePiece" or "BlackPiece")をマスに代入
     /// なにもなければ"Tile"tagにする
+    /// 駒があるマスはColliderをoffにする
     /// </summary>
     void GetInfo()
     {
