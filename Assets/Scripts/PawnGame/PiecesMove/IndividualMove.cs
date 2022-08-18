@@ -7,11 +7,13 @@ using UnityEngine;
 /// </summary>
 public class IndividualMove : PieceMove
 {
-    //必要なマスにRayを飛ばし、それ以外のマスは強制的にoffにする?→誤選択で移動しなくなる(?)
+    //必要なマスにRayを飛ばし(駒からではなく、カメラ視点からのRayでやってみる)、それ以外のマスは強制的にoffにする?→誤選択で移動しなくなる(?)
     //ターンの切り替わり毎にoff→onにする必要がある
     //※駒があるマスはCollider off(これはBoardInfo()で書いてる)
     //移動可能範囲のマスだけ
     //選択したマスのtagでマスの色を変化させる(駒がとれるなら黄色、"Tile"tagなら青色など)
+    Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //MainCamera
+    Ray _ray2 = GameObject.Find("Camera(black)").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition); //SecondCamera
 
     // Start is called before the first frame update
     void Start()
