@@ -227,8 +227,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     {
         switch (_color)
         {
-            //case int: ÇÃâ∫[break;]Ç‹Ç≈é¿çsÇ≥ÇÍÇÈ({ }Ç≈àÕÇ‹Ç»Ç¢)
-            case 0:                                                                                                                      
+            //case int: ÇÃâ∫[break;]Ç‹Ç≈é¿çsÇ≥ÇÍÇÈ
+            case PieceColor.White:                                                                                                                      
                 _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = false;
@@ -240,7 +240,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 }
                 break;
 
-            case (PieceColor)1:
+            case PieceColor.Black:
                 _whiteTurn.color = Color.yellow;
                 _blackTurn.color = Color.black;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = true;

@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 public class IndividualMove : PieceMove
 {
+    [Tooltip("ポーンの移動回数")] int _moveCount = 0;
+
     //必要なマスにRayを飛ばし(駒からではなく、カメラ視点からのRayでやってみる)、それ以外のマスは強制的にoffにする?→誤選択で移動しなくなる(?)
     //ターンの切り替わり毎にoff→onにする必要がある
     //※駒があるマスはCollider off(これはBoardInfo()で書いてる)
     //移動可能範囲のマスだけ
     //選択したマスのtagでマスの色を変化させる(駒がとれるなら黄色、"Tile"tagなら青色など)
-    Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //MainCamera
-    Ray _ray2 = GameObject.Find("Camera(black)").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition); //SecondCamera
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +37,16 @@ public class IndividualMove : PieceMove
             Debug.Log("ポーンが選択されました");
             //1,1回目の動きか、そうでないか
             //　1回目の場合→2マス移動可
+            if (_moveCount == 0)
+            {
+
+                _moveCount++;
+            }
             //2,2回目以降は1マス移動
+            else if (_moveCount != 0)
+            {
+
+            }
             //　常に斜め1コ前は探索(アンパッサンに使える?)
             //3,アンパッサン...真隣のマス探索
         }
