@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ŒÂ•Ê(Individual)‚Ì“®‚«
+/// ‹î‚ÌŒÂ•Ê(Individual)‚Ì“®‚«
 /// </summary>
 public class IndividualMove : PieceMove
 {
