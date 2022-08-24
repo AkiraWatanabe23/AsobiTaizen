@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 /// <summary> 
 /// 駒の移動に関するスクリプト
 /// </summary>
-public class PieceMove : MonoBehaviour, IPointerClickHandler
+public class CopyMove : MonoBehaviour, IPointerClickHandler
 {
     //レイヤーマスク(InspectorのLayerから選択する)
     [SerializeField] LayerMask _tileLayer;
@@ -37,8 +37,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     //駒の得点(Inspectorで設定)
     [SerializeField] public int _getScore;
 
-    [SerializeField] MasuSearch _search;
-
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
     //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
@@ -56,8 +54,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //↑カメラから現在のマウスカーソルの位置にRayを飛ばし、当たったオブジェクトを代入する
         var piece = go.GetComponent<PieceMove>();
 
-        Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 2.6f), Color.yellow, 20f);
-        Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 5.2f), Color.yellow, 20f);
+        Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
 
         print($"{ name } を選んだ");
         piece.ChangeState();
@@ -124,7 +121,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             GameManager._player = GameManager.Player_Two;
 
             PhaseChange(_target);
-            SetCursorPos(Screen.width/2, Screen.height/2);
+            SetCursorPos(Screen.width / 2, Screen.height / 2);
             GameManager._state = Phase.Black;
 
             print($"駒は {_target.name} をとった");
@@ -209,21 +206,18 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search.gameObject.GetComponent<MasuSearch>()._piece = this;
         }
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search.gameObject.GetComponent<MasuSearch>()._piece = this;
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
         {
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
-            _search.gameObject.GetComponent<MasuSearch>()._piece = null;
         }
     }
 
@@ -236,7 +230,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         switch (_color)
         {
             //case int: の下[break;]まで実行される
-            case PieceColor.White:                                                                                                                      
+            case PieceColor.White:
                 _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = false;

@@ -28,9 +28,9 @@ public class BoardManager : MonoBehaviour
         //1ŸŒ³”z—ñ‚Åæ“¾‚µ‚½‚à‚Ì‚ğ–³—‚â‚è2ŸŒ³‚É•ÏŠ·‚µ‚Ä‚¢‚é
         int count = 0;
         Collider[] itizigenn = transform.GetComponentsInChildren<Collider>();
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; ++i)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 8; ++j)
             {
                 _tiles[i, j] = itizigenn[count].gameObject;
                 count++;
