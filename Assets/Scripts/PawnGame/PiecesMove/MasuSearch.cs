@@ -34,16 +34,16 @@ public class MasuSearch : MonoBehaviour
                 Pawn();
                 break;
             case 2:
-
+                Knight();
                 break;
             case 3:
                 Bishop();
                 break;
             case 4:
-
+                Rook();
                 break;
             case 5:
-
+                Queen();
                 break;
         }    }
 
@@ -52,7 +52,22 @@ public class MasuSearch : MonoBehaviour
 
     }
 
+    void Knight()
+    {
+
+    }
+
     void Bishop()
+    {
+
+    }
+
+    void Rook()
+    {
+
+    }
+
+    void Queen()
     {
 
     }
