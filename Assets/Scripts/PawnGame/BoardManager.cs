@@ -14,7 +14,7 @@ public class BoardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Get_Masu();
+        Get_Tile();
     }
 
     void Update()
@@ -22,7 +22,7 @@ public class BoardManager : MonoBehaviour
         
     }
 
-    void Get_Masu()
+    void Get_Tile()
     {
         //自身の子にタイルを持たせるやり方。少し無駄な処理をしている感がある
         //1次元配列で取得したものを無理やり2次元に変換している

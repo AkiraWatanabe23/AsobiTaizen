@@ -59,14 +59,14 @@ public class IndividualMove : PieceMove, IPointerClickHandler
             //　1回目の場合→2マス移動可
             if (_moveCount == 0)
             {
-                Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 2.5f), Color.yellow, 20f);
-                Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 5f), Color.yellow, 20f);
+                Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 2.5f), Color.yellow, 5f);
+                Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 5f), Color.yellow, 5f);
                 _moveCount++;
             }
             //2,2回目以降は1マス移動
             else if (_moveCount != 0)
             {
-                Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 2.5f), Color.yellow, 20f);
+                Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 2.5f), Color.yellow, 5f);
             }
             //　常に斜め1コ前は探索(アンパッサンに使える?)
             //3,アンパッサン...真隣のマス探索
@@ -85,22 +85,22 @@ public class IndividualMove : PieceMove, IPointerClickHandler
             //斜め方向を探索(駒があればそこでstop)
             //駒が味方→そのマスは×、敵→〇
             //左斜め前方向
-            for (int i = 0; i < 8; ++i)
+            for (int i = 0; i < 8; i++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //右斜め前方向
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 8; j++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //左斜め後ろ方向
-            for (int k = 0; k < 8; ++k)
+            for (int k = 0; k < 8; k++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //右斜め後ろ方向
-            for (int l = 0; l < 8; ++l)
+            for (int l = 0; l < 8; l++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
@@ -112,22 +112,22 @@ public class IndividualMove : PieceMove, IPointerClickHandler
             //上下左右を探索(駒があればそこでstop)
             //駒が味方→そのマスは×、敵→〇
             //前方向
-            for (int i = 0; i < 8; ++i)
+            for (int i = 0; i < 8; i++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //後ろ方向
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 8; j++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //左方向
-            for (int k = 0; k < 8; ++k)
+            for (int k = 0; k < 8; k++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //右方向
-            for (int l = 0; l < 8; ++l)
+            for (int l = 0; l < 8; l++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
@@ -139,42 +139,42 @@ public class IndividualMove : PieceMove, IPointerClickHandler
             //斜め方向 + 上下左右を探索(駒があればそこでstop)
             //駒が味方→そのマスは×、敵→〇
             //前方向
-            for (int i = 0; i < 8; ++i)
+            for (int i = 0; i < 8; i++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //後ろ方向
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 8; j++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //左方向
-            for (int k = 0; k < 8; ++k)
+            for (int k = 0; k < 8; k++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //右方向
-            for (int l = 0; l < 8; ++l)
+            for (int l = 0; l < 8; l++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //左斜め前方向
-            for (int m = 0; m < 8; ++m)
+            for (int m = 0; m < 8; m++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //右斜め前方向
-            for (int n = 0; n < 8; ++n)
+            for (int n = 0; n < 8; n++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //左斜め後ろ方向
-            for (int o = 0; o < 8; ++o)
+            for (int o = 0; o < 8; o++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }
             //右斜め後ろ方向
-            for (int p = 0; p < 8; ++p)
+            for (int p = 0; p < 8; p++)
             {
                 Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, 2.5f), Color.yellow, 20f);
             }

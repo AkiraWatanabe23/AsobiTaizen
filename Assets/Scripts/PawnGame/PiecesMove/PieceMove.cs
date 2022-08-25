@@ -11,32 +11,26 @@ using System.Runtime.InteropServices;
 /// </summary>
 public class PieceMove : MonoBehaviour, IPointerClickHandler
 {
+    [Tooltip("黒番目線のカメラ")] public static Camera _camera;
+    [Tooltip("通常状態のマテリアル"), SerializeField] Material _normalMaterial;
+    [Tooltip("移動状態のマテリアル"), SerializeField] Material _moveMaterial;
+    Renderer _renderer;
+    [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
+    [Tooltip("どっちのターンか(白)")] Image _whiteTurnPanel;
+    [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
+    [Tooltip("どっちのターンか(黒)")] Image _blackTurnPanel;
+    [Tooltip("白駒か黒駒かのenum")] public PieceColor _color = PieceColor.White;
+    [Tooltip("駒の状態のenum")] public Status _status = Status.Normal;
+    [Tooltip("駒の種類のenum")] public PieceType _type;
+    RaycastHit _hit;
+    [SerializeField] Vector3 _offset = Vector3.up;
     //レイヤーマスク(InspectorのLayerから選択する)
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
-    /// <summary> 黒番目線のカメラ </summary>
-    public static Camera _camera;
-    /// <summary> 駒を移動した時にマスのcolliderの上に置く </summary>
-    [SerializeField] Vector3 _offset = Vector3.up;
-    /// <summary> 通常状態の駒のマテリアル </summary>
-    [SerializeField] Material _normalMaterial;
-    /// <summary> 移動状態の駒のマテリアル </summary>
-    [SerializeField] Material _moveMaterial;
-    Renderer _renderer;
-    [Tooltip("どっちのターンかの表示(白)")] Text _whiteTurn;
-    [Tooltip("どっちのターンかの表示(白)")] Image _whiteTurnPanel;
-    [Tooltip("どっちのターンかの表示(黒)")] Text _blackTurn;
-    [Tooltip("どっちのターンかの表示(黒)")] Image _blackTurnPanel;
-    /// <summary> 白駒か黒駒か </summary>
-    public PieceColor _color = PieceColor.White;
-    /// <summary> 駒の状態 </summary>
-    public Status _status = Status.Normal;
-    /// <summary> 駒の種類 </summary>
-    public PieceType _type;
     //駒の得点(Inspectorで設定)
     [SerializeField] public int _getScore;
-
+    //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
@@ -53,11 +47,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         var go = eventData.pointerCurrentRaycast.gameObject;
-        //↑カメラから現在のマウスカーソルの位置にRayを飛ばし、当たったオブジェクトを代入する
         var piece = go.GetComponent<PieceMove>();
-
-        Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 2.6f), Color.yellow, 20f);
-        Debug.DrawRay(go.transform.position + new Vector3(0, 2, 0), new Vector3(0f, -2.5f, 5.2f), Color.yellow, 20f);
 
         print($"{ name } を選んだ");
         piece.ChangeState();
@@ -97,18 +87,19 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
         }
     }
+
     public bool Move()
     {
         //マウスの位置を取得し、Rayに代入
-        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition); //白番カメラからRayをとばす
-        Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);    //黒番カメラからRayをとばす
+        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);
         float _rayDistance = 100;
 
         //白番目線の駒の移動
         //白番目線のRayの処理(駒を奪う場合)
-        if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _blackLayer))
+        if (Physics.Raycast(_ray, out _hit, _rayDistance, _blackLayer))
         {
-            GameObject _target = hit.collider.gameObject;
+            GameObject _target = _hit.collider.gameObject;
             int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
             if (_target.tag == "BlackPiece")
@@ -137,9 +128,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             return true;
         }
         //白番目線のRayの処理(移動処理)
-        else if (Physics.Raycast(_ray, out RaycastHit hit2, _rayDistance, _tileLayer))
+        else if (Physics.Raycast(_ray, out _hit, _rayDistance, _tileLayer))
         {
-            GameObject _target = hit2.collider.gameObject;
+            GameObject _target = _hit.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             GameManager._player = GameManager.Player_Two;
 
@@ -150,12 +141,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             print($"駒は {_target.name} に移動した");
             return true;
         }
-
         //黒番目線の駒の移動
         //黒番目線のRayの処理(駒を奪う場合)
-        if (Physics.Raycast(_ray2, out RaycastHit hit3, _rayDistance, _whiteLayer))
+        if (Physics.Raycast(_ray2, out _hit, _rayDistance, _whiteLayer))
         {
-            GameObject _target = hit3.collider.gameObject;
+            GameObject _target = _hit.collider.gameObject;
             int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
             if (_target.tag == "WhitePiece")
@@ -184,9 +174,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             return true;
         }
         //黒番目線のRayの処理(移動処理)
-        else if (Physics.Raycast(_ray2, out RaycastHit hit4, _rayDistance, _tileLayer))
+        else if (Physics.Raycast(_ray2, out _hit, _rayDistance, _tileLayer))
         {
-            GameObject _target = hit4.collider.gameObject;
+            GameObject _target = _hit.collider.gameObject;
             this.transform.position = _target.transform.position + _offset;
             GameManager._player = GameManager.Player_One;
 
@@ -199,6 +189,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
         return false;
     }
+
     /// <summary>
     /// マウスクリックをした(駒を選んだ、動かした)時に実行される処理
     /// </summary>
@@ -210,6 +201,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
+            _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
         }
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
@@ -217,6 +209,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
+            _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
@@ -224,6 +217,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
+            _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
         }
     }
 
@@ -235,7 +229,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     {
         switch (_color)
         {
-            //case int: の下[break;]まで実行される
             case PieceColor.White:                                                                                                                      
                 _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;
@@ -267,8 +260,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public enum Status
     {
-        Normal, //通常状態
-        Move,   //移動状態
+        Normal,
+        Move,
     }
 
     /// <summary>

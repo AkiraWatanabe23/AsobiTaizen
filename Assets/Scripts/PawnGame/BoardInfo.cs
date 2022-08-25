@@ -28,21 +28,21 @@ public class BoardInfo : MonoBehaviour
             //マスに白駒がある場合
             if (_hit.collider.gameObject.tag == "WhitePiece")
             {
-                this.gameObject.tag = "WhitePiece";
-                this.gameObject.GetComponent<BoxCollider>().enabled = false;
+                gameObject.tag = _hit.collider.gameObject.tag;
+                gameObject.GetComponent<BoxCollider>().enabled = false;
             }
             //マスに黒駒がある場合
             else if (_hit.collider.gameObject.tag == "BlackPiece")
             {
-                this.gameObject.tag = "BlackPiece";
-                this.gameObject.GetComponent<BoxCollider>().enabled = false;
+                gameObject.tag = _hit.collider.gameObject.tag;
+                gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
         //マスに駒がない場合
         else if (_hit.collider == null)
         {
-            this.gameObject.tag = "Tile";
-            this.gameObject.GetComponent<BoxCollider>().enabled = true;
+            gameObject.tag = "Tile";
+            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

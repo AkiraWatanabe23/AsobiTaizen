@@ -10678,6 +10678,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1369652718, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: _tile.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 3468421999110978641, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
       propertyPath: m_Size.x
       value: 1
