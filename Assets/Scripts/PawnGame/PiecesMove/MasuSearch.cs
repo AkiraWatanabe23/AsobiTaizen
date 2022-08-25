@@ -25,6 +25,7 @@ public class MasuSearch : MonoBehaviour
     {
         if (_piece != null)
         {
+            GetTileNum();
             var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
             Search((int)_pieceNum);
         }
@@ -32,17 +33,6 @@ public class MasuSearch : MonoBehaviour
 
     public void Search(int pieceType)
     {
-        Debug.Log("bbb");
-        if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 10))
-        {
-            if (_hit.collider.gameObject.tag == "Tile")
-            {
-                Debug.Log("aaa");
-                //マスの番号を取得
-                _tileNum = int.Parse(_hit.collider.gameObject.name[1].ToString());
-            }
-        }
-
         switch (pieceType)
         {
             case 1:
@@ -61,6 +51,21 @@ public class MasuSearch : MonoBehaviour
                 Queen();
                 break;
         }   
+    }
+
+    void GetTileNum()
+    {
+        Debug.Log("bbb");
+        if (_pieceInfo != null)
+        {
+            Debug.DrawRay(_pieceInfo.gameObject.transform.position, Vector3.down, Color.red, 5);
+            if (Physics.Raycast(_pieceInfo.gameObject.transform.position, Vector3.down, out _hit, 5))
+            {
+                Debug.Log("aaa");
+                //マスの番号を取得
+                _tileNum = int.Parse(_hit.collider.gameObject.name[1].ToString());
+            }
+        }
     }
 
     void Pawn()
