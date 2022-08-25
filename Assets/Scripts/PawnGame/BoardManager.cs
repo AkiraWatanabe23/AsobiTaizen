@@ -34,7 +34,6 @@ public class BoardManager : MonoBehaviour
             {
                 _tiles[i, j] = itizigenn[count].gameObject;
                 count++;
-                //print($"{i+1} - {j+1} ”Ô–Ú‚Ìƒ}ƒX‚Í {_tiles[i, j].name}");
             }
         }
     }

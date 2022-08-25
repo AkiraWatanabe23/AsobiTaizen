@@ -9,6 +9,9 @@ public class MasuSearch : MonoBehaviour
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("駒のいるマス番号")] public int _tileNum = 0;
     RaycastHit _hit;
+    float _vecX = 0f;
+    float _vecY = 0.3f;
+    float _vecZ = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -55,22 +58,23 @@ public class MasuSearch : MonoBehaviour
 
     void GetTileNum()
     {
-        Debug.Log("bbb");
         if (_pieceInfo != null)
         {
-            Debug.DrawRay(_pieceInfo.gameObject.transform.position, Vector3.down, Color.red, 5);
-            if (Physics.Raycast(_pieceInfo.gameObject.transform.position, Vector3.down, out _hit, 5))
+            if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 5))
             {
-                Debug.Log("aaa");
-                //マスの番号を取得
+                Debug.Log("マス番号取得");
                 _tileNum = int.Parse(_hit.collider.gameObject.name[1].ToString());
+            }
+            else if (_hit.collider == null)
+            {
+                Debug.Log("なにもない");
             }
         }
     }
 
     void Pawn()
     {
-        Debug.Log(_tileNum);
+
     }
 
     void Knight()
@@ -80,41 +84,30 @@ public class MasuSearch : MonoBehaviour
 
     void Bishop()
     {
-        //斜め前方向の探索
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
 
-            }
-        }
-        //斜め後ろ方向の探索
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-
-            }
-        }
     }
 
     void Rook()
     {
-        //前、右方向の探索
-        for (int i = 0; i <= 8; i++)
+        //前方向
+        for (int i = 0; i <= 8 - _tileNum; i++)
         {
-            for (int j = 0; j <= 8; j++)
-            {
-
-            }
+            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
         }
-        //後ろ、左方向の探索
-        for (int i = 0; i <= 8; i++)
+        //後ろ方向
+        for (int j = 0; j <= 8 - _tileNum; j++)
         {
-            for (int j = 0; j <= 8; j++)
-            {
-
-            }
+            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+        }
+        //左方向
+        for (int k = 0; k <= 8 - _tileNum; k++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+        }
+        //右方向
+        for (int l = 0; l <= 8 - _tileNum; l++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
         }
     }
 

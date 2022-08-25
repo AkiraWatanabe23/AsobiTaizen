@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// 駒の個別(Individual)の動き
 /// </summary>
-public class IndividualMove : PieceMove, IPointerClickHandler
+public class IndividualMove : PieceMove
 {
     [Tooltip("ポーンの移動回数")] int _moveCount = 0;
     [Tooltip("マスの間隔")] float _masuSpace = 2.5f;
@@ -17,33 +16,6 @@ public class IndividualMove : PieceMove, IPointerClickHandler
     //※駒があるマスはCollider off(これはBoardInfo()で書いてる)
     //移動可能範囲のマスだけ
     //選択したマスのtagでマスの色を変化させる(駒がとれるなら黄色、"Tile"tagなら青色など)
-
-    /// <summary>
-    /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
-    /// </summary>
-    /// <param name="eventData"></param>
-    public new void OnPointerClick(PointerEventData eventData)
-    {
-        go = eventData.pointerCurrentRaycast.gameObject;
-        //↑カメラから現在のマウスカーソルの位置にRayを飛ばし、当たったオブジェクトを代入する
-        var piece = go.GetComponent<PieceMove>();
-
-        Debug.DrawRay(go.transform.position, new Vector3(0f, -0.3f, _masuSpace), Color.yellow, 20f);
-
-        print($"{ name } を選んだ");
-        piece.ChangeState();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// 駒の個別の移動(PieceMoveのMoveを実行している部分で実行する)
