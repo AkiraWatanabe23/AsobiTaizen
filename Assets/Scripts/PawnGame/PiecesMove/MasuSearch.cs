@@ -32,6 +32,17 @@ public class MasuSearch : MonoBehaviour
 
     public void Search(int pieceType)
     {
+        Debug.Log("bbb");
+        if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 10))
+        {
+            if (_hit.collider.gameObject.tag == "Tile")
+            {
+                Debug.Log("aaa");
+                //マスの番号を取得
+                _tileNum = int.Parse(_hit.collider.gameObject.name[1].ToString());
+            }
+        }
+
         switch (pieceType)
         {
             case 1:
@@ -54,13 +65,6 @@ public class MasuSearch : MonoBehaviour
 
     void Pawn()
     {
-        Debug.Log("bbb");
-        if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 5))
-        {
-            Debug.Log("aaa");
-            //マスの番号を取得
-            _tileNum = int.Parse(_hit.collider.gameObject.name[1].ToString());
-        }
         Debug.Log(_tileNum);
     }
 

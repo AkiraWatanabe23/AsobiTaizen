@@ -34,7 +34,7 @@ public class BoardManager : MonoBehaviour
             {
                 _tiles[i, j] = itizigenn[count].gameObject;
                 count++;
-                print($"{i+1} - {j+1} 番目のマスは {_tiles[i, j].name}");
+                //print($"{i+1} - {j+1} 番目のマスは {_tiles[i, j].name}");
             }
         }
     }
