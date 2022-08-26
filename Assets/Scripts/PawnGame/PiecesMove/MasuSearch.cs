@@ -93,6 +93,22 @@ public class MasuSearch : MonoBehaviour
         for (int i = 0; i <= 8 - _tileNum; i++)
         {
             Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+            if (Physics.Raycast(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), out _hit, 5))
+            {
+                //’Tõ’â~
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "‚©‚çæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
+                    break;
+                }
+                //’Tõ‘±s
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ += _vecZ;
+                    Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                }
+            }
         }
         //Œã‚ë•ûŒü
         for (int j = 0; j <= 8 - _tileNum; j++)
