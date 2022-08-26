@@ -96,6 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677fb34185986ae47b8f05c1bc461ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _normalMaterial: {fileID: 2100000, guid: 4e0a16e7ff30642b8901637e8aea5b37, type: 2}
+  _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
+  _color: 1
+  _status: 0
+  _type: 4
+  _offset: {x: 0, y: 0.1, z: 0}
   _tileLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -105,13 +111,8 @@ MonoBehaviour:
   _blackLayer:
     serializedVersion: 2
     m_Bits: 512
-  _offset: {x: 0, y: 0.1, z: 0}
-  _normalMaterial: {fileID: 2100000, guid: 4e0a16e7ff30642b8901637e8aea5b37, type: 2}
-  _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
-  _color: 1
-  _status: 0
-  _type: 4
   _getScore: 4
+  _search: {fileID: 0}
 --- !u!54 &-4738416354575551098
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.7
+  m_Radius: 1
   m_Height: 3.3909698
   m_Direction: 1
   m_Center: {x: 0.013831139, y: 1.6983073, z: 0.049515486}

@@ -37,6 +37,10 @@ public class MasuSearch : MonoBehaviour
 
     public void Search(int pieceType)
     {
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+
         switch (pieceType)
         {
             case 1:
@@ -94,8 +98,8 @@ public class MasuSearch : MonoBehaviour
         //前方向
         for (int i = 0; i < 8 - _tileNum; i++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 30))
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 //探索停止
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -107,14 +111,13 @@ public class MasuSearch : MonoBehaviour
                 //探索続行
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ += _vecZ;
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
                         break;
                     }
-                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                 }
-                //Debug.Log($"iは{i}HitCollider{_hit.collider.gameObject.tag}_pieceInfoTag{_pieceInfo.tag}");
             }
             else 
             {
@@ -124,17 +127,17 @@ public class MasuSearch : MonoBehaviour
         //後ろ方向
         for (int j = 0; j < 8 - _tileNum; j++)
         {
-            //Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+
         }
         //左方向
         for (int k = 0; k < 8 - _tileNum; k++)
         {
-            //Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+
         }
         //右方向
         for (int l = 0; l < 8 - _tileNum; l++)
         {
-            //Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+
         }
     }
 
