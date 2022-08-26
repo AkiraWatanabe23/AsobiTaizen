@@ -7,7 +7,8 @@ public class MasuSearch : MonoBehaviour
     [SerializeField] Collider[] _masu = new Collider[64];
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
-    [Tooltip("駒のいるマス番号")] public int _tileNum = 0;
+    [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
+    [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
     RaycastHit _hit;
     float _vecX = 0f;
     float _vecY = 2.5f;
@@ -19,7 +20,6 @@ public class MasuSearch : MonoBehaviour
         for (int i = 0; i < 64; i++)
         {
             _masu[i] = gameObject.transform.GetChild(i).GetComponent<Collider>();
-            _tileNum = int.Parse(_masu[i].name[1].ToString());
         }
     }
 
@@ -37,10 +37,6 @@ public class MasuSearch : MonoBehaviour
 
     public void Search(int pieceType)
     {
-        _vecX = 0f;
-        _vecY = 2.55f;
-        _vecZ = 2.55f;
-
         switch (pieceType)
         {
             case 1:
@@ -67,8 +63,40 @@ public class MasuSearch : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 5))
             {
-                Debug.Log("マス番号取得");
-                _tileNum = int.Parse(_hit.collider.gameObject.name[1].ToString());
+                Debug.Log("マス番号取得(列、行それぞれ)");
+                _tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());
+                if (_hit.collider.gameObject.name[0] == 'a')
+                {
+                    _tileFile = 1;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'b')
+                {
+                    _tileFile = 2;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'c')
+                {
+                    _tileFile = 3;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'd')
+                {
+                    _tileFile = 4;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'e')
+                {
+                    _tileFile = 5;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'f')
+                {
+                    _tileFile = 6;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'g')
+                {
+                    _tileFile = 7;
+                }
+                else if (_hit.collider.gameObject.name[0] == 'h')
+                {
+                    _tileFile = 8;
+                }
             }
             else if (_hit.collider == null)
             {
@@ -94,9 +122,11 @@ public class MasuSearch : MonoBehaviour
 
     void Rook()
     {
-        Debug.Log(8 - _tileNum);
         //前方向
-        for (int i = 0; i < 8 - _tileNum; i++)
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int i = 0; i < 8 - _tileRank; i++)
         {
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
@@ -105,7 +135,7 @@ public class MasuSearch : MonoBehaviour
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                    Debug.Log(_hit.collider.gameObject.name + "から先にはすすめません");
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
                     break;
                 }
                 //探索続行
@@ -124,20 +154,104 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
+
         //後ろ方向
-        for (int j = 0; j < 8 - _tileNum; j++)
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int j = _tileRank; j > 1; j--)
         {
-
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
         }
+
         //左方向
-        for (int k = 0; k < 8 - _tileNum; k++)
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 0f;
+        for (int k = _tileFile; k > 1; k--)
         {
-
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
         }
-        //右方向
-        for (int l = 0; l < 8 - _tileNum; l++)
-        {
 
+        //右方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 0f;
+        for (int l = 0; l < 8 - _tileFile; l++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
         }
     }
 
