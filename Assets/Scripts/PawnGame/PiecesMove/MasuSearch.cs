@@ -10,8 +10,8 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("駒のいるマス番号")] public int _tileNum = 0;
     RaycastHit _hit;
     float _vecX = 0f;
-    float _vecY = 0.3f;
-    float _vecZ = 2.5f;
+    float _vecY = 2.5f;
+    float _vecZ = 2.55f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,7 @@ public class MasuSearch : MonoBehaviour
         {
             GetTileNum();
             var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
+            _piece = null;
             Search((int)_pieceNum);
         }
     }
@@ -89,11 +90,12 @@ public class MasuSearch : MonoBehaviour
 
     void Rook()
     {
+        Debug.Log(8 - _tileNum);
         //前方向
-        for (int i = 0; i <= 8 - _tileNum; i++)
+        for (int i = 0; i < 8 - _tileNum; i++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
-            if (Physics.Raycast(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), out _hit, 5))
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 30))
             {
                 //探索停止
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -106,24 +108,33 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += _vecZ;
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                 }
+                //Debug.Log($"iは{i}HitCollider{_hit.collider.gameObject.tag}_pieceInfoTag{_pieceInfo.tag}");
+            }
+            else 
+            {
+                Debug.Log("Colliderが当たってない");
             }
         }
         //後ろ方向
-        for (int j = 0; j <= 8 - _tileNum; j++)
+        for (int j = 0; j < 8 - _tileNum; j++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+            //Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
         }
         //左方向
-        for (int k = 0; k <= 8 - _tileNum; k++)
+        for (int k = 0; k < 8 - _tileNum; k++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+            //Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
         }
         //右方向
-        for (int l = 0; l <= 8 - _tileNum; l++)
+        for (int l = 0; l < 8 - _tileNum; l++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
+            //Debug.DrawRay(_pieceInfo.transform.position, new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 20f);
         }
     }
 
