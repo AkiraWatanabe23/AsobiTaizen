@@ -10,6 +10,7 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
     [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
     RaycastHit _hit;
+    int _moveCount = 0;
     float _vecX = 0f;
     float _vecY = 2.5f;
     float _vecZ = 2.55f;
@@ -63,7 +64,7 @@ public class MasuSearch : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 5))
             {
-                Debug.Log("マス番号取得(列、行それぞれ)");
+                //マス番号取得(列、行それぞれ)
                 _tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());
                 if (_hit.collider.gameObject.name[0] == 'a')
                 {
@@ -107,17 +108,167 @@ public class MasuSearch : MonoBehaviour
 
     void Pawn()
     {
+        //1,1回目の動きか、そうでないか
+        //　1回目の場合→2マス移動可
+        if (_moveCount == 0)
+        {
 
+            _moveCount++;
+        }
+        //2,2回目以降は1マス移動
+        else if (_moveCount != 0)
+        {
+
+        }
+        //　常に斜め1コ前は探索(アンパッサンに使える?)
+        //3,アンパッサン...真隣のマス探索
     }
 
     void Knight()
     {
-
+        //移動可能なマス(桂馬4方向)に駒があるか、ないかの判定(あったら白or黒、なければ移動可)
+        //味方駒があれば移動不可
     }
 
     void Bishop()
     {
+        //左斜め前方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int i = 0; i < 8 - _tileRank; i++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
 
+        //右斜め前方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int j = _tileRank; j > 1; j--)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //左斜め後ろ方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int k = _tileFile; k > 1; k--)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //右斜め後ろ方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int l = 0; l < 8 - _tileFile; l++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //移動範囲以外のColliderをoffにする処理を書く
     }
 
     void Rook()
@@ -253,10 +404,278 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
+
+        //移動範囲以外のColliderをoffにする処理を書く
     }
 
     void Queen()
     {
+        /*==========前後左右の動き==========*/
+        //前方向
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int i = 0; i < 8 - _tileRank; i++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
 
+        //後ろ方向
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int j = _tileRank; j > 1; j--)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //左方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 0f;
+        for (int k = _tileFile; k > 1; k--)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //右方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 0f;
+        for (int l = 0; l < 8 - _tileFile; l++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        /*==========斜め方向の動き==========*/
+        //左斜め前方向
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int i = 0; i < 8 - _tileRank; i++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //右斜め前方向
+        _vecX = 0f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int j = _tileRank; j > 1; j--)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //左斜め後ろ方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 0f;
+        for (int k = _tileFile; k > 1; k--)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //右斜め後ろ方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 0f;
+        for (int l = 0; l < 8 - _tileFile; l++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX += 2.5f;
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+
+        //移動範囲以外のColliderをoffにする処理を書く
     }
 }
