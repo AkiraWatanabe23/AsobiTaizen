@@ -20,7 +20,7 @@ public class MasuSearch : MonoBehaviour
     {
         for (int i = 0; i < 64; i++)
         {
-            _tile[i] = gameObject.transform.GetChild(i).GetComponent<Collider>();
+            _tile[i] = gameObject.transform.GetChild(i).GetComponent<BoxCollider>();
         }
     }
 
@@ -31,8 +31,8 @@ public class MasuSearch : MonoBehaviour
         {
             GetTileNum();
             var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
-            _piece = null;
             Search((int)_pieceNum);
+            //_piece = null;
         }
     }
 
@@ -144,10 +144,10 @@ public class MasuSearch : MonoBehaviour
                     }
                 }
 
-                for (int i = 0; i < _tile.Count; i++)
+                foreach (BoxCollider col in _tile)
                 {
-                    _tile[i].GetComponent<Collider>().enabled = false;
-                    Debug.Log("Collider off‚É‚µ‚Ü‚·");
+                    col.enabled = false;
+                    Debug.Log(col + "‚ÌCollider‚ğoff‚É‚µ‚Ü‚·");
                 }
             }
             //2,2‰ñ–ÚˆÈ~‚Í1ƒ}ƒXˆÚ“®
