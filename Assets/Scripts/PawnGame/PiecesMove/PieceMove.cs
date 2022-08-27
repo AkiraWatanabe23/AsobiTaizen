@@ -32,6 +32,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
+    public int _moveCount = 0;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
@@ -214,6 +215,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
         {
+            _moveCount++;
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
