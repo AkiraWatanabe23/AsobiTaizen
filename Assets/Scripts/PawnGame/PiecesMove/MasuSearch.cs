@@ -32,7 +32,7 @@ public class MasuSearch : MonoBehaviour
             GetTileNum();
             var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
             Search((int)_pieceNum);
-            //_piece = null;
+            _piece = null;
         }
     }
 
@@ -144,7 +144,7 @@ public class MasuSearch : MonoBehaviour
                     }
                 }
 
-                foreach (BoxCollider col in _tile)
+                foreach (Collider col in _tile)
                 {
                     col.enabled = false;
                     Debug.Log(col + "のColliderをoffにします");
@@ -176,6 +176,12 @@ public class MasuSearch : MonoBehaviour
 
                         }
                     }
+                }
+
+                foreach (Collider col in _tile)
+                {
+                    col.enabled = false;
+                    Debug.Log(col + "のColliderをoffにします");
                 }
             }
             //　常に斜め1コ前は探索(アンパッサンに使える?)
@@ -216,6 +222,12 @@ public class MasuSearch : MonoBehaviour
                         }
                     }
                 }
+
+                foreach (Collider col in _tile)
+                {
+                    col.enabled = false;
+                    Debug.Log(col + "のColliderをoffにします");
+                }
             }
             //2,2回目以降は1マス移動
             else if (_pieceInfo.GetComponent<PieceMove>()._moveCount != 0)
@@ -243,6 +255,12 @@ public class MasuSearch : MonoBehaviour
 
                         }
                     }
+                }
+
+                foreach (Collider col in _tile)
+                {
+                    col.enabled = false;
+                    Debug.Log(col + "のColliderをoffにします");
                 }
             }
             //　常に斜め1コ前は探索(アンパッサンに使える?)
@@ -391,6 +409,12 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
+        //移動範囲以外のColliderをoffにする処理を書く
+        foreach (Collider col in _tile)
+        {
+            col.enabled = false;
+            Debug.Log(col + "のColliderをoffにします");
+        }
     }
 
     void Bishop()
@@ -538,8 +562,12 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
-
         //移動範囲以外のColliderをoffにする処理を書く
+        foreach (Collider col in _tile)
+        {
+            col.enabled = false;
+            Debug.Log(col + "のColliderをoffにします");
+        }
     }
 
     void Rook()
@@ -683,8 +711,12 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
-
         //移動範囲以外のColliderをoffにする処理を書く
+        foreach (Collider col in _tile)
+        {
+            col.enabled = false;
+            Debug.Log(col + "のColliderをoffにします");
+        }
     }
 
     void Queen()
@@ -976,5 +1008,10 @@ public class MasuSearch : MonoBehaviour
         }
 
         //移動範囲以外のColliderをoffにする処理を書く
+        foreach (Collider col in _tile)
+        {
+            col.enabled = false;
+            Debug.Log(col + "のColliderをoffにします");
+        }
     }
 }
