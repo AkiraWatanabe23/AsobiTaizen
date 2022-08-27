@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -218,6 +219,16 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _moveCount++;
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
+            //_search.gameObject.GetComponent<MasuSearch>()._tile.AddRange(_mo);
+            //移動可能なColliderを一旦別のリストに保存しておく。
+            for (int i = 0; i < _search.gameObject.GetComponent<MasuSearch>()._movableTile.Count; i++)
+            {
+                if (_search.gameObject.GetComponent<MasuSearch>()._movableTile[i].tag == "Tile")
+                {
+                    _search.gameObject.GetComponent<MasuSearch>()._tile.Add(_search.gameObject.GetComponent<MasuSearch>()._movableTile[i]);
+                }
+            }
+            _search.gameObject.GetComponent<MasuSearch>()._movableTile.Clear();
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
         }

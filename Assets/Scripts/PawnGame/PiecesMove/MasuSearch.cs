@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MasuSearch : MonoBehaviour
 {
-    [SerializeField] Collider[] _masu = new Collider[64];
+    [SerializeField] public List<Collider> _tile = new List<Collider>();
+    [SerializeField] public List<Collider> _movableTile = new List<Collider>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
@@ -19,7 +20,7 @@ public class MasuSearch : MonoBehaviour
     {
         for (int i = 0; i < 64; i++)
         {
-            _masu[i] = gameObject.transform.GetChild(i).GetComponent<Collider>();
+            _tile[i] = gameObject.transform.GetChild(i).GetComponent<Collider>();
         }
     }
 
@@ -132,6 +133,8 @@ public class MasuSearch : MonoBehaviour
                         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                         {
                             _vecZ += 2.5f;
+                            _movableTile.Add(_hit.collider);
+                            _tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                             if (_hit.collider.gameObject.tag == "BlackPiece")
                             {
@@ -139,6 +142,12 @@ public class MasuSearch : MonoBehaviour
                             }
                         }
                     }
+                }
+
+                for (int i = 0; i < _tile.Count; i++)
+                {
+                    _tile[i].GetComponent<Collider>().enabled = false;
+                    Debug.Log("Collider offにします");
                 }
             }
             //2,2回目以降は1マス移動
@@ -159,6 +168,8 @@ public class MasuSearch : MonoBehaviour
                     //探索続行
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
+                        _movableTile.Add(_hit.collider);
+                        _tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
@@ -195,8 +206,10 @@ public class MasuSearch : MonoBehaviour
                         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                         {
                             _vecZ += 2.5f;
+                            _movableTile.Add(_hit.collider);
+                            _tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                            if (_hit.collider.gameObject.tag == "BlackPiece")
+                            if (_hit.collider.gameObject.tag == "WhitePiece")
                             {
                                 break;
                             }
@@ -222,8 +235,10 @@ public class MasuSearch : MonoBehaviour
                     //探索続行
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
+                        _movableTile.Add(_hit.collider);
+                        _tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                        if (_hit.collider.gameObject.tag == "BlackPiece")
+                        if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
 
                         }
@@ -240,6 +255,142 @@ public class MasuSearch : MonoBehaviour
     {
         //移動可能なマス(桂馬4方向)に駒があるか、ないかの判定(あったら白or黒、なければ移動可)
         //味方駒があれば移動不可
+        //桂馬 前方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 5f;
+        for (int i = 0; i < 2; i++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX -= 5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+        //桂馬 後ろ方向
+        _vecX = 2.55f;
+        _vecY = 2.55f;
+        _vecZ = 5f;
+        for (int j = 0; j < 2; j++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecX -= 5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+        //桂馬 左方向
+        _vecX = 5f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int k = 0; k < 2; k++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ -= 5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
+        //桂馬 右方向
+        _vecX = 5f;
+        _vecY = 2.55f;
+        _vecZ = 2.55f;
+        for (int l = 0; l < 2; l++)
+        {
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                //探索停止
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                {
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    Debug.Log(_hit.collider.gameObject.name + "にはすすめません");
+                    break;
+                }
+                //探索続行
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                {
+                    _vecZ -= 5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
+                    Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Colliderが当たってない");
+            }
+        }
     }
 
     void Bishop()
@@ -265,6 +416,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -299,6 +452,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -333,6 +488,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -367,6 +524,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -405,6 +564,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -412,7 +573,7 @@ public class MasuSearch : MonoBehaviour
                     }
                 }
             }
-            else 
+            else
             {
                 Debug.Log("Colliderが当たってない");
             }
@@ -438,6 +599,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -471,6 +634,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -504,6 +669,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -543,6 +710,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -576,6 +745,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -609,6 +780,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -642,6 +815,8 @@ public class MasuSearch : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -677,6 +852,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -711,6 +888,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -745,6 +924,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -779,6 +960,8 @@ public class MasuSearch : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
+                    _movableTile.Add(_hit.collider);
+                    _tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                     if (_hit.collider.gameObject.tag == "BlackPiece")
                     {
