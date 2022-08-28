@@ -20,7 +20,7 @@ public class MasuSearch : MonoBehaviour
     {
         for (int i = 0; i < 64; i++)
         {
-            _tile[i] = gameObject.transform.GetChild(i).GetComponent<BoxCollider>();
+            _tile.Add(this.gameObject.transform.GetChild(i).GetComponent<Collider>());
         }
     }
 
@@ -32,7 +32,8 @@ public class MasuSearch : MonoBehaviour
             GetTileNum();
             var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
             Search((int)_pieceNum);
-            _piece = null;
+            //_piece = null; /*©‚±‚ê‚ª‚ ‚é‚Æw’è‚ÌCollider‚ªoff‚É‚È‚ç‚È‚¢(NG)*/
+                             /*  List‚É“®‚¯‚éƒ}ƒX‚ª1‰ñ‚¾‚¯’Ç‰Á‚³‚ê‚é(OK)*/
         }
     }
 
@@ -99,19 +100,15 @@ public class MasuSearch : MonoBehaviour
                     _tileFile = 8;
                 }
             }
-            else if (_hit.collider == null)
-            {
-                Debug.Log("‚È‚É‚à‚È‚¢");
-            }
         }
     }
 
+    /***************ƒ|[ƒ“‚ÌˆÚ“®ˆ—***************/
     void Pawn()
     {
-        if (_pieceInfo.tag == "WhitePiece") /*”’ƒ|[ƒ“*/
+        if (_pieceInfo.tag == "WhitePiece")
         {
-            //1,1‰ñ–Ú‚Ì“®‚«‚©A‚»‚¤‚Å‚È‚¢‚©
-            //@1‰ñ–Ú‚Ìê‡¨2ƒ}ƒXˆÚ“®‰Â
+            //1,1‰ñ–Ú‚Ì“®‚«‚©A‚»‚¤‚Å‚È‚¢‚©(1‰ñ–Ú‚Ìê‡¨2ƒ}ƒXˆÚ“®‰Â)
             if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
             {
                 _vecX = 0f;
@@ -122,14 +119,12 @@ public class MasuSearch : MonoBehaviour
                     Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                     {
-                        //’Tõ’â~
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                             Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                             break;
                         }
-                        //’Tõ‘±s
                         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                         {
                             _vecZ += 2.5f;
@@ -143,7 +138,7 @@ public class MasuSearch : MonoBehaviour
                         }
                     }
                 }
-
+                //ˆÚ“®”ÍˆÍˆÈŠO‚ÌCollider‚ğoff‚É‚·‚éˆ—‚ğ‘‚­
                 foreach (Collider col in _tile)
                 {
                     col.enabled = false;
@@ -159,13 +154,11 @@ public class MasuSearch : MonoBehaviour
                 Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
-                    //’Tõ’â~
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                         Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     }
-                    //’Tõ‘±s
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
                         _movableTile.Add(_hit.collider);
@@ -177,7 +170,7 @@ public class MasuSearch : MonoBehaviour
                         }
                     }
                 }
-
+                //ˆÚ“®”ÍˆÍˆÈŠO‚ÌCollider‚ğoff‚É‚·‚éˆ—‚ğ‘‚­
                 foreach (Collider col in _tile)
                 {
                     col.enabled = false;
@@ -187,10 +180,9 @@ public class MasuSearch : MonoBehaviour
             //@í‚ÉÎ‚ß1ƒR‘O‚Í’Tõ(ƒAƒ“ƒpƒbƒTƒ“‚Ég‚¦‚é?)
             //3,ƒAƒ“ƒpƒbƒTƒ“...^—×‚Ìƒ}ƒX’Tõ
         }
-        else if (_pieceInfo.tag == "BlackPiece") /*•ƒ|[ƒ“*/
+        else if (_pieceInfo.tag == "BlackPiece")
         {
-            //1,1‰ñ–Ú‚Ì“®‚«‚©A‚»‚¤‚Å‚È‚¢‚©
-            //@1‰ñ–Ú‚Ìê‡¨2ƒ}ƒXˆÚ“®‰Â
+            //1,1‰ñ–Ú‚Ì“®‚«‚©A‚»‚¤‚Å‚È‚¢‚©(1‰ñ–Ú‚Ìê‡¨2ƒ}ƒXˆÚ“®‰Â)
             if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
             {
                 _vecX = 0f;
@@ -201,14 +193,12 @@ public class MasuSearch : MonoBehaviour
                     Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                     {
-                        //’Tõ’â~
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                             Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                             break;
                         }
-                        //’Tõ‘±s
                         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                         {
                             _vecZ += 2.5f;
@@ -222,7 +212,7 @@ public class MasuSearch : MonoBehaviour
                         }
                     }
                 }
-
+                //ˆÚ“®”ÍˆÍˆÈŠO‚ÌCollider‚ğoff‚É‚·‚éˆ—‚ğ‘‚­
                 foreach (Collider col in _tile)
                 {
                     col.enabled = false;
@@ -238,13 +228,11 @@ public class MasuSearch : MonoBehaviour
                 Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
-                    //’Tõ’â~
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                         Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     }
-                    //’Tõ‘±s
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
                         _movableTile.Add(_hit.collider);
@@ -256,7 +244,7 @@ public class MasuSearch : MonoBehaviour
                         }
                     }
                 }
-
+                //ˆÚ“®”ÍˆÍˆÈŠO‚ÌCollider‚ğoff‚É‚·‚éˆ—‚ğ‘‚­
                 foreach (Collider col in _tile)
                 {
                     col.enabled = false;
@@ -269,10 +257,9 @@ public class MasuSearch : MonoBehaviour
 
     }
 
+    /***************ƒiƒCƒg‚ÌˆÚ“®ˆ—***************/
     void Knight()
     {
-        //ˆÚ“®‰Â”\‚Èƒ}ƒX(Œj”n4•ûŒü)‚É‹î‚ª‚ ‚é‚©A‚È‚¢‚©‚Ì”»’è(‚ ‚Á‚½‚ç”’or•A‚È‚¯‚ê‚ÎˆÚ“®‰Â)
-        //–¡•û‹î‚ª‚ ‚ê‚ÎˆÚ“®•s‰Â
         //Œj”n ‘O•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -282,14 +269,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX -= 5f;
@@ -316,14 +301,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX -= 5f;
@@ -350,14 +333,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ -= 5f;
@@ -384,14 +365,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ -= 5f;
@@ -417,6 +396,7 @@ public class MasuSearch : MonoBehaviour
         }
     }
 
+    /***************ƒrƒVƒ‡ƒbƒv‚ÌˆÚ“®ˆ—***************/
     void Bishop()
     {
         //¶Î‚ß‘O•ûŒü
@@ -428,14 +408,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -454,7 +432,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //‰EÎ‚ß‘O•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -464,14 +441,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -490,7 +465,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //¶Î‚ßŒã‚ë•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -500,14 +474,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -526,7 +498,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //‰EÎ‚ßŒã‚ë•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -536,14 +507,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -570,6 +539,7 @@ public class MasuSearch : MonoBehaviour
         }
     }
 
+    /***************ƒ‹[ƒN‚ÌˆÚ“®ˆ—***************/
     void Rook()
     {
         //‘O•ûŒü
@@ -581,14 +551,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
@@ -606,7 +574,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //Œã‚ë•ûŒü
         _vecX = 0f;
         _vecY = 2.55f;
@@ -616,14 +583,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
@@ -641,7 +606,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //¶•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -651,14 +615,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -676,7 +638,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //‰E•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -686,14 +647,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -719,6 +678,7 @@ public class MasuSearch : MonoBehaviour
         }
     }
 
+    /***************ƒNƒC[ƒ“‚ÌˆÚ“®ˆ—***************/
     void Queen()
     {
         /*==========‘OŒã¶‰E‚Ì“®‚«==========*/
@@ -731,14 +691,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
@@ -756,7 +714,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //Œã‚ë•ûŒü
         _vecX = 0f;
         _vecY = 2.55f;
@@ -766,14 +723,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
@@ -791,7 +746,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //¶•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -801,14 +755,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -826,7 +778,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //‰E•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -836,14 +787,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -861,7 +810,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         /*==========Î‚ß•ûŒü‚Ì“®‚«==========*/
         //¶Î‚ß‘O•ûŒü
         _vecX = 2.55f;
@@ -872,14 +820,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -898,7 +844,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //‰EÎ‚ß‘O•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -908,14 +853,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -934,7 +877,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //¶Î‚ßŒã‚ë•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -944,14 +886,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -970,7 +910,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //‰EÎ‚ßŒã‚ë•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;
@@ -980,14 +919,12 @@ public class MasuSearch : MonoBehaviour
             Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                //’Tõ’â~
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                //’Tõ‘±s
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
@@ -1006,7 +943,6 @@ public class MasuSearch : MonoBehaviour
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
-
         //ˆÚ“®”ÍˆÍˆÈŠO‚ÌCollider‚ğoff‚É‚·‚éˆ—‚ğ‘‚­
         foreach (Collider col in _tile)
         {

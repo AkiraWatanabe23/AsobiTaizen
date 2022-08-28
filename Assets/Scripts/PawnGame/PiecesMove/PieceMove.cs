@@ -219,8 +219,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _moveCount++;
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
-            //_search.gameObject.GetComponent<MasuSearch>()._tile.AddRange(_mo);
-            //移動可能なColliderを一旦別のリストに保存しておく。
             for (int i = 0; i < _search.gameObject.GetComponent<MasuSearch>()._movableTile.Count; i++)
             {
                 if (_search.gameObject.GetComponent<MasuSearch>()._movableTile[i].tag == "Tile")
