@@ -107,7 +107,7 @@ public class MasuSearch : MonoBehaviour
     {
         if (_pieceInfo.tag == "WhitePiece")
         {
-            //1,1回目の動きか、そうでないか(1回目の場合...2マス移動可)
+            //1,1回目の動き...2マス移動可
             if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
             {
                 _vecX = 0f;
@@ -190,12 +190,31 @@ public class MasuSearch : MonoBehaviour
                     Debug.Log(col + "のColliderをoffにします");
                 }
             }
-            //　常に斜め1コ前は探索(アンパッサンに使える?)
+            //　常に斜め前の探索(アンパッサンに使える?)
+            _vecX = 2.55f;
+            _vecY = 2.55f;
+            _vecZ = 2.55f;
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                if (_hit.collider.gameObject.tag == "BlackPiece")
+                {
+                    Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
+                }
+            }
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            {
+                if (_hit.collider.gameObject.tag == "BlackPiece")
+                {
+                    Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
+                }
+            }
             //3,アンパッサン...真隣のマス探索
         }
         else if (_pieceInfo.tag == "BlackPiece")
         {
-            //1,1回目の動きか、そうでないか(1回目の場合...2マス移動可)
+            //1,1回目の動き...2マス移動可
             if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
             {
                 _vecX = 0f;
@@ -278,7 +297,26 @@ public class MasuSearch : MonoBehaviour
                     Debug.Log(col + "のColliderをoffにします");
                 }
             }
-            //　常に斜め1コ前は探索(アンパッサンに使える?)
+            //　常に斜め前の探索(アンパッサンに使える?)
+            _vecX = 2.55f;
+            _vecY = 2.55f;
+            _vecZ = 2.55f;
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                if (_hit.collider.gameObject.tag == "WhitePiece")
+                {
+                    Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
+                }
+            }
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
+            {
+                if (_hit.collider.gameObject.tag == "WhitePiece")
+                {
+                    Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
+                }
+            }
             //3,アンパッサン...真隣のマス探索
         }
 
