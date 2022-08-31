@@ -10,10 +10,15 @@ public class MasuSearch : MonoBehaviour
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
     [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
-    RaycastHit _hit;
-    float _vecX = 0f;
-    float _vecY = 2.5f;
-    float _vecZ = 2.55f;
+    public RaycastHit _hit;
+    public float _vecX = 0f;
+    public float _vecY = 2.5f;
+    public float _vecZ = 2.55f;
+    [SerializeField] public Pawn _pawn;
+    [SerializeField] public Knight _knight;
+    [SerializeField] public Bishop _bishop;
+    [SerializeField] public Rook _rook;
+    [SerializeField] public Queen _queen;
 
     // Start is called before the first frame update
     void Start()
@@ -41,18 +46,28 @@ public class MasuSearch : MonoBehaviour
         switch (pieceType)
         {
             case 1:
-                Pawn();
+                Debug.Log("ポーンの移動処理を実行します");
+                _pawn.PawnMovement();
+                //Pawn();
                 break;
             case 2:
-                Knight();
+                Debug.Log("ナイトの移動処理を実行します");
+                _knight.KnightMovement();
+                //Knight();
                 break;
             case 3:
-                Bishop();
+                Debug.Log("ビショップの移動処理を実行します");
+                _bishop.BishopMovement();
+                //Bishop();
                 break;
             case 4:
+                Debug.Log("ルークの移動処理を実行します");
+                _rook.RookMovement();
                 Rook();
                 break;
             case 5:
+                Debug.Log("クイーンの移動処理を実行します");
+                _queen.QueenMovement();
                 Queen();
                 break;
         }   
@@ -129,7 +144,7 @@ public class MasuSearch : MonoBehaviour
                             _vecZ += 2.5f;
                             if (_movableTile.Contains(_hit.collider))
                             {
-                                
+                                break;
                             }
                             else
                             {
@@ -236,7 +251,7 @@ public class MasuSearch : MonoBehaviour
                             _vecZ += 2.5f;
                             if (_movableTile.Contains(_hit.collider))
                             {
-
+                                break;
                             }
                             else
                             {
@@ -345,7 +360,7 @@ public class MasuSearch : MonoBehaviour
                     _vecX -= 5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -384,7 +399,7 @@ public class MasuSearch : MonoBehaviour
                     _vecX -= 5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -423,7 +438,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ -= 5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -462,7 +477,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ -= 5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -513,7 +528,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -553,7 +568,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -593,7 +608,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -633,7 +648,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -683,7 +698,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -722,7 +737,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -761,7 +776,7 @@ public class MasuSearch : MonoBehaviour
                     _vecX += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -800,7 +815,7 @@ public class MasuSearch : MonoBehaviour
                     _vecX += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -851,7 +866,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -890,7 +905,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -929,7 +944,7 @@ public class MasuSearch : MonoBehaviour
                     _vecX += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -968,7 +983,7 @@ public class MasuSearch : MonoBehaviour
                     _vecX += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -1009,7 +1024,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -1049,7 +1064,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -1089,7 +1104,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
@@ -1129,7 +1144,7 @@ public class MasuSearch : MonoBehaviour
                     _vecZ += 2.5f;
                     if (_movableTile.Contains(_hit.collider))
                     {
-
+                        break;
                     }
                     else
                     {
