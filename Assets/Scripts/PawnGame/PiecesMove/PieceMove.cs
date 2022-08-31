@@ -33,6 +33,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
+    [SerializeField] Pawn _pawn;
     public int _moveCount = 0;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
@@ -204,6 +205,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
+            _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = gameObject;
         }
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
@@ -212,6 +214,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
+            _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = gameObject;
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
@@ -229,6 +232,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search.gameObject.GetComponent<MasuSearch>()._movableTile.Clear();
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
+            _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = null;
         }
     }
 

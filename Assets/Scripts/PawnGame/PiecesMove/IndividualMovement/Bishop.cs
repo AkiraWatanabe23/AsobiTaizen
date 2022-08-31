@@ -8,20 +8,15 @@ using UnityEngine;
 public class Bishop : MonoBehaviour
 {
     MasuSearch _search;
-    public RaycastHit _hit;
-    public float _vecX = 0f;
-    public float _vecY = 2.5f;
-    public float _vecZ = 2.55f;
+    RaycastHit _hit;
+    float _vecX;
+    float _vecY;
+    float _vecZ;
 
     // Start is called before the first frame update
     void Start()
     {
         _search = GetComponent<MasuSearch>();
-
-        _hit = _search._hit;
-        _vecX = _search._vecX;
-        _vecY = _search._vecY;
-        _vecZ = _search._vecZ;
     }
 
     public void BishopMovement()
