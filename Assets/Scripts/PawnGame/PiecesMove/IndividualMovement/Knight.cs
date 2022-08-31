@@ -17,7 +17,7 @@ public class Knight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _search = GameObject.Find("Movements").GetComponent<MasuSearch>();
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
     }
 
     public void KnightMovement ()
