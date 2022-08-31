@@ -209,11 +209,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
-            _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = gameObject;
-            _knight.gameObject.GetComponent<Knight>()._pieceInfo = gameObject;
-            _bishop.gameObject.GetComponent<Bishop>()._pieceInfo = gameObject;
-            _rook.gameObject.GetComponent<Rook>()._pieceInfo = gameObject;
-            _queen.gameObject.GetComponent<Queen>()._pieceInfo = gameObject;
         }
         //í èÌèÛë‘Å®à⁄ìÆèÛë‘(çï)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
@@ -222,11 +217,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
-            _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = gameObject;
-            _knight.gameObject.GetComponent<Knight>()._pieceInfo = gameObject;
-            _bishop.gameObject.GetComponent<Bishop>()._pieceInfo = gameObject;
-            _rook.gameObject.GetComponent<Rook>()._pieceInfo = gameObject;
-            _queen.gameObject.GetComponent<Queen>()._pieceInfo = gameObject;
         }
         //à⁄ìÆèÛë‘Å®í èÌèÛë‘(ãÓÇ™à⁄ìÆÇµÇΩå„ÇÃã§í èàóù)
         else if (_status == Status.Move)
@@ -244,11 +234,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search.gameObject.GetComponent<MasuSearch>()._movableTile.Clear();
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
-            _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = null;
-            _knight.gameObject.GetComponent<Knight>()._pieceInfo = null;
-            _bishop.gameObject.GetComponent<Bishop>()._pieceInfo = null;
-            _rook.gameObject.GetComponent<Rook>()._pieceInfo = null;
-            _queen.gameObject.GetComponent<Queen>()._pieceInfo = null;
         }
     }
 

@@ -17,11 +17,12 @@ public class Bishop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _search = GetComponent<MasuSearch>();
+        _search = GameObject.Find("Movements").GetComponent<MasuSearch>();
     }
 
     public void BishopMovement()
     {
+        _pieceInfo = _search._pieceInfo;
         //¶Î‚ß‘O•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;

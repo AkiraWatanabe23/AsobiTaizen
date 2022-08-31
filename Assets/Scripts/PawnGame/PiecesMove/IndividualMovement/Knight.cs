@@ -17,11 +17,12 @@ public class Knight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _search = GetComponent<MasuSearch>();
+        _search = GameObject.Find("Movements").GetComponent<MasuSearch>();
     }
 
     public void KnightMovement ()
     {
+        _pieceInfo = _search._pieceInfo;
         //Œj”n ‘O•ûŒü
         _vecX = 2.55f;
         _vecY = 2.55f;

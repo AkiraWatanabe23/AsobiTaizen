@@ -17,11 +17,12 @@ public class Rook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _search = GetComponent<MasuSearch>();
+        _search = GameObject.Find("Movements").GetComponent<MasuSearch>();
     }
 
     public void RookMovement()
     {
+        _pieceInfo = _search._pieceInfo;
         //‘O•ûŒü
         _vecX = 0f;
         _vecY = 2.55f;

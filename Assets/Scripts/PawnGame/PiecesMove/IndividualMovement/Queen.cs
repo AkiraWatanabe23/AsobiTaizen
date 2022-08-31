@@ -17,11 +17,12 @@ public class Queen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _search = GetComponent<MasuSearch>();
+        _search = GameObject.Find("Movements").GetComponent<MasuSearch>();
     }
 
     public void QueenMovement()
     {
+        _pieceInfo = _search._pieceInfo;
         /*==========‘OŒã¶‰E‚Ì“®‚«==========*/
         //‘O•ûŒü
         _vecX = 0f;

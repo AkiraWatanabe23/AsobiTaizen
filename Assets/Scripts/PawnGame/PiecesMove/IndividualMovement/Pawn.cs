@@ -17,11 +17,12 @@ public class Pawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _search = GetComponent<MasuSearch>();
+        _search = GameObject.Find("Movements").GetComponent<MasuSearch>();
     }
 
     public void PawnMovement()
     {
+        _pieceInfo = _search._pieceInfo;
         if (_pieceInfo.tag == "WhitePiece")
         {
             //1,1‰ñ–Ú‚Ì“®‚«...2ƒ}ƒXˆÚ“®‰Â
