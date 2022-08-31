@@ -7699,20 +7699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e13dc0458454e7439faf754e60b1b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tile: []
-  _movableTile: []
-  _piece: {fileID: 0}
-  _pieceInfo: {fileID: 0}
-  _tileRank: 0
-  _tileFile: 0
-  _vecX: 0
-  _vecY: 2.5
-  _vecZ: 2.55
-  _pawn: {fileID: 0}
-  _knight: {fileID: 0}
-  _bishop: {fileID: 0}
-  _rook: {fileID: 0}
-  _queen: {fileID: 907221170}
 --- !u!114 &907221171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7725,20 +7711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c8eb0454f3d5b4a9f6732c661dc99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tile: []
-  _movableTile: []
-  _piece: {fileID: 0}
-  _pieceInfo: {fileID: 0}
-  _tileRank: 0
-  _tileFile: 0
-  _vecX: 0
-  _vecY: 2.5
-  _vecZ: 2.55
-  _pawn: {fileID: 907221174}
-  _knight: {fileID: 907221173}
-  _bishop: {fileID: 907221172}
-  _rook: {fileID: 907221171}
-  _queen: {fileID: 907221170}
 --- !u!114 &907221172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7751,9 +7723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d2c5eea30c3d14fb58bcb451740009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vecX: 0
-  _vecY: 2.5
-  _vecZ: 2.55
 --- !u!114 &907221173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7766,9 +7735,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4152dca6fbafdb49a9aa01f96e1d38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vecX: 0
-  _vecY: 2.5
-  _vecZ: 2.55
 --- !u!114 &907221174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7781,9 +7747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5712969793996d64789101dbc5056658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vecX: 0
-  _vecY: 2.5
-  _vecZ: 2.55
 --- !u!1 &910585658
 GameObject:
   m_ObjectHideFlags: 0
@@ -17329,9 +17292,6 @@ MonoBehaviour:
   _pieceInfo: {fileID: 0}
   _tileRank: 0
   _tileFile: 0
-  _vecX: 0
-  _vecY: 2.5
-  _vecZ: 2.55
   _pawn: {fileID: 907221174}
   _knight: {fileID: 907221173}
   _bishop: {fileID: 907221172}

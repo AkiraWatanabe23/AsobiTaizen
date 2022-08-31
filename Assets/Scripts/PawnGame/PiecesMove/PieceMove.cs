@@ -33,7 +33,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
-    [SerializeField] Pawn _pawn;
+    Pawn _pawn;
+    Knight _knight;
+    Bishop _bishop;
+    Rook _rook;
+    Queen _queen;
     public int _moveCount = 0;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
@@ -59,7 +63,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         _renderer = GetComponent<Renderer>();
-        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
         //↓ターン表示のText
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
@@ -68,6 +71,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
         _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
         _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
+        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
         /*↑enabled...オブジェクトの指定した[コンポーネント(今回はImage)]のアクティブ、非アクティブを変更する
          *  SetActive(false)でオブジェクトをとってこれないのを回避する*/
     }
@@ -206,6 +210,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
             _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = gameObject;
+            _knight.gameObject.GetComponent<Knight>()._pieceInfo = gameObject;
+            _bishop.gameObject.GetComponent<Bishop>()._pieceInfo = gameObject;
+            _rook.gameObject.GetComponent<Rook>()._pieceInfo = gameObject;
+            _queen.gameObject.GetComponent<Queen>()._pieceInfo = gameObject;
         }
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
@@ -215,6 +223,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
             _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = gameObject;
+            _knight.gameObject.GetComponent<Knight>()._pieceInfo = gameObject;
+            _bishop.gameObject.GetComponent<Bishop>()._pieceInfo = gameObject;
+            _rook.gameObject.GetComponent<Rook>()._pieceInfo = gameObject;
+            _queen.gameObject.GetComponent<Queen>()._pieceInfo = gameObject;
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
@@ -233,6 +245,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
             _pawn.gameObject.GetComponent<Pawn>()._pieceInfo = null;
+            _knight.gameObject.GetComponent<Knight>()._pieceInfo = null;
+            _bishop.gameObject.GetComponent<Bishop>()._pieceInfo = null;
+            _rook.gameObject.GetComponent<Rook>()._pieceInfo = null;
+            _queen.gameObject.GetComponent<Queen>()._pieceInfo = null;
         }
     }
 
@@ -244,12 +260,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     {
         switch (_color)
         {
-            case PieceColor.White:                                                                                                                      
+            case PieceColor.White:
                 _whiteTurn.color = Color.black;
                 _blackTurn.color = Color.yellow;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = false;
                 _blackTurnPanel.gameObject.GetComponent<Image>().enabled = true;
-
                 if (_target.tag == "WhitePiece")
                 {
                     _status = Status.Normal;
@@ -261,7 +276,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 _blackTurn.color = Color.black;
                 _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = true;
                 _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
-
                 if (_target.tag == "BlackPiece")
                 {
                     _status = Status.Normal;

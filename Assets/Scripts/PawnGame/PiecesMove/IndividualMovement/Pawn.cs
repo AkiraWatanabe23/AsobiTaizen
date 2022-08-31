@@ -107,7 +107,7 @@ public class Pawn : MonoBehaviour
                     Debug.Log(col + "のColliderをoffにします");
                 }
             }
-            //　常に斜め前の探索(アンパッサンに使える?)
+            //常に斜め前の探索
             _vecX = 2.55f;
             _vecY = 2.55f;
             _vecZ = 2.55f;
@@ -214,7 +214,7 @@ public class Pawn : MonoBehaviour
                     Debug.Log(col + "のColliderをoffにします");
                 }
             }
-            //　常に斜め前の探索(アンパッサンに使える?)
+            //常に斜め前の探索
             _vecX = 2.55f;
             _vecY = 2.55f;
             _vecZ = 2.55f;

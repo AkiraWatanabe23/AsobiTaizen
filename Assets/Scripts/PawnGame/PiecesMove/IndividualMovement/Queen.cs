@@ -8,6 +8,7 @@ using UnityEngine;
 public class Queen : MonoBehaviour
 {
     MasuSearch _search;
+    public GameObject _pieceInfo;
     RaycastHit _hit;
     float _vecX;
     float _vecY;
