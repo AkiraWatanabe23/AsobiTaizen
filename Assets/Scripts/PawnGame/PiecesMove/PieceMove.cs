@@ -33,11 +33,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
-    Pawn _pawn;
-    Knight _knight;
-    Bishop _bishop;
-    Rook _rook;
-    Queen _queen;
     public int _moveCount = 0;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
@@ -207,8 +202,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search.gameObject.GetComponent<MasuSearch>()._piece = this;
-            _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
+            _search._piece = this;
+            _search._pieceInfo = gameObject;
 
         }
         //通常状態→移動状態(黒)
@@ -216,8 +211,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search.gameObject.GetComponent<MasuSearch>()._piece = this;
-            _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
+            _search._piece = this;
+            _search._pieceInfo = gameObject;
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
@@ -225,34 +220,21 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _moveCount++;
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
-            for (int i = 0; i < _search.gameObject.GetComponent<MasuSearch>()._movableTile.Count; i++)
+            for (int i = 0; i < _search._movableTile.Count; i++)
             {
-                if (_search.gameObject.GetComponent<MasuSearch>()._movableTile[i].tag == "Tile")
+                if (_search._movableTile[i].tag == "Tile")
                 {
-                    _search.gameObject.GetComponent<MasuSearch>()._tile.Add(_search.gameObject.GetComponent<MasuSearch>()._movableTile[i]);
+                    _search._tile.Add(_search._movableTile[i]);
                 }
             }
-            _search.gameObject.GetComponent<MasuSearch>()._movableTile.Clear();
-            _search.gameObject.GetComponent<MasuSearch>()._piece = null;
-            _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
-            switch (_type)
+            _search._movableTile.Clear();
+            _search._piece = null;
+            _search._pieceInfo = null;
+            foreach (var piece in _search._immovablePieces)
             {
-                case PieceType.Pawn:
-                    _pawn._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
-                    break;
-                case PieceType.Knight:
-                    _knight._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
-                    break;
-                case PieceType.Bishop:
-                    _bishop._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
-                    break;
-                case PieceType.Rook:
-                    _rook._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
-                    break;
-                case PieceType.Queen:
-                    _queen._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
-                    break;
+                piece.GetComponent<Collider>().enabled = true;
             }
+            _search._immovablePieces.Clear();
         }
     }
 
