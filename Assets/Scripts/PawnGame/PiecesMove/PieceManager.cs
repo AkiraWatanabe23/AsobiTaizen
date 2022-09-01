@@ -17,12 +17,10 @@ public class PieceManager : MonoBehaviour
         {
             if (transform.GetChild(i).gameObject.tag == "WhitePiece")
             {
-                Debug.Log(transform.GetChild(i).gameObject);
                 _whitePieces.Add(transform.GetChild(i).gameObject);
             }
             else if (transform.GetChild(i).gameObject.tag == "BlackPiece")
             {
-                Debug.Log(transform.GetChild(i).gameObject);
                 _blackPieces.Add(transform.GetChild(i).gameObject);
             }
         }

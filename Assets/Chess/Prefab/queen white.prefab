@@ -113,6 +113,8 @@ MonoBehaviour:
     m_Bits: 512
   _getScore: 5
   _search: {fileID: 0}
+  _piece: {fileID: 0}
+  _moveCount: 0
 --- !u!54 &4228737032886450593
 Rigidbody:
   m_ObjectHideFlags: 0

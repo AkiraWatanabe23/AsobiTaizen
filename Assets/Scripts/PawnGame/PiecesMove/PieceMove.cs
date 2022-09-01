@@ -33,7 +33,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
-    PieceManager _piece;
+    [SerializeField] PieceManager _piece;
     public int _moveCount = 0;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
