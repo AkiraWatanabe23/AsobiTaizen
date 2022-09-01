@@ -33,6 +33,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
+    PieceManager _piece;
     public int _moveCount = 0;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
@@ -101,31 +102,41 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //白番目線のRayの処理(駒を奪う場合)
         if (Physics.Raycast(_ray, out _hit, _rayDistance, _blackLayer))
         {
-            GameObject _target = _hit.collider.gameObject;
-            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
-
-            if (_target.tag == "BlackPiece")
+            foreach (var i in _search._movableTile)
             {
-                //白のスコアを加算
-                GameManager._scoreWhite += _targetScore;
-                //盤上にある敵駒のカウントを減らして、駒を破壊する
-                GameManager._bPieceCount--;
-                Destroy(_target);
-            }
+                GameObject _target = _hit.collider.gameObject;
+                if (_target == i.gameObject)
+                {
+                    int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
-            this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager.Player_Two;
+                    if (_target.tag == "BlackPiece")
+                    {
+                        //白のスコアを加算
+                        GameManager._scoreWhite += _targetScore;
+                        //盤上にある敵駒のカウントを減らして、駒を破壊する
+                        GameManager._bPieceCount--;
+                        Destroy(_target);
+                    }
 
-            PhaseChange(_target);
-            SetCursorPos(Screen.width/2, Screen.height/2);
-            GameManager._state = Phase.Black;
+                    this.transform.position = _target.transform.position + _offset;
+                    GameManager._player = GameManager.Player_Two;
 
-            print($"駒は {_target.name} をとった");
+                    PhaseChange(_target);
+                    SetCursorPos(Screen.width / 2, Screen.height / 2);
+                    GameManager._state = Phase.Black;
 
-            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-            {
-                GameObject _hitTile = hitTile.collider.gameObject;
-                print($"駒は {_hitTile.name} に移動した");
+                    print($"駒は {_target.name} をとった");
+
+                    if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+                    {
+                        GameObject _hitTile = hitTile.collider.gameObject;
+                        print($"駒は {_hitTile.name} に移動した");
+                    }
+                }
+                else
+                {
+                    Debug.Log("指定したマスには動けません");
+                }
             }
             return true;
         }
@@ -135,10 +146,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             foreach (var i in _search._movableTile)
             {
                 GameObject _target = _hit.collider.gameObject;
-
                 if (_target == i.gameObject)
                 {
-
                     this.transform.position = _target.transform.position + _offset;
                     GameManager._player = GameManager.Player_Two;
 
@@ -159,31 +168,41 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //黒番目線のRayの処理(駒を奪う場合)
         if (Physics.Raycast(_ray2, out _hit, _rayDistance, _whiteLayer))
         {
-            GameObject _target = _hit.collider.gameObject;
-            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
-
-            if (_target.tag == "WhitePiece")
+            foreach (var i in _search._movableTile)
             {
-                //黒のスコアを加算
-                GameManager._scoreBlack += _targetScore;
-                //盤上にある駒のカウントを減らして、駒を破壊する
-                GameManager._wPieceCount--;
-                Destroy(_target);
-            }
+                GameObject _target = _hit.collider.gameObject;
+                if (_target == i.gameObject)
+                {
+                    int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
-            this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager.Player_One;
+                    if (_target.tag == "WhitePiece")
+                    {
+                        //黒のスコアを加算
+                        GameManager._scoreBlack += _targetScore;
+                        //盤上にある駒のカウントを減らして、駒を破壊する
+                        GameManager._wPieceCount--;
+                        Destroy(_target);
+                    }
 
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager._state = Phase.White;
+                    this.transform.position = _target.transform.position + _offset;
+                    GameManager._player = GameManager.Player_One;
 
-            print($"駒は {_target.name} をとった");
+                    PhaseChange(_target);
+                    SetCursorPos(Screen.width / 2, Screen.height / 2);
+                    GameManager._state = Phase.White;
 
-            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-            {
-                GameObject _hitTile = hitTile.collider.gameObject;
-                print($"駒は {_hitTile.name} に移動した");
+                    print($"駒は {_target.name} をとった");
+
+                    if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+                    {
+                        GameObject _hitTile = hitTile.collider.gameObject;
+                        print($"駒は {_hitTile.name} に移動した");
+                    }
+                }
+                else
+                {
+                    Debug.Log("指定したマスには動けません");
+                }
             }
             return true;
         }
@@ -226,7 +245,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search._piece = this;
             _search._pieceInfo = gameObject;
-
+            _piece._whitePieces.Remove(gameObject);
+            foreach (var pieces in _piece._whitePieces)
+            {
+                pieces.GetComponent<Collider>().enabled = false;
+            }
         }
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
@@ -235,6 +258,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search._piece = this;
             _search._pieceInfo = gameObject;
+            _piece._blackPieces.Remove(gameObject);
+            foreach (var pieces in _piece._blackPieces)
+            {
+                pieces.GetComponent<Collider>().enabled = false;
+            }
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
@@ -257,6 +285,23 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 piece.GetComponent<Collider>().enabled = true;
             }
             _search._immovablePieces.Clear();
+
+            if (gameObject.tag == "WhitePiece")
+            {
+                foreach (var pieces in _piece._whitePieces)
+                {
+                    pieces.GetComponent<Collider>().enabled = true;
+                }
+                _piece._whitePieces.Add(gameObject);
+            }
+            else if (gameObject.tag == "BlackPiece")
+            {
+                foreach (var pieces in _piece._blackPieces)
+                {
+                    pieces.GetComponent<Collider>().enabled = true;
+                }
+                _piece._blackPieces.Add(gameObject);
+            }
         }
     }
 

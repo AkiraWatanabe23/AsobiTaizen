@@ -33,13 +33,12 @@ public class GameManager : MonoBehaviour
 
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] public Image _resultPanel;
-    [Header("白のスコアをシーンに表示する↓")]
+    [Header("白のスコア")]
     [SerializeField] public Text _scoreWhiteText;
-    [Header("黒のスコアをシーンに表示する↓")]
+    [Header("黒のスコア")]
     [SerializeField] public Text _scoreBlackText;
-
     [SerializeField] public static Phase _state = Phase.White;
-    
+
 
     // Start is called before the first frame update
     void Start()

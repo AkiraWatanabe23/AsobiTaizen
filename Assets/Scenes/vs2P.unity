@@ -4526,6 +4526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bishop white
       objectReference: {fileID: 0}
+    - target: {fileID: 1223592777669084, guid: 3698dddfe4c0a4a8dadcdf81c3255943, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4700783612619404, guid: 3698dddfe4c0a4a8dadcdf81c3255943, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -6586,6 +6590,10 @@ PrefabInstance:
     - target: {fileID: 1037745782791696, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
       propertyPath: m_Name
       value: rook white
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037745782791696, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4894417914186506, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
       propertyPath: m_RootOrder
@@ -11544,6 +11552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: queen white
       objectReference: {fileID: 0}
+    - target: {fileID: 1097155551969228, guid: 55516a6c49a924127a8b226bfbb3cf46, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4396500669875302, guid: 55516a6c49a924127a8b226bfbb3cf46, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -15874,6 +15886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db58cff3c0b1984081e719809fb4b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _whitePieces: []
+  _blackPieces: []
 --- !u!1001 &1925623805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17549,6 +17563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tile: []
   _movableTile: []
+  _immovablePieces: []
   _piece: {fileID: 0}
   _pieceInfo: {fileID: 0}
   _tileRank: 0

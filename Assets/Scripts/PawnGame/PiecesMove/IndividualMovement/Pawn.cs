@@ -67,7 +67,6 @@ public class Pawn : MonoBehaviour
                 foreach (Collider col in _search._tile)
                 {
                     col.enabled = false;
-                    Debug.Log(col + "のColliderをoffにします");
                 }
             }
             //2,2回目以降は1マス移動
@@ -107,7 +106,6 @@ public class Pawn : MonoBehaviour
                 foreach (Collider col in _search._tile)
                 {
                     col.enabled = false;
-                    Debug.Log(col + "のColliderをoffにします");
                 }
             }
             //常に斜め前の探索
@@ -176,7 +174,6 @@ public class Pawn : MonoBehaviour
                 foreach (Collider col in _search._tile)
                 {
                     col.enabled = false;
-                    Debug.Log(col + "のColliderをoffにします");
                 }
             }
             //2,2回目以降は1マス移動
@@ -216,7 +213,6 @@ public class Pawn : MonoBehaviour
                 foreach (Collider col in _search._tile)
                 {
                     col.enabled = false;
-                    Debug.Log(col + "のColliderをoffにします");
                 }
             }
             //常に斜め前の探索

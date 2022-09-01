@@ -7,22 +7,24 @@ using UnityEngine;
 /// </summary>
 public class PieceManager : MonoBehaviour
 {
-    /// <summary> 駒をまとめている親オブジェクトを取得 </summary>
-    GameObject _pieceParent;
-    /// <summary> 駒(子オブジェクト達)を一次元配列として取得 </summary>
-    Transform[] _pieceChildrens;
+    [SerializeField] public List<GameObject> _whitePieces = new List<GameObject>();
+    [SerializeField] public List<GameObject> _blackPieces = new List<GameObject>();
 
     // Start is called before the first frame update
     public void Start()
     {
-        ///<summary> 駒をまとめている親オブジェクトを検索する </summary>
-        _pieceParent = GameObject.Find("Piece");
-        ///<summary> 子オブジェクト達の配列を初期化 </summary>
-        _pieceChildrens = new Transform[_pieceParent.transform.childCount];
-        ///<summary> 子オブジェクトを取得 </summary>
-        for (int i = 0; i < _pieceParent.transform.childCount; i++)
+        for (int i = 0; i < 16; i++)
         {
-            _pieceChildrens[i] = _pieceParent.transform.GetChild(i);
+            if (transform.GetChild(i).gameObject.tag == "WhitePiece")
+            {
+                Debug.Log(transform.GetChild(i).gameObject);
+                _whitePieces.Add(transform.GetChild(i).gameObject);
+            }
+            else if (transform.GetChild(i).gameObject.tag == "BlackPiece")
+            {
+                Debug.Log(transform.GetChild(i).gameObject);
+                _blackPieces.Add(transform.GetChild(i).gameObject);
+            }
         }
     }
 }
