@@ -29,13 +29,11 @@ public class BoardInfo : MonoBehaviour
             if (_hit.collider.gameObject.tag == "WhitePiece")
             {
                 gameObject.tag = _hit.collider.gameObject.tag;
-                //gameObject.GetComponent<BoxCollider>().enabled = false;
             }
             //マスに黒駒がある場合
             else if (_hit.collider.gameObject.tag == "BlackPiece")
             {
                 gameObject.tag = _hit.collider.gameObject.tag;
-                //gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
         //マスに駒がない場合

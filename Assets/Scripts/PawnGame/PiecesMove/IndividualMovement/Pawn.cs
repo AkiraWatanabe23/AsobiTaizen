@@ -86,13 +86,9 @@ public class Pawn : MonoBehaviour
                     }
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
-                        if (_search._movableTile.Contains(_hit.collider))
+                        if (!_search._movableTile.Contains(_hit.collider))
                         {
 
-                        }
-                        else
-                        {
-                            _search._movableTile.Add(_hit.collider);
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -193,13 +189,9 @@ public class Pawn : MonoBehaviour
                     }
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
-                        if (_search._movableTile.Contains(_hit.collider))
+                        if (!_search._movableTile.Contains(_hit.collider))
                         {
 
-                        }
-                        else
-                        {
-                            _search._movableTile.Add(_hit.collider);
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");

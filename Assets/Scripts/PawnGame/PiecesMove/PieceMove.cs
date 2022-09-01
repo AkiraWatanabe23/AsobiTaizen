@@ -35,6 +35,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] MasuSearch _search;
     [SerializeField] PieceManager _piece;
     public int _moveCount = 0;
+    GameObject _currentPieceTile;
+    GameObject _movedPieceTile;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
@@ -162,6 +164,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     Debug.Log("指定したマスには動けません");
                 }
             }
+            _movedPieceTile = _hit.collider.gameObject;
             return true;
         }
         //黒番目線の駒の移動
@@ -228,6 +231,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     Debug.Log("指定したマスには動けません");
                 }
             }
+            _movedPieceTile = _hit.collider.gameObject;
             return true;
         }
         return false;
@@ -241,6 +245,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //通常状態→移動状態(白)
         if (_status == Status.Normal && _color == PieceColor.White && GameManager._state == Phase.White)
         {
+            _currentPieceTile = gameObject;
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             _search._piece = this;
@@ -254,6 +259,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
         {
+            _currentPieceTile = gameObject;
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             _search._piece = this;
@@ -267,7 +273,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
         {
-            _moveCount++;
+            if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
+            {
+                _moveCount++;
+            }
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
             for (int i = 0; i < _search._movableTile.Count; i++)
@@ -280,6 +289,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._movableTile.Clear();
             _search._piece = null;
             _search._pieceInfo = null;
+
             foreach (var piece in _search._immovablePieces)
             {
                 piece.GetComponent<Collider>().enabled = true;

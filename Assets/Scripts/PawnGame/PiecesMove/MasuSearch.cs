@@ -23,7 +23,7 @@ public class MasuSearch : MonoBehaviour
     {
         for (int i = 0; i < 64; i++)
         {
-            _tile.Add(this.gameObject.transform.GetChild(i).GetComponent<Collider>());
+            _tile.Add(gameObject.transform.GetChild(i).GetComponent<Collider>());
         }
     }
 

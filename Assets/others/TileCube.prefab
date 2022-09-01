@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6441393769814730956}
   - component: {fileID: 6441393769814730957}
   - component: {fileID: 6441393769814730962}
-  - component: {fileID: -5204302853130004070}
   - component: {fileID: -7980375049681167676}
   m_Layer: 7
   m_Name: TileCube
@@ -96,18 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-5204302853130004070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6441393769814730963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee79243a99d8774ca9ad6051b2c36ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-7980375049681167676
 MonoBehaviour:
   m_ObjectHideFlags: 0
