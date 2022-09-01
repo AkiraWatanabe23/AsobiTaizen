@@ -132,15 +132,27 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //白番目線のRayの処理(移動処理)
         else if (Physics.Raycast(_ray, out _hit, _rayDistance, _tileLayer))
         {
-            GameObject _target = _hit.collider.gameObject;
-            this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager.Player_Two;
+            foreach (var i in _search._movableTile)
+            {
+                GameObject _target = _hit.collider.gameObject;
 
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager._state = Phase.Black;
+                if (_target == i.gameObject)
+                {
 
-            print($"駒は {_target.name} に移動した");
+                    this.transform.position = _target.transform.position + _offset;
+                    GameManager._player = GameManager.Player_Two;
+
+                    PhaseChange(_target);
+                    SetCursorPos(Screen.width / 2, Screen.height / 2);
+                    GameManager._state = Phase.Black;
+
+                    print($"駒は {_target.name} に移動した");
+                }
+                else
+                {
+                    Debug.Log("指定したマスには動けません");
+                }
+            }
             return true;
         }
         //黒番目線の駒の移動
@@ -178,15 +190,25 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //黒番目線のRayの処理(移動処理)
         else if (Physics.Raycast(_ray2, out _hit, _rayDistance, _tileLayer))
         {
-            GameObject _target = _hit.collider.gameObject;
-            this.transform.position = _target.transform.position + _offset;
-            GameManager._player = GameManager.Player_One;
+            foreach (var i in _search._movableTile)
+            {
+                GameObject _target = _hit.collider.gameObject;
+                if (_target == i.gameObject)
+                {
+                    this.transform.position = _target.transform.position + _offset;
+                    GameManager._player = GameManager.Player_One;
 
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager._state = Phase.White;
+                    PhaseChange(_target);
+                    SetCursorPos(Screen.width / 2, Screen.height / 2);
+                    GameManager._state = Phase.White;
 
-            print($"駒は {_target.name} に移動した");
+                    print($"駒は {_target.name} に移動した");
+                }
+                else
+                {
+                    Debug.Log("指定したマスには動けません");
+                }
+            }
             return true;
         }
         return false;

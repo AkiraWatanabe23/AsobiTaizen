@@ -13465,6 +13465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: d8
       objectReference: {fileID: 0}
+    - target: {fileID: 6441393769814730963, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
 --- !u!1 &1798326052
@@ -16244,6 +16248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tile: []
   _movableTile: []
+  _immovablePieces: []
   _piece: {fileID: 0}
   _pieceInfo: {fileID: 0}
   _tileRank: 0

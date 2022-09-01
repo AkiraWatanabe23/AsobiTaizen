@@ -53,9 +53,19 @@ public class Bishop : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    if (_pieceInfo.tag == "WhitePiece")
                     {
-                        break;
+                        if (_hit.collider.gameObject.tag == "BlackPiece")
+                        {
+                            break;
+                        }
+                    }
+                    else if (_pieceInfo.tag == "BlackPiece")
+                    {
+                        if (_hit.collider.gameObject.tag == "WhitePiece")
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -94,9 +104,19 @@ public class Bishop : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    if (_pieceInfo.tag == "WhitePiece")
                     {
-                        break;
+                        if (_hit.collider.gameObject.tag == "BlackPiece")
+                        {
+                            break;
+                        }
+                    }
+                    else if (_pieceInfo.tag == "BlackPiece")
+                    {
+                        if (_hit.collider.gameObject.tag == "WhitePiece")
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -135,9 +155,19 @@ public class Bishop : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    if (_pieceInfo.tag == "WhitePiece")
                     {
-                        break;
+                        if (_hit.collider.gameObject.tag == "BlackPiece")
+                        {
+                            break;
+                        }
+                    }
+                    else if (_pieceInfo.tag == "BlackPiece")
+                    {
+                        if (_hit.collider.gameObject.tag == "WhitePiece")
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -176,9 +206,19 @@ public class Bishop : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_hit.collider.gameObject.tag == "BlackPiece")
+                    if (_pieceInfo.tag == "WhitePiece")
                     {
-                        break;
+                        if (_hit.collider.gameObject.tag == "BlackPiece")
+                        {
+                            break;
+                        }
+                    }
+                    else if (_pieceInfo.tag == "BlackPiece")
+                    {
+                        if (_hit.collider.gameObject.tag == "WhitePiece")
+                        {
+                            break;
+                        }
                     }
                 }
             }
