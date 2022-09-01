@@ -286,6 +286,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     _search._tile.Add(_search._movableTile[i]);
                 }
             }
+            foreach (var tiles in _search._tile)
+            {
+                tiles.GetComponent<Collider>().enabled = true;
+            }
             _search._movableTile.Clear();
             _search._piece = null;
             _search._pieceInfo = null;

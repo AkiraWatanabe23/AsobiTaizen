@@ -23,6 +23,7 @@ public class Pawn : MonoBehaviour
     public void PawnMovement()
     {
         _pieceInfo = _search._pieceInfo;
+        /***************白駒の移動処理***************/
         if (_pieceInfo.tag == "WhitePiece")
         {
             //1,1回目の動き...2マス移動可
@@ -88,7 +89,7 @@ public class Pawn : MonoBehaviour
                     {
                         if (!_search._movableTile.Contains(_hit.collider))
                         {
-
+                            _search._movableTile.Add(_hit.collider);
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -126,6 +127,7 @@ public class Pawn : MonoBehaviour
             }
             //3,アンパッサン...真隣のマス探索
         }
+        /***************黒駒の移動処理***************/
         else if (_pieceInfo.tag == "BlackPiece")
         {
             //1,1回目の動き...2マス移動可
@@ -191,7 +193,7 @@ public class Pawn : MonoBehaviour
                     {
                         if (!_search._movableTile.Contains(_hit.collider))
                         {
-
+                            _search._movableTile.Add(_hit.collider);
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
