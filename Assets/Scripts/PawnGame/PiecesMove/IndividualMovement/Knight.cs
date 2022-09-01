@@ -9,7 +9,7 @@ public class Knight : MonoBehaviour
 {
     MasuSearch _search;
     public GameObject _pieceInfo;
-    RaycastHit _hit;
+    public RaycastHit _hit;
     float _vecX;
     float _vecY;
     float _vecZ;
@@ -29,16 +29,17 @@ public class Knight : MonoBehaviour
         _vecZ = 5f;
         for (int i = 0; i < 2; i++)
         {
-            Debug.DrawRay(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
-            if (Physics.Raycast(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                if (_hit.collider.gameObject.tag == _search._pieceInfo.tag)
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                else if (_hit.collider.gameObject.tag != _search._pieceInfo.tag)
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX -= 5f;
                     if (_search._movableTile.Contains(_hit.collider))
@@ -68,16 +69,17 @@ public class Knight : MonoBehaviour
         _vecZ = 5f;
         for (int j = 0; j < 2; j++)
         {
-            Debug.DrawRay(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
-            if (Physics.Raycast(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                if (_hit.collider.gameObject.tag == _search._pieceInfo.tag)
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                else if (_hit.collider.gameObject.tag != _search._pieceInfo.tag)
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX -= 5f;
                     if (_search._movableTile.Contains(_hit.collider))
@@ -107,16 +109,17 @@ public class Knight : MonoBehaviour
         _vecZ = 2.55f;
         for (int k = 0; k < 2; k++)
         {
-            Debug.DrawRay(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
-            if (Physics.Raycast(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                if (_hit.collider.gameObject.tag == _search._pieceInfo.tag)
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                else if (_hit.collider.gameObject.tag != _search._pieceInfo.tag)
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ -= 5f;
                     if (_search._movableTile.Contains(_hit.collider))
@@ -146,16 +149,17 @@ public class Knight : MonoBehaviour
         _vecZ = 2.55f;
         for (int l = 0; l < 2; l++)
         {
-            Debug.DrawRay(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
-            if (Physics.Raycast(_search._pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                if (_hit.collider.gameObject.tag == _search._pieceInfo.tag)
+                if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
-                else if (_hit.collider.gameObject.tag != _search._pieceInfo.tag)
+                else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ -= 5f;
                     if (_search._movableTile.Contains(_hit.collider))

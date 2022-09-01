@@ -209,6 +209,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _renderer.material = _moveMaterial;
             _search.gameObject.GetComponent<MasuSearch>()._piece = this;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = gameObject;
+
         }
         //í èÌèÛë‘Å®à⁄ìÆèÛë‘(çï)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black)
@@ -234,6 +235,24 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search.gameObject.GetComponent<MasuSearch>()._movableTile.Clear();
             _search.gameObject.GetComponent<MasuSearch>()._piece = null;
             _search.gameObject.GetComponent<MasuSearch>()._pieceInfo = null;
+            switch (_type)
+            {
+                case PieceType.Pawn:
+                    _pawn._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
+                    break;
+                case PieceType.Knight:
+                    _knight._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
+                    break;
+                case PieceType.Bishop:
+                    _bishop._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
+                    break;
+                case PieceType.Rook:
+                    _rook._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
+                    break;
+                case PieceType.Queen:
+                    _queen._hit.collider.gameObject.GetComponent<Collider>().enabled = true;
+                    break;
+            }
         }
     }
 

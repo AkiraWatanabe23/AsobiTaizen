@@ -6,6 +6,7 @@ public class MasuSearch : MonoBehaviour
 {
     [SerializeField] public List<Collider> _tile = new List<Collider>();
     [SerializeField] public List<Collider> _movableTile = new List<Collider>();
+    [SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("‹î‚Ì‚¢‚éƒ}ƒX‚Ìƒ‰ƒ“ƒN(‰¡)")] public int _tileRank = 0;

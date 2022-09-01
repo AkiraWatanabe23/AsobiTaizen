@@ -9,7 +9,7 @@ public class Pawn : MonoBehaviour
 {
     MasuSearch _search;
     public GameObject _pieceInfo;
-    RaycastHit _hit;
+    public RaycastHit _hit;
     float _vecX;
     float _vecY;
     float _vecZ;
@@ -39,6 +39,7 @@ public class Pawn : MonoBehaviour
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                            _search._immovablePieces.Add(_hit.collider.gameObject);
                             Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                             break;
                         }
@@ -81,6 +82,7 @@ public class Pawn : MonoBehaviour
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                        _search._immovablePieces.Add(_hit.collider.gameObject);
                         Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     }
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
@@ -146,6 +148,7 @@ public class Pawn : MonoBehaviour
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                            _search._immovablePieces.Add(_hit.collider.gameObject);
                             Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                             break;
                         }
@@ -188,6 +191,7 @@ public class Pawn : MonoBehaviour
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                        _search._immovablePieces.Add(_hit.collider.gameObject);
                         Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     }
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
