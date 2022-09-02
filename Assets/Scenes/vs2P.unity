@@ -5788,6 +5788,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23812868346385688, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23812868346385688, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 95607dbe2e7c3481c90296c75fb23104, type: 2}
     - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_Height
       value: 3
@@ -7239,7 +7247,7 @@ PrefabInstance:
     - target: {fileID: 6441393769814730957, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e2a883ed9d5383a46a826bdc3336b3f0, type: 2}
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6441393769814730957, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -8127,11 +8135,11 @@ PrefabInstance:
     - target: {fileID: 6441393769814730957, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e2a883ed9d5383a46a826bdc3336b3f0, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6441393769814730957, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6441393769814730959, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -8397,7 +8405,7 @@ PrefabInstance:
     - target: {fileID: 6441393769814730957, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e2a883ed9d5383a46a826bdc3336b3f0, type: 2}
+      objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6441393769814730957, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -10718,7 +10726,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30DE\u30A6\u30B9\uFF1A\u5DE6\u30AF\u30EA\u30C3\u30AF\u3067\u99D2\u306E\u9078\u629E\u3001\u79FB\u52D5,\u53F3\u30AF\u30EA\u30C3\u30AF\u3067\u9078\u629E\u89E3\u9664"
+  m_Text: "\u30DE\u30A6\u30B9\uFF1A\u5DE6\u30AF\u30EA\u30C3\u30AF\u3067\u99D2\u306E\u9078\u629E\u3001\u79FB\u52D5"
 --- !u!222 &1231311138
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17642,8 +17650,8 @@ MonoBehaviour:
   _immovablePieces: []
   _piece: {fileID: 0}
   _pieceInfo: {fileID: 0}
-  _tileRank: 0
   _tileFile: 0
+  _tileRank: 0
   _pawn: {fileID: 907221174}
   _knight: {fileID: 907221173}
   _bishop: {fileID: 907221172}
