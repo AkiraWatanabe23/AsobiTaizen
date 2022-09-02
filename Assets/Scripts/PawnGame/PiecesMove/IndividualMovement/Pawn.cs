@@ -23,7 +23,7 @@ public class Pawn : MonoBehaviour
     public void PawnMovement()
     {
         _pieceInfo = _search._pieceInfo;
-        /***************白駒の移動処理***************/
+        /********************白駒の移動処理********************/
         if (_pieceInfo.tag == "WhitePiece")
         {
             //1,1回目の動き...2マス移動可
@@ -134,16 +134,22 @@ public class Pawn : MonoBehaviour
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 10))
                 {
                     Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), Color.yellow, 10f);
-                    Debug.Log("Hit Pawn");
+                    if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
+                    {
+
+                    }
                 }
                 else if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 10))
                 {
                     Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), Color.yellow, 10f);
-                    Debug.Log("Hit Pawn");
+                    if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
+                    {
+
+                    }
                 }
             }
         }
-        /***************黒駒の移動処理***************/
+        /********************黒駒の移動処理********************/
         else if (_pieceInfo.tag == "BlackPiece")
         {
             //1,1回目の動き...2マス移動可
@@ -254,10 +260,18 @@ public class Pawn : MonoBehaviour
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 10))
                 {
                     Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), Color.yellow, 10f);
+                    if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
+                    {
+
+                    }
                 }
                 else if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 10))
                 {
                     Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), Color.yellow, 10f);
+                    if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
+                    {
+
+                    }
                 }
             }
         }
