@@ -9,8 +9,8 @@ public class MasuSearch : MonoBehaviour
     [SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
-    [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
     [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
+    [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
     RaycastHit _hit;
     [SerializeField] public Pawn _pawn;
     [SerializeField] public Knight _knight;

@@ -76,9 +76,9 @@ public class Pawn : MonoBehaviour
                 _vecX = 0f;
                 _vecY = 2.55f;
                 _vecZ = 2.55f;
-                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
+                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -109,23 +109,39 @@ public class Pawn : MonoBehaviour
             _vecX = 2.55f;
             _vecY = 2.55f;
             _vecZ = 2.55f;
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
             //3,アンパッサン...真隣のマス探索
+            if (_search._tileRank >= 5)
+            {
+                _vecX = 2.55f;
+                _vecY = 0f;
+                _vecZ = 0f;
+                if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 10))
+                {
+                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), Color.yellow, 10f);
+                    Debug.Log("Hit Pawn");
+                }
+                else if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 10))
+                {
+                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), Color.yellow, 10f);
+                    Debug.Log("Hit Pawn");
+                }
+            }
         }
         /***************黒駒の移動処理***************/
         else if (_pieceInfo.tag == "BlackPiece")
@@ -138,9 +154,9 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 for (int i = 0; i < 2; i++)
                 {
-                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                     {
+                        Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -180,9 +196,9 @@ public class Pawn : MonoBehaviour
                 _vecX = 0f;
                 _vecY = 2.55f;
                 _vecZ = 2.55f;
-                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                 {
+                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -213,23 +229,37 @@ public class Pawn : MonoBehaviour
             _vecX = 2.55f;
             _vecY = 2.55f;
             _vecZ = 2.55f;
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
             //3,アンパッサン...真隣のマス探索
+            if (_search._tileRank <= 4)
+            {
+                _vecX = 2.55f;
+                _vecY = 0f;
+                _vecZ = 0f;
+                if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 10))
+                {
+                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), Color.yellow, 10f);
+                }
+                else if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 10))
+                {
+                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), Color.yellow, 10f);
+                }
+            }
         }
     }
 }
