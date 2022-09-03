@@ -37,8 +37,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public int _moveCount = 0;
     GameObject _currentPieceTile;
     public GameObject _movedPieceTile;
-    public GameObject _promWhitePawn;
-    public GameObject _promBlackPawn;
+    [SerializeField] Promotion _promQ;
+    [SerializeField] Promotion _promR;
+    [SerializeField] Promotion _promB;
+    [SerializeField] Promotion _promK;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
@@ -264,12 +266,15 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
             {
-                _promWhitePawn = gameObject;
+                _promQ._promWhite = _promR._promWhite = _promB._promWhite = _promK._promWhite = gameObject;
+                //_promR._promWhite = gameObject;
+                //_promB._promWhite = gameObject;
+                //_promK._promWhite = gameObject;
                 _piece.ActivePanel();
             }
             else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
             {
-                _promBlackPawn = gameObject;
+
                 _piece.ActivePanel();
             }
 

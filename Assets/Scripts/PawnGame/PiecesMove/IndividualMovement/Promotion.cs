@@ -18,6 +18,8 @@ public class Promotion : MonoBehaviour
     [SerializeField] GameObject _promRookBlack;
     [SerializeField] GameObject _promBishopBlack;
     [SerializeField] GameObject _promKnightBlack;
+    public GameObject _promWhite;
+    public GameObject _promBlack;
 
     // Start is called before the first frame update
     void Start()
@@ -27,49 +29,57 @@ public class Promotion : MonoBehaviour
 
     public void OnClick()
     {
-        if (_search._pieceInfo.tag == "WhitePiece")
+        if (_promWhite.tag == "WhitePiece")
         {
             if (gameObject.name == "Queen")
             {
-                Instantiate(_promQueenWhite, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promWhite.gameObject.SetActive(false);
+                Instantiate(_promQueenWhite, _promWhite.transform.position, Quaternion.identity);
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
             {
-                Instantiate(_promRookWhite, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promWhite.gameObject.SetActive(false);
+                Instantiate(_promRookWhite, _promWhite.transform.position, Quaternion.identity);
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
             {
-                Instantiate(_promBishopWhite, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promWhite.gameObject.SetActive(false);
+                Instantiate(_promBishopWhite, _promWhite.transform.position, Quaternion.identity);
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
             {
-                Instantiate(_promKnightWhite, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promWhite.gameObject.SetActive(false);
+                Instantiate(_promKnightWhite, _promWhite.transform.position, Quaternion.identity);
                 Debug.Log("ナイトにプロモーションします");
             }
         }
-        else if (_search._pieceInfo.tag == "BlackPiece")
+        else if (_promBlack.tag == "BlackPiece")
         {
             if (gameObject.name == "Queen")
             {
-                Instantiate(_promQueenBlack, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promBlack.gameObject.SetActive(false);
+                Instantiate(_promQueenBlack, _promBlack.transform.position, Quaternion.identity);
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
             {
-                Instantiate(_promRookBlack, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promBlack.gameObject.SetActive(false);
+                Instantiate(_promRookBlack, _promBlack.transform.position, Quaternion.identity);
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
             {
-                Instantiate(_promBishopBlack, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promBlack.gameObject.SetActive(false);
+                Instantiate(_promBishopBlack, _promBlack.transform.position, Quaternion.identity);
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
             {
-                Instantiate(_promKnightBlack, _search._pieceInfo.transform.position, Quaternion.identity);
+                _promBlack.gameObject.SetActive(false);
+                Instantiate(_promKnightBlack, _promBlack.transform.position, Quaternion.identity);
                 Debug.Log("ナイトにプロモーションします");
             }
         }
