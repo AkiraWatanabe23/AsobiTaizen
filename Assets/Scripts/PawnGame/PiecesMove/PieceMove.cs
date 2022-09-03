@@ -36,8 +36,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] PieceManager _piece;
     public int _moveCount = 0;
     GameObject _currentPieceTile;
-    GameObject _movedPieceTile;
-    Pawn _pawn;
+    public GameObject _movedPieceTile;
+    public GameObject _promWhitePawn;
+    public GameObject _promBlackPawn;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
@@ -105,41 +106,31 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //白番目線のRayの処理(駒を奪う場合)
         if (Physics.Raycast(_ray, out _hit, _rayDistance, _blackLayer))
         {
-            foreach (var i in _search._movableTile)
+            GameObject _target = _hit.collider.gameObject;
+            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
+
+            if (_target.tag == "BlackPiece")
             {
-                GameObject _target = _hit.collider.gameObject;
-                if (_target == i.gameObject)
-                {
-                    int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
+                //白のスコアを加算
+                GameManager._scoreWhite += _targetScore;
+                //盤上にある敵駒のカウントを減らして、駒を破壊する
+                GameManager._bPieceCount--;
+                Destroy(_target);
+            }
 
-                    if (_target.tag == "BlackPiece")
-                    {
-                        //白のスコアを加算
-                        GameManager._scoreWhite += _targetScore;
-                        //盤上にある敵駒のカウントを減らして、駒を破壊する
-                        GameManager._bPieceCount--;
-                        Destroy(_target);
-                    }
+            this.transform.position = _target.transform.position + _offset;
+            GameManager._player = GameManager.Player_Two;
 
-                    this.transform.position = _target.transform.position + _offset;
-                    GameManager._player = GameManager.Player_Two;
+            PhaseChange(_target);
+            SetCursorPos(Screen.width / 2, Screen.height / 2);
+            GameManager._state = Phase.Black;
 
-                    PhaseChange(_target);
-                    SetCursorPos(Screen.width / 2, Screen.height / 2);
-                    GameManager._state = Phase.Black;
+            print($"駒は {_target.name} をとった");
 
-                    print($"駒は {_target.name} をとった");
-
-                    if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-                    {
-                        GameObject _hitTile = hitTile.collider.gameObject;
-                        print($"駒は {_hitTile.name} に移動した");
-                    }
-                }
-                else
-                {
-                    Debug.Log("指定したマスには動けません");
-                }
+            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+            {
+                GameObject _hitTile = hitTile.collider.gameObject;
+                print($"駒は {_hitTile.name} に移動した");
             }
             return true;
         }
@@ -172,42 +163,32 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //黒番目線のRayの処理(駒を奪う場合)
         if (Physics.Raycast(_ray2, out _hit, _rayDistance, _whiteLayer))
         {
-            foreach (var i in _search._movableTile)
-            {
                 GameObject _target = _hit.collider.gameObject;
-                if (_target == i.gameObject)
+                int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
+
+                if (_target.tag == "WhitePiece")
                 {
-                    int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
-
-                    if (_target.tag == "WhitePiece")
-                    {
-                        //黒のスコアを加算
-                        GameManager._scoreBlack += _targetScore;
-                        //盤上にある駒のカウントを減らして、駒を破壊する
-                        GameManager._wPieceCount--;
-                        Destroy(_target);
-                    }
-
-                    this.transform.position = _target.transform.position + _offset;
-                    GameManager._player = GameManager.Player_One;
-
-                    PhaseChange(_target);
-                    SetCursorPos(Screen.width / 2, Screen.height / 2);
-                    GameManager._state = Phase.White;
-
-                    print($"駒は {_target.name} をとった");
-
-                    if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-                    {
-                        GameObject _hitTile = hitTile.collider.gameObject;
-                        print($"駒は {_hitTile.name} に移動した");
-                    }
+                    //黒のスコアを加算
+                    GameManager._scoreBlack += _targetScore;
+                    //盤上にある駒のカウントを減らして、駒を破壊する
+                    GameManager._wPieceCount--;
+                    Destroy(_target);
                 }
-                else
+
+                this.transform.position = _target.transform.position + _offset;
+                GameManager._player = GameManager.Player_One;
+
+                PhaseChange(_target);
+                SetCursorPos(Screen.width / 2, Screen.height / 2);
+                GameManager._state = Phase.White;
+
+                print($"駒は {_target.name} をとった");
+
+                if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
                 {
-                    Debug.Log("指定したマスには動けません");
+                    GameObject _hitTile = hitTile.collider.gameObject;
+                    print($"駒は {_hitTile.name} に移動した");
                 }
-            }
             return true;
         }
         //黒番目線のRayの処理(移動処理)
@@ -280,6 +261,18 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
+
+            if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
+            {
+                _promWhitePawn = gameObject;
+                _piece.ActivePanel();
+            }
+            else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
+            {
+                _promBlackPawn = gameObject;
+                _piece.ActivePanel();
+            }
+
             for (int i = 0; i < _search._movableTile.Count; i++)
             {
                 if (_search._movableTile[i].tag == "Tile")

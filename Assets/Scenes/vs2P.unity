@@ -730,7 +730,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52694211}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28e199835aeb45546b2b5d46626e3a6a, type: 3}
   m_Name: 
@@ -3602,6 +3602,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1184636118}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &482071400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3652,6 +3664,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4fb81c73f5c324c89f6f142413d9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _promQueenWhite: {fileID: 1097155551969228, guid: 55516a6c49a924127a8b226bfbb3cf46, type: 3}
+  _promRookWhite: {fileID: 1037745782791696, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
+  _promBishopWhite: {fileID: 1223592777669084, guid: 3698dddfe4c0a4a8dadcdf81c3255943, type: 3}
+  _promKnightWhite: {fileID: 1943414466066380, guid: 45e10aea18beb495d9489aed31b95270, type: 3}
+  _promQueenBlack: {fileID: 1996616484037168, guid: fd58da484cc87433689394934ae1baa1, type: 3}
+  _promRookBlack: {fileID: 1764167493807252, guid: 27b957161063143d6a75fad94db1125f, type: 3}
+  _promBishopBlack: {fileID: 1916680518618882, guid: eec17d5f9090c4c949f55d97388bfec8, type: 3}
+  _promKnightBlack: {fileID: 1830534316869998, guid: 396e9ff596f3340a3ba66f31bb9c83f8, type: 3}
 --- !u!1 &484631072
 GameObject:
   m_ObjectHideFlags: 0
@@ -10824,6 +10844,7 @@ RectTransform:
   - {fileID: 1491832068}
   - {fileID: 1890035997}
   - {fileID: 1199877089}
+  - {fileID: 1217426316}
   m_Father: {fileID: 1716103242}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10845,7 +10866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 0.78431374, b: 0.3529412, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10971,6 +10992,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1184636118}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1199877091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11021,6 +11054,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4fb81c73f5c324c89f6f142413d9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _promQueenWhite: {fileID: 1097155551969228, guid: 55516a6c49a924127a8b226bfbb3cf46, type: 3}
+  _promRookWhite: {fileID: 1037745782791696, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
+  _promBishopWhite: {fileID: 1223592777669084, guid: 3698dddfe4c0a4a8dadcdf81c3255943, type: 3}
+  _promKnightWhite: {fileID: 1943414466066380, guid: 45e10aea18beb495d9489aed31b95270, type: 3}
+  _promQueenBlack: {fileID: 1996616484037168, guid: fd58da484cc87433689394934ae1baa1, type: 3}
+  _promRookBlack: {fileID: 1764167493807252, guid: 27b957161063143d6a75fad94db1125f, type: 3}
+  _promBishopBlack: {fileID: 1916680518618882, guid: eec17d5f9090c4c949f55d97388bfec8, type: 3}
+  _promKnightBlack: {fileID: 1830534316869998, guid: 396e9ff596f3340a3ba66f31bb9c83f8, type: 3}
 --- !u!1 &1209255522
 GameObject:
   m_ObjectHideFlags: 0
@@ -11101,6 +11142,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6441393769814730959, guid: 6f227bb894861164881c1a658d3d8512, type: 3}
   m_PrefabInstance: {fileID: 991954328}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1217426315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217426316}
+  - component: {fileID: 1217426318}
+  - component: {fileID: 1217426317}
+  m_Layer: 5
+  m_Name: Promotion!!
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1217426316
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217426315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1184636119}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1217426317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217426315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 25
+    m_FontStyle: 3
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Promotion!!
+--- !u!222 &1217426318
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217426315}
+  m_CullTransparentMesh: 1
 --- !u!4 &1220394396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4338145759346166, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
@@ -12984,6 +13104,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1184636118}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1491832070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13034,6 +13166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4fb81c73f5c324c89f6f142413d9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _promQueenWhite: {fileID: 1097155551969228, guid: 55516a6c49a924127a8b226bfbb3cf46, type: 3}
+  _promRookWhite: {fileID: 1037745782791696, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
+  _promBishopWhite: {fileID: 1223592777669084, guid: 3698dddfe4c0a4a8dadcdf81c3255943, type: 3}
+  _promKnightWhite: {fileID: 1943414466066380, guid: 45e10aea18beb495d9489aed31b95270, type: 3}
+  _promQueenBlack: {fileID: 1996616484037168, guid: fd58da484cc87433689394934ae1baa1, type: 3}
+  _promRookBlack: {fileID: 1764167493807252, guid: 27b957161063143d6a75fad94db1125f, type: 3}
+  _promBishopBlack: {fileID: 1916680518618882, guid: eec17d5f9090c4c949f55d97388bfec8, type: 3}
+  _promKnightBlack: {fileID: 1830534316869998, guid: 396e9ff596f3340a3ba66f31bb9c83f8, type: 3}
 --- !u!4 &1493251456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4507527947277470, guid: 484e214fc05fe436393fd7787991ebfe, type: 3}
@@ -16461,6 +16601,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1184636118}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1890035999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16511,6 +16663,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4fb81c73f5c324c89f6f142413d9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _promQueenWhite: {fileID: 1097155551969228, guid: 55516a6c49a924127a8b226bfbb3cf46, type: 3}
+  _promRookWhite: {fileID: 1037745782791696, guid: ae91a18cadda2480e9478488d2142fde, type: 3}
+  _promBishopWhite: {fileID: 1223592777669084, guid: 3698dddfe4c0a4a8dadcdf81c3255943, type: 3}
+  _promKnightWhite: {fileID: 1943414466066380, guid: 45e10aea18beb495d9489aed31b95270, type: 3}
+  _promQueenBlack: {fileID: 1996616484037168, guid: fd58da484cc87433689394934ae1baa1, type: 3}
+  _promRookBlack: {fileID: 1764167493807252, guid: 27b957161063143d6a75fad94db1125f, type: 3}
+  _promBishopBlack: {fileID: 1916680518618882, guid: eec17d5f9090c4c949f55d97388bfec8, type: 3}
+  _promKnightBlack: {fileID: 1830534316869998, guid: 396e9ff596f3340a3ba66f31bb9c83f8, type: 3}
 --- !u!1001 &1896895873
 PrefabInstance:
   m_ObjectHideFlags: 0

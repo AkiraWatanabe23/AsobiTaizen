@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Pawn : MonoBehaviour
 {
     MasuSearch _search;
-    Promotion _move;
+    //Promotion _move;
     public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;
@@ -20,7 +20,7 @@ public class Pawn : MonoBehaviour
     void Start()
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
-        _move = GameObject.Find("Movements").GetComponent<Promotion>();
+        //_move = GameObject.Find("Movements").GetComponent<Promotion>();
     }
 
     public void PawnMovement()
