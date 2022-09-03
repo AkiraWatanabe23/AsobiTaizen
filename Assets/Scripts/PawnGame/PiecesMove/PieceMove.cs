@@ -37,6 +37,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public int _moveCount = 0;
     GameObject _currentPieceTile;
     GameObject _movedPieceTile;
+    Pawn _pawn;
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか

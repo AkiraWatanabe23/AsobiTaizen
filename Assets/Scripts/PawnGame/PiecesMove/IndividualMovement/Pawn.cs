@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// ポーンの移動処理
@@ -8,6 +9,7 @@ using UnityEngine;
 public class Pawn : MonoBehaviour
 {
     MasuSearch _search;
+    Promotion _move;
     public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;
@@ -18,6 +20,7 @@ public class Pawn : MonoBehaviour
     void Start()
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _move = GameObject.Find("Movements").GetComponent<Promotion>();
     }
 
     public void PawnMovement()
@@ -106,6 +109,7 @@ public class Pawn : MonoBehaviour
                     col.enabled = false;
                 }
             }
+
             //常に斜め前の探索
             _vecX = 2.55f;
             _vecY = 2.55f;
@@ -126,8 +130,7 @@ public class Pawn : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
-            En_Passant_White();
-            Promotion_White();
+            //En_Passant_White();
         }
         /********************黒駒の移動処理********************/
         else if (_pieceInfo.tag == "BlackPiece")
@@ -231,8 +234,7 @@ public class Pawn : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
-            En_Passant_Black();
-            Promotion_Black();
+            //En_Passant_Black();
         }
     }
 
@@ -335,27 +337,4 @@ public class Pawn : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// プロモーション処理(白)
-    /// </summary>
-    void Promotion_White()
-    {
-        if (_search._tileRank == 8)
-        {
-
-        }
-    }
-
-    /// <summary>
-    /// プロモーション処理(黒)
-    /// </summary>
-    void Promotion_Black()
-    {
-        if (_search._tileRank == 1)
-        {
-
-        }
-    }
-
 }
