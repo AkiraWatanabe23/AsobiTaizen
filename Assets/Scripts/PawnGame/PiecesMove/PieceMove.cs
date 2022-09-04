@@ -16,10 +16,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [Tooltip("通常状態のマテリアル"), SerializeField] Material _normalMaterial;
     [Tooltip("移動状態のマテリアル"), SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
-    [Tooltip("どっちのターンか(白)")] Image _whiteTurnPanel;
-    [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
-    [Tooltip("どっちのターンか(黒)")] Image _blackTurnPanel;
     [Tooltip("白駒か黒駒かのenum")] public PieceColor _color = PieceColor.White;
     [Tooltip("駒の状態のenum")] public Status _status = Status.Normal;
     [Tooltip("駒の種類のenum")] public PieceType _type;
@@ -65,14 +61,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         _renderer = GetComponent<Renderer>();
-        //↓ターン表示のText
-        _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
-        _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
-        _whiteTurn.color = Color.yellow;
-        //↓ターン表示のPanel
-        _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
-        _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
-        _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
         /*↑enabled...オブジェクトの指定した[コンポーネント(今回はImage)]のアクティブ、非アクティブを変更する
          *  SetActive(false)でオブジェクトをとってこれないのを回避する*/
@@ -267,14 +255,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
             {
                 _promQ._promWhite = _promR._promWhite = _promB._promWhite = _promK._promWhite = gameObject;
-                //_promR._promWhite = gameObject;
-                //_promB._promWhite = gameObject;
-                //_promK._promWhite = gameObject;
                 _piece.ActivePanel();
             }
             else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
             {
-
+                _promQ._promBlack = _promR._promBlack = _promB._promBlack = _promK._promBlack = gameObject;
                 _piece.ActivePanel();
             }
 
@@ -327,10 +312,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         switch (_color)
         {
             case PieceColor.White:
-                _whiteTurn.color = Color.black;
-                _blackTurn.color = Color.yellow;
-                _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = false;
-                _blackTurnPanel.gameObject.GetComponent<Image>().enabled = true;
+                _piece.SwitchTurnWhite();
                 if (_target.tag == "WhitePiece")
                 {
                     _status = Status.Normal;
@@ -338,10 +320,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 break;
 
             case PieceColor.Black:
-                _whiteTurn.color = Color.yellow;
-                _blackTurn.color = Color.black;
-                _whiteTurnPanel.gameObject.GetComponent<Image>().enabled = true;
-                _blackTurnPanel.gameObject.GetComponent<Image>().enabled = false;
+                _piece.SwitchTurnBlack();
                 if (_target.tag == "BlackPiece")
                 {
                     _status = Status.Normal;

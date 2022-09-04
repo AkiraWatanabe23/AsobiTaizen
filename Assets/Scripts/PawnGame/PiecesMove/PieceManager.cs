@@ -9,6 +9,10 @@ using UnityEngine.UI;
 public class PieceManager : MonoBehaviour
 {
     [Tooltip("プロモーション時に表示する")] Image _promImage;
+    [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
+    [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
+    [Tooltip("どっちのターンか(白)")] Image _whiteTurnPanel;
+    [Tooltip("どっちのターンか(黒)")] Image _blackTurnPanel;
     [SerializeField] public List<GameObject> _whitePieces = new List<GameObject>();
     [SerializeField] public List<GameObject> _blackPieces = new List<GameObject>();
 
@@ -28,10 +32,34 @@ public class PieceManager : MonoBehaviour
         }
         _promImage = GameObject.Find("PromotionPanel").GetComponent<Image>();
         _promImage.gameObject.SetActive(false);
+        //↓ターン表示のText
+        _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
+        _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
+        _whiteTurn.color = Color.yellow;
+        //↓ターン表示のPanel
+        _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
+        _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
+        _blackTurnPanel.gameObject.SetActive(false);
     }
 
     public void ActivePanel()
     {
         _promImage.gameObject.SetActive(true);
+    }
+
+    public void SwitchTurnWhite()
+    {
+        _whiteTurn.color = Color.black;
+        _blackTurn.color = Color.yellow;
+        _whiteTurnPanel.gameObject.SetActive(false);
+        _blackTurnPanel.gameObject.SetActive(true);
+    }
+
+    public void SwitchTurnBlack()
+    {
+        _whiteTurn.color = Color.yellow;
+        _blackTurn.color = Color.black;
+        _whiteTurnPanel.gameObject.SetActive(true);
+        _blackTurnPanel.gameObject.SetActive(false);
     }
 }
