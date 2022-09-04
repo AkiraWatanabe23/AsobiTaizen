@@ -29,7 +29,7 @@ public class Promotion : MonoBehaviour
 
     public void OnClick()
     {
-        if (_promWhite != null)
+        if (_promWhite != null && _promBlack == null)
         {
             if (_promWhite.tag == "WhitePiece")
             {
@@ -57,8 +57,13 @@ public class Promotion : MonoBehaviour
                     Instantiate(_promKnightWhite, _promWhite.transform.position, Quaternion.identity);
                     Debug.Log("ナイトにプロモーションします");
                 }
+                _promWhite = null;
             }
-            else if (_promBlack.tag == "BlackPiece")
+        }
+
+        if (_promBlack != null && _promWhite == null)
+        {
+            if (_promBlack.tag == "BlackPiece")
             {
                 if (gameObject.name == "Queen")
                 {
@@ -85,10 +90,7 @@ public class Promotion : MonoBehaviour
                     Debug.Log("ナイトにプロモーションします");
                 }
             }
-        }
-        else if (_promWhite== null)
-        {
-            Debug.Log("_promWhite== null");
+            _promBlack = null;
         }
     }
 }
