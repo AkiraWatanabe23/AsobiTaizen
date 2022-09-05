@@ -39,25 +39,33 @@ public class Promotion : MonoBehaviour
             if (gameObject.name == "Queen")
             {
                 _promWhite.SetActive(false);
-                Instantiate(_promQueenWhite, _promWhite.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promQueenWhite, _promWhite.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
             {
                 _promWhite.SetActive(false);
-                Instantiate(_promRookWhite, _promWhite.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promRookWhite, _promWhite.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
             {
                 _promWhite.SetActive(false);
-                Instantiate(_promBishopWhite, _promWhite.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promBishopWhite, _promWhite.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
             {
                 _promWhite.SetActive(false);
-                Instantiate(_promKnightWhite, _promWhite.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promKnightWhite, _promWhite.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("ナイトにプロモーションします");
             }
             _aftProm.PromReturn();
@@ -68,25 +76,33 @@ public class Promotion : MonoBehaviour
             if (gameObject.name == "Queen")
             {
                 _promBlack.SetActive(false);
-                Instantiate(_promQueenBlack, _promBlack.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promQueenBlack, _promBlack.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
             {
                 _promBlack.SetActive(false);
-                Instantiate(_promRookBlack, _promBlack.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promRookBlack, _promBlack.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
             {
                 _promBlack.SetActive(false);
-                Instantiate(_promBishopBlack, _promBlack.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promBishopBlack, _promBlack.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
             {
                 _promBlack.SetActive(false);
-                Instantiate(_promKnightBlack, _promBlack.transform.position, Quaternion.identity);
+                GameObject _promPiece = Instantiate(_promKnightBlack, _promBlack.transform.position, Quaternion.identity);
+                PieceMove _piece = _promPiece.GetComponent<PieceMove>();
+                _piece.TestAsign();
                 Debug.Log("ナイトにプロモーションします");
             }
             _aftProm.PromReturn();

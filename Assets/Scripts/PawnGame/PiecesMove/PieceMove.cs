@@ -328,6 +328,16 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void TestAsign() 
+    {
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+        _promQ = GameObject.Find("Queen").GetComponent<Promotion>();
+        _promR = GameObject.Find("Rook").GetComponent<Promotion>();
+        _promB = GameObject.Find("Bishop").GetComponent<Promotion>();
+        _promK = GameObject.Find("Knight").GetComponent<Promotion>();
+    }
+
     /// <summary>
     /// ’Êíó‘ÔAˆÚ“®ó‘Ô
     /// </summary>
