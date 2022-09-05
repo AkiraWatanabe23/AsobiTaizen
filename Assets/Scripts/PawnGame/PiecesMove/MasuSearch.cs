@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// マスの情報を取得、駒の個別の移動処理に移行
+/// </summary>
 public class MasuSearch : MonoBehaviour
 {
     [SerializeField] public List<Collider> _tile = new List<Collider>();

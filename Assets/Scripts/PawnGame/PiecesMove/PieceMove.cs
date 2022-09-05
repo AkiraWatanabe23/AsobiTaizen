@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 //↓マウスカーソルポジションの強制移動させる処理をするのに宣言する必要があるらしい
 using System.Runtime.InteropServices;
