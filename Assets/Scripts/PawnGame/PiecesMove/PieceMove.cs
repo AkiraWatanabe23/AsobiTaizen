@@ -44,7 +44,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [DllImport("user32.dll")]
     public static extern bool SetCursorPos(int x, int y);
 
-    /// <summary>
+    /// <summary> 
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
     /// </summary>
     /// <param name="eventData"></param>
@@ -208,7 +208,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         return false;
     }
 
-    /// <summary>
+    /// <summary> 
     /// マウスクリックをした(駒を選んだ、動かした)時に実行される処理
     /// </summary>
     public void ChangeState() //駒を右クリックをすると移動状態→通常状態にできる
@@ -251,17 +251,22 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
 
-            if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
+            //プロモーションへの移行
+            if (gameObject.name.Contains("pawn"))
             {
-                _promQ._promWhite = _promR._promWhite = _promB._promWhite = _promK._promWhite = gameObject;
-                _piece.ActivePanel();
-            }
-            else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
-            {
-                _promQ._promBlack = _promR._promBlack = _promB._promBlack = _promK._promBlack = gameObject;
-                _piece.ActivePanel();
+                if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
+                {
+                    _promQ._promWhite = _promR._promWhite = _promB._promWhite = _promK._promWhite = gameObject;
+                    _piece.ActivePanel();
+                }
+                else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
+                {
+                    _promQ._promBlack = _promR._promBlack = _promB._promBlack = _promK._promBlack = gameObject;
+                    _piece.ActivePanel();
+                }
             }
 
+            //マスを元の状態に戻す
             for (int i = 0; i < _search._movableTile.Count; i++)
             {
                 if (_search._movableTile[i].tag == "Tile")
@@ -328,8 +333,12 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void TestAsign() 
+    /// <summary> 
+    /// プロモーションでInstantiateされた駒にスクリプトをアサインする...×アサイン,〇変数に代入 の考え方の方が理解しやすい
+    /// </summary>
+    public void PromAssign() 
     {
+        //変数に直接代入する
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
         _promQ = GameObject.Find("Queen").GetComponent<Promotion>();
@@ -338,27 +347,21 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         _promK = GameObject.Find("Knight").GetComponent<Promotion>();
     }
 
-    /// <summary>
-    /// 通常状態、移動状態
-    /// </summary>
+    /// <summary> 通常状態、移動状態 </summary>
     public enum Status
     {
         Normal,
         Move,
     }
 
-    /// <summary>
-    /// 白駒or黒駒
-    /// </summary>
+    /// <summary> 白駒or黒駒 </summary>
     public enum PieceColor
     {
         White = 0,
         Black = 1,
     }
 
-    /// <summary>
-    /// 駒の種類
-    /// </summary>
+    /// <summary> 駒の種類 </summary>
     public enum PieceType
     {
         Pawn = 1,
