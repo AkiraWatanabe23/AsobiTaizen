@@ -334,7 +334,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     }
 
     /// <summary> 
-    /// プロモーションでInstantiateされた駒にスクリプトをアサインする...×アサイン,〇変数に代入 の考え方の方が理解しやすい
+    /// プロモーションでInstantiateされた駒にスクリプトをアサインする...×アサイン,〇変数に代入 の考え方の方が(個人的には)理解しやすい
     /// </summary>
     public void PromAssign() 
     {

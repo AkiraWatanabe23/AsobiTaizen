@@ -20,11 +20,11 @@ public class Promotion : MonoBehaviour
     [SerializeField] GameObject _promKnightBlack;
     public GameObject _promWhite;
     public GameObject _promBlack;
-    AfterPromotion _aftProm;
+    PieceManager _piece;
 
     private void Start()
     {
-        _aftProm = GameObject.Find("PromotionPanel").GetComponent<AfterPromotion>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
 
@@ -68,7 +68,7 @@ public class Promotion : MonoBehaviour
                 _piece.PromAssign();
                 Debug.Log("ナイトにプロモーションします");
             }
-            _aftProm.PromReturn();
+            _piece.AfterProm();
         }
         //黒駒のプロモーション
         else if (_promBlack != null && _promWhite == null)
@@ -105,7 +105,7 @@ public class Promotion : MonoBehaviour
                 _piece.PromAssign();
                 Debug.Log("ナイトにプロモーションします");
             }
-            _aftProm.PromReturn();
+            _piece.AfterProm();
         }
     }
 }

@@ -38,10 +38,13 @@ public class MasuSearch : MonoBehaviour
             GetTileNum();
             var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
             Search((int)_pieceNum);
-            //_piece = null;
         }
     }
 
+    /// <summary>
+    /// ‹î‚ÌŒÂ•Ê‚ÌˆÚ“®ˆ—
+    /// </summary>
+    /// <param name="pieceType"></param>
     public void Search(int pieceType)
     {
         switch (pieceType)
