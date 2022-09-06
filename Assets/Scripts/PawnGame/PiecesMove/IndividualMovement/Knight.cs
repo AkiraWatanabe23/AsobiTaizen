@@ -8,7 +8,7 @@ using UnityEngine;
 public class Knight : MonoBehaviour
 {
     MasuSearch _search;
-    public GameObject _pieceInfo;
+    [Tooltip("移動させるナイト")] public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;
     float _vecY;
@@ -23,13 +23,13 @@ public class Knight : MonoBehaviour
     public void KnightMovement ()
     {
         _pieceInfo = _search._pieceInfo;
+
         //桂馬 前方向
         _vecX = 2.55f;
         _vecY = 2.55f;
         _vecZ = 5f;
         for (int i = 0; i < 2; i++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -79,7 +79,6 @@ public class Knight : MonoBehaviour
         _vecZ = 5f;
         for (int j = 0; j < 2; j++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -129,7 +128,6 @@ public class Knight : MonoBehaviour
         _vecZ = 2.55f;
         for (int k = 0; k < 2; k++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -179,7 +177,6 @@ public class Knight : MonoBehaviour
         _vecZ = 2.55f;
         for (int l = 0; l < 2; l++)
         {
-            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)

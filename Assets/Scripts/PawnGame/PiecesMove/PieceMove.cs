@@ -307,6 +307,20 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary> 
+    /// プロモーションでInstantiateされた駒にスクリプトをアサインする...×アサイン,〇変数に直接代入 の考え方の方が(個人的には)理解しやすい
+    /// </summary>
+    public void PromAssign()
+    {
+        //変数に直接代入する
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+        _promQ = GameObject.Find("Queen").GetComponent<Promotion>();
+        _promR = GameObject.Find("Rook").GetComponent<Promotion>();
+        _promB = GameObject.Find("Bishop").GetComponent<Promotion>();
+        _promK = GameObject.Find("Knight").GetComponent<Promotion>();
+    }
+
     /// <summary>
     /// ターン表示の切り替え、駒の移動状態→通常状態
     /// </summary>
@@ -331,20 +345,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 }
                 break;
         }
-    }
-
-    /// <summary> 
-    /// プロモーションでInstantiateされた駒にスクリプトをアサインする...×アサイン,〇変数に代入 の考え方の方が(個人的には)理解しやすい
-    /// </summary>
-    public void PromAssign() 
-    {
-        //変数に直接代入する
-        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
-        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
-        _promQ = GameObject.Find("Queen").GetComponent<Promotion>();
-        _promR = GameObject.Find("Rook").GetComponent<Promotion>();
-        _promB = GameObject.Find("Bishop").GetComponent<Promotion>();
-        _promK = GameObject.Find("Knight").GetComponent<Promotion>();
     }
 
     /// <summary> 通常状態、移動状態 </summary>

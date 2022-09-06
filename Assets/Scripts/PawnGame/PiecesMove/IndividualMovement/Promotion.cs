@@ -36,6 +36,7 @@ public class Promotion : MonoBehaviour
         //白駒のプロモーション
         if (_promWhite != null && _promBlack == null)
         {
+            //↓(this.)gameObject...クリックするボタンのこと
             if (gameObject.name == "Queen")
             {
                 _promWhite.SetActive(false);
@@ -71,7 +72,7 @@ public class Promotion : MonoBehaviour
             _piece.AfterProm();
         }
         //黒駒のプロモーション
-        else if (_promBlack != null && _promWhite == null)
+        else if (_promWhite == null && _promBlack != null)
         {
             if (gameObject.name == "Queen")
             {

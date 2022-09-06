@@ -8,8 +8,7 @@ using UnityEngine;
 public class Pawn : MonoBehaviour
 {
     MasuSearch _search;
-    //Promotion _move;
-    public GameObject _pieceInfo;
+    [Tooltip("移動させるポーン")] public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;
     float _vecY;
@@ -19,7 +18,6 @@ public class Pawn : MonoBehaviour
     void Start()
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
-        //_move = GameObject.Find("Movements").GetComponent<Promotion>();
     }
 
     public void PawnMovement()
@@ -37,7 +35,6 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 for (int i = 0; i < 2; i++)
                 {
-                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                     {
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -81,7 +78,6 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
-                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -115,7 +111,6 @@ public class Pawn : MonoBehaviour
             _vecZ = 2.55f;
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
@@ -144,7 +139,6 @@ public class Pawn : MonoBehaviour
                 {
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                     {
-                        Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -186,7 +180,6 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                 {
-                    Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -219,7 +212,6 @@ public class Pawn : MonoBehaviour
             _vecZ = 2.55f;
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
@@ -227,7 +219,6 @@ public class Pawn : MonoBehaviour
             }
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
-                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
