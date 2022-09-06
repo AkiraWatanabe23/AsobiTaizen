@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _scoreWhiteText.text = _scoreWhite.ToString(); //得点をシーンに表示
+        //得点をシーンに表示
+        _scoreWhiteText.text = _scoreWhite.ToString();
         _scoreBlackText.text = _scoreBlack.ToString();
 
         //白黒それぞれの駒の数を取得する
@@ -67,24 +68,24 @@ public class GameManager : MonoBehaviour
         if (_scoreWhite >= _finalScore || _scoreBlack >= _finalScore)
         {
             _resultPanel.gameObject.SetActive(true);
-            Invoke("GoResult", 2f); //2秒後にGoResultの処理を実行する(処理を遅らせる)
+            Invoke("SceneTransition", 2f); //2秒後にGoResultの処理を実行する(処理を遅らせる)
         }
         //敵の駒が0になったら
         else if (_wPieceCount == 0 || _bPieceCount == 0)
         {
             _resultPanel.gameObject.SetActive(true);
-            Invoke("GoResult", 2f);
+            Invoke("SceneTransition", 2f);
         }
 
         //引き分け時(駒の数がお互い1つになった時)のシーン遷移
         if (_wPieceCount == 1 && _bPieceCount == 1)
         {
             _resultPanel.gameObject.SetActive(true);
-            Invoke("GoResult", 2f); //2秒後にGoResult()の処理を実行する
+            Invoke("SceneTransition", 2f); //2秒後にGoResult()の処理を実行する
         }
     }
 
-    void GoResult()
+    void SceneTransition()
     {
         SceneManager.LoadScene("ChessResult");
     }

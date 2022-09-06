@@ -29,8 +29,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
     [SerializeField] PieceManager _piece;
-    public int _moveCount = 0;
-    GameObject _currentPieceTile;
+    [Tooltip("駒の移動回数")] public int _moveCount = 0;
+    public GameObject _currentPieceTile;
     public GameObject _movedPieceTile;
     [SerializeField] Promotion _promQ;
     [SerializeField] Promotion _promR;
@@ -51,10 +51,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         var go = eventData.pointerCurrentRaycast.gameObject;
-        var piece = go.GetComponent<PieceMove>();
 
         print($"{ name } を選んだ");
-        piece.ChangeState();
+        go.GetComponent<PieceMove>().ChangeState();
     }
 
     void Start()
@@ -74,12 +73,58 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             //駒が移動状態になっていたら
             if (_status == Status.Move)
             {
-                //移動処理
+                //移動処理(return の値が true だったら)
                 if (Move())
                 {
                     //移動状態→通常状態
                     ChangeState();
                 }
+            }
+        }
+        //右クリックで非選択状態に変更
+        else if (Input.GetMouseButtonDown(1) && _status == Status.Move)
+        {
+            _status = Status.Normal;
+            _renderer.material = _normalMaterial;
+            Debug.Log("選び直し");
+
+            //マスを元の状態に戻す
+            for (int i = 0; i < _search._movableTile.Count; i++)
+            {
+                if (_search._movableTile[i].tag == "Tile")
+                {
+                    _search._tile.Add(_search._movableTile[i]);
+                }
+            }
+            foreach (var tiles in _search._tile)
+            {
+                tiles.GetComponent<Collider>().enabled = true;
+            }
+            _search._movableTile.Clear();
+            _search._piece = null;
+            _search._pieceInfo = null;
+
+            foreach (var piece in _search._immovablePieces)
+            {
+                piece.GetComponent<Collider>().enabled = true;
+            }
+            _search._immovablePieces.Clear();
+
+            if (gameObject.tag == "WhitePiece")
+            {
+                foreach (var pieces in _piece._whitePieces)
+                {
+                    pieces.GetComponent<Collider>().enabled = true;
+                }
+                _piece._whitePieces.Add(gameObject);
+            }
+            else if (gameObject.tag == "BlackPiece")
+            {
+                foreach (var pieces in _piece._blackPieces)
+                {
+                    pieces.GetComponent<Collider>().enabled = true;
+                }
+                _piece._blackPieces.Add(gameObject);
             }
         }
     }

@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class MasuSearch : MonoBehaviour
 {
-    [SerializeField] public List<Collider> _tile = new List<Collider>();
-    [SerializeField] public List<Collider> _movableTile = new List<Collider>();
-    [SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
+    [Tooltip("盤面のマス"), SerializeField] public List<Collider> _tile = new List<Collider>();
+    [Tooltip("移動可能マス"), SerializeField] public List<Collider> _movableTile = new List<Collider>();
+    [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
@@ -67,6 +67,9 @@ public class MasuSearch : MonoBehaviour
         }   
     }
 
+    /// <summary>
+    /// マスの番号を取得する
+    /// </summary>
     void GetTileNum()
     {
         if (_pieceInfo != null)
