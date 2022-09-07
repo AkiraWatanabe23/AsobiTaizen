@@ -54,14 +54,17 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
         print($"{ name } を選んだ");
         go.GetComponent<PieceMove>().ChangeState();
+        if (_status == Status.Normal && _currentPieceTile == _movedPieceTile)
+        {
+            _movedPieceTile = null;
+        }
     }
 
     void Start()
     {
         _renderer = GetComponent<Renderer>();
         _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
-        /*↑enabled...オブジェクトの指定した[コンポーネント(今回はImage)]のアクティブ、非アクティブを変更する
-         *  SetActive(false)でオブジェクトをとってこれないのを回避する*/
+
         if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
         {
             _currentPieceTile = _hit.collider.gameObject;
@@ -71,14 +74,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        //左クリックが行われた場合の処理
+        //左クリックで選択、移動
         if (Input.GetMouseButtonDown(0))
         {
             //駒が移動状態になっていたら
             if (_status == Status.Move)
             {
-                //移動処理(return の値が true だったら)
-                if (Move())
+                //移動処理
+                if (Move()) /*←return の値が true だったら*/
                 {
                     //移動状態→通常状態
                     ChangeState();
