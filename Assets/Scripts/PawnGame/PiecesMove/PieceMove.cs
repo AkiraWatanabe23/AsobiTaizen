@@ -54,6 +54,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
         print($"{ name } ‚ğ‘I‚ñ‚¾");
         go.GetComponent<PieceMove>().ChangeState();
+
+        //_movedPieceTile = null ‚Å‹î‚ÌÄ‘I‘ğ‚ğo—ˆ‚é‚æ‚¤‚É‚·‚é
         if (_status == Status.Normal && _currentPieceTile == _movedPieceTile)
         {
             _movedPieceTile = null;

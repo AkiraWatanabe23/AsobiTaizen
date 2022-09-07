@@ -24,9 +24,11 @@ public class MasuSearch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //マスを取得し、色を非表示にする
         for (int i = 0; i < 64; i++)
         {
             _tile.Add(gameObject.transform.GetChild(i).GetComponent<Collider>());
+            _tile[i].GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
