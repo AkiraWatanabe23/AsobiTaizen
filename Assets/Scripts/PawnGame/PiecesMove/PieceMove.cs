@@ -102,6 +102,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 if (_search._movableTile[i].tag == "Tile")
                 {
+                    _search._movableTile[i].GetComponent<MeshRenderer>().enabled = false;
                     _search._tile.Add(_search._movableTile[i]);
                 }
             }
@@ -336,6 +337,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 if (_search._movableTile[i].tag == "Tile")
                 {
+                    _search._movableTile[i].GetComponent<MeshRenderer>().enabled = false;
                     _search._tile.Add(_search._movableTile[i]);
                 }
             }

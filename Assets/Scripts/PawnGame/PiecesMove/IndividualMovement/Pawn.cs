@@ -47,13 +47,11 @@ public class Pawn : MonoBehaviour
                         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                         {
                             _vecZ += 2.5f;
-                            if (_search._movableTile.Contains(_hit.collider))
-                            {
-                                break;
-                            }
-                            else
+                            //’Tõ’†‚É“¯‚¶—v‘f‚ª‰½“x‚àList‚É“ü‚é‚Ì‚ğ–h‚®
+                            if (!_search._movableTile.Contains(_hit.collider))
                             {
                                 _search._movableTile.Add(_hit.collider);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                             }
                             _search._tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
@@ -86,9 +84,11 @@ public class Pawn : MonoBehaviour
                     }
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
+                        //’Tõ’†‚É“¯‚¶—v‘f‚ª‰½“x‚àList‚É“ü‚é‚Ì‚ğ–h‚®
                         if (!_search._movableTile.Contains(_hit.collider))
                         {
                             _search._movableTile.Add(_hit.collider);
+                            _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
@@ -149,13 +149,11 @@ public class Pawn : MonoBehaviour
                         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                         {
                             _vecZ += 2.5f;
-                            if (_search._movableTile.Contains(_hit.collider))
-                            {
-                                break;
-                            }
-                            else
+                            //’Tõ’†‚É“¯‚¶—v‘f‚ª‰½“x‚àList‚É“ü‚é‚Ì‚ğ–h‚®
+                            if (!_search._movableTile.Contains(_hit.collider))
                             {
                                 _search._movableTile.Add(_hit.collider);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                             }
                             _search._tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
@@ -188,9 +186,11 @@ public class Pawn : MonoBehaviour
                     }
                     else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                     {
+                        //’Tõ’†‚É“¯‚¶—v‘f‚ª‰½“x‚àList‚É“ü‚é‚Ì‚ğ–h‚®
                         if (!_search._movableTile.Contains(_hit.collider))
                         {
                             _search._movableTile.Add(_hit.collider);
+                            _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
