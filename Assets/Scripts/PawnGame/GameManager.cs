@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Text _scoreWhiteText;
     [Header("çïÇÃÉXÉRÉA")]
     [SerializeField] public Text _scoreBlackText;
-    [SerializeField] public static Phase _state = Phase.White;
+    [SerializeField] public static Phase _phase = Phase.White;
 
 
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         _scoreBlack = 0;
         _finalScore = 5;
 
-        _state = Phase.White;
+        _phase = Phase.White;
         _resultPanel.gameObject.SetActive(false);
     }
 

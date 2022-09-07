@@ -41,6 +41,7 @@ public class Promotion : MonoBehaviour
             {
                 _promWhite.SetActive(false);
                 GameObject _promPiece = Instantiate(_promQueenWhite, _promWhite.transform.position, Quaternion.identity);
+                _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
@@ -50,6 +51,7 @@ public class Promotion : MonoBehaviour
             {
                 _promWhite.SetActive(false);
                 GameObject _promPiece = Instantiate(_promRookWhite, _promWhite.transform.position, Quaternion.identity);
+                _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
@@ -59,6 +61,7 @@ public class Promotion : MonoBehaviour
             {
                 _promWhite.SetActive(false);
                 GameObject _promPiece = Instantiate(_promBishopWhite, _promWhite.transform.position, Quaternion.identity);
+                _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
@@ -68,6 +71,7 @@ public class Promotion : MonoBehaviour
             {
                 _promWhite.SetActive(false);
                 GameObject _promPiece = Instantiate(_promKnightWhite, _promWhite.transform.position, Quaternion.identity);
+                _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
@@ -82,7 +86,8 @@ public class Promotion : MonoBehaviour
             {
                 _promBlack.SetActive(false);
                 GameObject _promPiece = Instantiate(_promQueenBlack, _promBlack.transform.position, Quaternion.identity);
-                _piece._whitePieces.Add(_promPiece);
+                _piece._blackPieces.Remove(_promBlack);
+                _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
                 Debug.Log("クイーンにプロモーションします");
@@ -91,7 +96,8 @@ public class Promotion : MonoBehaviour
             {
                 _promBlack.SetActive(false);
                 GameObject _promPiece = Instantiate(_promRookBlack, _promBlack.transform.position, Quaternion.identity);
-                _piece._whitePieces.Add(_promPiece);
+                _piece._blackPieces.Remove(_promBlack);
+                _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
                 Debug.Log("ルークにプロモーションします");
@@ -100,7 +106,8 @@ public class Promotion : MonoBehaviour
             {
                 _promBlack.SetActive(false);
                 GameObject _promPiece = Instantiate(_promBishopBlack, _promBlack.transform.position, Quaternion.identity);
-                _piece._whitePieces.Add(_promPiece);
+                _piece._blackPieces.Remove(_promBlack);
+                _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
                 Debug.Log("ビショップにプロモーションします");
@@ -109,7 +116,8 @@ public class Promotion : MonoBehaviour
             {
                 _promBlack.SetActive(false);
                 GameObject _promPiece = Instantiate(_promKnightBlack, _promBlack.transform.position, Quaternion.identity);
-                _piece._whitePieces.Add(_promPiece);
+                _piece._blackPieces.Remove(_promBlack);
+                _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
                 _pieceInfo.PromAssign();
                 Debug.Log("ナイトにプロモーションします");

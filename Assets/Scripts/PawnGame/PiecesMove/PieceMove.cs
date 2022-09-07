@@ -50,14 +50,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_status == Status.Normal) 
-        {
-            var go = eventData.pointerCurrentRaycast.gameObject;
+        var go = eventData.pointerCurrentRaycast.gameObject;
 
-            print($"{ name } を選んだ");
-            go.GetComponent<PieceMove>().ChangeState();
-        }
-      
+        print($"{ name } を選んだ");
+        go.GetComponent<PieceMove>().ChangeState();
 
         //_movedPieceTile = null で駒の再選択を出来るようにする
         if (_status == Status.Normal && _currentPieceTile == _movedPieceTile)
@@ -171,7 +167,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             PhaseChange(_target);
             SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager._state = Phase.Black;
+            GameManager._phase = Phase.Black;
 
             print($"駒は {_target.name} をとった");
 
@@ -195,7 +191,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
                     PhaseChange(_target);
                     SetCursorPos(Screen.width / 2, Screen.height / 2);
-                    GameManager._state = Phase.Black;
+                    GameManager._phase = Phase.Black;
 
                     print($"駒は {_target.name} に移動した");
                 }
@@ -228,7 +224,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             PhaseChange(_target);
             SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager._state = Phase.White;
+            GameManager._phase = Phase.White;
 
             print($"駒は {_target.name} をとった");
 
@@ -257,7 +253,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
                     PhaseChange(_target);
                     SetCursorPos(Screen.width / 2, Screen.height / 2);
-                    GameManager._state = Phase.White;
+                    GameManager._phase = Phase.White;
 
                     print($"駒は {_target.name} に移動した");
                 }
@@ -278,7 +274,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public void ChangeState() //駒を右クリックをすると移動状態→通常状態にできる
     {
         //通常状態→移動状態(白)
-        if (_status == Status.Normal && _color == PieceColor.White && GameManager._state == Phase.White && _currentPieceTile != _movedPieceTile)
+        if (_status == Status.Normal && _color == PieceColor.White && GameManager._phase == Phase.White && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
@@ -299,7 +295,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             //}
         }
         //通常状態→移動状態(黒)
-        else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black && _currentPieceTile != _movedPieceTile)
+        else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._phase == Phase.Black && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
@@ -310,14 +306,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._blackPieces.Remove(gameObject);
-            foreach (var pieces in _piece._whitePieces)
-            {
-                pieces.GetComponent<Collider>().enabled = false;
-            }
-            foreach (var pieces in _piece._blackPieces)
-            {
-                pieces.GetComponent<Collider>().enabled = false;
-            }
+            //foreach (var pieces in _piece._whitePieces)
+            //{
+            //    pieces.GetComponent<Collider>().enabled = false;
+            //}
+            //foreach (var pieces in _piece._blackPieces)
+            //{
+            //    pieces.GetComponent<Collider>().enabled = false;
+            //}
         }
         //移動状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
