@@ -33,6 +33,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -43,13 +44,10 @@ public class Queen : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -82,6 +80,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -92,13 +91,10 @@ public class Queen : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -131,6 +127,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -141,13 +138,10 @@ public class Queen : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -180,6 +174,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -190,13 +185,10 @@ public class Queen : MonoBehaviour
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -230,6 +222,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -241,13 +234,10 @@ public class Queen : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -280,6 +270,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -291,13 +282,10 @@ public class Queen : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -330,6 +318,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -341,13 +330,10 @@ public class Queen : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -380,6 +366,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -391,13 +378,10 @@ public class Queen : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");

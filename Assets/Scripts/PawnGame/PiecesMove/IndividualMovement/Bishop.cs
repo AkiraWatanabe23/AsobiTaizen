@@ -43,13 +43,10 @@ public class Bishop : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -93,13 +90,10 @@ public class Bishop : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -143,13 +137,10 @@ public class Bishop : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
@@ -193,13 +184,10 @@ public class Bishop : MonoBehaviour
                 {
                     _vecX += 2.5f;
                     _vecZ += 2.5f;
-                    if (_search._movableTile.Contains(_hit.collider))
-                    {
-                        break;
-                    }
-                    else
+                    if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");

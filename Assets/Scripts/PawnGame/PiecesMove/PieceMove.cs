@@ -376,7 +376,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
                 _movedPieceTile = _hit.collider.gameObject;
-                Debug.Log(_movedPieceTile);
             }
             else
             {

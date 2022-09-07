@@ -118,7 +118,6 @@ public class Pawn : MonoBehaviour
             }
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
-                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
                     Debug.Log(_hit.collider.gameObject.name + "ÇÇ∆ÇÈÇ±Ç∆Ç™èoóàÇ‹Ç∑");
