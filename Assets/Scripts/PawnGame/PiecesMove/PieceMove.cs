@@ -50,10 +50,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        var go = eventData.pointerCurrentRaycast.gameObject;
+        if (_status == Status.Normal) 
+        {
+            var go = eventData.pointerCurrentRaycast.gameObject;
 
-        print($"{ name } を選んだ");
-        go.GetComponent<PieceMove>().ChangeState();
+            print($"{ name } を選んだ");
+            go.GetComponent<PieceMove>().ChangeState();
+        }
+      
 
         //_movedPieceTile = null で駒の再選択を出来るようにする
         if (_status == Status.Normal && _currentPieceTile == _movedPieceTile)
@@ -285,10 +289,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._whitePieces.Remove(gameObject);
-            foreach (var pieces in _piece._whitePieces)
-            {
-                pieces.GetComponent<Collider>().enabled = false;
-            }
+            //foreach (var pieces in _piece._whitePieces)
+            //{
+            //    pieces.GetComponent<Collider>().enabled = false;
+            //}
+            //foreach (var pieces in _piece._blackPieces)
+            //{
+            //    pieces.GetComponent<Collider>().enabled = false;
+            //}
         }
         //通常状態→移動状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._state == Phase.Black && _currentPieceTile != _movedPieceTile)
@@ -302,6 +310,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._blackPieces.Remove(gameObject);
+            foreach (var pieces in _piece._whitePieces)
+            {
+                pieces.GetComponent<Collider>().enabled = false;
+            }
             foreach (var pieces in _piece._blackPieces)
             {
                 pieces.GetComponent<Collider>().enabled = false;
@@ -424,11 +436,12 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    /// <summary> 通常状態、移動状態 </summary>
+    /// <summary> 通常状態、移動状態、選択状態 </summary>
     public enum Status
     {
         Normal,
         Move,
+        Choose,
     }
 
     /// <summary> 白駒or黒駒 </summary>

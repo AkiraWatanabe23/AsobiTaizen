@@ -55,7 +55,7 @@ public class Pawn : MonoBehaviour
                             }
                             _search._tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                            if (_hit.collider.gameObject.tag == "BlackPiece")
+                            if (_hit.collider.gameObject.tag != "Tile")
                             {
                                 break;
                             }
@@ -92,9 +92,9 @@ public class Pawn : MonoBehaviour
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                        if (_hit.collider.gameObject.tag == "BlackPiece")
+                        if (_hit.collider.gameObject.tag != "Tile")
                         {
-
+                            _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                         }
                     }
                 }
@@ -156,7 +156,7 @@ public class Pawn : MonoBehaviour
                             }
                             _search._tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                            if (_hit.collider.gameObject.tag == "WhitePiece")
+                            if (_hit.collider.gameObject.tag != "Tile")
                             {
                                 break;
                             }
@@ -193,9 +193,9 @@ public class Pawn : MonoBehaviour
                         }
                         _search._tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                        if (_hit.collider.gameObject.tag == "WhitePiece")
+                        if (_hit.collider.gameObject.tag != "Tile")
                         {
-
+                            _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                         }
                     }
                 }
