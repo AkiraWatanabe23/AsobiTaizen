@@ -8,6 +8,7 @@ using UnityEngine;
 public class Pawn : MonoBehaviour
 {
     MasuSearch _search;
+    PieceManager _piece;
     [Tooltip("移動させるポーン")] public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;
@@ -18,6 +19,7 @@ public class Pawn : MonoBehaviour
     void Start()
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
     public void PawnMovement()
@@ -113,6 +115,8 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
+                    _piece._blackPieces.Remove(_hit.collider.gameObject);
+                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -120,6 +124,8 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
+                    _piece._blackPieces.Remove(_hit.collider.gameObject);
+                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -213,6 +219,8 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
+                    _piece._whitePieces.Remove(_hit.collider.gameObject);
+                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -220,6 +228,8 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
+                    _piece._whitePieces.Remove(_hit.collider.gameObject);
+                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }

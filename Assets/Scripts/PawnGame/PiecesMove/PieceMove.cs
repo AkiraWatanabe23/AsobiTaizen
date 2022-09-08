@@ -271,9 +271,9 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// <summary> 
     /// マウスクリックをした(駒を選んだ、動かした)時に実行される処理
     /// </summary>
-    public void ChangeState() //駒を右クリックをすると移動状態→通常状態にできる
+    public void ChangeState() //駒を右クリックをすると選択状態→通常状態にできる
     {
-        //通常状態→移動状態(白)
+        //通常状態→選択状態(白)
         if (_status == Status.Normal && _color == PieceColor.White && GameManager._phase == Phase.White && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
@@ -285,16 +285,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._whitePieces.Remove(gameObject);
-            //foreach (var pieces in _piece._whitePieces)
-            //{
-            //    pieces.GetComponent<Collider>().enabled = false;
-            //}
-            //foreach (var pieces in _piece._blackPieces)
-            //{
-            //    pieces.GetComponent<Collider>().enabled = false;
-            //}
         }
-        //通常状態→移動状態(黒)
+        //通常状態→選択状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._phase == Phase.Black && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
@@ -306,16 +298,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._blackPieces.Remove(gameObject);
-            //foreach (var pieces in _piece._whitePieces)
-            //{
-            //    pieces.GetComponent<Collider>().enabled = false;
-            //}
-            //foreach (var pieces in _piece._blackPieces)
-            //{
-            //    pieces.GetComponent<Collider>().enabled = false;
-            //}
         }
-        //移動状態→通常状態(駒が移動した後の共通処理)
+        //選択状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
         {
             if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
@@ -325,7 +309,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
 
-            //プロモーションへの移行
+            //プロモーションへの移行(ポーンのみ)
             if (gameObject.name.Contains("pawn"))
             {
                 if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
@@ -363,20 +347,21 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             _search._immovablePieces.Clear();
 
+            //Collider off にした駒をもとに戻す
+            foreach (var pieces in _piece._whitePieces)
+            {
+                pieces.GetComponent<Collider>().enabled = true;
+            }
+            foreach (var pieces in _piece._blackPieces)
+            {
+                pieces.GetComponent<Collider>().enabled = true;
+            }
             if (gameObject.tag == "WhitePiece")
             {
-                foreach (var pieces in _piece._whitePieces)
-                {
-                    pieces.GetComponent<Collider>().enabled = true;
-                }
                 _piece._whitePieces.Add(gameObject);
             }
             else if (gameObject.tag == "BlackPiece")
             {
-                foreach (var pieces in _piece._blackPieces)
-                {
-                    pieces.GetComponent<Collider>().enabled = true;
-                }
                 _piece._blackPieces.Add(gameObject);
             }
 
@@ -407,7 +392,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     }
 
     /// <summary>
-    /// ターン表示の切り替え、駒の移動状態→通常状態
+    /// ターン表示の切り替え、駒の選択状態→通常状態
     /// </summary>
     /// <param name="_target"></param>
     public void PhaseChange(GameObject _target)
@@ -432,12 +417,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    /// <summary> 通常状態、移動状態、選択状態 </summary>
+    /// <summary> 通常状態、選択状態 </summary>
     public enum Status
     {
         Normal,
         Move,
-        Choose,
     }
 
     /// <summary> 白駒or黒駒 </summary>

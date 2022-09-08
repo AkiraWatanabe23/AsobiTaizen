@@ -10,11 +10,13 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("盤面のマス"), SerializeField] public List<Collider> _tile = new List<Collider>();
     [Tooltip("移動可能マス"), SerializeField] public List<Collider> _movableTile = new List<Collider>();
     [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
+    [Tooltip("獲ることが出来る駒"), SerializeField] public List<GameObject> _getablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
     [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
     RaycastHit _hit;
+    [SerializeField] public PieceManager _manager;
     [SerializeField] public Pawn _pawn;
     [SerializeField] public Knight _knight;
     [SerializeField] public Bishop _bishop;
@@ -66,7 +68,16 @@ public class MasuSearch : MonoBehaviour
             case 5:
                 _queen.QueenMovement();
                 break;
-        }   
+        }
+        //ここで、移動範囲外の駒、マスのColliderをoffにする処理を書く
+        foreach (var pieces in _manager._whitePieces)
+        {
+            pieces.GetComponent<Collider>().enabled = false;
+        }
+        foreach (var pieces in _manager._blackPieces)
+        {
+            pieces.GetComponent<Collider>().enabled = false;
+        }
     }
 
     /// <summary>

@@ -19992,6 +19992,7 @@ MonoBehaviour:
   _pieceInfo: {fileID: 0}
   _tileFile: 0
   _tileRank: 0
+  _manager: {fileID: 1924269326}
   _pawn: {fileID: 907221174}
   _knight: {fileID: 907221173}
   _bishop: {fileID: 907221172}
