@@ -10,7 +10,6 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("盤面のマス"), SerializeField] public List<Collider> _tile = new List<Collider>();
     [Tooltip("移動可能マス"), SerializeField] public List<Collider> _movableTile = new List<Collider>();
     [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
-    [Tooltip("獲ることが出来る駒"), SerializeField] public List<GameObject> _getablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
     [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;

@@ -9,6 +9,7 @@ public class Knight : MonoBehaviour
 {
     MasuSearch _search;
     [Tooltip("移動させるナイト")] public GameObject _pieceInfo;
+    [Tooltip("探索範囲にいた獲ることが出来る駒")] public List<GameObject> _getablePieces = new List<GameObject>();
     public RaycastHit _hit;
     float _vecX;
     float _vecY;

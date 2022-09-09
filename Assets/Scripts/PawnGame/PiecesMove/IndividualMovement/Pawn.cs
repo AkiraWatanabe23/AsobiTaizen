@@ -10,6 +10,7 @@ public class Pawn : MonoBehaviour
     MasuSearch _search;
     PieceManager _piece;
     [Tooltip("移動させるポーン")] public GameObject _pieceInfo;
+    [Tooltip("探索範囲にいた獲ることが出来る駒")] public List<GameObject> _getablePieces = new List<GameObject>();
     public RaycastHit _hit;
     float _vecX;
     float _vecY;
@@ -115,8 +116,11 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
+                    if (!_getablePieces.Contains(_hit.collider.gameObject))
+                    {
+                        _getablePieces.Add(_hit.collider.gameObject);
+                    }
                     _piece._blackPieces.Remove(_hit.collider.gameObject);
-                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -124,8 +128,11 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
+                    if (!_getablePieces.Contains(_hit.collider.gameObject))
+                    {
+                        _getablePieces.Add(_hit.collider.gameObject);
+                    }
                     _piece._blackPieces.Remove(_hit.collider.gameObject);
-                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -220,7 +227,6 @@ public class Pawn : MonoBehaviour
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
                     _piece._whitePieces.Remove(_hit.collider.gameObject);
-                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -229,7 +235,6 @@ public class Pawn : MonoBehaviour
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
                     _piece._whitePieces.Remove(_hit.collider.gameObject);
-                    _search._getablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }

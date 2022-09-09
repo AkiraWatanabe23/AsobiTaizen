@@ -9,6 +9,7 @@ public class Rook : MonoBehaviour
 {
     MasuSearch _search;
     [Tooltip("ˆÚ“®‚³‚¹‚éƒ‹[ƒN")] public GameObject _pieceInfo;
+    [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚½Šl‚é‚±‚Æ‚ªo—ˆ‚é‹î")] public List<GameObject> _getablePieces = new List<GameObject>();
     public RaycastHit _hit;
     float _vecX;
     float _vecY;
