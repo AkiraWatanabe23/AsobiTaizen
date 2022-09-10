@@ -12,8 +12,8 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public GameObject _pieceInfo;
-    [Tooltip("駒のいるマスのファイル(縦)")] public int _tileFile = 0;
-    [Tooltip("駒のいるマスのランク(横)")] public int _tileRank = 0;
+    [Tooltip("駒のいるマスのファイル(縦) a～h")] public int _tileFile = 0;
+    [Tooltip("駒のいるマスのランク(横) 1～8")] public int _tileRank = 0;
     RaycastHit _hit;
     [SerializeField] public PieceManager _manager;
     [SerializeField] public Pawn _pawn;
