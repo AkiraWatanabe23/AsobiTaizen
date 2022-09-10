@@ -93,8 +93,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //右クリックで非選択状態に変更
         else if (Input.GetMouseButtonDown(1) && _status == Status.Move)
         {
-            _status = Status.Normal;
-            _renderer.material = _normalMaterial;
             Debug.Log("選び直し");
 
             //マスを元の状態に戻す
@@ -110,9 +108,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
-            _search._movableTile.Clear();
-            _search._piece = null;
-            _search._pieceInfo = null;
 
             foreach (var piece in _search._immovablePieces)
             {
@@ -136,6 +131,19 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 }
                 _piece._blackPieces.Add(gameObject);
             }
+
+            //獲れる駒を獲らなかった場合にListに戻す
+            if (_piece._getablePieces != null)
+            {
+                _piece.UnGetPiece();
+            }
+
+            //駒の状態をもとに戻す
+            _status = Status.Normal;
+            _renderer.material = _normalMaterial;
+            _search._movableTile.Clear();
+            _search._piece = null;
+            _search._pieceInfo = null;
         }
     }
 
@@ -346,11 +354,17 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             //Collider off にした駒をもとに戻す
             foreach (var pieces in _piece._whitePieces)
             {
-                pieces.GetComponent<Collider>().enabled = true;
+                if (pieces != null)
+                {
+                    pieces.GetComponent<Collider>().enabled = true;
+                }
             }
             foreach (var pieces in _piece._blackPieces)
             {
-                pieces.GetComponent<Collider>().enabled = true;
+                if (pieces != null)
+                {
+                    pieces.GetComponent<Collider>().enabled = true;
+                }
             }
             if (gameObject.tag == "WhitePiece")
             {

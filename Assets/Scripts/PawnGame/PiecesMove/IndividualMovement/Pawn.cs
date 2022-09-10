@@ -135,7 +135,6 @@ public class Pawn : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
-            //En_Passant_White();
         }
         /********************黒駒の移動処理********************/
         else if (_pieceInfo.tag == "BlackPiece")
@@ -225,6 +224,10 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
+                    if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                    {
+                        _piece._getablePieces.Add(_hit.collider.gameObject);
+                    }
                     _piece._whitePieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
@@ -233,111 +236,14 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
+                    if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                    {
+                        _piece._getablePieces.Add(_hit.collider.gameObject);
+                    }
                     _piece._whitePieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
-            //En_Passant_Black();
         }
     }
-
-    /// <summary>
-    /// アンパッサン処理(白)
-    /// </summary>
-    //void En_Passant_White()
-    //{
-    //    if (_search._tileRank == 5)
-    //    {
-    //        _vecX = 2.55f;
-    //        _vecY = 0f;
-    //        _vecZ = 0f;
-    //        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 10))
-    //        {
-    //            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), Color.yellow, 10f);
-    //            if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
-    //            {
-    //                if (_hit.collider.gameObject.GetComponent<PieceMove>()._moveCount == 1)
-    //                {
-    //                    _vecX = 2.55f;
-    //                    _vecY = 2.55f;
-    //                    _vecZ = 2.55f;
-    //                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
-    //                    {
-    //                        if (_hit.collider.gameObject.tag == "Tile")
-    //                        {
-    //                            Debug.Log("アンパッサンが可能です");
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        else if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 10))
-    //        {
-    //            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), Color.yellow, 10f);
-    //            if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
-    //            {
-    //                if (_hit.collider.gameObject.GetComponent<PieceMove>()._moveCount == 1)
-    //                {
-    //                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
-    //                    {
-    //                        if (_hit.collider.gameObject.tag == "Tile")
-    //                        {
-    //                            Debug.Log("アンパッサンが可能です");
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
-    /// <summary>
-    /// アンパッサン処理(黒)
-    /// </summary>
-    //void En_Passant_Black()
-    //{
-    //    if (_search._tileRank == 4)
-    //    {
-    //        _vecX = 2.55f;
-    //        _vecY = 0f;
-    //        _vecZ = 0f;
-    //        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 10))
-    //        {
-    //            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, _vecY, _vecZ), Color.yellow, 10f);
-    //            if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
-    //            {
-    //                if (_hit.collider.gameObject.GetComponent<PieceMove>()._moveCount == 1)
-    //                {
-    //                    _vecX = 2.55f;
-    //                    _vecY = 2.55f;
-    //                    _vecZ = 2.55f;
-    //                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
-    //                    {
-    //                        if (_hit.collider.gameObject.tag == "Tile")
-    //                        {
-    //                            Debug.Log("アンパッサンが可能です");
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        else if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 10))
-    //        {
-    //            Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, _vecY, _vecZ), Color.yellow, 10f);
-    //            if (_hit.collider.gameObject.GetComponent<PieceMove>()._type == PieceMove.PieceType.Pawn)
-    //            {
-    //                if (_hit.collider.gameObject.GetComponent<PieceMove>()._moveCount == 1)
-    //                {
-    //                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
-    //                    {
-    //                        if (_hit.collider.gameObject.tag == "Tile")
-    //                        {
-    //                            Debug.Log("アンパッサンが可能です");
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 }
