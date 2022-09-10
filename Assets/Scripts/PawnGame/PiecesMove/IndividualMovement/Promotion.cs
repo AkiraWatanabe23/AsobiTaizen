@@ -77,7 +77,8 @@ public class Promotion : MonoBehaviour
                 _pieceInfo.PromAssign();
                 Debug.Log("ナイトにプロモーションします");
             }
-            _piece.AfterProm();
+            _promWhite = null;
+            _promBlack = null;
         }
         //黒駒のプロモーション
         else if (_promWhite == null && _promBlack != null)
@@ -122,7 +123,8 @@ public class Promotion : MonoBehaviour
                 _pieceInfo.PromAssign();
                 Debug.Log("ナイトにプロモーションします");
             }
-            _piece.AfterProm();
+            _promWhite = null;
+            _promBlack = null;
         }
     }
 }

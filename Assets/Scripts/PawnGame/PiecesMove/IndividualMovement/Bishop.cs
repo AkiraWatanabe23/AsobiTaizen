@@ -56,6 +56,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -63,6 +68,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -103,6 +113,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -110,6 +125,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -150,6 +170,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -157,6 +182,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -197,6 +227,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -204,6 +239,11 @@ public class Bishop : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
+                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            {
+                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                            }
+                            _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }

@@ -67,15 +67,6 @@ public class PieceManager : MonoBehaviour
         _blackTurnPanel.gameObject.SetActive(false);
     }
 
-    public void AfterProm()
-    {
-        foreach (Promotion i in GetComponentsInChildren<Promotion>())
-        {
-            i._promWhite = null;
-            i._promBlack = null;
-        }
-    }
-
     /// <summary>
     /// Šl‚ê‚é‹î‚ğŠl‚ç‚È‚©‚Á‚½ê‡‚ÉList‚É–ß‚·
     /// </summary>

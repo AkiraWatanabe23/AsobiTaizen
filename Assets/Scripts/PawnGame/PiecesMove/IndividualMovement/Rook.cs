@@ -51,6 +51,7 @@ public class Rook : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -107,6 +108,7 @@ public class Rook : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -163,6 +165,7 @@ public class Rook : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -219,6 +222,7 @@ public class Rook : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
