@@ -15,10 +15,14 @@ public class PieceManager : MonoBehaviour
     [Tooltip("‚Ç‚Á‚¿‚Ìƒ^[ƒ“‚©(•)")] Image _blackTurnPanel;
     [SerializeField] public List<GameObject> _whitePieces = new List<GameObject>();
     [SerializeField] public List<GameObject> _blackPieces = new List<GameObject>();
+    [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚½Šl‚é‚±‚Æ‚ªo—ˆ‚é‹î")] public List<GameObject> _getablePieces = new List<GameObject>();
+    MasuSearch _search;
 
     // Start is called before the first frame update
     public void Start()
     {
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+
         for (int i = 0; i < 16; i++)
         {
             if (transform.GetChild(i).gameObject.tag == "WhitePiece")
@@ -70,5 +74,24 @@ public class PieceManager : MonoBehaviour
             i._promWhite = null;
             i._promBlack = null;
         }
+    }
+
+    /// <summary>
+    /// Šl‚ê‚é‹î‚ğŠl‚ç‚È‚©‚Á‚½ê‡‚ÉList‚É–ß‚·
+    /// </summary>
+    public void UnGetPiece()
+    {
+        foreach (var i in _getablePieces)
+        {
+            if (_search._pieceInfo.tag == "BlackPiece")
+            {
+                _whitePieces.Add(i);
+            }
+            else if (_search._pieceInfo.gameObject.tag == "WhitePiece")
+            {
+                _blackPieces.Add(i);
+            }
+        }
+        _getablePieces.Clear();
     }
 }

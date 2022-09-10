@@ -302,12 +302,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         //選択状態→通常状態(駒が移動した後の共通処理)
         else if (_status == Status.Move)
         {
+            //駒の移動回数を加算する(ポーンの移動用)
             if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
             {
                 _moveCount++;
             }
-            _status = Status.Normal;
-            _renderer.material = _normalMaterial;
 
             //プロモーションへの移行(ポーンのみ)
             if (gameObject.name.Contains("pawn"))
@@ -337,9 +336,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
-            _search._movableTile.Clear();
-            _search._piece = null;
-            _search._pieceInfo = null;
 
             foreach (var piece in _search._immovablePieces)
             {
@@ -374,6 +370,19 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 Debug.Log("none");
             }
+
+            //獲れる駒を獲らなかった場合にListに戻す
+            if (_piece._getablePieces != null)
+            {
+                _piece.UnGetPiece();
+            }
+
+            //駒の状態をもとに戻す
+            _status = Status.Normal;
+            _renderer.material = _normalMaterial;
+            _search._movableTile.Clear();
+            _search._piece = null;
+            _search._pieceInfo = null;
         }
     }
 

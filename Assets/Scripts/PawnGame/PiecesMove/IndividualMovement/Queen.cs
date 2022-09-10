@@ -8,8 +8,8 @@ using UnityEngine;
 public class Queen : MonoBehaviour
 {
     MasuSearch _search;
+    PieceManager _piece;
     [Tooltip("移動させるクイーン")] public GameObject _pieceInfo;
-    [Tooltip("探索範囲にいた獲ることが出来る駒")] public List<GameObject> _getablePieces = new List<GameObject>();
     public RaycastHit _hit;
     float _vecX;
     float _vecY;
@@ -19,6 +19,7 @@ public class Queen : MonoBehaviour
     void Start()
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
     public void QueenMovement()
