@@ -39,14 +39,14 @@ public class Pawn : MonoBehaviour
                 {
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                     {
-                        if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                        if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                             _search._immovablePieces.Add(_hit.collider.gameObject);
                             Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                             break;
                         }
-                        else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                        else if (_hit.collider.gameObject.tag == "Tile")
                         {
                             _vecZ += 2.5f;
                             //íTçıíÜÇ…ìØÇ∂óvëfÇ™âΩìxÇ‡ListÇ…ì¸ÇÈÇÃÇñhÇÆ
@@ -78,13 +78,13 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
-                    if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                    if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                         _search._immovablePieces.Add(_hit.collider.gameObject);
                         Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     }
-                    else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                    else if (_hit.collider.gameObject.tag == "Tile")
                     {
                         //íTçıíÜÇ…ìØÇ∂óvëfÇ™âΩìxÇ‡ListÇ…ì¸ÇÈÇÃÇñhÇÆ
                         if (!_search._movableTile.Contains(_hit.collider))
@@ -149,14 +149,14 @@ public class Pawn : MonoBehaviour
                 {
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                     {
-                        if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                        if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                             _search._immovablePieces.Add(_hit.collider.gameObject);
                             Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                             break;
                         }
-                        else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                        else if (_hit.collider.gameObject.tag == "Tile")
                         {
                             _vecZ += 2.5f;
                             //íTçıíÜÇ…ìØÇ∂óvëfÇ™âΩìxÇ‡ListÇ…ì¸ÇÈÇÃÇñhÇÆ
@@ -188,13 +188,13 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                 {
-                    if (_hit.collider.gameObject.tag == _pieceInfo.tag)
+                    if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                         _search._immovablePieces.Add(_hit.collider.gameObject);
                         Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     }
-                    else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
+                    else if (_hit.collider.gameObject.tag == "Tile")
                     {
                         //íTçıíÜÇ…ìØÇ∂óvëfÇ™âΩìxÇ‡ListÇ…ì¸ÇÈÇÃÇñhÇÆ
                         if (!_search._movableTile.Contains(_hit.collider))
