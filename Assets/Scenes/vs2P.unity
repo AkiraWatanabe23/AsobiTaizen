@@ -748,7 +748,7 @@ Transform:
   - {fileID: 873879562}
   - {fileID: 1850775149}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68395990
 GameObject:
@@ -1637,7 +1637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 896
+    m_Bits: 4294967295
   m_MaxRayIntersections: 0
 --- !u!1 &174677472
 GameObject:
@@ -3265,10 +3265,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1924269325}
     m_Modifications:
     - target: {fileID: -5660648507505439259, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: _pawn
-      value: 
-      objectReference: {fileID: 907221174}
-    - target: {fileID: -5660648507505439259, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: _piece
       value: 
       objectReference: {fileID: 1924269326}
@@ -3295,14 +3291,6 @@ PrefabInstance:
     - target: {fileID: 1213357437349106, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_Name
       value: pawn white (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1213357437349106, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1213357437349106, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4338145759346166, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_RootOrder
@@ -3346,26 +3334,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4338145759346166, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_Height
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_Center.y
-      value: 1.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
-      propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6941,7 +6909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4338145759346166, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.2000003
+      value: -6.2
       objectReference: {fileID: 0}
     - target: {fileID: 4338145759346166, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6970,6 +6938,10 @@ PrefabInstance:
     - target: {fileID: 4338145759346166, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428967484037818612, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb6a8f6d20d524a85bf5d4d1c6ba3d93, type: 3}
@@ -10308,7 +10280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 896
+    m_Bits: 4294967295
   m_MaxRayIntersections: 0
 --- !u!4 &964233769 stripped
 Transform:
@@ -20531,7 +20503,7 @@ Transform:
   - {fileID: 642306736}
   - {fileID: 534575944}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1924269326
 MonoBehaviour:
