@@ -8,6 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class PieceManager : MonoBehaviour
 {
+    [SerializeField] Material _white;
+    [SerializeField] Material _black;
     [Tooltip("プロモーション時に表示する")] public Image _promImage;
     [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
@@ -71,10 +73,18 @@ public class PieceManager : MonoBehaviour
         {
             if (_search._pieceInfo.tag == "BlackPiece")
             {
+                if (i.gameObject.tag == "WhitePiece")
+                {
+                    i.gameObject.GetComponent<MeshRenderer>().material = _white;
+                }
                 _whitePieces.Add(i);
             }
             else if (_search._pieceInfo.gameObject.tag == "WhitePiece")
             {
+                if (i.gameObject.tag == "BlackPiece")
+                {
+                    i.gameObject.GetComponent<MeshRenderer>().material = _black;
+                }
                 _blackPieces.Add(i);
             }
         }

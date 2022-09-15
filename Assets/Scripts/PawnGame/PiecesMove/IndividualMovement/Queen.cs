@@ -9,6 +9,7 @@ public class Queen : MonoBehaviour
 {
     MasuSearch _search;
     PieceManager _piece;
+    [Tooltip("‚±‚Ì‹îŠl‚ê‚Ü‚·"), SerializeField] Material _getable;
     [Tooltip("ˆÚ“®‚³‚¹‚éƒNƒC[ƒ“")] public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;

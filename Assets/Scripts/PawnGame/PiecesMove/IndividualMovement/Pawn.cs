@@ -9,6 +9,7 @@ public class Pawn : MonoBehaviour
 {
     MasuSearch _search;
     PieceManager _piece;
+    [Tooltip("‚±‚Ì‹îŠl‚ê‚Ü‚·"), SerializeField] Material _getable;
     [Tooltip("ˆÚ“®‚³‚¹‚éƒ|[ƒ“")] public GameObject _pieceInfo;
     public RaycastHit _hit;
     float _vecX;
@@ -118,6 +119,8 @@ public class Pawn : MonoBehaviour
                     if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                     {
                         _piece._getablePieces.Add(_hit.collider.gameObject);
+                        //’D‚¦‚é‹î‚ÌMaterial‚ğØ‚è‘Ö‚¦‚é
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
                     _piece._blackPieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚ğ‚Æ‚é‚±‚Æ‚ªo—ˆ‚Ü‚·");
@@ -130,6 +133,8 @@ public class Pawn : MonoBehaviour
                     if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                     {
                         _piece._getablePieces.Add(_hit.collider.gameObject);
+                        //’D‚¦‚é‹î‚ÌMaterial‚ğØ‚è‘Ö‚¦‚é
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
                     _piece._blackPieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚ğ‚Æ‚é‚±‚Æ‚ªo—ˆ‚Ü‚·");
@@ -227,6 +232,8 @@ public class Pawn : MonoBehaviour
                     if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                     {
                         _piece._getablePieces.Add(_hit.collider.gameObject);
+                        //’D‚¦‚é‹î‚ÌMaterial‚ğØ‚è‘Ö‚¦‚é
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
                     _piece._whitePieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚ğ‚Æ‚é‚±‚Æ‚ªo—ˆ‚Ü‚·");
@@ -239,6 +246,8 @@ public class Pawn : MonoBehaviour
                     if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                     {
                         _piece._getablePieces.Add(_hit.collider.gameObject);
+                        //’D‚¦‚é‹î‚ÌMaterial‚ğØ‚è‘Ö‚¦‚é
+                        _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
                     _piece._whitePieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚ğ‚Æ‚é‚±‚Æ‚ªo—ˆ‚Ü‚·");
