@@ -322,12 +322,12 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
                 {
                     _promQ._promWhite = _promR._promWhite = _promB._promWhite = _promK._promWhite = gameObject;
-                    _piece.ActivePanel();
+                    _piece._promImage.gameObject.SetActive(true);
                 }
                 else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
                 {
                     _promQ._promBlack = _promR._promBlack = _promB._promBlack = _promK._promBlack = gameObject;
-                    _piece.ActivePanel();
+                    _piece._promImage.gameObject.SetActive(true);
                 }
             }
 

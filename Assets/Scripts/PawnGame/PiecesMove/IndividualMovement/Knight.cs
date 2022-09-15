@@ -40,7 +40,7 @@ public class Knight : MonoBehaviour
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
-                    break;
+                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -61,7 +61,7 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                     else if (_pieceInfo.tag == "BlackPiece")
@@ -73,13 +73,14 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                 }
             }
             else //íTçıêÊÇ™î’ñ ÇÃîÕàÕäOÇæÇ¡ÇΩèÍçá
             {
+                _vecX -= 5f;
                 Debug.Log("ColliderÇ™ìñÇΩÇ¡ÇƒÇ»Ç¢");
             }
         }
@@ -96,7 +97,7 @@ public class Knight : MonoBehaviour
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
-                    break;
+                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -117,7 +118,7 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                     else if (_pieceInfo.tag == "BlackPiece")
@@ -129,13 +130,14 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                 }
             }
             else //íTçıêÊÇ™î’ñ ÇÃîÕàÕäOÇæÇ¡ÇΩèÍçá
             {
+                _vecX -= 5f;
                 Debug.Log("ColliderÇ™ìñÇΩÇ¡ÇƒÇ»Ç¢");
             }
         }
@@ -152,7 +154,7 @@ public class Knight : MonoBehaviour
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
-                    break;
+                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -173,7 +175,7 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                     else if (_pieceInfo.tag == "BlackPiece")
@@ -185,13 +187,14 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                 }
             }
             else //íTçıêÊÇ™î’ñ ÇÃîÕàÕäOÇæÇ¡ÇΩèÍçá
             {
+                _vecZ -= 5f;
                 Debug.Log("ColliderÇ™ìñÇΩÇ¡ÇƒÇ»Ç¢");
             }
         }
@@ -208,7 +211,7 @@ public class Knight : MonoBehaviour
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search._immovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
-                    break;
+                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -229,7 +232,7 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                     else if (_pieceInfo.tag == "BlackPiece")
@@ -241,13 +244,14 @@ public class Knight : MonoBehaviour
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            break;
+                            //break;
                         }
                     }
                 }
             }
             else //íTçıêÊÇ™î’ñ ÇÃîÕàÕäOÇæÇ¡ÇΩèÍçá
             {
+                _vecZ -= 5f;
                 Debug.Log("ColliderÇ™ìñÇΩÇ¡ÇƒÇ»Ç¢");
             }
         }

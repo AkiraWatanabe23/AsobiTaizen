@@ -68,7 +68,7 @@ public class MasuSearch : MonoBehaviour
                 _queen.QueenMovement();
                 break;
         }
-        //ここで、移動範囲外の駒、マスのColliderをoffにする処理を書く
+        //移動範囲外の駒、マスのColliderをoffにする処理
         foreach (var pieces in _manager._whitePieces)
         {
             pieces.GetComponent<Collider>().enabled = false;
@@ -88,8 +88,9 @@ public class MasuSearch : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 5))
             {
-                //マス番号取得(列、行それぞれ)
+                //マス番号取得(ランク)
                 _tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());
+                //マス番号取得(ファイル)
                 if (_hit.collider.gameObject.name[0] == 'a')
                 {
                     _tileFile = 1;

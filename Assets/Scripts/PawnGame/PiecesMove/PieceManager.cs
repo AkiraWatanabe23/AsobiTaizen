@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// start時に駒を取得
+/// 駒を動かしたときの細かな処理
 /// </summary>
 public class PieceManager : MonoBehaviour
 {
-    [Tooltip("プロモーション時に表示する")] Image _promImage;
+    [Tooltip("プロモーション時に表示する")] public Image _promImage;
     [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
     [Tooltip("どっちのターンか(白)")] Image _whiteTurnPanel;
@@ -44,11 +44,6 @@ public class PieceManager : MonoBehaviour
         _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
         _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
         _blackTurnPanel.gameObject.SetActive(false);
-    }
-
-    public void ActivePanel()
-    {
-        _promImage.gameObject.SetActive(true);
     }
 
     public void SwitchTurnWhite()
