@@ -401,11 +401,11 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     }
 
     /// <summary> 
-    /// プロモーションでInstantiateされた駒にスクリプトをアサインする...×アサイン,〇変数に直接代入 の考え方の方が(個人的には)理解しやすい
+    /// プロモーションでInstantiateされた駒にスクリプトをアサインする
     /// </summary>
     public void PromAssign()
     {
-        //変数に直接代入する
+        //変数に直接代入する...×アサイン,〇変数に直接代入 の考え方の方が(個人的には)理解しやすい
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
         _promQ = GameObject.Find("Queen").GetComponent<Promotion>();
