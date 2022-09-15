@@ -254,7 +254,7 @@ public class Bishop : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
-        //移動範囲以外のColliderをoffにする処理を書く
+        //移動範囲以外のマスのColliderをoffにする処理を書く
         foreach (Collider col in _search._tile)
         {
             col.enabled = false;

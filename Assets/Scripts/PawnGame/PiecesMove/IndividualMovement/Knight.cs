@@ -255,7 +255,7 @@ public class Knight : MonoBehaviour
                 Debug.Log("Colliderが当たってない");
             }
         }
-        //移動可能範囲外(移動出来ないマス)のColliderをoffにする処理を書く
+        //移動範囲以外のマスのColliderをoffにする処理を書く
         foreach (Collider col in _search._tile)
         {
             col.enabled = false;

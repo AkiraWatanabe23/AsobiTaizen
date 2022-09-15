@@ -15,7 +15,7 @@ public class PieceManager : MonoBehaviour
     [Tooltip("‚Ç‚Á‚¿‚Ìƒ^[ƒ“‚©(•)")] Image _blackTurnPanel;
     [SerializeField] public List<GameObject> _whitePieces = new List<GameObject>();
     [SerializeField] public List<GameObject> _blackPieces = new List<GameObject>();
-    [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚½Šl‚é‚±‚Æ‚ªo—ˆ‚é‹î")] public List<GameObject> _getablePieces = new List<GameObject>();
+    [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚éŠl‚é‚±‚Æ‚ªo—ˆ‚é‹î")] public List<GameObject> _getablePieces = new List<GameObject>();
     MasuSearch _search;
 
     // Start is called before the first frame update

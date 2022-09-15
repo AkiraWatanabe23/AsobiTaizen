@@ -47,7 +47,7 @@ public class MasuSearch : MonoBehaviour
     /// <summary>
     /// 駒の個別の移動処理
     /// </summary>
-    /// <param name="pieceType"></param>
+    /// <param name="pieceType"> 選んだ駒の種類 </param>
     public void Search(int pieceType)
     {
         switch (pieceType)
@@ -68,14 +68,22 @@ public class MasuSearch : MonoBehaviour
                 _queen.QueenMovement();
                 break;
         }
-        //移動範囲外の駒、マスのColliderをoffにする処理
+        //移動範囲外の駒のColliderをoffにする処理
         foreach (var pieces in _manager._whitePieces)
         {
-            pieces.GetComponent<Collider>().enabled = false;
+            //Listの要素がMissingだった場合、無視する
+            if (pieces != null)
+            {
+                pieces.GetComponent<Collider>().enabled = false;
+            }
         }
         foreach (var pieces in _manager._blackPieces)
         {
-            pieces.GetComponent<Collider>().enabled = false;
+            //Listの要素がMissingだった場合、無視する
+            if (pieces != null)
+            {
+                pieces.GetComponent<Collider>().enabled = false;
+            }
         }
     }
 

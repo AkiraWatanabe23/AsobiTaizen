@@ -147,6 +147,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary> 移動するマス(または奪う駒)をマウスクリックで選び、その位置に移動する </summary>
     public bool Move()
     {
         //マウスの位置を取得し、Rayに代入
@@ -307,10 +308,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._pieceInfo = gameObject;
             _piece._blackPieces.Remove(gameObject);
         }
-        //選択状態→通常状態(駒が移動した後の共通処理)
+        //選択状態→通常状態(駒が移動した後の処理)
         else if (_status == Status.Move)
         {
-            //駒の移動回数を加算する(ポーンの移動用)
+            //駒の移動回数を加算する(ポーンの移動制限用)
             if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
             {
                 _moveCount++;
@@ -351,7 +352,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             _search._immovablePieces.Clear();
 
-            //Collider off にした駒をもとに戻す
+            //ColliderOffにした駒をもとに戻す
             foreach (var pieces in _piece._whitePieces)
             {
                 if (pieces != null)
