@@ -49,7 +49,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("aaa");
         var go = eventData.pointerCurrentRaycast.gameObject;
 
         print($"{ name } ‚ð‘I‚ñ‚¾");
