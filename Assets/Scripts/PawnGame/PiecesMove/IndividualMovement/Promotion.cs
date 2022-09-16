@@ -20,6 +20,7 @@ public class Promotion : MonoBehaviour
     [SerializeField] GameObject _promKnightBlack;
     public GameObject _promWhite;
     public GameObject _promBlack;
+    Transform _currentPos;
     PieceManager _piece;
 
     private void Start()
@@ -39,8 +40,9 @@ public class Promotion : MonoBehaviour
             //↓(this.)gameObject...クリックするボタンのこと
             if (gameObject.name == "Queen")
             {
-                _promWhite.SetActive(false);
-                GameObject _promPiece = Instantiate(_promQueenWhite, _promWhite.transform.position, Quaternion.identity);
+                _currentPos = _promWhite.transform;
+                Destroy(_promWhite);
+                GameObject _promPiece = Instantiate(_promQueenWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -49,8 +51,9 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Rook")
             {
-                _promWhite.SetActive(false);
-                GameObject _promPiece = Instantiate(_promRookWhite, _promWhite.transform.position, Quaternion.identity);
+                _currentPos = _promWhite.transform;
+                Destroy(_promWhite);
+                GameObject _promPiece = Instantiate(_promRookWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -59,8 +62,9 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Bishop")
             {
-                _promWhite.SetActive(false);
-                GameObject _promPiece = Instantiate(_promBishopWhite, _promWhite.transform.position, Quaternion.identity);
+                _currentPos = _promWhite.transform;
+                Destroy(_promWhite);
+                GameObject _promPiece = Instantiate(_promBishopWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -69,8 +73,9 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Knight")
             {
-                _promWhite.SetActive(false);
-                GameObject _promPiece = Instantiate(_promKnightWhite, _promWhite.transform.position, Quaternion.identity);
+                _currentPos = _promWhite.transform;
+                Destroy(_promWhite);
+                GameObject _promPiece = Instantiate(_promKnightWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -85,8 +90,9 @@ public class Promotion : MonoBehaviour
         {
             if (gameObject.name == "Queen")
             {
-                _promBlack.SetActive(false);
-                GameObject _promPiece = Instantiate(_promQueenBlack, _promBlack.transform.position, Quaternion.identity);
+                _currentPos = _promBlack.transform;
+                Destroy(_promBlack);
+                GameObject _promPiece = Instantiate(_promQueenBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -95,8 +101,9 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Rook")
             {
-                _promBlack.SetActive(false);
-                GameObject _promPiece = Instantiate(_promRookBlack, _promBlack.transform.position, Quaternion.identity);
+                _currentPos = _promBlack.transform;
+                Destroy(_promBlack);
+                GameObject _promPiece = Instantiate(_promRookBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -105,8 +112,9 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Bishop")
             {
-                _promBlack.SetActive(false);
-                GameObject _promPiece = Instantiate(_promBishopBlack, _promBlack.transform.position, Quaternion.identity);
+                _currentPos = _promBlack.transform;
+                Destroy(_promBlack);
+                GameObject _promPiece = Instantiate(_promBishopBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
@@ -115,8 +123,9 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Knight")
             {
-                _promBlack.SetActive(false);
-                GameObject _promPiece = Instantiate(_promKnightBlack, _promBlack.transform.position, Quaternion.identity);
+                _currentPos = _promBlack.transform;
+                Destroy(_promBlack);
+                GameObject _promPiece = Instantiate(_promKnightBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
