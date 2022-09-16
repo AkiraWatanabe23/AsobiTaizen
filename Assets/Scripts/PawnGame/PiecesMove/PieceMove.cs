@@ -317,7 +317,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             //プロモーションへの移行(ポーンのみ)
-            if (gameObject.name.Contains("pawn"))
+            if (gameObject.name.Contains("Pawn"))
             {
                 if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
                 {

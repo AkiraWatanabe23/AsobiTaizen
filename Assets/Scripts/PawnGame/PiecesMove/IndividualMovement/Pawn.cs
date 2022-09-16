@@ -38,7 +38,7 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 for (int i = 0; i < 2; i++)
                 {
-                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                     {
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                         {
@@ -77,7 +77,7 @@ public class Pawn : MonoBehaviour
                 _vecX = 0f;
                 _vecY = 2.55f;
                 _vecZ = 2.55f;
-                if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+                if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                     {
@@ -112,7 +112,7 @@ public class Pawn : MonoBehaviour
             _vecX = 2.55f;
             _vecY = 2.55f;
             _vecZ = 2.55f;
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
@@ -126,7 +126,7 @@ public class Pawn : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "‚ð‚Æ‚é‚±‚Æ‚ªo—ˆ‚Ü‚·");
                 }
             }
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
@@ -152,7 +152,7 @@ public class Pawn : MonoBehaviour
                 _vecZ = 2.55f;
                 for (int i = 0; i < 2; i++)
                 {
-                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+                    if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                     {
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
                         {
@@ -191,7 +191,7 @@ public class Pawn : MonoBehaviour
                 _vecX = 0f;
                 _vecY = 2.55f;
                 _vecZ = 2.55f;
-                if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+                if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                 {
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
                     {
@@ -225,7 +225,7 @@ public class Pawn : MonoBehaviour
             _vecX = 2.55f;
             _vecY = 2.55f;
             _vecZ = 2.55f;
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
@@ -239,7 +239,7 @@ public class Pawn : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "‚ð‚Æ‚é‚±‚Æ‚ªo—ˆ‚Ü‚·");
                 }
             }
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 1.5f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
