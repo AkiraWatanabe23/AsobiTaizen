@@ -33,7 +33,7 @@ public class Knight : MonoBehaviour
         _vecZ = 5f;
         for (int i = 0; i < 2; i++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 //’Tõæ‚É‚¢‚½‚Ì‚ª–¡•û‚Ì‹î‚¾‚Á‚½‚ç
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -91,7 +91,7 @@ public class Knight : MonoBehaviour
         _vecZ = 5f;
         for (int j = 0; j < 2; j++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -148,7 +148,7 @@ public class Knight : MonoBehaviour
         _vecZ = 2.55f;
         for (int k = 0; k < 2; k++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -205,7 +205,7 @@ public class Knight : MonoBehaviour
         _vecZ = 2.55f;
         for (int l = 0; l < 2; l++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2.6f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {

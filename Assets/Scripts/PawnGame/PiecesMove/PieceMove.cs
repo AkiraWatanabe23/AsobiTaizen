@@ -170,7 +170,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position + _offset;
+            this.transform.position = _target.transform.position;
             GameManager._player = GameManager.Player_Two;
 
             PhaseChange(_target);
@@ -227,7 +227,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position + _offset;
+            this.transform.position = _target.transform.position;
             GameManager._player = GameManager.Player_One;
 
             PhaseChange(_target);
