@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _normalMaterial: {fileID: 2100000, guid: 973635ff02379f4429b7df0543346d32, type: 2}
-  _moveMaterial: {fileID: 2100000, guid: e2a883ed9d5383a46a826bdc3336b3f0, type: 2}
+  _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
   _color: 1
   _status: 0
   _type: 1
