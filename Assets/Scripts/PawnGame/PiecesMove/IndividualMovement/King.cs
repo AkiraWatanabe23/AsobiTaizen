@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 全方向に1マスできる
+/// キングの移動処理(全方向に1マスできる)
 /// </summary>
 public class King : MonoBehaviour
 {
@@ -32,26 +32,42 @@ public class King : MonoBehaviour
         _vecX = 0f;
         _vecY = 3f;
         _vecZ = 4.5f;
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
         {
             MovableCheck();
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, _vecY, -_vecZ), out _hit, 100))
+        else
+        {
+            Debug.Log("none");
+        }
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
         {
             MovableCheck();
+        }
+        else
+        {
+            Debug.Log("none");
         }
 
         //左右方向
         _vecX = 4.5f;
         _vecY = 3f;
         _vecZ = 0f;
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
         {
             MovableCheck();
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 100))
+        else
+        {
+            Debug.Log("none");
+        }
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
         {
             MovableCheck();
+        }
+        else
+        {
+            Debug.Log("none");
         }
 
         //////////斜め方向の動き//////////
@@ -59,25 +75,40 @@ public class King : MonoBehaviour
         _vecX = 5f;
         _vecY = 3f;
         _vecZ = 5f;
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, _vecY, _vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
         {
             MovableCheck();
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, _vecY, _vecZ), out _hit, 100))
+        else
+        {
+            Debug.Log("none");
+        }
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
         {
             MovableCheck();
+        }
+        else
+        {
+            Debug.Log("none");
         }
 
         //斜め後ろ2方向
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, _vecY, -_vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
         {
             MovableCheck();
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, _vecY, -_vecZ), out _hit, 100))
+        else
+        {
+            Debug.Log("none");
+        }
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
         {
             MovableCheck();
         }
-
+        else
+        {
+            Debug.Log("none");
+        }
     }
 
     private void MovableCheck()
