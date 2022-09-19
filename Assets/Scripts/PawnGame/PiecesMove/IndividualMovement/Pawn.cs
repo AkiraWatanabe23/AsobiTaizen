@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ポーンの移動処理
+/// ポーンの移動処理(少々複雑な動きです)
 /// </summary>
 public class Pawn : MonoBehaviour
 {

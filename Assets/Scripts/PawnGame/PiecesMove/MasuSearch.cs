@@ -21,6 +21,7 @@ public class MasuSearch : MonoBehaviour
     [SerializeField] public Bishop _bishop;
     [SerializeField] public Rook _rook;
     [SerializeField] public Queen _queen;
+    [SerializeField] public King _king;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,9 @@ public class MasuSearch : MonoBehaviour
                 break;
             case 5:
                 _queen.QueenMovement();
+                break;
+            case 6:
+                _king.KingMovement();
                 break;
         }
         //ˆÚ“®”ÍˆÍŠO‚Ì‹î‚ÌCollider‚ğoff‚É‚·‚éˆ—

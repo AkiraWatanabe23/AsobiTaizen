@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 4000011383913036}
   - component: {fileID: 33000010981930260}
   - component: {fileID: 23000012459057614}
-  m_Layer: 0
-  m_Name: Chess King Black
-  m_TagString: Untagged
+  - component: {fileID: 8479516416826629409}
+  - component: {fileID: 854660359212271455}
+  - component: {fileID: 5349705716317990640}
+  m_Layer: 9
+  m_Name: King Black
+  m_TagString: BlackPiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000013427829390}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 150.07, y: 150.06999, z: 150.0595}
+  m_LocalScale: {x: 130, y: 130, z: 130}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &33000010981930260
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -81,3 +84,70 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8479516416826629409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013427829390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 677fb34185986ae47b8f05c1bc461ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normalMaterial: {fileID: 2100000, guid: 973635ff02379f4429b7df0543346d32, type: 2}
+  _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
+  _color: 1
+  _status: 0
+  _type: 6
+  _offset: {x: 0, y: 0.5, z: 0}
+  _tileLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _whiteLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _blackLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _getScore: 6
+  _search: {fileID: 0}
+  _piece: {fileID: 0}
+  _moveCount: 0
+  _currentPieceTile: {fileID: 0}
+  _movedPieceTile: {fileID: 0}
+  _promQ: {fileID: 0}
+  _promR: {fileID: 0}
+  _promB: {fileID: 0}
+  _promK: {fileID: 0}
+--- !u!54 &854660359212271455
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013427829390}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &5349705716317990640
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013427829390}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.01
+  m_Height: 0.065
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.03}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ナイトの移動処理
+/// ナイトの移動処理(桂馬の動きを4方向にできる)
 /// </summary>
 public class Knight : MonoBehaviour
 {

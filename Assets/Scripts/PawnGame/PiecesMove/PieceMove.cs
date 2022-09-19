@@ -462,5 +462,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         Bishop,
         Rook,
         Queen,
+        King,
     }
 }

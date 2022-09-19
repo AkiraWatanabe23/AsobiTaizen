@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ビショップの移動処理
+/// ビショップの移動処理(斜め方向に何マスでも移動できる)
 /// </summary>
 public class Bishop : MonoBehaviour
 {

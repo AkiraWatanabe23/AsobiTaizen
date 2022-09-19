@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ルークの移動処理
+/// ルークの移動処理(前後左右に何マスでも移動できる)
 /// </summary>
 public class Rook : MonoBehaviour
 {

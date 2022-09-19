@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// クイーンの移動処理
+/// クイーンの移動処理(全方向に何マスでも移動できる)
 /// </summary>
 public class Queen : MonoBehaviour
 {
