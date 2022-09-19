@@ -34,12 +34,13 @@ public class Pawn : MonoBehaviour
             if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
             {
                 _vecX = 0f;
-                _vecY = 2.55f;
-                _vecZ = 2.55f;
+                _vecY = 3f;
+                _vecZ = 6f;
                 for (int i = 0; i < 2; i++)
                 {
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                     {
+                        Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -49,7 +50,7 @@ public class Pawn : MonoBehaviour
                         }
                         else if (_hit.collider.gameObject.tag == "Tile")
                         {
-                            _vecZ += 2.5f;
+                            _vecZ += 6f;
                             //íTçıíÜÇ…ìØÇ∂óvëfÇ™âΩìxÇ‡ListÇ…ì¸ÇÈÇÃÇñhÇÆ
                             if (!_search._movableTile.Contains(_hit.collider))
                             {
@@ -75,8 +76,8 @@ public class Pawn : MonoBehaviour
             else if (_pieceInfo.GetComponent<PieceMove>()._moveCount != 0)
             {
                 _vecX = 0f;
-                _vecY = 2.55f;
-                _vecZ = 2.55f;
+                _vecY = 3f;
+                _vecZ = 6f;
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
                 {
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
@@ -109,9 +110,9 @@ public class Pawn : MonoBehaviour
             }
 
             //èÌÇ…éŒÇﬂëOÇÃíTçı
-            _vecX = 2.55f;
-            _vecY = 2.55f;
-            _vecZ = 2.55f;
+            _vecX = 6f;
+            _vecY = 3f;
+            _vecZ = 6f;
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -148,8 +149,8 @@ public class Pawn : MonoBehaviour
             if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
             {
                 _vecX = 0f;
-                _vecY = 2.55f;
-                _vecZ = 2.55f;
+                _vecY = 3f;
+                _vecZ = 6f;
                 for (int i = 0; i < 2; i++)
                 {
                     if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
@@ -163,7 +164,7 @@ public class Pawn : MonoBehaviour
                         }
                         else if (_hit.collider.gameObject.tag == "Tile")
                         {
-                            _vecZ += 2.5f;
+                            _vecZ += 6f;
                             //íTçıíÜÇ…ìØÇ∂óvëfÇ™âΩìxÇ‡ListÇ…ì¸ÇÈÇÃÇñhÇÆ
                             if (!_search._movableTile.Contains(_hit.collider))
                             {
@@ -189,8 +190,8 @@ public class Pawn : MonoBehaviour
             else if (_pieceInfo.GetComponent<PieceMove>()._moveCount != 0)
             {
                 _vecX = 0f;
-                _vecY = 2.55f;
-                _vecZ = 2.55f;
+                _vecY = 3f;
+                _vecZ = 6f;
                 if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
                 {
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
@@ -222,9 +223,9 @@ public class Pawn : MonoBehaviour
                 }
             }
             //èÌÇ…éŒÇﬂëOÇÃíTçı
-            _vecX = 2.55f;
-            _vecY = 2.55f;
-            _vecZ = 2.55f;
+            _vecX = 6f;
+            _vecY = 3f;
+            _vecZ = 6f;
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")

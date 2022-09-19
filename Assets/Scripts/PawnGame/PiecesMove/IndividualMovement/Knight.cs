@@ -29,7 +29,7 @@ public class Knight : MonoBehaviour
 
         //Œj”n ‘O•ûŒü
         _vecX = 2.55f;
-        _vecY = 2.55f;
+        _vecY = 3f;
         _vecZ = 5f;
         for (int i = 0; i < 2; i++)
         {
@@ -87,7 +87,7 @@ public class Knight : MonoBehaviour
         }
         //Œj”n Œã‚ë•ûŒü
         _vecX = 2.55f;
-        _vecY = 2.55f;
+        _vecY = 3f;
         _vecZ = 5f;
         for (int j = 0; j < 2; j++)
         {
@@ -144,7 +144,7 @@ public class Knight : MonoBehaviour
         }
         //Œj”n ¶•ûŒü
         _vecX = 5f;
-        _vecY = 2.55f;
+        _vecY = 3f;
         _vecZ = 2.55f;
         for (int k = 0; k < 2; k++)
         {
@@ -201,7 +201,7 @@ public class Knight : MonoBehaviour
         }
         //Œj”n ‰E•ûŒü
         _vecX = 5f;
-        _vecY = 2.55f;
+        _vecY = 3f;
         _vecZ = 2.55f;
         for (int l = 0; l < 2; l++)
         {
