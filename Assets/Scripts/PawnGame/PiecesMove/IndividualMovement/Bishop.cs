@@ -28,13 +28,14 @@ public class Bishop : MonoBehaviour
         _pieceInfo = _search._pieceInfo;
 
         //左斜め前方向
-        _vecX = 6f;
+        _vecX = 5f;
         _vecY = 3f;
-        _vecZ = 6f;
+        _vecZ = 5f;
         for (int i = 0; i < 8 - _search._tileRank; i++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -44,8 +45,8 @@ public class Bishop : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 5f;
-                    _vecZ += 5f;
+                    _vecX += 4f;
+                    _vecZ += 4f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -60,6 +61,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
@@ -72,6 +74,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
@@ -85,13 +88,14 @@ public class Bishop : MonoBehaviour
             }
         }
         //右斜め前方向
-        _vecX = 6f;
+        _vecX = 5f;
         _vecY = 3f;
-        _vecZ = 6f;
+        _vecZ = 5f;
         for (int j = _search._tileRank; j > 1; j--)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -101,8 +105,8 @@ public class Bishop : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 5f;
-                    _vecZ += 5f;
+                    _vecX += 4f;
+                    _vecZ += 4f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -117,6 +121,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
@@ -129,6 +134,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
@@ -142,13 +148,14 @@ public class Bishop : MonoBehaviour
             }
         }
         //左斜め後ろ方向
-        _vecX = 6f;
+        _vecX = 5f;
         _vecY = 3f;
-        _vecZ = 6f;
+        _vecZ = 5f;
         for (int k = _search._tileFile; k > 1; k--)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -158,8 +165,8 @@ public class Bishop : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 5f;
-                    _vecZ += 5f;
+                    _vecX += 4f;
+                    _vecZ += 4f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -174,6 +181,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
@@ -186,6 +194,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
@@ -199,13 +208,14 @@ public class Bishop : MonoBehaviour
             }
         }
         //右斜め後ろ方向
-        _vecX = 6f;
+        _vecX = 5f;
         _vecY = 3f;
-        _vecZ = 6f;
+        _vecZ = 5f;
         for (int l = 0; l < 8 - _search._tileFile; l++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -215,8 +225,8 @@ public class Bishop : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 5f;
-                    _vecZ += 5f;
+                    _vecX += 4f;
+                    _vecZ += 4f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -231,6 +241,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._blackPieces.Remove(_hit.collider.gameObject);
                             break;
@@ -243,6 +254,7 @@ public class Bishop : MonoBehaviour
                             if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
                             {
                                 _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
                             _piece._whitePieces.Remove(_hit.collider.gameObject);
                             break;
