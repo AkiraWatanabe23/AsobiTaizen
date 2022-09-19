@@ -28,13 +28,14 @@ public class Knight : MonoBehaviour
         _pieceInfo = _search._pieceInfo;
 
         //桂馬 前方向
-        _vecX = 2.55f;
+        _vecX = 5f;
         _vecY = 3f;
-        _vecZ = 5f;
+        _vecZ = 9f;
         for (int i = 0; i < 2; i++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 //探索先にいたのが味方の駒だったら
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -45,7 +46,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX -= 5f;
+                    _vecX -= 9f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -53,46 +54,24 @@ public class Knight : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_pieceInfo.tag == "WhitePiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "BlackPiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
-                    else if (_pieceInfo.tag == "BlackPiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "WhitePiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
+                    GetablePiece();
                 }
             }
             else //探索先が盤面の範囲外だった場合
             {
-                _vecX -= 5f;
+                _vecX -= 9f;
                 Debug.Log("Colliderが当たってない");
             }
         }
         //桂馬 後ろ方向
-        _vecX = 2.55f;
+        _vecX = 5f;
         _vecY = 3f;
-        _vecZ = 5f;
+        _vecZ = 9f;
         for (int j = 0; j < 2; j++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -102,7 +81,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX -= 5f;
+                    _vecX -= 9f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -110,46 +89,24 @@ public class Knight : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_pieceInfo.tag == "WhitePiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "BlackPiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
-                    else if (_pieceInfo.tag == "BlackPiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "WhitePiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
+                    GetablePiece();
                 }
             }
             else //探索先が盤面の範囲外だった場合
             {
-                _vecX -= 5f;
+                _vecX -= 9f;
                 Debug.Log("Colliderが当たってない");
             }
         }
         //桂馬 左方向
-        _vecX = 5f;
+        _vecX = 9f;
         _vecY = 3f;
-        _vecZ = 2.55f;
+        _vecZ = 5f;
         for (int k = 0; k < 2; k++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -159,7 +116,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ -= 5f;
+                    _vecZ -= 9f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -167,46 +124,24 @@ public class Knight : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_pieceInfo.tag == "WhitePiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "BlackPiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
-                    else if (_pieceInfo.tag == "BlackPiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "WhitePiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
+                    GetablePiece();
                 }
             }
             else //探索先が盤面の範囲外だった場合
             {
-                _vecZ -= 5f;
+                _vecZ -= 9f;
                 Debug.Log("Colliderが当たってない");
             }
         }
         //桂馬 右方向
-        _vecX = 5f;
+        _vecX = 9f;
         _vecY = 3f;
-        _vecZ = 2.55f;
+        _vecZ = 5f;
         for (int l = 0; l < 2; l++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -216,7 +151,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ -= 5f;
+                    _vecZ -= 9f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
@@ -224,35 +159,12 @@ public class Knight : MonoBehaviour
                     }
                     _search._tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
-                    if (_pieceInfo.tag == "WhitePiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "BlackPiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
-                    else if (_pieceInfo.tag == "BlackPiece")
-                    {
-                        if (_hit.collider.gameObject.tag == "WhitePiece")
-                        {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
-                            {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
-                            }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
-                            //break;
-                        }
-                    }
+                    GetablePiece();
                 }
             }
             else //探索先が盤面の範囲外だった場合
             {
-                _vecZ -= 5f;
+                _vecZ -= 9f;
                 Debug.Log("Colliderが当たってない");
             }
         }
@@ -261,6 +173,37 @@ public class Knight : MonoBehaviour
         {
             col.enabled = false;
             Debug.Log(col + "のColliderをoffにします");
+        }
+    }
+
+    /// <summary>
+    /// 駒を奪える場合の処理
+    /// </summary>
+    public void GetablePiece()
+    {
+        if (_pieceInfo.tag == "WhitePiece")
+        {
+            if (_hit.collider.gameObject.tag == "BlackPiece")
+            {
+                if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                {
+                    _piece._getablePieces.Add(_hit.collider.gameObject);
+                    _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
+                }
+                _piece._blackPieces.Remove(_hit.collider.gameObject);
+            }
+        }
+        else if (_pieceInfo.tag == "BlackPiece")
+        {
+            if (_hit.collider.gameObject.tag == "WhitePiece")
+            {
+                if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                {
+                    _piece._getablePieces.Add(_hit.collider.gameObject);
+                    _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
+                }
+                _piece._whitePieces.Remove(_hit.collider.gameObject);
+            }
         }
     }
 }

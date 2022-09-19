@@ -512,9 +512,4 @@ public class Queen : MonoBehaviour
             Debug.Log(col + "‚ÌCollider‚ðoff‚É‚µ‚Ü‚·");
         }
     }
-
-    //public void GetablePiece()
-    //{
-
-    //}
 }
