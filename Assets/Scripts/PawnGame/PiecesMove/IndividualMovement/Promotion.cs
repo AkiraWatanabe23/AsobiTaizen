@@ -39,8 +39,7 @@ public class Promotion : MonoBehaviour
             //↓(this.)gameObject...クリックするボタンのこと
             if (gameObject.name == "Queen")
             {
-                _currentPos = _promWhite.transform;
-                Destroy(_promWhite);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promQueenWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
@@ -50,8 +49,7 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Rook")
             {
-                _currentPos = _promWhite.transform;
-                Destroy(_promWhite);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promRookWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
@@ -61,8 +59,7 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Bishop")
             {
-                _currentPos = _promWhite.transform;
-                Destroy(_promWhite);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promBishopWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
@@ -72,8 +69,7 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Knight")
             {
-                _currentPos = _promWhite.transform;
-                Destroy(_promWhite);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promKnightWhite, _currentPos.position, _currentPos.rotation);
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
@@ -89,8 +85,7 @@ public class Promotion : MonoBehaviour
         {
             if (gameObject.name == "Queen")
             {
-                _currentPos = _promBlack.transform;
-                Destroy(_promBlack);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promQueenBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
@@ -100,8 +95,7 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Rook")
             {
-                _currentPos = _promBlack.transform;
-                Destroy(_promBlack);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promRookBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
@@ -111,8 +105,7 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Bishop")
             {
-                _currentPos = _promBlack.transform;
-                Destroy(_promBlack);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promBishopBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
@@ -122,8 +115,7 @@ public class Promotion : MonoBehaviour
             }
             else if (gameObject.name == "Knight")
             {
-                _currentPos = _promBlack.transform;
-                Destroy(_promBlack);
+                PromPos();
                 GameObject _promPiece = Instantiate(_promKnightBlack, _currentPos.position, _currentPos.rotation);
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
@@ -134,5 +126,26 @@ public class Promotion : MonoBehaviour
             _promWhite = null;
             _promBlack = null;
         }
+    }
+
+    /// <summary>
+    /// プロモーション時の位置情報
+    /// </summary>
+    private void PromPos()
+    {
+        if (_promWhite != null && _promBlack == null)
+        {
+            _currentPos = _promWhite.transform;
+            Destroy(_promWhite);
+        }
+        else if (_promWhite == null && _promBlack != null)
+        {
+            _currentPos = _promBlack.transform;
+            Destroy(_promBlack);
+        }
+
+        Vector3 _pos = _currentPos.position;
+        _pos.y = 1f;
+        _currentPos.position = _pos;
     }
 }
