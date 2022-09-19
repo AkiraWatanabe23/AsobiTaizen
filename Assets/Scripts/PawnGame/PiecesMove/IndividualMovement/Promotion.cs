@@ -28,7 +28,6 @@ public class Promotion : MonoBehaviour
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
-
     /// <summary>
     /// パネルのボタンクリックでプロモーション
     /// </summary>
