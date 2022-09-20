@@ -249,7 +249,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
     public void ChangeState()
     {
         //’Êíó‘Ô¨‘I‘ğó‘Ô(”’)
-        if (_status == Status.Normal && _color == PieceColor.White && GameManager._phase == Phase.White && _currentPieceTile != _movedPieceTile)
+        if (_status == Status.Normal && _color == PieceColor.White && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
@@ -262,7 +262,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             _piece._whitePieces.Remove(gameObject);
         }
         //’Êíó‘Ô¨‘I‘ğó‘Ô(•)
-        else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._phase == Phase.Black && _currentPieceTile != _movedPieceTile)
+        else if (_status == Status.Normal && _color == PieceColor.Black && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
