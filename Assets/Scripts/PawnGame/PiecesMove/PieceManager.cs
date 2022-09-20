@@ -10,11 +10,6 @@ public class PieceManager : MonoBehaviour
 {
     [SerializeField] Material _white;
     [SerializeField] Material _black;
-    [Tooltip("プロモーション時に表示する")] public Image _promImage;
-    [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
-    [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
-    [Tooltip("どっちのターンか(白)")] Image _whiteTurnPanel;
-    [Tooltip("どっちのターンか(黒)")] Image _blackTurnPanel;
     [SerializeField] public List<GameObject> _whitePieces = new List<GameObject>();
     [SerializeField] public List<GameObject> _blackPieces = new List<GameObject>();
     [Tooltip("探索範囲にいる獲ることが出来る駒")] public List<GameObject> _getablePieces = new List<GameObject>();
@@ -25,43 +20,20 @@ public class PieceManager : MonoBehaviour
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
 
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (transform.GetChild(i).gameObject.tag == "WhitePiece")
+            if (transform.GetChild(i).gameObject != null)
             {
-                _whitePieces.Add(transform.GetChild(i).gameObject);
-            }
-            else if (transform.GetChild(i).gameObject.tag == "BlackPiece")
-            {
-                _blackPieces.Add(transform.GetChild(i).gameObject);
+                if (transform.GetChild(i).gameObject.tag == "WhitePiece")
+                {
+                    _whitePieces.Add(transform.GetChild(i).gameObject);
+                }
+                else if (transform.GetChild(i).gameObject.tag == "BlackPiece")
+                {
+                    _blackPieces.Add(transform.GetChild(i).gameObject);
+                }
             }
         }
-        _promImage = GameObject.Find("PromotionPanel").GetComponent<Image>();
-        _promImage.gameObject.SetActive(false);
-        //↓ターン表示のText
-        _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
-        _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
-        _whiteTurn.color = Color.yellow;
-        //↓ターン表示のPanel
-        _whiteTurnPanel = GameObject.Find("WhiteTurnPanel").GetComponent<Image>();
-        _blackTurnPanel = GameObject.Find("BlackTurnPanel").GetComponent<Image>();
-        _blackTurnPanel.gameObject.SetActive(false);
-    }
-
-    public void SwitchTurnWhite()
-    {
-        _whiteTurn.color = Color.black;
-        _blackTurn.color = Color.yellow;
-        _whiteTurnPanel.gameObject.SetActive(false);
-        _blackTurnPanel.gameObject.SetActive(true);
-    }
-
-    public void SwitchTurnBlack()
-    {
-        _whiteTurn.color = Color.yellow;
-        _blackTurn.color = Color.black;
-        _whiteTurnPanel.gameObject.SetActive(true);
-        _blackTurnPanel.gameObject.SetActive(false);
     }
 
     /// <summary>

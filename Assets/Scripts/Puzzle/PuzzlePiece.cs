@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-//↓マウスカーソルポジションの強制移動させる処理をするのに宣言する必要があるらしい
-using System.Runtime.InteropServices;
 
-/// <summary> 
-/// 駒の移動に関するスクリプト
+/// <summary>
+/// 駒の移動に関するもの(パズル版)
 /// </summary>
-public class PieceMove : MonoBehaviour, IPointerClickHandler
+public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
 {
-    [Tooltip("黒番目線のカメラ")] public static Camera _camera;
     [Tooltip("通常状態のマテリアル"), SerializeField] Material _normalMaterial;
     [Tooltip("移動状態のマテリアル"), SerializeField] Material _moveMaterial;
     Renderer _renderer;
@@ -23,29 +20,15 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
-    //駒の得点(Inspectorで設定)
-    [SerializeField] public int _getScore;
     //移動可能範囲の探索
     [SerializeField] MasuSearch _search;
     [SerializeField] PieceManager _piece;
-    GameManager _manager;
     [Tooltip("駒の移動回数")] public int _moveCount = 0;
     public GameObject _currentPieceTile;
     public GameObject _movedPieceTile;
-    [SerializeField] Promotion _promQ;
-    [SerializeField] Promotion _promR;
-    [SerializeField] Promotion _promB;
-    [SerializeField] Promotion _promK;
 
-    //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
-    //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
-    //SetCursorPos(関数)...指定したファイル内のどの機能(関数)を使うのか
-    //以下2行はセットで書かないとコンパイルエラー発生
-    [DllImport("user32.dll")]
-    public static extern bool SetCursorPos(int x, int y);
-
-    /// <summary> 
-    /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
+    /// <summary>
+    /// オブジェクトをクリックした時の処理
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
@@ -53,7 +36,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         var go = eventData.pointerCurrentRaycast.gameObject;
 
         print($"{ name } を選んだ");
-        go.GetComponent<PieceMove>().ChangeState();
+        go.GetComponent<PuzzlePiece>().ChangeState();
 
         //_movedPieceTile = null で駒の再選択を出来るようにする
         if (_status == Status.Normal && _currentPieceTile == _movedPieceTile)
@@ -62,11 +45,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    // Start is called before the first frame update
     void Start()
     {
-        _manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _renderer = GetComponent<Renderer>();
-        _camera = GameObject.Find("Camera(black)").GetComponent<Camera>();
 
         if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
         {
@@ -148,12 +130,10 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    /// <summary> 移動するマス(または奪う駒)をマウスクリックで選び、その位置に移動する </summary>
     public bool Move()
     {
         //マウスの位置を取得し、Rayに代入
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Ray _ray2 = _camera.ScreenPointToRay(Input.mousePosition);
         float _rayDistance = 100;
 
         //白番目線の駒の移動
@@ -174,9 +154,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             this.transform.position = _target.transform.position;
             GameManager._player = GameManager.Player_Two;
-
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
             GameManager._phase = Phase.Black;
 
             print($"駒は {_target.name} をとった");
@@ -198,9 +175,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 {
                     this.transform.position = _target.transform.position + _offset;
                     GameManager._player = GameManager.Player_Two;
-
-                    PhaseChange(_target);
-                    SetCursorPos(Screen.width / 2, Screen.height / 2);
                     GameManager._phase = Phase.Black;
 
                     print($"駒は {_target.name} に移動した");
@@ -215,73 +189,64 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
         //黒番目線の駒の移動
         //黒番目線のRayの処理(駒を奪う場合)
-        if (Physics.Raycast(_ray2, out _hit, _rayDistance, _whiteLayer))
-        {
-            GameObject _target = _hit.collider.gameObject;
-            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
+        //if (Physics.Raycast(_ray2, out _hit, _rayDistance, _whiteLayer))
+        //{
+        //    GameObject _target = _hit.collider.gameObject;
+        //    int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
-            if (_target.tag == "WhitePiece")
-            {
-                //黒のスコアを加算
-                GameManager._scoreBlack += _targetScore;
-                //盤上にある駒のカウントを減らして、駒を破壊する
-                GameManager._wPieceCount--;
-                Destroy(_target);
-            }
+        //    if (_target.tag == "WhitePiece")
+        //    {
+        //        //黒のスコアを加算
+        //        GameManager._scoreBlack += _targetScore;
+        //        //盤上にある駒のカウントを減らして、駒を破壊する
+        //        GameManager._wPieceCount--;
+        //        Destroy(_target);
+        //    }
 
-            this.transform.position = _target.transform.position;
-            GameManager._player = GameManager.Player_One;
+        //    this.transform.position = _target.transform.position;
+        //    GameManager._player = GameManager.Player_One;
+        //    GameManager._phase = Phase.White;
 
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager._phase = Phase.White;
+        //    print($"駒は {_target.name} をとった");
 
-            print($"駒は {_target.name} をとった");
+        //    if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+        //    {
+        //        GameObject _hitTile = hitTile.collider.gameObject;
+        //        print($"駒は {_hitTile.name} に移動した");
+        //    }
 
-            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-            {
-                GameObject _hitTile = hitTile.collider.gameObject;
-                print($"駒は {_hitTile.name} に移動した");
-            }
-
-            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
-            {
-                _movedPieceTile = _hit.collider.gameObject;
-            }
-            return true;
-        }
+        //    if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
+        //    {
+        //        _movedPieceTile = _hit.collider.gameObject;
+        //    }
+        //    return true;
+        //}
         //黒番目線のRayの処理(移動処理)
-        else if (Physics.Raycast(_ray2, out _hit, _rayDistance, _tileLayer))
-        {
-            foreach (var i in _search._movableTile)
-            {
-                GameObject _target = _hit.collider.gameObject;
-                if (_target == i.gameObject)
-                {
-                    this.transform.position = _target.transform.position + _offset;
-                    GameManager._player = GameManager.Player_One;
+        //else if (Physics.Raycast(_ray2, out _hit, _rayDistance, _tileLayer))
+        //{
+        //    foreach (var i in _search._movableTile)
+        //    {
+        //        GameObject _target = _hit.collider.gameObject;
+        //        if (_target == i.gameObject)
+        //        {
+        //            this.transform.position = _target.transform.position + _offset;
+        //            GameManager._player = GameManager.Player_One;
+        //            GameManager._phase = Phase.White;
 
-                    PhaseChange(_target);
-                    SetCursorPos(Screen.width / 2, Screen.height / 2);
-                    GameManager._phase = Phase.White;
-
-                    print($"駒は {_target.name} に移動した");
-                }
-                else
-                {
-                    Debug.Log("指定したマスには動けません");
-                }
-            }
-            _movedPieceTile = _hit.collider.gameObject;
-            return true;
-        }
+        //            print($"駒は {_target.name} に移動した");
+        //        }
+        //        else
+        //        {
+        //            Debug.Log("指定したマスには動けません");
+        //        }
+        //    }
+        //    _movedPieceTile = _hit.collider.gameObject;
+        //    return true;
+        //}
         return false;
     }
 
-    /// <summary> 
-    /// マウスクリックをした(駒を選んだ、動かした)時に実行される処理
-    /// </summary>
-    public void ChangeState() //駒を右クリックをすると選択状態→通常状態にできる
+    public void ChangeState()
     {
         //通常状態→選択状態(白)
         if (_status == Status.Normal && _color == PieceColor.White && GameManager._phase == Phase.White && _currentPieceTile != _movedPieceTile)
@@ -292,7 +257,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search._piece = this;
+            _search._puzzle = this;
             _search._pieceInfo = gameObject;
             _piece._whitePieces.Remove(gameObject);
         }
@@ -305,7 +270,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search._piece = this;
+            _search._puzzle = this;
             _search._pieceInfo = gameObject;
             _piece._blackPieces.Remove(gameObject);
         }
@@ -316,21 +281,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
             {
                 _moveCount++;
-            }
-
-            //プロモーションへの移行(ポーンのみ)
-            if (gameObject.name.Contains("Pawn"))
-            {
-                if (gameObject.tag == "WhitePiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 8)
-                {
-                    _promQ._promWhite = _promR._promWhite = _promB._promWhite = _promK._promWhite = gameObject;
-                    _manager._promImage.gameObject.SetActive(true);
-                }
-                else if (gameObject.tag == "BlackPiece" && int.Parse(_movedPieceTile.name[1].ToString()) == 1)
-                {
-                    _promQ._promBlack = _promR._promBlack = _promB._promBlack = _promK._promBlack = gameObject;
-                    _manager._promImage.gameObject.SetActive(true);
-                }
             }
 
             //マスを元の状態に戻す
@@ -399,46 +349,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _search._movableTile.Clear();
             _search._piece = null;
             _search._pieceInfo = null;
-        }
-    }
-
-    /// <summary> 
-    /// プロモーションでInstantiateされた駒にスクリプトをアサインする
-    /// </summary>
-    public void PromAssign()
-    {
-        //変数に直接代入する...×アサイン,〇変数に直接代入 の考え方の方が(個人的には)理解しやすい
-        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
-        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
-        _promQ = GameObject.Find("Queen").GetComponent<Promotion>();
-        _promR = GameObject.Find("Rook").GetComponent<Promotion>();
-        _promB = GameObject.Find("Bishop").GetComponent<Promotion>();
-        _promK = GameObject.Find("Knight").GetComponent<Promotion>();
-    }
-
-    /// <summary>
-    /// ターン表示の切り替え、駒の選択状態→通常状態
-    /// </summary>
-    /// <param name="_target"></param>
-    public void PhaseChange(GameObject _target)
-    {
-        switch (_color)
-        {
-            case PieceColor.White:
-                _manager.SwitchTurnWhite();
-                if (_target.tag == "WhitePiece")
-                {
-                    _status = Status.Normal;
-                }
-                break;
-
-            case PieceColor.Black:
-                _manager.SwitchTurnBlack();
-                if (_target.tag == "BlackPiece")
-                {
-                    _status = Status.Normal;
-                }
-                break;
         }
     }
 

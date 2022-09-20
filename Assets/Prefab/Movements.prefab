@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &150188184350302790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 150188184350302791}
+  - component: {fileID: 150188184350302784}
+  - component: {fileID: 150188184350302787}
+  - component: {fileID: 150188184350302786}
+  - component: {fileID: 150188184350302789}
+  - component: {fileID: 150188184350302788}
+  - component: {fileID: 150188184350302785}
+  m_Layer: 0
+  m_Name: Movements
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &150188184350302791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &150188184350302784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5712969793996d64789101dbc5056658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getable: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+  _pieceInfo: {fileID: 0}
+--- !u!114 &150188184350302787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4152dca6fbafdb49a9aa01f96e1d38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getable: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+  _pieceInfo: {fileID: 0}
+--- !u!114 &150188184350302786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d2c5eea30c3d14fb58bcb451740009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getable: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+  _pieceInfo: {fileID: 0}
+--- !u!114 &150188184350302789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c8eb0454f3d5b4a9f6732c661dc99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getable: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+  _pieceInfo: {fileID: 0}
+--- !u!114 &150188184350302788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e13dc0458454e7439faf754e60b1b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getable: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+  _pieceInfo: {fileID: 0}
+--- !u!114 &150188184350302785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150188184350302790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15eb1e29329d12d45b054245663fd543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getable: {fileID: 2100000, guid: 63d8141d627c7bf449786b54e24914ce, type: 2}
+  _pieceInfo: {fileID: 0}
