@@ -168,7 +168,6 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             PuzzleManager._moveCount--;
-            Debug.Log(_moveCount);
 
             return true;
         }
