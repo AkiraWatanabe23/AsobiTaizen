@@ -141,14 +141,15 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
         if (Physics.Raycast(_ray, out _hit, _rayDistance, _blackLayer))
         {
             GameObject _target = _hit.collider.gameObject;
-            int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
+            //int _targetScore = _target.GetComponent<PieceMove>()._getScore; //とった駒が持っている_getScoreを取得
 
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                GameManager._scoreWhite += _targetScore;
+                //GameManager._scoreWhite += _targetScore;
                 //盤上にある敵駒のカウントを減らして、駒を破壊する
                 GameManager._bPieceCount--;
+                PuzzleManager._getPieceCount++;
                 Destroy(_target);
             }
 
@@ -163,6 +164,10 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
                 GameObject _hitTile = hitTile.collider.gameObject;
                 print($"駒は {_hitTile.name} に移動した");
             }
+
+            PuzzleManager._moveCount--;
+            Debug.Log(_moveCount);
+
             return true;
         }
         //白番目線のRayの処理(移動処理)
@@ -185,6 +190,10 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
                 }
             }
             _movedPieceTile = _hit.collider.gameObject;
+
+            PuzzleManager._moveCount--;
+            Debug.Log(_moveCount);
+
             return true;
         }
         //黒番目線の駒の移動
@@ -349,6 +358,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             _search._movableTile.Clear();
             _search._piece = null;
             _search._pieceInfo = null;
+            _search._puzzle = null;
         }
     }
 

@@ -9,7 +9,7 @@ public class PuzzleManager : MonoBehaviour
     public static int _moveCount;
     public static int _maxMoveCount;
     //älÇ¡ÇΩãÓÇÃêî
-    public int _getPieceCount;
+    public static int _getPieceCount;
 
     [SerializeField] public Text _moveText;
     [SerializeField] public Text _maxText;
@@ -43,12 +43,12 @@ public class PuzzleManager : MonoBehaviour
         _maxText.text = _maxMoveCount.ToString();
 
         //ÉNÉäÉAéû
-        if (_getPieceCount == _start && _moveCount != 0)
+        if (_getPieceCount == _start)
         {
             _clearImage.gameObject.SetActive(true);
         }
         //é∏îséû
-        else if (_moveCount == 0 && _getPieceCount != _start)
+        else if (_getPieceCount != _start && _moveCount == 0)
         {
             _failedImage.gameObject.SetActive(true);
         }
