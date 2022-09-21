@@ -15,7 +15,9 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
     [Tooltip("駒の状態のenum")] public Status _status = Status.Normal;
     [Tooltip("駒の種類のenum")] public PieceType _type;
     RaycastHit _hit;
-    [SerializeField] Vector3 _offset = Vector3.up;
+    [Header("移動後の位置調整")]
+    [SerializeField] Vector3 _movedOffset = Vector3.up;
+    [SerializeField] Vector3 _gotOffset = Vector3.down;
     //レイヤーマスク(InspectorのLayerから選択する)
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
@@ -153,7 +155,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position;
+            this.transform.position = _target.transform.position + _gotOffset;
             GameManager._player = GameManager.Player_Two;
             GameManager._phase = Phase.Black;
 
@@ -178,7 +180,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
                 GameObject _target = _hit.collider.gameObject;
                 if (_target == i.gameObject)
                 {
-                    this.transform.position = _target.transform.position + _offset;
+                    this.transform.position = _target.transform.position + _movedOffset;
                     GameManager._player = GameManager.Player_Two;
                     GameManager._phase = Phase.Black;
 
