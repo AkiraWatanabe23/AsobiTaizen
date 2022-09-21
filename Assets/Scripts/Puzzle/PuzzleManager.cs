@@ -7,7 +7,7 @@ public class PuzzleManager : MonoBehaviour
 {
     //‹î‚ÌˆÚ“®§ŒÀ
     public static int _moveCount;
-    public static int _maxMoveCount;
+    public int _maxMoveCount;
     //Šl‚Á‚½‹î‚Ì”
     public static int _getPieceCount;
 
@@ -21,8 +21,7 @@ public class PuzzleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _moveCount = 6;
-        _maxMoveCount = 6;
+        _moveCount = _maxMoveCount;
         _clearImage.gameObject.SetActive(false);
         _failedImage.gameObject.SetActive(false);
 
@@ -33,7 +32,6 @@ public class PuzzleManager : MonoBehaviour
                 _start++;
             }
         }
-        Debug.Log(_start);
     }
 
     // Update is called once per frame

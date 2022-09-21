@@ -683,6 +683,10 @@ PrefabInstance:
       propertyPath: _failedImage
       value: 
       objectReference: {fileID: 2016386866}
+    - target: {fileID: 2831416701572959036, guid: 64a32c99c0285d547b7ba1f3ae28ffbf, type: 3}
+      propertyPath: _maxMoveCount
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2831416701572959037, guid: 64a32c99c0285d547b7ba1f3ae28ffbf, type: 3}
       propertyPath: m_RootOrder
       value: 2

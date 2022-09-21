@@ -343,8 +343,8 @@ public class Queen : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 4f;
-                    _vecZ += 4f;
+                    _vecX += 4.3f;
+                    _vecZ += 4.3f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);
