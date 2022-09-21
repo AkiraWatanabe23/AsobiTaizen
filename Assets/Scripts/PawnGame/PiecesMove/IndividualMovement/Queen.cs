@@ -333,6 +333,7 @@ public class Queen : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
             {
+                Debug.DrawRay(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), Color.yellow, 10f);
                 //íTçıêÊÇ…Ç¢ÇΩÇÃÇ™ñ°ï˚ÇÃãÓÇæÇ¡ÇΩÇÁ
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -343,8 +344,8 @@ public class Queen : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 4.3f;
-                    _vecZ += 4.3f;
+                    _vecX += 4f;
+                    _vecZ += 4f;
                     if (!_search._movableTile.Contains(_hit.collider))
                     {
                         _search._movableTile.Add(_hit.collider);

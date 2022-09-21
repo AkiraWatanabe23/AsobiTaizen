@@ -845,26 +845,50 @@ PrefabInstance:
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 800848185715838757, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 800848185986526639, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 800848185986526639, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 800848186179931412, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 800848186179931412, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 800848187192271300, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 800848187192271300, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 800848187304204896, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 800848187304204896, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 800848187583148590, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 800848187583148590, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3600357801588242376, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
       propertyPath: m_Name
       value: Piece
@@ -917,5 +941,9 @@ PrefabInstance:
       propertyPath: _search
       value: 
       objectReference: {fileID: 295625820}
+    - target: {fileID: 3957056699840886460, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
+      propertyPath: _movedOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b293ebe488af8445a28550e444d8ca4, type: 3}
