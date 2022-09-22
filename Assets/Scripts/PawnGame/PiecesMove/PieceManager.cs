@@ -20,7 +20,7 @@ public class PieceManager : MonoBehaviour
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (transform.GetChild(i).gameObject != null)
             {

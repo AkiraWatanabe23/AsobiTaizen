@@ -44,7 +44,6 @@ public class Promotion : MonoBehaviour
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
@@ -54,7 +53,6 @@ public class Promotion : MonoBehaviour
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
@@ -64,7 +62,6 @@ public class Promotion : MonoBehaviour
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
@@ -74,7 +71,6 @@ public class Promotion : MonoBehaviour
                 _piece._whitePieces.Remove(_promWhite);
                 _piece._whitePieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("ナイトにプロモーションします");
             }
             _promWhite = null;
@@ -90,7 +86,6 @@ public class Promotion : MonoBehaviour
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
@@ -100,7 +95,6 @@ public class Promotion : MonoBehaviour
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
@@ -110,7 +104,6 @@ public class Promotion : MonoBehaviour
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
@@ -120,7 +113,6 @@ public class Promotion : MonoBehaviour
                 _piece._blackPieces.Remove(_promBlack);
                 _piece._blackPieces.Add(_promPiece);
                 PieceMove _pieceInfo = _promPiece.GetComponent<PieceMove>();
-                _pieceInfo.PromAssign();
                 Debug.Log("ナイトにプロモーションします");
             }
             _promWhite = null;
