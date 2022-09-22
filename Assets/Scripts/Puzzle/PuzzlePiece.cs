@@ -149,8 +149,6 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             {
                 //白のスコアを加算
                 //GameManager._scoreWhite += _targetScore;
-                //盤上にある敵駒のカウントを減らして、駒を破壊する
-                GameManager._bPieceCount--;
                 PuzzleManager._getPieceCount++;
                 Destroy(_target);
             }

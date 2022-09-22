@@ -155,8 +155,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_target.tag == "BlackPiece")
             {
                 //白のスコアを加算
-                //盤上にある敵駒のカウントを減らして、駒を破壊する
-                GameManager._bPieceCount--;
                 Destroy(_target);
             }
 
@@ -184,8 +182,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_target.tag == "WhitePiece")
             {
                 //黒のスコアを加算
-                //盤上にある駒のカウントを減らして、駒を破壊する
-                GameManager._wPieceCount--;
                 Destroy(_target);
             }
 
