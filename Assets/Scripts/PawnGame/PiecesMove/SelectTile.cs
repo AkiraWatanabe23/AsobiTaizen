@@ -41,6 +41,7 @@ public class SelectTile : MonoBehaviour
 
             print($"{_setPiece.name} ‚ð {_target.name} ‚É”z’u‚µ‚½");
         }
+        
         _set = null;
 
         SwitchTurn();

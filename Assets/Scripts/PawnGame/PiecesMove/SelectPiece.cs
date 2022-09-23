@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Panelに設置したボタンの駒を選ぶスクリプト
@@ -19,16 +20,15 @@ public class SelectPiece : MonoBehaviour
     int _blackRookCount = 4;
     int _blackBishopCount = 4;
     int _blackKnightCount = 4;
-    //選んだマス
-    public GameObject _selectTile;
-    Transform _currentPos;
-    PieceManager _piece;
+    [Header("駒を選ぶPanel")]
+    [SerializeField] Image _whitePanel;
+    [SerializeField] Image _blackPanel;
+    [SerializeField] Text _whereText;
     SelectTile _select;
 
     // Start is called before the first frame update
     void Start()
     {
-        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
         _select = GameObject.Find("GameManager").GetComponent< SelectTile > ();
     }
 
@@ -47,6 +47,7 @@ public class SelectPiece : MonoBehaviour
                     _select._set = _selectWhite_One;
                     _whiteRookCount--;
                     print($"白ルークはあと {_whiteRookCount} 個");
+                    UISwitch();
                 }
                 else if (_whiteRookCount == 0)
                 {
@@ -60,6 +61,7 @@ public class SelectPiece : MonoBehaviour
                     _select._set = _selectWhite_Two;
                     _whiteBishopCount--;
                     print($"白ビショップはあと {_whiteBishopCount} 個");
+                    UISwitch();
                 }
                 else if (_whiteBishopCount == 0)
                 {
@@ -73,6 +75,7 @@ public class SelectPiece : MonoBehaviour
                     _select._set = _selectWhite_Three;
                     _whiteKnightCount--;
                     print($"白ナイトはあと {_whiteKnightCount} 個");
+                    UISwitch();
                 }
                 else if (_whiteKnightCount == 0)
                 {
@@ -90,6 +93,7 @@ public class SelectPiece : MonoBehaviour
                     _select._set = _selectBlack_One;
                     _blackRookCount--;
                     print($"黒ルークはあと {_blackRookCount} 個");
+                    UISwitch();
                 }
                 else if (_blackRookCount == 0)
                 {
@@ -103,6 +107,7 @@ public class SelectPiece : MonoBehaviour
                     _select._set = _selectBlack_Two;
                     _blackBishopCount--;
                     print($"黒ルークはあと {_blackBishopCount} 個");
+                    UISwitch();
                 }
                 else if (_blackBishopCount == 0)
                 {
@@ -116,6 +121,7 @@ public class SelectPiece : MonoBehaviour
                     _select._set = _selectBlack_Three;
                     _blackKnightCount--;
                     print($"黒ルークはあと {_blackKnightCount} 個");
+                    UISwitch();
                 }
                 else if (_blackKnightCount == 0)
                 {
@@ -123,5 +129,19 @@ public class SelectPiece : MonoBehaviour
                 }
             }
         }
+    }
+
+    void UISwitch()
+    {
+        if (GameManager._player == 1)
+        {
+            _whitePanel.gameObject.SetActive(false);
+        }
+        else if (GameManager._player == 2)
+        {
+            _blackPanel.gameObject.SetActive(false);
+        }
+        _whereText.gameObject.SetActive(true);
+        _select.SetPiece();
     }
 }
