@@ -27,6 +27,9 @@ public class SelectTile : MonoBehaviour
         {
             GameObject _target = _hit.collider.gameObject;
 
+            float x = -90f;
+            _target.transform.rotation = Quaternion.Euler(x, 0f, 0f);
+
             GameObject _setPiece = Instantiate(_set, _target.transform.position + new Vector3(0, 0.5f), _target.transform.rotation);
             if (_setPiece.tag == "WhitePiece")
             {
