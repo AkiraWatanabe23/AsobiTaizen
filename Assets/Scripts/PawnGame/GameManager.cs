@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
     [SerializeField] Button _whiteSelect;
     [SerializeField] Button _blackSelect;
+    public GameObject _getPiece;
 
 
     // Start is called before the first frame update
@@ -58,7 +59,13 @@ public class GameManager : MonoBehaviour
             _blackSelect.gameObject.SetActive(true);
         }
         //勝利時(得点による)のシーン遷移
-        //引き分け時(駒の数がお互い1つになった時)のシーン遷移
+        //敵のキングを獲ったとき、または条件を満たして1列揃えたら
+        if (_getPiece != null && _getPiece.name == "King")
+        {
+            _resultPanel.gameObject.SetActive(true);
+            Invoke("SceneTransition", 2f);
+        }
+        //引き分け時のシーン遷移
     }
 
     public void SwitchTurnWhite()

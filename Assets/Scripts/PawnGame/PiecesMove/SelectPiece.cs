@@ -13,6 +13,13 @@ public class SelectPiece : MonoBehaviour
     [SerializeField] GameObject _selectBlack_One;
     [SerializeField] GameObject _selectBlack_Two;
     [SerializeField] GameObject _selectBlack_Three;
+    int _whiteRookCount = 4;
+    int _whiteBishopCount = 4;
+    int _whiteKnightCount = 4;
+    int _blackRookCount = 4;
+    int _blackBishopCount = 4;
+    int _blackKnightCount = 4;
+
     public GameObject _selectTile;
     Transform _currentPos;
     PieceManager _piece;
@@ -33,27 +40,51 @@ public class SelectPiece : MonoBehaviour
         {
             if (gameObject.name == "Rook")
             {
-                SetPiece();
-                GameObject _selectPiece = Instantiate(_selectWhite_One, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Add(_selectPiece);
-                PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                if (_whiteRookCount != 0)
+                {
+                    SetPiece();
+                    GameObject _selectPiece = Instantiate(_selectWhite_One, _currentPos.position, _currentPos.rotation);
+                    _piece._whitePieces.Add(_selectPiece);
+                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
+                    _pieceInfo.SelectAssign();
+                    _whiteRookCount--;
+                }
+                else if (_whiteRookCount == 0)
+                {
+                    Debug.LogError("この駒はもう置くことが出来ません");
+                }
             }
             else if (gameObject.name == "Bishop")
             {
-                SetPiece();
-                GameObject _selectPiece = Instantiate(_selectWhite_Two, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Add(_selectPiece);
-                PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                if (_whiteBishopCount != 0)
+                {
+                    SetPiece();
+                    GameObject _selectPiece = Instantiate(_selectWhite_Two, _currentPos.position, _currentPos.rotation);
+                    _piece._whitePieces.Add(_selectPiece);
+                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
+                    _pieceInfo.SelectAssign();
+                    _whiteBishopCount--;
+                }
+                else if (_whiteBishopCount == 0)
+                {
+                    Debug.LogError("この駒はもう置くことが出来ません");
+                }
             }
             else if (gameObject.name == "Knight")
             {
-                SetPiece();
-                GameObject _selectPiece = Instantiate(_selectWhite_Three, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Add(_selectPiece);
-                PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                if (_whiteKnightCount != 0)
+                {
+                    SetPiece();
+                    GameObject _selectPiece = Instantiate(_selectWhite_Three, _currentPos.position, _currentPos.rotation);
+                    _piece._whitePieces.Add(_selectPiece);
+                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
+                    _pieceInfo.SelectAssign();
+                    _whiteKnightCount--;
+                }
+                else if (_whiteKnightCount == 0)
+                {
+                    Debug.LogError("この駒はもう置くことが出来ません");
+                }
             }
         }
         //黒ターン
@@ -61,27 +92,51 @@ public class SelectPiece : MonoBehaviour
         {
             if (gameObject.name == "Rook")
             {
-                SetPiece();
-                GameObject _selectPiece = Instantiate(_selectBlack_One, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Add(_selectPiece);
-                PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                if (_blackRookCount != 0)
+                {
+                    SetPiece();
+                    GameObject _selectPiece = Instantiate(_selectBlack_One, _currentPos.position, _currentPos.rotation);
+                    _piece._blackPieces.Add(_selectPiece);
+                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
+                    _pieceInfo.SelectAssign();
+                    _blackRookCount--;
+                }
+                else if (_blackRookCount == 0)
+                {
+                    Debug.LogError("この駒はもう置くことが出来ません");
+                }
             }
             else if (gameObject.name == "Bishop")
             {
-                SetPiece();
-                GameObject _selectPiece = Instantiate(_selectBlack_Two, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Add(_selectPiece);
-                PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                if (_blackBishopCount != 0)
+                {
+                    SetPiece();
+                    GameObject _selectPiece = Instantiate(_selectBlack_Two, _currentPos.position, _currentPos.rotation);
+                    _piece._blackPieces.Add(_selectPiece);
+                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
+                    _pieceInfo.SelectAssign();
+                    _blackBishopCount--;
+                }
+                else if (_blackBishopCount == 0)
+                {
+                    Debug.LogError("この駒はもう置くことが出来ません");
+                }
             }
             else if (gameObject.name == "Knight")
             {
-                SetPiece();
-                GameObject _selectPiece = Instantiate(_selectBlack_Three, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Add(_selectPiece);
-                PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                if (_blackKnightCount != 0)
+                {
+                    SetPiece();
+                    GameObject _selectPiece = Instantiate(_selectBlack_Three, _currentPos.position, _currentPos.rotation);
+                    _piece._blackPieces.Add(_selectPiece);
+                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
+                    _pieceInfo.SelectAssign();
+                    _blackKnightCount--;
+                }
+                else if (_blackKnightCount == 0)
+                {
+                    Debug.LogError("この駒はもう置くことが出来ません");
+                }
             }
         }
     }
