@@ -60,10 +60,13 @@ public class GameManager : MonoBehaviour
         }
         //勝利時(得点による)のシーン遷移
         //敵のキングを獲ったとき、または条件を満たして1列揃えたら
-        if (_getPiece != null && _getPiece.name == "King")
+        if (_getPiece != null)
         {
-            _resultPanel.gameObject.SetActive(true);
-            Invoke("SceneTransition", 2f);
+            if (_getPiece.name == "King")
+            {
+                _resultPanel.gameObject.SetActive(true);
+                Invoke("SceneTransition", 2f);
+            }
         }
         //引き分け時のシーン遷移
     }
@@ -80,6 +83,9 @@ public class GameManager : MonoBehaviour
         _blackTurn.color = Color.black;
     }
 
+    /// <summary>
+    /// リザルトシーンへの移行
+    /// </summary>
     void SceneTransition()
     {
         SceneManager.LoadScene("ChessResult");

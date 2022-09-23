@@ -19,15 +19,17 @@ public class SelectPiece : MonoBehaviour
     int _blackRookCount = 4;
     int _blackBishopCount = 4;
     int _blackKnightCount = 4;
-
+    //選んだマス
     public GameObject _selectTile;
     Transform _currentPos;
     PieceManager _piece;
+    SelectTile _select;
 
     // Start is called before the first frame update
     void Start()
     {
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+        _select = GameObject.Find("GameManager").GetComponent< SelectTile > ();
     }
 
     /// <summary>
@@ -42,12 +44,9 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_whiteRookCount != 0)
                 {
-                    SetPiece();
-                    GameObject _selectPiece = Instantiate(_selectWhite_One, _currentPos.position, _currentPos.rotation);
-                    _piece._whitePieces.Add(_selectPiece);
-                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                    _pieceInfo.SelectAssign();
+                    _select._set = _selectWhite_One;
                     _whiteRookCount--;
+                    print($"白ルークはあと {_whiteRookCount} 個");
                 }
                 else if (_whiteRookCount == 0)
                 {
@@ -58,12 +57,9 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_whiteBishopCount != 0)
                 {
-                    SetPiece();
-                    GameObject _selectPiece = Instantiate(_selectWhite_Two, _currentPos.position, _currentPos.rotation);
-                    _piece._whitePieces.Add(_selectPiece);
-                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                    _pieceInfo.SelectAssign();
+                    _select._set = _selectWhite_Two;
                     _whiteBishopCount--;
+                    print($"白ビショップはあと {_whiteBishopCount} 個");
                 }
                 else if (_whiteBishopCount == 0)
                 {
@@ -74,12 +70,9 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_whiteKnightCount != 0)
                 {
-                    SetPiece();
-                    GameObject _selectPiece = Instantiate(_selectWhite_Three, _currentPos.position, _currentPos.rotation);
-                    _piece._whitePieces.Add(_selectPiece);
-                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                    _pieceInfo.SelectAssign();
+                    _select._set = _selectWhite_Three;
                     _whiteKnightCount--;
+                    print($"白ナイトはあと {_whiteKnightCount} 個");
                 }
                 else if (_whiteKnightCount == 0)
                 {
@@ -94,12 +87,9 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_blackRookCount != 0)
                 {
-                    SetPiece();
-                    GameObject _selectPiece = Instantiate(_selectBlack_One, _currentPos.position, _currentPos.rotation);
-                    _piece._blackPieces.Add(_selectPiece);
-                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                    _pieceInfo.SelectAssign();
+                    _select._set = _selectBlack_One;
                     _blackRookCount--;
+                    print($"黒ルークはあと {_blackRookCount} 個");
                 }
                 else if (_blackRookCount == 0)
                 {
@@ -110,12 +100,9 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_blackBishopCount != 0)
                 {
-                    SetPiece();
-                    GameObject _selectPiece = Instantiate(_selectBlack_Two, _currentPos.position, _currentPos.rotation);
-                    _piece._blackPieces.Add(_selectPiece);
-                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                    _pieceInfo.SelectAssign();
+                    _select._set = _selectBlack_Two;
                     _blackBishopCount--;
+                    print($"黒ルークはあと {_blackBishopCount} 個");
                 }
                 else if (_blackBishopCount == 0)
                 {
@@ -126,12 +113,9 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_blackKnightCount != 0)
                 {
-                    SetPiece();
-                    GameObject _selectPiece = Instantiate(_selectBlack_Three, _currentPos.position, _currentPos.rotation);
-                    _piece._blackPieces.Add(_selectPiece);
-                    PieceMove _pieceInfo = _selectPiece.GetComponent<PieceMove>();
-                    _pieceInfo.SelectAssign();
+                    _select._set = _selectBlack_Three;
                     _blackKnightCount--;
+                    print($"黒ルークはあと {_blackKnightCount} 個");
                 }
                 else if (_blackKnightCount == 0)
                 {
@@ -139,13 +123,5 @@ public class SelectPiece : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void SetPiece()
-    {
-        _currentPos = _selectTile.transform;
-        Vector3 _pos = _currentPos.position;
-        _pos.y = 1f;
-        _currentPos.position = _pos;
     }
 }

@@ -240,7 +240,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 }
             }
             _movedPieceTile = _hit.collider.gameObject;
-            Debug.Log("ˆÚ“®Ï‚İ");
             return true;
         }
         return false;
