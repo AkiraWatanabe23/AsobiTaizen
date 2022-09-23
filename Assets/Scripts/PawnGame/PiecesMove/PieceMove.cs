@@ -379,6 +379,15 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// 駒を配置した時に動かせる状態にする(変数にスクリプトを直接代入する)
+    /// </summary>
+    public void SelectAssign()
+    {
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+    }
+
     /// <summary> 通常状態、選択状態 </summary>
     public enum Status
     {

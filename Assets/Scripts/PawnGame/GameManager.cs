@@ -27,11 +27,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] public static Phase _phase = Phase.White;
     [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
+    [SerializeField] Button _whiteSelect;
+    [SerializeField] Button _blackSelect;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _player = 1;
         _phase = Phase.White;
         _resultPanel.gameObject.SetActive(false);
         //↓ターン表示のText
@@ -43,6 +46,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //SelectButtonの切り替え
+        if (_player == 1)
+        {
+            _whiteSelect.gameObject.SetActive(true);
+            _blackSelect.gameObject.SetActive(false);
+        }
+        else if (_player == 2)
+        {
+            _whiteSelect.gameObject.SetActive(false);
+            _blackSelect.gameObject.SetActive(true);
+        }
         //勝利時(得点による)のシーン遷移
         //引き分け時(駒の数がお互い1つになった時)のシーン遷移
     }
