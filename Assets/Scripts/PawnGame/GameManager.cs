@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
     [SerializeField] Button _whiteSelect;
     [SerializeField] Button _blackSelect;
-    public GameObject _getPiece;
+    public string _getPiece;
 
 
     // Start is called before the first frame update
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         //敵のキングを獲ったとき、または条件を満たして1列揃えたら
         if (_getPiece != null)
         {
-            if (_getPiece.name == "King")
+            if (_getPiece.Contains("King"))
             {
                 _resultPanel.gameObject.SetActive(true);
                 Invoke("SceneTransition", 2f);
@@ -100,6 +100,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void SceneTransition()
     {
+        //黒が勝ったら
+        if (_getPiece.Contains("White"))
+        {
+            ResultSceneManager._win = 1;
+        }
+        //白が勝ったら
+        else if (_getPiece.Contains("Black"))
+        {
+            ResultSceneManager._win = 2;
+        }
         SceneManager.LoadScene("ChessResult");
     }
 }
