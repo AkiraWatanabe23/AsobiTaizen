@@ -23,13 +23,12 @@ public class SelectPiece : MonoBehaviour
     [Header("‹î‚ð‘I‚ÔPanel")]
     [SerializeField] Image _whitePanel;
     [SerializeField] Image _blackPanel;
-    [SerializeField] Text _whereText;
     SelectTile _select;
 
     // Start is called before the first frame update
     void Start()
     {
-        _select = GameObject.Find("GameManager").GetComponent< SelectTile > ();
+        _select = GameObject.Find("GameManager").GetComponent<SelectTile>();
     }
 
     /// <summary>
@@ -129,6 +128,7 @@ public class SelectPiece : MonoBehaviour
                 }
             }
         }
+        _select.SetPiece();
     }
 
     void UISwitch()
@@ -141,7 +141,6 @@ public class SelectPiece : MonoBehaviour
         {
             _blackPanel.gameObject.SetActive(false);
         }
-        _whereText.gameObject.SetActive(true);
-        _select.SetPiece();
+        _select._whereText.gameObject.SetActive(true);
     }
 }

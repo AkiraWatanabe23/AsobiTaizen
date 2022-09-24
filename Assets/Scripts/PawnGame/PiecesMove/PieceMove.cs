@@ -39,6 +39,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
     /// <summary> 
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
+    /// 呼ばれるタイミングはButtonUpのタイミングに似てる?
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
@@ -76,7 +77,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             if (_status == Status.Move)
             {
                 //移動処理
-                if (Move()) /*←return の値が true だったら*/
+                if (Move()) /*←return の値が true だったら[Move()はbool型の関数]*/
                 {
                     //移動状態→通常状態
                     ChangeState();

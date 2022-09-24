@@ -4,10 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// どっちのターンか
+/// </summary>
 public enum Phase
 {
     White = 0,
     Black = 1,
+}
+
+/// <summary>
+/// 選択状態(駒を選ぶか、マスを選ぶか)
+/// </summary>
+public enum SelectPhase
+{
+    Piece,
+    Tile,
 }
 
 /// <summary>

@@ -111,16 +111,11 @@ MonoBehaviour:
   _blackLayer:
     serializedVersion: 2
     m_Bits: 512
-  _getScore: 5
   _search: {fileID: 0}
   _piece: {fileID: 0}
   _moveCount: 0
   _currentPieceTile: {fileID: 0}
   _movedPieceTile: {fileID: 0}
-  _promQ: {fileID: 0}
-  _promR: {fileID: 0}
-  _promB: {fileID: 0}
-  _promK: {fileID: 0}
 --- !u!54 &-1850663890769516856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -135,7 +130,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5409586342712880746
 CapsuleCollider:
