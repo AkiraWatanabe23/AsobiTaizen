@@ -73,7 +73,7 @@ public class SelectTile : MonoBehaviour
         }
         else if (_phase == SelectPhase.Piece)
         {
-            //Object‚ÌSetActive‚ðif•¶‚Å”»’è(bool)
+            //Object‚ÌSetActive‚ðif•¶‚Å”»’è(bool‚ð•Ô‚·)
             if (_whereText.gameObject.activeSelf)
             {
                 _phase = SelectPhase.Tile;
