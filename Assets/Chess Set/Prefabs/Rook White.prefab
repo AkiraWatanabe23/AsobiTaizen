@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000013246153070}
   - component: {fileID: 23000011383343684}
   - component: {fileID: 1482082197}
+  - component: {fileID: -4541014594157386606}
   - component: {fileID: 1482082196}
   - component: {fileID: 1482082195}
   m_Layer: 8
@@ -99,7 +100,7 @@ MonoBehaviour:
   _normalMaterial: {fileID: 2100000, guid: b391301c47109a144bbb6408e48da028, type: 2}
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
   _color: 0
-  _status: 0
+  _state: 0
   _type: 4
   _offset: {x: 0, y: 0.5, z: 0}
   _tileLayer:
@@ -116,6 +117,19 @@ MonoBehaviour:
   _moveCount: 0
   _currentPieceTile: {fileID: 0}
   _movedPieceTile: {fileID: 0}
+--- !u!114 &-4541014594157386606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012089885188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d72e9920f7f45f49a272c7efcd9bf21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkCount: 0000000000000000000000000000000000000000000000000000000000000000
 --- !u!54 &1482082196
 Rigidbody:
   m_ObjectHideFlags: 0

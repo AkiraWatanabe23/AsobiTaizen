@@ -77,7 +77,12 @@ public class GameManager : MonoBehaviour
             if (_getPiece.Contains("King"))
             {
                 _resultPanel.gameObject.SetActive(true);
-                Invoke("SceneTransition", 2f);
+                Invoke("SceneSwitch", 2f);
+            }
+            else
+            {
+                print($"{_getPiece} を獲った");
+                _getPiece = null;
             }
         }
         //引き分け時のシーン遷移
@@ -98,7 +103,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトシーンへの移行
     /// </summary>
-    void SceneTransition()
+    void SceneSwitch()
     {
         //黒が勝ったら
         if (_getPiece.Contains("White"))

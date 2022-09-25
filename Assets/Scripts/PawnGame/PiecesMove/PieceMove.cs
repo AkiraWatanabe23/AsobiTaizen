@@ -14,7 +14,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [Tooltip("移動状態のマテリアル"), SerializeField] Material _moveMaterial;
     Renderer _renderer;
     [Tooltip("白駒か黒駒かのenum")] public PieceColor _color = PieceColor.White;
-    [Tooltip("駒の状態のenum")] public Status _status = Status.Normal;
+    [Tooltip("駒の状態のenum")] public PieceState _state = PieceState.Normal;
     [Tooltip("駒の種類のenum")] public PieceType _type;
     RaycastHit _hit;
     [SerializeField] Vector3 _offset = Vector3.up;
@@ -50,7 +50,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         go.GetComponent<PieceMove>().ChangeState();
 
         //_movedPieceTile = null で駒の再選択を出来るようにする
-        if (_status == Status.Normal && _currentPieceTile == _movedPieceTile)
+        if (_state == PieceState.Normal && _currentPieceTile == _movedPieceTile)
         {
             _movedPieceTile = null;
         }
@@ -74,7 +74,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Input.GetMouseButtonDown(0))
         {
             //駒が移動状態になっていたら
-            if (_status == Status.Move)
+            if (_state == PieceState.Move)
             {
                 //移動処理
                 if (Move()) /*←return の値が true だったら[Move()はbool型の関数]*/
@@ -85,7 +85,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
         }
         //右クリックで非選択状態に変更
-        else if (Input.GetMouseButtonDown(1) && _status == Status.Move)
+        else if (Input.GetMouseButtonDown(1) && _state == PieceState.Move)
         {
             Debug.Log("選び直し");
 
@@ -133,7 +133,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             //駒の状態をもとに戻す
-            _status = Status.Normal;
+            _state = PieceState.Normal;
             _renderer.material = _normalMaterial;
             _search._movableTile.Clear();
             _search._piece = null;
@@ -155,15 +155,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             if (_target.tag == "BlackPiece")
             {
-                //白のスコアを加算
                 Destroy(_target);
             }
-
-            this.transform.position = _target.transform.position;
-            GameManager._player = GameManager.Player_Two;
+            transform.position = _target.transform.position;
 
             PhaseChange(_target);
             SetCursorPos(Screen.width / 2, Screen.height / 2);
+            GameManager._player = GameManager.Player_Two;
             GameManager._phase = Phase.Black;
 
             print($"駒は {_target.name} をとった");
@@ -183,15 +181,14 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             if (_target.tag == "WhitePiece")
             {
-                //黒のスコアを加算
                 Destroy(_target);
             }
 
-            this.transform.position = _target.transform.position;
-            GameManager._player = GameManager.Player_One;
+            transform.position = _target.transform.position;
 
             PhaseChange(_target);
             SetCursorPos(Screen.width / 2, Screen.height / 2);
+            GameManager._player = GameManager.Player_One;
             GameManager._phase = Phase.White;
 
             print($"駒は {_target.name} をとった");
@@ -217,7 +214,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 GameObject _target = _hit.collider.gameObject;
                 if (_target == i.gameObject)
                 {
-                    this.transform.position = _target.transform.position + _offset;
+                    transform.position = _target.transform.position + _offset;
 
                     PhaseChange(_target);
                     SetCursorPos(Screen.width / 2, Screen.height / 2);
@@ -252,33 +249,33 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public void ChangeState() //駒を右クリックをすると選択状態→通常状態にできる
     {
         //通常状態→選択状態(白)
-        if (_status == Status.Normal && _color == PieceColor.White && GameManager._phase == Phase.White && _currentPieceTile != _movedPieceTile)
+        if (_state == PieceState.Normal && _color == PieceColor.White && GameManager._phase == Phase.White && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
                 _currentPieceTile = _movedPieceTile = _hit.collider.gameObject;
             }
-            _status = Status.Move;
+            _state = PieceState.Move;
             _renderer.material = _moveMaterial;
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._whitePieces.Remove(gameObject);
         }
         //通常状態→選択状態(黒)
-        else if (_status == Status.Normal && _color == PieceColor.Black && GameManager._phase == Phase.Black && _currentPieceTile != _movedPieceTile)
+        else if (_state == PieceState.Normal && _color == PieceColor.Black && GameManager._phase == Phase.Black && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
                 _currentPieceTile = _movedPieceTile = _hit.collider.gameObject;
             }
-            _status = Status.Move;
+            _state = PieceState.Move;
             _renderer.material = _moveMaterial;
             _search._piece = this;
             _search._pieceInfo = gameObject;
             _piece._blackPieces.Remove(gameObject);
         }
         //選択状態→通常状態(駒が移動した後の処理)
-        else if (_status == Status.Move)
+        else if (_state == PieceState.Move)
         {
             //駒の移動回数を加算する(ポーンの移動制限用)
             if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
@@ -347,7 +344,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             //駒の状態をもとに戻す
-            _status = Status.Normal;
+            _state = PieceState.Normal;
             _renderer.material = _normalMaterial;
             _search._movableTile.Clear();
             _search._piece = null;
@@ -367,7 +364,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 _manager.SwitchTurnWhite();
                 if (_target.tag == "WhitePiece")
                 {
-                    _status = Status.Normal;
+                    _state = PieceState.Normal;
                 }
                 break;
 
@@ -375,7 +372,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 _manager.SwitchTurnBlack();
                 if (_target.tag == "BlackPiece")
                 {
-                    _status = Status.Normal;
+                    _state = PieceState.Normal;
                 }
                 break;
         }
@@ -391,7 +388,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     }
 
     /// <summary> 通常状態、選択状態 </summary>
-    public enum Status
+    public enum PieceState
     {
         Normal,
         Move,
