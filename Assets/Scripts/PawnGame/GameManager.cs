@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public const int Player_Two = 2;
     /// <summary> 現在の(current)プレイヤー </summary>
     public static int _player;
-    public static int _beFrPlayer;
+    int _beFrPlayer;
 
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] public Image _resultPanel;
@@ -64,6 +64,43 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //今のフレームが白のターン かつ 前のフレームが黒のターンであれば実行する(白のターンになった瞬間に一度だけ実行する)
+        //または、今のフレームが黒のターン かつ 前のフレームが白のターンであれば実行する(黒のターンになった瞬間に一度だけ実行する)
+        if (GameManager._player == 1 && _beFrPlayer == 2
+            || GameManager._player == 2 && _beFrPlayer == 1)
+        {
+            foreach (var i in _piece._whitePieces)
+            {
+                print($"{i.name} aaa");
+                i.GetComponent<GameCheck>().Check();
+                PlayerWin();
+                if (i.GetComponent<Collider>().enabled == false)
+                {
+                    i.GetComponent<Collider>().enabled = true;
+                }
+                for (int j = 0; j < 8; j++)
+                {
+                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
+                }
+            }
+            foreach (var i in _piece._blackPieces)
+            {
+                print($"{i.name} aaa");
+                i.GetComponent<GameCheck>().Check();
+                PlayerWin();
+                if (i.GetComponent<Collider>().enabled == false)
+                {
+                    i.GetComponent<Collider>().enabled = true;
+                }
+                for (int j = 0; j < 8; j++)
+                {
+                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
+                }
+            }
+        }
+        //次フレームの為に現在、どちらのターンかを保存しておく。
+        _beFrPlayer = _player;
+
         //SelectButtonの切り替え
         if (_player == 1)
         {
@@ -75,8 +112,13 @@ public class GameManager : MonoBehaviour
             _whiteSelect.gameObject.SetActive(false);
             _blackSelect.gameObject.SetActive(true);
         }
-        //勝利時(得点による)のシーン遷移
-        //敵のキングを獲ったとき、または条件を満たして1列揃えたら
+        //引き分け時のシーン遷移
+    }
+
+    void PlayerWin()
+    {
+        //勝利時のシーン遷移
+        //敵のキングを獲ったとき、または条件を満たして1列揃えたとき
         if (_getPiece != null)
         {
             if (_getPiece.Contains("King"))
@@ -109,7 +151,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        //引き分け時のシーン遷移
     }
 
     public void SwitchTurnWhite()

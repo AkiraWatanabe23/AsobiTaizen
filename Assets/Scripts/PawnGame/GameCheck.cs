@@ -20,51 +20,6 @@ public class GameCheck : MonoBehaviour
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
-    void Update()
-    {
-        //今のフレームが白のターン かつ 前のフレームが黒のターンであれば実行する(白のターンになった瞬間に一度だけ実行する)
-        //または、今のフレームが黒のターン かつ 前のフレームが白のターンであれば実行する(黒のターンになった瞬間に一度だけ実行する)
-        if (GameManager._player == 1 && GameManager._beFrPlayer == 2
-            || GameManager._player == 2 && GameManager._beFrPlayer == 1)
-        {
-            Check();
-            foreach (var i in _piece._whitePieces)
-            {
-                if (i.GetComponent<Collider>().enabled == false)
-                {
-                    i.GetComponent<Collider>().enabled = true;
-                }
-            }
-            foreach (var i in _piece._blackPieces)
-            {
-                if (i.GetComponent<Collider>().enabled == false)
-                {
-                    i.GetComponent<Collider>().enabled = true;
-                }
-            }
-        }
-        //次フレームの為に現在、どちらのターンかを保存しておく。
-        GameManager._beFrPlayer = GameManager._player;
-
-        if (!GameManager.isClear)
-        {
-            foreach (var i in _piece._whitePieces)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
-                }
-            }
-            foreach (var i in _piece._blackPieces)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
-                }
-            }
-        }
-    }
-
     /// <summary>
     /// 8方向にRayを飛ばし、駒が並んでいるかを判定する
     /// </summary>
@@ -74,7 +29,7 @@ public class GameCheck : MonoBehaviour
         //前方向
         _checkX = 0f;
         _checkZ = 6f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, 10))
             {
@@ -95,7 +50,7 @@ public class GameCheck : MonoBehaviour
         //後ろ方向
         _checkX = 0f;
         _checkZ = 6f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, -_checkZ), out _hit, 10))
             {
@@ -116,10 +71,11 @@ public class GameCheck : MonoBehaviour
         //左方向
         _checkX = 6f;
         _checkZ = 0f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), out _hit, 10))
             {
+                Debug.DrawRay(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), Color.yellow, 10f);
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
@@ -137,7 +93,7 @@ public class GameCheck : MonoBehaviour
         //右方向
         _checkX = 6f;
         _checkZ = 0f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, 10))
             {
@@ -160,7 +116,7 @@ public class GameCheck : MonoBehaviour
         //左斜め前
         _checkX = 7.5f;
         _checkZ = 7.5f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), out _hit, 10))
             {
@@ -170,6 +126,7 @@ public class GameCheck : MonoBehaviour
                     _checkCount[4]++;
                     _checkX += 6f;
                     _checkZ += 6f;
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[4]);
                 }
             }
@@ -181,7 +138,7 @@ public class GameCheck : MonoBehaviour
         //右斜め前
         _checkX = 7.5f;
         _checkZ = 7.5f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, 10))
             {
@@ -191,6 +148,7 @@ public class GameCheck : MonoBehaviour
                     _checkCount[5]++;
                     _checkX += 6f;
                     _checkZ += 6f;
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[5]);
                 }
             }
@@ -202,7 +160,7 @@ public class GameCheck : MonoBehaviour
         //左斜め後ろ
         _checkX = 7.5f;
         _checkZ = 7.5f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, -_checkZ), out _hit, 10))
             {
@@ -212,6 +170,7 @@ public class GameCheck : MonoBehaviour
                     _checkCount[6]++;
                     _checkX += 6f;
                     _checkZ += 6f;
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[6]);
                 }
             }
@@ -223,7 +182,7 @@ public class GameCheck : MonoBehaviour
         //右斜め後ろ
         _checkX = 7.5f;
         _checkZ = 7.5f;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, -_checkZ), out _hit, 10))
             {
@@ -233,6 +192,7 @@ public class GameCheck : MonoBehaviour
                     _checkCount[7]++;
                     _checkX += 6f;
                     _checkZ += 6f;
+                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[7]);
                 }
             }
