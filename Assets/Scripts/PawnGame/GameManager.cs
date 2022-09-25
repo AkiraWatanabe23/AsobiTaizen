@@ -163,14 +163,14 @@ public class GameManager : MonoBehaviour
 
     public void SwitchTurnWhite()
     {
-        _whiteTurn.color = Color.black;
+        _whiteTurn.color = Color.white;
         _blackTurn.color = Color.yellow;
     }
 
     public void SwitchTurnBlack()
     {
         _whiteTurn.color = Color.yellow;
-        _blackTurn.color = Color.black;
+        _blackTurn.color = Color.white;
     }
 
     /// <summary>
