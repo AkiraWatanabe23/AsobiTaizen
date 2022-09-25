@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
                 {
                     isClear = true;
                     _resultPanel.gameObject.SetActive(true);
+                    ResultSceneManager._win = 2;
                     Invoke("SceneSwitch", 2f);
                 }
             }
@@ -153,6 +154,7 @@ public class GameManager : MonoBehaviour
                 {
                     isClear = true;
                     _resultPanel.gameObject.SetActive(true);
+                    ResultSceneManager._win = 1;
                     Invoke("SceneSwitch", 2f);
                 }
             }
