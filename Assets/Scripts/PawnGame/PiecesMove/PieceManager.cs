@@ -59,6 +59,7 @@ public class PieceManager : MonoBehaviour
                 }
                 _blackPieces.Add(i);
             }
+            i.gameObject.GetComponent<Collider>().enabled = true;
         }
         _getablePieces.Clear();
     }

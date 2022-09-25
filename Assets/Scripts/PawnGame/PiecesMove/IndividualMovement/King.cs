@@ -109,6 +109,12 @@ public class King : MonoBehaviour
         {
             Debug.Log("none");
         }
+        //ˆÚ“®”ÍˆÍˆÈŠO‚Ìƒ}ƒX‚ÌCollider‚ğoff‚É‚·‚éˆ—‚ğ‘‚­
+        foreach (Collider col in _search._tile)
+        {
+            col.enabled = false;
+            Debug.Log(col + "‚ÌCollider‚ğoff‚É‚µ‚Ü‚·");
+        }
     }
 
     private void MovableCheck()

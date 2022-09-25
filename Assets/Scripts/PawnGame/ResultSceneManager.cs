@@ -27,12 +27,4 @@ public class ResultSceneManager : MonoBehaviour
             _drawText.gameObject.SetActive(false);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //白の勝ち
-        //黒の勝ち
-        //引き分け(この時、スコア表示する?)
-    }
 }

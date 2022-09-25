@@ -296,7 +296,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
-
             foreach (var piece in _search._immovablePieces)
             {
                 piece.GetComponent<Collider>().enabled = true;

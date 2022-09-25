@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public const int Player_Two = 2;
     /// <summary> 現在の(current)プレイヤー </summary>
     public static int _player;
+    public static int _beFrPlayer;
 
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] public Image _resultPanel;
@@ -42,18 +43,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button _whiteSelect;
     [SerializeField] Button _blackSelect;
     public string _getPiece;
+    public static bool isClear = false;
+    PieceManager _piece;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _player = 1;
+        _beFrPlayer = 1;
         _phase = Phase.White;
         _resultPanel.gameObject.SetActive(false);
         //↓ターン表示のText
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
         _blackTurn = GameObject.Find("BlackText").GetComponent<Text>();
         _whiteTurn.color = Color.yellow;
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
     // Update is called once per frame
@@ -79,10 +84,29 @@ public class GameManager : MonoBehaviour
                 _resultPanel.gameObject.SetActive(true);
                 Invoke("SceneSwitch", 2f);
             }
-            else
+        }
+        for (int i = 0; i < _piece._whitePieces.Count; i++)
+        {
+            for (int j = 0; j < 8; j++)
             {
-                print($"{_getPiece} を獲った");
-                _getPiece = null;
+                if (_piece._whitePieces[i].GetComponent<GameCheck>()._checkCount[j] >= 4)
+                {
+                    isClear = true;
+                    _resultPanel.gameObject.SetActive(true);
+                    Invoke("SceneSwitch", 2f);
+                }
+            }
+        }
+        for (int i = 0; i < _piece._blackPieces.Count; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (_piece._blackPieces[i].GetComponent<GameCheck>()._checkCount[j] >= 4)
+                {
+                    isClear = true;
+                    _resultPanel.gameObject.SetActive(true);
+                    Invoke("SceneSwitch", 2f);
+                }
             }
         }
         //引き分け時のシーン遷移
