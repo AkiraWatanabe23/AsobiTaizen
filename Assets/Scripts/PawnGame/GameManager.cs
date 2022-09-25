@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
-                if (_piece._whitePieces[i].GetComponent<GameCheck>()._checkCount[j] >= 4)
+                if (_piece._whitePieces[i].GetComponent<GameCheck>()._checkCount[j] >= 3)
                 {
                     isClear = true;
                     _resultPanel.gameObject.SetActive(true);
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
-                if (_piece._blackPieces[i].GetComponent<GameCheck>()._checkCount[j] >= 4)
+                if (_piece._blackPieces[i].GetComponent<GameCheck>()._checkCount[j] >= 3)
                 {
                     isClear = true;
                     _resultPanel.gameObject.SetActive(true);
