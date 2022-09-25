@@ -69,15 +69,11 @@ public class GameManager : MonoBehaviour
         if (GameManager._player == 1 && _beFrPlayer == 2
             || GameManager._player == 2 && _beFrPlayer == 1)
         {
+            //‹î‚ªğŒ‚É‰ˆ‚Á‚Ä•À‚ñ‚Å‚¢‚é‚©‚Ì”»’è
             foreach (var i in _piece._whitePieces)
             {
-                print($"{i.name} aaa");
                 i.GetComponent<GameCheck>().Check();
                 PlayerWin();
-                if (i.GetComponent<Collider>().enabled == false)
-                {
-                    i.GetComponent<Collider>().enabled = true;
-                }
                 for (int j = 0; j < 8; j++)
                 {
                     i.GetComponent<GameCheck>()._checkCount[j] = 0;
@@ -85,16 +81,26 @@ public class GameManager : MonoBehaviour
             }
             foreach (var i in _piece._blackPieces)
             {
-                print($"{i.name} aaa");
                 i.GetComponent<GameCheck>().Check();
                 PlayerWin();
+                for (int j = 0; j < 8; j++)
+                {
+                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
+                }
+            }
+            //”»’è’†‚ÉColliderOff‚É‚µ‚½‹î‚ğŒ³‚É–ß‚·
+            foreach (var i in _piece._whitePieces)
+            {
                 if (i.GetComponent<Collider>().enabled == false)
                 {
                     i.GetComponent<Collider>().enabled = true;
                 }
-                for (int j = 0; j < 8; j++)
+            }
+            foreach (var i in _piece._blackPieces)
+            {
+                if (i.GetComponent<Collider>().enabled == false)
                 {
-                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
+                    i.GetComponent<Collider>().enabled = true;
                 }
             }
         }
