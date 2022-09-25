@@ -9,7 +9,7 @@ public class GameCheck : MonoBehaviour
     /// <summary> 条件を満たした駒がいくつ並んでいるか(探索方向毎) </summary>
     public int[] _checkCount = new int[8];
     RaycastHit _hit;
-    PieceManager _piece;
+    int _rayDist;
 
     void Start()
     {
@@ -17,7 +17,6 @@ public class GameCheck : MonoBehaviour
         {
             _checkCount[i] = 0;
         }
-        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
     /// <summary>
@@ -27,17 +26,16 @@ public class GameCheck : MonoBehaviour
     {
         //前後左右
         //前方向
-        _checkX = 0f;
-        _checkZ = 6f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.forward, out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[0]++;
-                    _checkZ += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[0]);
                 }
@@ -48,17 +46,16 @@ public class GameCheck : MonoBehaviour
             }
         }
         //後ろ方向
-        _checkX = 0f;
-        _checkZ = 6f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, -_checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), -Vector3.forward, out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[1]++;
-                    _checkZ += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[1]);
                 }
@@ -69,18 +66,17 @@ public class GameCheck : MonoBehaviour
             }
         }
         //左方向
-        _checkX = 6f;
-        _checkZ = 0f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.left, out _hit, _rayDist))
             {
-                Debug.DrawRay(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), Color.yellow, 10f);
+                Debug.DrawRay(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.left, Color.yellow, _rayDist);
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[2]++;
-                    _checkX += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[2]);
                 }
@@ -91,17 +87,16 @@ public class GameCheck : MonoBehaviour
             }
         }
         //右方向
-        _checkX = 6f;
-        _checkZ = 0f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.right, out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[3]++;
-                    _checkX += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[3]);
                 }
@@ -113,19 +108,19 @@ public class GameCheck : MonoBehaviour
         }
 
         //斜め方向
+        _checkX = 1f;
+        _checkZ = 1f;
         //左斜め前
-        _checkX = 7.5f;
-        _checkZ = 7.5f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[4]++;
-                    _checkX += 6f;
-                    _checkZ += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[4]);
                 }
@@ -136,18 +131,16 @@ public class GameCheck : MonoBehaviour
             }
         }
         //右斜め前
-        _checkX = 7.5f;
-        _checkZ = 7.5f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[5]++;
-                    _checkX += 6f;
-                    _checkZ += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[5]);
                 }
@@ -158,18 +151,16 @@ public class GameCheck : MonoBehaviour
             }
         }
         //左斜め後ろ
-        _checkX = 7.5f;
-        _checkZ = 7.5f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, -_checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, -_checkZ), out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[6]++;
-                    _checkX += 6f;
-                    _checkZ += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[6]);
                 }
@@ -180,18 +171,16 @@ public class GameCheck : MonoBehaviour
             }
         }
         //右斜め後ろ
-        _checkX = 7.5f;
-        _checkZ = 7.5f;
+        _rayDist = 6;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, -_checkZ), out _hit, 10))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, -_checkZ), out _hit, _rayDist))
             {
                 if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>()._type == gameObject.GetComponent<PieceMove>()._type)
                 {
                     _checkCount[7]++;
-                    _checkX += 6f;
-                    _checkZ += 6f;
+                    _rayDist += 6;
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     Debug.Log(_checkCount[7]);
                 }
