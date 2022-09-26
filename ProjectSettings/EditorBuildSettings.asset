@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Quarto.unity
     guid: 05288cc638113ff4387aca27ec5cd066
   - enabled: 0
-    path: Assets/Scenes/vs2P.unity
+    path: Assets/Scenes/vs2P/vs2P.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Puzzle/Puzzle1.unity

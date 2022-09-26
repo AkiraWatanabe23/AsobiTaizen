@@ -148,7 +148,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float _rayDistance = 100;
 
-        //”’”Ô‚Ì‹î‚ğ’D‚¤ˆ—
+        //”’‚ª•‚Ì‹î‚ğ’D‚¤ˆ—
         if (Physics.Raycast(_ray, out _hit, _rayDistance, _blackLayer))
         {
             GameObject _target = _hit.collider.gameObject;
@@ -174,7 +174,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             _manager._getPiece = _target.name;
             return true;
         }
-        //•”Ô‚Ì‹î‚ğ’D‚¤ˆ—
+        //•‚ª”’‚Ì‹î‚ğ’D‚¤ˆ—
         else if (Physics.Raycast(_ray, out _hit, _rayDistance, _whiteLayer))
         {
             GameObject _target = _hit.collider.gameObject;
