@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 10496746}
   - component: {fileID: 10496745}
   - component: {fileID: 10496744}
-  - component: {fileID: 10496747}
+  - component: {fileID: 7974036180959298706}
   m_Layer: 5
   m_Name: retryButton
   m_TagString: Untagged
@@ -122,19 +122,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 10496747}
+      - m_Target: {fileID: 7974036180959298706}
         m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
+        m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Puzzle2
+          m_StringArgument: Puzzle1
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &10496747
+--- !u!114 &7974036180959298706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 10496742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c9c1ce979708144ad98ac614c99f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &240438438
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 240438442}
   - component: {fileID: 240438441}
   - component: {fileID: 240438440}
-  - component: {fileID: 666620481}
+  - component: {fileID: 7974036180959298701}
   m_Layer: 5
   m_Name: BackTitleButton
   m_TagString: Untagged
@@ -268,9 +268,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 666620481}
+      - m_Target: {fileID: 7974036180959298701}
         m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
+        m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -280,7 +280,7 @@ MonoBehaviour:
           m_StringArgument: TitleScene
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &666620481
+--- !u!114 &7974036180959298701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 240438438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c9c1ce979708144ad98ac614c99f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &672574277
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 726529643}
   - component: {fileID: 726529642}
   - component: {fileID: 726529641}
-  - component: {fileID: 726529644}
+  - component: {fileID: 7974036180959298702}
   m_Layer: 5
   m_Name: NextStageButton
   m_TagString: Untagged
@@ -493,19 +493,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 726529644}
+      - m_Target: {fileID: 7974036180959298702}
         m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
+        m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Puzzle2
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &726529644
+--- !u!114 &7974036180959298702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 726529639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c9c1ce979708144ad98ac614c99f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1255357499
@@ -687,7 +687,7 @@ GameObject:
   - component: {fileID: 1919693587}
   - component: {fileID: 1919693586}
   - component: {fileID: 1919693585}
-  - component: {fileID: 1919693588}
+  - component: {fileID: 7974036180959298705}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -797,9 +797,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1919693588}
+      - m_Target: {fileID: 7974036180959298705}
         m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
+        m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -809,7 +809,7 @@ MonoBehaviour:
           m_StringArgument: TitleScene
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1919693588
+--- !u!114 &7974036180959298705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1919693583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c9c1ce979708144ad98ac614c99f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1996508588
@@ -1136,7 +1136,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Lv.5
+  m_Text: Lv.1
 --- !u!1 &7974036181887391931
 GameObject:
   m_ObjectHideFlags: 0

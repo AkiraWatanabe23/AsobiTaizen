@@ -9,6 +9,8 @@ public class SelectTile : MonoBehaviour
     PieceManager _piece;
     public GameObject _set;
     RaycastHit _hit;
+    public int[] _selectPieceCount = new int[6];
+    [SerializeField] Text[] _countText = new Text[6];
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
@@ -22,12 +24,23 @@ public class SelectTile : MonoBehaviour
     {
         _manager = GetComponent<GameManager>();
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+        for (int i = 0; i < _selectPieceCount.Length; i++)
+        {
+            _selectPieceCount[i] = 4;
+        }
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
-        SetPiece();
+        {
+            SetPiece();
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            _countText[i].text = _selectPieceCount[i].ToString();
+        }
     }
 
     public void SetPiece()

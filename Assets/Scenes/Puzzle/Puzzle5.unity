@@ -1029,7 +1029,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 957016383}
         m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
+        m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 957016378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c9c1ce979708144ad98ac614c99f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &961182408
@@ -1174,9 +1174,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 961182413}
-        m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
-        m_Mode: 5
+        m_TargetAssemblyTypeName: FadeLoad, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1235,6 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneName: TitleScene
 --- !u!1 &985433960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,9 +1670,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1237923332}
-        m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
-        m_MethodName: OnClickStartButton
-        m_Mode: 5
+        m_TargetAssemblyTypeName: FadeLoad, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1730,6 +1731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneName: TitleScene
 --- !u!1001 &1246777711
 PrefabInstance:
   m_ObjectHideFlags: 0

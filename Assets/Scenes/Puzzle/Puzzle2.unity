@@ -234,6 +234,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 10496744, guid: b74be993f0a26fc42924466c4a5c6403, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Puzzle2
+      objectReference: {fileID: 0}
     - target: {fileID: 726529641, guid: b74be993f0a26fc42924466c4a5c6403, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Puzzle3
