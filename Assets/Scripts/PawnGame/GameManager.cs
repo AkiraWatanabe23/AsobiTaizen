@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button _whiteSelect;
     [SerializeField] Button _blackSelect;
     public string _getPiece;
-    public static bool isClear = false;
     PieceManager _piece;
 
 
@@ -64,12 +63,29 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LineCount();
+        //SelectButtonの切り替え
+        if (_player == 1)
+        {
+            _whiteSelect.gameObject.SetActive(true);
+            _blackSelect.gameObject.SetActive(false);
+        }
+        else if (_player == 2)
+        {
+            _whiteSelect.gameObject.SetActive(false);
+            _blackSelect.gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ターンが切り替わったときに、駒が条件に沿って並んでいるかの判定をする
+    /// </summary>
+    public void LineCount()
+    {
         //今のフレームが白のターン かつ 前のフレームが黒のターンであれば実行する(白のターンになった瞬間に一度だけ実行する)
         //または、今のフレームが黒のターン かつ 前のフレームが白のターンであれば実行する(黒のターンになった瞬間に一度だけ実行する)
-        if (GameManager._player == 1 && _beFrPlayer == 2
-            || GameManager._player == 2 && _beFrPlayer == 1)
+        if (_player != _beFrPlayer)
         {
-            //駒が条件に沿って並んでいるかの判定
             foreach (var i in _piece._whitePieces)
             {
                 i.GetComponent<GameCheck>().Check();
@@ -104,21 +120,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        //次フレームの為に現在、どちらのターンかを保存しておく。
+        //次フレームの為に現在、どちらのターンかを保存しておく(これをしないと上記の処理がたくさん実行される)
         _beFrPlayer = _player;
-
-        //SelectButtonの切り替え
-        if (_player == 1)
-        {
-            _whiteSelect.gameObject.SetActive(true);
-            _blackSelect.gameObject.SetActive(false);
-        }
-        else if (_player == 2)
-        {
-            _whiteSelect.gameObject.SetActive(false);
-            _blackSelect.gameObject.SetActive(true);
-        }
-        //引き分け時のシーン遷移
     }
 
     void PlayerWin()
@@ -133,26 +136,24 @@ public class GameManager : MonoBehaviour
                 Invoke("SceneSwitch", 2f);
             }
         }
-        for (int i = 0; i < _piece._whitePieces.Count; i++)
+        foreach (var i in _piece._whitePieces)
         {
             for (int j = 0; j < 8; j++)
             {
-                if (_piece._whitePieces[i].GetComponent<GameCheck>()._checkCount[j] >= 3)
+                if (i.GetComponent<GameCheck>()._checkCount[j] >= 3)
                 {
-                    isClear = true;
                     _resultPanel.gameObject.SetActive(true);
                     ResultSceneManager._win = 2;
                     Invoke("SceneSwitch", 2f);
                 }
             }
         }
-        for (int i = 0; i < _piece._blackPieces.Count; i++)
+        foreach (var i in _piece._blackPieces)
         {
             for (int j = 0; j < 8; j++)
             {
-                if (_piece._blackPieces[i].GetComponent<GameCheck>()._checkCount[j] >= 3)
+                if (i.GetComponent<GameCheck>()._checkCount[j] >= 3)
                 {
-                    isClear = true;
                     _resultPanel.gameObject.SetActive(true);
                     ResultSceneManager._win = 1;
                     Invoke("SceneSwitch", 2f);

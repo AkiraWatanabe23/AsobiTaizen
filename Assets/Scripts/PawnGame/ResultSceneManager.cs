@@ -7,7 +7,6 @@ public class ResultSceneManager : MonoBehaviour
 {
     [SerializeField] public Text _whiteWinText; //‚Ç‚Á‚¿‚ªŸ‚Á‚½‚©•\¦‚·‚éText(”’)
     [SerializeField] public Text _blackWinText; //‚Ç‚Á‚¿‚ªŸ‚Á‚½‚©•\¦‚·‚éText(•)
-    [SerializeField] public Text _drawText;     //ˆø‚«•ª‚¯‚ÌText
     public static int _win;
 
     // Start is called before the first frame update
@@ -18,13 +17,11 @@ public class ResultSceneManager : MonoBehaviour
         {
             _whiteWinText.gameObject.SetActive(false);
             _blackWinText.gameObject.SetActive(true);
-            _drawText.gameObject.SetActive(false);
         }
         else if (_win == 2)
         {
             _whiteWinText.gameObject.SetActive(true);
             _blackWinText.gameObject.SetActive(false);
-            _drawText.gameObject.SetActive(false);
         }
     }
 }

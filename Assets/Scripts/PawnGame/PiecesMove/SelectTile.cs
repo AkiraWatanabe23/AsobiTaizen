@@ -81,6 +81,7 @@ public class SelectTile : MonoBehaviour
                 _set = null;
                 _whereText.gameObject.SetActive(false);
                 _phase = SelectPhase.Piece;
+                _manager.LineCount();
                 SwitchTurn();
             }
         }
