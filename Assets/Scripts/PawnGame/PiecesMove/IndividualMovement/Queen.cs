@@ -10,8 +10,8 @@ public class Queen : MonoBehaviour
     MasuSearch _search;
     PieceManager _piece;
     [Tooltip("この駒獲れます"), SerializeField] Material _getable;
-    [Tooltip("移動させるクイーン")] public GameObject _pieceInfo;
-    public RaycastHit _hit;
+    [Tooltip("移動させるクイーン")] GameObject _pieceInfo;
+    RaycastHit _hit;
     float _vecX;
     float _vecY;
     float _vecZ;

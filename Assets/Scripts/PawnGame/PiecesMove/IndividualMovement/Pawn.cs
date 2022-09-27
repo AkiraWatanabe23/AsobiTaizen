@@ -10,8 +10,8 @@ public class Pawn : MonoBehaviour
     MasuSearch _search;
     PieceManager _piece;
     [Tooltip("この駒獲れます"), SerializeField] Material _getable;
-    [Tooltip("移動させるポーン")] public GameObject _pieceInfo;
-    public RaycastHit _hit;
+    [Tooltip("移動させるポーン")] GameObject _pieceInfo;
+    RaycastHit _hit;
     float _vecX;
     float _vecY;
     float _vecZ;
@@ -31,7 +31,7 @@ public class Pawn : MonoBehaviour
         if (_pieceInfo.tag == "WhitePiece")
         {
             //1,1回目の動き...2マス移動可
-            if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
+            if (_pieceInfo.GetComponent<PieceMove>().moveCount == 0)
             {
                 _vecX = 0f;
                 _vecY = 3f;
@@ -72,7 +72,7 @@ public class Pawn : MonoBehaviour
                 }
             }
             //2,2回目以降は1マス移動
-            else if (_pieceInfo.GetComponent<PieceMove>()._moveCount != 0)
+            else if (_pieceInfo.GetComponent<PieceMove>().moveCount != 0)
             {
                 _vecX = 0f;
                 _vecY = 3f;
@@ -145,7 +145,7 @@ public class Pawn : MonoBehaviour
         else if (_pieceInfo.tag == "BlackPiece")
         {
             //1,1回目の動き...2マス移動可
-            if (_pieceInfo.GetComponent<PieceMove>()._moveCount == 0)
+            if (_pieceInfo.GetComponent<PieceMove>().moveCount == 0)
             {
                 _vecX = 0f;
                 _vecY = 3f;
@@ -186,7 +186,7 @@ public class Pawn : MonoBehaviour
                 }
             }
             //2,2回目以降は1マス移動
-            else if (_pieceInfo.GetComponent<PieceMove>()._moveCount != 0)
+            else if (_pieceInfo.GetComponent<PieceMove>().moveCount != 0)
             {
                 _vecX = 0f;
                 _vecY = 3f;

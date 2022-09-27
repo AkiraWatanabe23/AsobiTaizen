@@ -7,15 +7,15 @@ public class SelectTile : MonoBehaviour
 {
     GameManager _manager;
     PieceManager _piece;
-    public GameObject _set;
+    public GameObject setPiece;
     RaycastHit _hit;
-    public int[] _selectPieceCount = new int[6];
+    public int[] SelectPieceCount = new int[6];
     [SerializeField] Text[] _countText = new Text[6];
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
     [SerializeField] public Text _whereText;
-    public SelectPhase _phase = SelectPhase.Piece;
+    public SelectPhase phase = SelectPhase.Piece;
     //駒を配置する時の位置修正
     [SerializeField] Vector3 _offset = Vector3.up;
 
@@ -24,9 +24,9 @@ public class SelectTile : MonoBehaviour
     {
         _manager = GetComponent<GameManager>();
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
-        for (int i = 0; i < _selectPieceCount.Length; i++)
+        for (int i = 0; i < SelectPieceCount.Length; i++)
         {
-            _selectPieceCount[i] = 4;
+            SelectPieceCount[i] = 4;
         }
     }
 
@@ -39,13 +39,13 @@ public class SelectTile : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            _countText[i].text = _selectPieceCount[i].ToString();
+            _countText[i].text = SelectPieceCount[i].ToString();
         }
     }
 
     public void SetPiece()
     {
-        if (_phase == SelectPhase.Tile)
+        if (phase == SelectPhase.Tile)
         {
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             float _rayDistance = 100;
@@ -65,7 +65,7 @@ public class SelectTile : MonoBehaviour
             {
                 GameObject target = _hit.collider.gameObject;
 
-                GameObject _setPiece = Instantiate(_set, target.transform.position + _offset, _set.transform.rotation);
+                GameObject _setPiece = Instantiate(setPiece, target.transform.position + _offset, setPiece.transform.rotation);
                 if (_setPiece.tag == "WhitePiece")
                 {
                     _piece.WhitePieces.Add(_setPiece);
@@ -78,19 +78,19 @@ public class SelectTile : MonoBehaviour
                 _pieceInfo.SelectAssign();
 
                 print($"{_setPiece.name} を {target.name} に配置した");
-                _set = null;
+                setPiece = null;
                 _whereText.gameObject.SetActive(false);
-                _phase = SelectPhase.Piece;
+                phase = SelectPhase.Piece;
                 _manager.LineCount();
                 SwitchTurn();
             }
         }
-        else if (_phase == SelectPhase.Piece)
+        else if (phase == SelectPhase.Piece)
         {
             //ObjectのSetActiveをif文で判定(boolを返す)
             if (_whereText.gameObject.activeSelf)
             {
-                _phase = SelectPhase.Tile;
+                phase = SelectPhase.Tile;
             }
         }
     }

@@ -16,7 +16,7 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("駒のいるマスのファイル(縦) a～h")] public int _tileFile = 0;
     [Tooltip("駒のいるマスのランク(横) 1～8")] public int _tileRank = 0;
     RaycastHit _hit;
-    [SerializeField] public PieceManager _manager;
+    [SerializeField] public PieceManager manager;
     [SerializeField] public Pawn _pawn;
     [SerializeField] public Knight _knight;
     [SerializeField] public Bishop _bishop;
@@ -81,7 +81,7 @@ public class MasuSearch : MonoBehaviour
                 break;
         }
         //移動範囲外の駒のColliderをoffにする処理
-        foreach (var pieces in _manager.WhitePieces)
+        foreach (var pieces in manager.WhitePieces)
         {
             //Listの要素がMissingだった場合、無視する
             if (pieces != null)
@@ -89,7 +89,7 @@ public class MasuSearch : MonoBehaviour
                 pieces.GetComponent<Collider>().enabled = false;
             }
         }
-        foreach (var pieces in _manager.BlackPieces)
+        foreach (var pieces in manager.BlackPieces)
         {
             //Listの要素がMissingだった場合、無視する
             if (pieces != null)

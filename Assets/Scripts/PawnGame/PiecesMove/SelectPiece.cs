@@ -30,42 +30,42 @@ public class SelectPiece : MonoBehaviour
         {
             if (gameObject.name == "Rook")
             {
-                if (_select._selectPieceCount[0] != 0)
+                if (_select.SelectPieceCount[0] != 0)
                 {
-                    _select._set = _selectPieces[0];
-                    _select._selectPieceCount[0]--;
-                    print($"白ルークはあと {_select._selectPieceCount[0]} 個");
+                    _select.setPiece = _selectPieces[0];
+                    _select.SelectPieceCount[0]--;
+                    print($"白ルークはあと {_select.SelectPieceCount[0]} 個");
                     UISwitch();
                 }
-                else if (_select._selectPieceCount[0] == 0)
+                else if (_select.SelectPieceCount[0] == 0)
                 {
                     Debug.LogError("この駒はもう置くことが出来ません");
                 }
             }
             else if (gameObject.name == "Bishop")
             {
-                if (_select._selectPieceCount[1] != 0)
+                if (_select.SelectPieceCount[1] != 0)
                 {
-                    _select._set = _selectPieces[1];
-                    _select._selectPieceCount[1]--;
-                    print($"白ビショップはあと {_select._selectPieceCount[1]} 個");
+                    _select.setPiece = _selectPieces[1];
+                    _select.SelectPieceCount[1]--;
+                    print($"白ビショップはあと {_select.SelectPieceCount[1]} 個");
                     UISwitch();
                 }
-                else if (_select._selectPieceCount[1] == 0)
+                else if (_select.SelectPieceCount[1] == 0)
                 {
                     Debug.LogError("この駒はもう置くことが出来ません");
                 }
             }
             else if (gameObject.name == "Knight")
             {
-                if (_select._selectPieceCount[2] != 0)
+                if (_select.SelectPieceCount[2] != 0)
                 {
-                    _select._set = _selectPieces[2];
-                    _select._selectPieceCount[2]--;
-                    print($"白ナイトはあと {_select._selectPieceCount[2]} 個");
+                    _select.setPiece = _selectPieces[2];
+                    _select.SelectPieceCount[2]--;
+                    print($"白ナイトはあと {_select.SelectPieceCount[2]} 個");
                     UISwitch();
                 }
-                else if (_select._selectPieceCount[2] == 0)
+                else if (_select.SelectPieceCount[2] == 0)
                 {
                     Debug.LogError("この駒はもう置くことが出来ません");
                 }
@@ -76,42 +76,42 @@ public class SelectPiece : MonoBehaviour
         {
             if (gameObject.name == "Rook")
             {
-                if (_select._selectPieceCount[3] != 0)
+                if (_select.SelectPieceCount[3] != 0)
                 {
-                    _select._set = _selectPieces[3];
-                    _select._selectPieceCount[3]--;
-                    print($"黒ルークはあと {_select._selectPieceCount[3]} 個");
+                    _select.setPiece = _selectPieces[3];
+                    _select.SelectPieceCount[3]--;
+                    print($"黒ルークはあと {_select.SelectPieceCount[3]} 個");
                     UISwitch();
                 }
-                else if (_select._selectPieceCount[3] == 0)
+                else if (_select.SelectPieceCount[3] == 0)
                 {
                     Debug.LogError("この駒はもう置くことが出来ません");
                 }
             }
             else if (gameObject.name == "Bishop")
             {
-                if (_select._selectPieceCount[4] != 0)
+                if (_select.SelectPieceCount[4] != 0)
                 {
-                    _select._set = _selectPieces[4];
-                    _select._selectPieceCount[4]--;
-                    print($"黒ルークはあと {_select._selectPieceCount[4]} 個");
+                    _select.setPiece = _selectPieces[4];
+                    _select.SelectPieceCount[4]--;
+                    print($"黒ルークはあと {_select.SelectPieceCount[4]} 個");
                     UISwitch();
                 }
-                else if (_select._selectPieceCount[4] == 0)
+                else if (_select.SelectPieceCount[4] == 0)
                 {
                     Debug.LogError("この駒はもう置くことが出来ません");
                 }
             }
             else if (gameObject.name == "Knight")
             {
-                if (_select._selectPieceCount[5] != 0)
+                if (_select.SelectPieceCount[5] != 0)
                 {
-                    _select._set = _selectPieces[5];
-                    _select._selectPieceCount[5]--;
-                    print($"黒ルークはあと {_select._selectPieceCount[5]} 個");
+                    _select.setPiece = _selectPieces[5];
+                    _select.SelectPieceCount[5]--;
+                    print($"黒ルークはあと {_select.SelectPieceCount[5]} 個");
                     UISwitch();
                 }
-                else if (_select._selectPieceCount[5] == 0)
+                else if (_select.SelectPieceCount[5] == 0)
                 {
                     Debug.LogError("この駒はもう置くことが出来ません");
                 }

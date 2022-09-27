@@ -9,7 +9,6 @@ public class GameCheck : MonoBehaviour
     /// <summary> 条件を満たした駒がいくつ並んでいるか(探索方向毎) </summary>
     public int[] CheckCount = new int[8];
     RaycastHit _hit;
-    float _rayDist;
 
     void Start()
     {
@@ -20,23 +19,27 @@ public class GameCheck : MonoBehaviour
     }
 
     /// <summary>
-    /// 8方向にRayを飛ばし、駒が並んでいるかを判定する
+    /// 8方向にRayを飛ばし、条件に沿って駒が並んでいるかを判定する
     /// </summary>
     public void Check()
     {
         //前後左右
         //前方向
-        _rayDist = 7f;
+        _checkX = 0f;
+        _checkZ = 6f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.forward, out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(_checkX, 10f, _checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[0]++;
-                    _rayDist += 7f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkZ += 6f;
                     Debug.Log(CheckCount[0]);
                 }
             }
@@ -46,17 +49,21 @@ public class GameCheck : MonoBehaviour
             }
         }
         //後ろ方向
-        _rayDist = 7f;
+        _checkX = 0f;
+        _checkZ = 6f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), -Vector3.forward, out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(_checkX, 10f, -_checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[1]++;
-                    _rayDist += 7f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkZ += 6f;
                     Debug.Log(CheckCount[1]);
                 }
             }
@@ -66,18 +73,21 @@ public class GameCheck : MonoBehaviour
             }
         }
         //左方向
-        _rayDist = 7f;
+        _checkX = 6f;
+        _checkZ = 0f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.left, out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(-_checkX, 10f, _checkZ), Vector3.down, out _hit, 20))
             {
-                Debug.DrawRay(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.left, Color.yellow, _rayDist);
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[2]++;
-                    _rayDist += 7f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkX += 6f;
                     Debug.Log(CheckCount[2]);
                 }
             }
@@ -87,17 +97,21 @@ public class GameCheck : MonoBehaviour
             }
         }
         //右方向
-        _rayDist = 7f;
+        _checkX = 6f;
+        _checkZ = 0f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), Vector3.right, out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(_checkX, 10f, _checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[3]++;
-                    _rayDist += 7f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkX += 6f;
                     Debug.Log(CheckCount[3]);
                 }
             }
@@ -108,20 +122,23 @@ public class GameCheck : MonoBehaviour
         }
 
         //斜め方向
-        _checkX = 1f;
-        _checkZ = 1f;
         //左斜め前
-        _rayDist = 9f;
+        _checkX = 6f;
+        _checkZ = 6f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, _checkZ), out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(-_checkX, 10f, _checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[4]++;
-                    _rayDist += 9f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkX += 6f;
+                    _checkZ += 6f;
                     Debug.Log(CheckCount[4]);
                 }
             }
@@ -131,17 +148,22 @@ public class GameCheck : MonoBehaviour
             }
         }
         //右斜め前
-        _rayDist = 9f;
+        _checkX = 6f;
+        _checkZ = 6f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, _checkZ), out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(_checkX, 10f, _checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[5]++;
-                    _rayDist += 9f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkX += 6f;
+                    _checkZ += 6f;
                     Debug.Log(CheckCount[5]);
                 }
             }
@@ -151,17 +173,22 @@ public class GameCheck : MonoBehaviour
             }
         }
         //左斜め後ろ
-        _rayDist = 9f;
+        _checkX = 6f;
+        _checkZ = 6f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(-_checkX, 0f, -_checkZ), out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(-_checkX, 10f, -_checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[6]++;
-                    _rayDist += 9f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkX += 6f;
+                    _checkZ += 6f;
                     Debug.Log(CheckCount[6]);
                 }
             }
@@ -171,17 +198,22 @@ public class GameCheck : MonoBehaviour
             }
         }
         //右斜め後ろ
-        _rayDist = 9f;
+        _checkX = 6f;
+        _checkZ = 6f;
         for (int i = 0; i < 3; i++)
         {
-            if (Physics.Raycast(gameObject.transform.position + new Vector3(0f, 2f, 0f), new Vector3(_checkX, 0f, -_checkZ), out _hit, _rayDist))
+            if (Physics.Raycast(gameObject.transform.position + new Vector3(_checkX, 10f, -_checkZ), Vector3.down, out _hit, 20))
             {
-                if (_hit.collider.gameObject.tag == gameObject.tag ||
+                if (_hit.collider.gameObject.tag == "Tile")
+                {
+                    break;
+                }
+                else if (_hit.collider.gameObject.tag == gameObject.tag ||
                     _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
                 {
                     CheckCount[7]++;
-                    _rayDist += 9f;
-                    _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
+                    _checkX += 6f;
+                    _checkZ += 6f;
                     Debug.Log(CheckCount[7]);
                 }
             }

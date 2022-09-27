@@ -10,8 +10,8 @@ public class King : MonoBehaviour
     MasuSearch _search;
     PieceManager _piece;
     [Tooltip("この駒獲れます"), SerializeField] Material _getable;
-    [Tooltip("移動させるクイーン")] public GameObject _pieceInfo;
-    public RaycastHit _hit;
+    [Tooltip("移動させるキング")] GameObject _pieceInfo;
+    RaycastHit _hit;
     float _vecX;
     float _vecY;
     float _vecZ;
@@ -30,9 +30,9 @@ public class King : MonoBehaviour
         //////////前後左右の動き//////////
         //前後方向
         _vecX = 0f;
-        _vecY = 3f;
-        _vecZ = 4.5f;
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+        _vecY = 10f;
+        _vecZ = 6f;
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -40,7 +40,7 @@ public class King : MonoBehaviour
         {
             Debug.Log("none");
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -50,10 +50,10 @@ public class King : MonoBehaviour
         }
 
         //左右方向
-        _vecX = 4.5f;
-        _vecY = 3f;
+        _vecX = 6f;
+        _vecY = 10f;
         _vecZ = 0f;
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -61,7 +61,7 @@ public class King : MonoBehaviour
         {
             Debug.Log("none");
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -72,10 +72,10 @@ public class King : MonoBehaviour
 
         //////////斜め方向の動き//////////
         //斜め前2方向
-        _vecX = 5f;
-        _vecY = 3f;
-        _vecZ = 5f;
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+        _vecX = 6f;
+        _vecY = 10f;
+        _vecZ = 6f;
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -83,7 +83,7 @@ public class King : MonoBehaviour
         {
             Debug.Log("none");
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -93,7 +93,7 @@ public class King : MonoBehaviour
         }
 
         //斜め後ろ2方向
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }
@@ -101,7 +101,7 @@ public class King : MonoBehaviour
         {
             Debug.Log("none");
         }
-        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, -_vecZ), out _hit, 100))
+        if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 20))
         {
             MovableCheck();
         }

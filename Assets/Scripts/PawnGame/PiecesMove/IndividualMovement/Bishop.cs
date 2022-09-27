@@ -10,8 +10,8 @@ public class Bishop : MonoBehaviour
     MasuSearch _search;
     PieceManager _piece;
     [Tooltip("この駒獲れます"), SerializeField] Material _getable;
-    [Tooltip("移動させるビショップ")] public GameObject _pieceInfo;
-    public RaycastHit _hit;
+    [Tooltip("移動させるビショップ")] GameObject _pieceInfo;
+    RaycastHit _hit;
     float _vecX;
     float _vecY;
     float _vecZ;

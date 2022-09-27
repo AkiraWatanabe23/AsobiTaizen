@@ -113,16 +113,22 @@ public class GameManager : MonoBehaviour
             //”»’è’†‚ÉColliderOff‚É‚µ‚½‹î‚ðŒ³‚É–ß‚·
             foreach (var i in _piece.WhitePieces)
             {
-                if (i.GetComponent<Collider>().enabled == false)
+                if (i != null)
                 {
-                    i.GetComponent<Collider>().enabled = true;
+                    if (i.GetComponent<Collider>().enabled == false)
+                    {
+                        i.GetComponent<Collider>().enabled = true;
+                    }
                 }
             }
             foreach (var i in _piece.BlackPieces)
             {
-                if (i.GetComponent<Collider>().enabled == false)
+                if (i != null)
                 {
-                    i.GetComponent<Collider>().enabled = true;
+                    if (i.GetComponent<Collider>().enabled == false)
+                    {
+                        i.GetComponent<Collider>().enabled = true;
+                    }
                 }
             }
         }
