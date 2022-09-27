@@ -88,20 +88,26 @@ public class GameManager : MonoBehaviour
         {
             foreach (var i in _piece.WhitePieces)
             {
-                i.GetComponent<GameCheck>().Check();
-                PlayerWin();
-                for (int j = 0; j < 8; j++)
+                if (i != null)
                 {
-                    i.GetComponent<GameCheck>().CheckCount[j] = 0;
+                    i.GetComponent<GameCheck>().Check();
+                    PlayerWin();
+                    for (int j = 0; j < 8; j++)
+                    {
+                        i.GetComponent<GameCheck>().CheckCount[j] = 0;
+                    }
                 }
             }
             foreach (var i in _piece.BlackPieces)
             {
-                i.GetComponent<GameCheck>().Check();
-                PlayerWin();
-                for (int j = 0; j < 8; j++)
+                if (i != null)
                 {
-                    i.GetComponent<GameCheck>().CheckCount[j] = 0;
+                    i.GetComponent<GameCheck>().Check();
+                    PlayerWin();
+                    for (int j = 0; j < 8; j++)
+                    {
+                        i.GetComponent<GameCheck>().CheckCount[j] = 0;
+                    }
                 }
             }
             //îªíËíÜÇ…ColliderOffÇ…ÇµÇΩãÓÇå≥Ç…ñﬂÇ∑
@@ -140,20 +146,23 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
-                if (i.GetComponent<GameCheck>().CheckCount[j] >= 3)
+                if (i != null)
                 {
-                    _resultPanel.gameObject.SetActive(true);
-                    //îíÇÃèüÇø
-                    if (_beFrPlayer == 1)
+                    if (i.GetComponent<GameCheck>().CheckCount[j] >= 3)
                     {
-                        ResultSceneManager._win = 2;
+                        _resultPanel.gameObject.SetActive(true);
+                        //îíÇÃèüÇø
+                        if (_beFrPlayer == 1)
+                        {
+                            ResultSceneManager._win = 2;
+                        }
+                        //çïÇÃèüÇø
+                        else if (_beFrPlayer == 2)
+                        {
+                            ResultSceneManager._win = 1;
+                        }
+                        Invoke("SceneSwitch", 2f);
                     }
-                    //çïÇÃèüÇø
-                    else if (_beFrPlayer == 2)
-                    {
-                        ResultSceneManager._win = 1;
-                    }
-                    Invoke("SceneSwitch", 2f);
                 }
             }
         }
@@ -161,20 +170,23 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
-                if (i.GetComponent<GameCheck>().CheckCount[j] >= 3)
+                if (i != null)
                 {
-                    _resultPanel.gameObject.SetActive(true);
-                    //îíÇÃèüÇø
-                    if (_beFrPlayer == 1)
+                    if (i.GetComponent<GameCheck>().CheckCount[j] >= 3)
                     {
-                        ResultSceneManager._win = 2;
+                        _resultPanel.gameObject.SetActive(true);
+                        //îíÇÃèüÇø
+                        if (_beFrPlayer == 1)
+                        {
+                            ResultSceneManager._win = 2;
+                        }
+                        //çïÇÃèüÇø
+                        else if (_beFrPlayer == 2)
+                        {
+                            ResultSceneManager._win = 1;
+                        }
+                        Invoke("SceneSwitch", 2f);
                     }
-                    //çïÇÃèüÇø
-                    else if (_beFrPlayer == 2)
-                    {
-                        ResultSceneManager._win = 1;
-                    }
-                    Invoke("SceneSwitch", 2f);
                 }
             }
         }
