@@ -29,11 +29,11 @@ public class Rook : MonoBehaviour
 
         //‘O•ûŒü
         _vecX = 0f;
-        _vecY = 3f;
-        _vecZ = 4.5f;
+        _vecY = 10f;
+        _vecZ = 6f;
         for (int i = 0; i < 8 - _search._tileRank; i++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 5f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -44,7 +44,7 @@ public class Rook : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ += 4f;
+                    _vecZ += 6f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -88,11 +88,11 @@ public class Rook : MonoBehaviour
         }
         //Œã‚ë•ûŒü
         _vecX = 0f;
-        _vecY = 3f;
-        _vecZ = 4.5f;
+        _vecY = 10f;
+        _vecZ = 6f;
         for (int j = _search._tileRank; j > 1; j--)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 5f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 20))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -103,7 +103,7 @@ public class Rook : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ += 4f;
+                    _vecZ += 6f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -146,12 +146,12 @@ public class Rook : MonoBehaviour
             }
         }
         //¶•ûŒü
-        _vecX = 4.5f;
-        _vecY = 3f;
+        _vecX = 6f;
+        _vecY = 10f;
         _vecZ = 0f;
         for (int k = _search._tileFile; k > 1; k--)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 5f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -162,7 +162,7 @@ public class Rook : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 4f;
+                    _vecX += 6f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -205,12 +205,12 @@ public class Rook : MonoBehaviour
             }
         }
         //‰E•ûŒü
-        _vecX = 4.5f;
-        _vecY = 3f;
+        _vecX = 6f;
+        _vecY = 10f;
         _vecZ = 0f;
         for (int l = 0; l < 8 - _search._tileFile; l++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 5f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -221,7 +221,7 @@ public class Rook : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX += 4f;
+                    _vecX += 6f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);

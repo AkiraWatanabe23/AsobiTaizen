@@ -13,6 +13,7 @@ public class PieceManager : MonoBehaviour
     [SerializeField] public List<GameObject> WhitePieces = new List<GameObject>();
     [SerializeField] public List<GameObject> BlackPieces = new List<GameObject>();
     [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚éŠl‚é‚±‚Æ‚ªo—ˆ‚é‹î")] public List<GameObject> GetablePieces = new List<GameObject>();
+    [Tooltip("Œ»İ‘I‚ñ‚Å‚¢‚é‹î")] public GameObject CurrentPiece;
     MasuSearch _search;
 
     // Start is called before the first frame update

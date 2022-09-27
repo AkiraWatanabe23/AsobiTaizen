@@ -394,6 +394,7 @@ MonoBehaviour:
   WhitePieces: []
   BlackPieces: []
   GetablePieces: []
+  CurrentPiece: {fileID: 0}
 --- !u!1 &116253624
 GameObject:
   m_ObjectHideFlags: 0

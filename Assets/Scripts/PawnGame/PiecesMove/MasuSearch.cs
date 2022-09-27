@@ -10,8 +10,8 @@ public class MasuSearch : MonoBehaviour
     [Tooltip("盤面のマス"), SerializeField] public List<Collider> Tile = new List<Collider>();
     [Tooltip("移動可能マス"), SerializeField] public List<Collider> MovableTile = new List<Collider>();
     [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> ImmovablePieces = new List<GameObject>();
-    [SerializeField] public PieceMove _piece = default;
-    [SerializeField] public PuzzlePiece _puzzle = default;
+    [SerializeField] public PieceMove piece = default;
+    [SerializeField] public PuzzlePiece puzzle = default;
     [SerializeField] public GameObject pieceInfo;
     [Tooltip("駒のいるマスのファイル(縦) a～h")] public int _tileFile = 0;
     [Tooltip("駒のいるマスのランク(横) 1～8")] public int _tileRank = 0;
@@ -38,17 +38,17 @@ public class MasuSearch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_piece != null)
+        if (piece != null)
         {
             GetTileNum();
-            var _pieceNum = _piece.gameObject.GetComponent<PieceMove>().type;
+            var _pieceNum = piece.gameObject.GetComponent<PieceMove>().type;
             Search((int)_pieceNum);
         }
 
-        if (_puzzle != null)
+        if (puzzle != null)
         {
             GetTileNum(); 
-            var _pieceNum = _puzzle.gameObject.GetComponent<PuzzlePiece>()._type;
+            var _pieceNum = puzzle.gameObject.GetComponent<PuzzlePiece>()._type;
             Search((int)_pieceNum);
         }
     }

@@ -127,7 +127,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
             _search.MovableTile.Clear();
-            _search._piece = null;
+            _search.piece = null;
             _search.pieceInfo = null;
         }
     }
@@ -265,7 +265,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search._puzzle = this;
+            _search.puzzle = this;
             _search.pieceInfo = gameObject;
             _piece.WhitePieces.Remove(gameObject);
         }
@@ -278,7 +278,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
             _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search._puzzle = this;
+            _search.puzzle = this;
             _search.pieceInfo = gameObject;
             _piece.BlackPieces.Remove(gameObject);
         }
@@ -355,9 +355,9 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
             _search.MovableTile.Clear();
-            _search._piece = null;
+            _search.piece = null;
             _search.pieceInfo = null;
-            _search._puzzle = null;
+            _search.puzzle = null;
         }
     }
 

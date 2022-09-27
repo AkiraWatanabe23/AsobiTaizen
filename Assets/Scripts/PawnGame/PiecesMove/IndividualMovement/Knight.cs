@@ -28,12 +28,12 @@ public class Knight : MonoBehaviour
         _pieceInfo = _search.pieceInfo;
 
         //Œj”n ‘O•ûŒü
-        _vecX = 5f;
-        _vecY = 3f;
-        _vecZ = 9f;
+        _vecX = 6f;
+        _vecY = 10f;
+        _vecZ = 12f;
         for (int i = 0; i < 2; i++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
                 //’Tõæ‚É‚¢‚½‚Ì‚ª–¡•û‚Ì‹î‚¾‚Á‚½‚ç
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
@@ -45,7 +45,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX -= 9f;
+                    _vecX -= 12f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -58,17 +58,17 @@ public class Knight : MonoBehaviour
             }
             else //’Tõæ‚ª”Õ–Ê‚Ì”ÍˆÍŠO‚¾‚Á‚½ê‡
             {
-                _vecX -= 9f;
+                _vecX -= 12f;
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
         //Œj”n Œã‚ë•ûŒü
-        _vecX = 5f;
-        _vecY = 3f;
-        _vecZ = 9f;
+        _vecX = 6f;
+        _vecY = 10f;
+        _vecZ = 12f;
         for (int j = 0; j < 2; j++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, -_vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 30))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -79,7 +79,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecX -= 9f;
+                    _vecX -= 12f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -92,17 +92,17 @@ public class Knight : MonoBehaviour
             }
             else //’Tõæ‚ª”Õ–Ê‚Ì”ÍˆÍŠO‚¾‚Á‚½ê‡
             {
-                _vecX -= 9f;
+                _vecX -= 12f;
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
         //Œj”n ¶•ûŒü
-        _vecX = 9f;
-        _vecY = 3f;
-        _vecZ = 5f;
+        _vecX = 12f;
+        _vecY = 10f;
+        _vecZ = 6f;
         for (int k = 0; k < 2; k++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(-_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -113,7 +113,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ -= 9f;
+                    _vecZ -= 12f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -126,17 +126,17 @@ public class Knight : MonoBehaviour
             }
             else //’Tõæ‚ª”Õ–Ê‚Ì”ÍˆÍŠO‚¾‚Á‚½ê‡
             {
-                _vecZ -= 9f;
+                _vecZ -= 12f;
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }
         //Œj”n ‰E•ûŒü
-        _vecX = 9f;
-        _vecY = 3f;
-        _vecZ = 5f;
+        _vecX = 12f;
+        _vecY = 10f;
+        _vecZ = 6f;
         for (int l = 0; l < 2; l++)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(0f, 4f, 0f), new Vector3(_vecX, -_vecY, _vecZ), out _hit, 100))
+            if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
@@ -147,7 +147,7 @@ public class Knight : MonoBehaviour
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
-                    _vecZ -= 9f;
+                    _vecZ -= 12f;
                     if (!_search.MovableTile.Contains(_hit.collider))
                     {
                         _search.MovableTile.Add(_hit.collider);
@@ -160,7 +160,7 @@ public class Knight : MonoBehaviour
             }
             else //’Tõæ‚ª”Õ–Ê‚Ì”ÍˆÍŠO‚¾‚Á‚½ê‡
             {
-                _vecZ -= 9f;
+                _vecZ -= 12f;
                 Debug.Log("Collider‚ª“–‚½‚Á‚Ä‚È‚¢");
             }
         }

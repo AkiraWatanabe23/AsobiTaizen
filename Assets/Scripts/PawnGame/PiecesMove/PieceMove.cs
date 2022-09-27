@@ -39,7 +39,6 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
     /// <summary> 
     /// マウスクリックが行われた(どのマウスクリックでも実行される)時の処理
-    /// 呼ばれるタイミングはButtonUpのタイミングに似てる?
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
@@ -136,7 +135,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             state = PieceState.Normal;
             _renderer.material = _normalMaterial;
             _search.MovableTile.Clear();
-            _search._piece = null;
+            _search.piece = null;
             _search.pieceInfo = null;
         }
     }
@@ -153,58 +152,64 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         {
             GameObject _target = _hit.collider.gameObject;
 
-            if (_target.tag == "BlackPiece")
+            if (gameObject.tag == "WhitePiece")
             {
-                Destroy(_target);
+                if (_target.tag == "BlackPiece")
+                {
+                    Destroy(_target);
+                }
+                transform.position = _target.transform.position;
+
+                PhaseChange(_target);
+                SetCursorPos(Screen.width / 2, Screen.height / 2);
+                GameManager.Player = GameManager.Player_Two;
+                GameManager.phase = Phase.Black;
+
+                print($"駒は {_target.name} をとった");
+
+                if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+                {
+                    GameObject _hitTile = hitTile.collider.gameObject;
+                    print($"駒は {_hitTile.name} に移動した");
+                }
+                _manager._getPiece = _target.name;
+                return true;
             }
-            transform.position = _target.transform.position;
-
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager.Player = GameManager.Player_Two;
-            GameManager.phase = Phase.Black;
-
-            print($"駒は {_target.name} をとった");
-
-            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-            {
-                GameObject _hitTile = hitTile.collider.gameObject;
-                print($"駒は {_hitTile.name} に移動した");
-            }
-            _manager._getPiece = _target.name;
-            return true;
         }
         //黒が白の駒を奪う処理
         else if (Physics.Raycast(_ray, out _hit, _rayDistance, _whiteLayer))
         {
             GameObject _target = _hit.collider.gameObject;
 
-            if (_target.tag == "WhitePiece")
+            if (gameObject.tag == "BlackPiece")
             {
-                Destroy(_target);
+                if (_target.tag == "WhitePiece")
+                {
+                    Destroy(_target);
+                }
+
+                transform.position = _target.transform.position;
+
+                PhaseChange(_target);
+                SetCursorPos(Screen.width / 2, Screen.height / 2);
+                GameManager.Player = GameManager.Player_One;
+                GameManager.phase = Phase.White;
+
+                print($"駒は {_target.name} をとった");
+
+                if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
+                {
+                    GameObject _hitTile = hitTile.collider.gameObject;
+                    print($"駒は {_hitTile.name} に移動した");
+                }
+
+                if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
+                {
+                    _movedPieceTile = _hit.collider.gameObject;
+                }
+                _manager._getPiece = _target.name;
+                return true;
             }
-
-            transform.position = _target.transform.position;
-
-            PhaseChange(_target);
-            SetCursorPos(Screen.width / 2, Screen.height / 2);
-            GameManager.Player = GameManager.Player_One;
-            GameManager.phase = Phase.White;
-
-            print($"駒は {_target.name} をとった");
-
-            if (Physics.Raycast(_ray, out RaycastHit hitTile, _rayDistance, _tileLayer))
-            {
-                GameObject _hitTile = hitTile.collider.gameObject;
-                print($"駒は {_hitTile.name} に移動した");
-            }
-
-            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
-            {
-                _movedPieceTile = _hit.collider.gameObject;
-            }
-            _manager._getPiece = _target.name;
-            return true;
         }
         //白黒共通の移動処理
         else if (Physics.Raycast(_ray, out _hit, _rayDistance, _tileLayer))
@@ -257,7 +262,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             state = PieceState.Move;
             _renderer.material = _moveMaterial;
-            _search._piece = this;
+            _search.piece = this;
             _search.pieceInfo = gameObject;
             _piece.WhitePieces.Remove(gameObject);
         }
@@ -270,7 +275,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             state = PieceState.Move;
             _renderer.material = _moveMaterial;
-            _search._piece = this;
+            _search.piece = this;
             _search.pieceInfo = gameObject;
             _piece.BlackPieces.Remove(gameObject);
         }
@@ -346,7 +351,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             state = PieceState.Normal;
             _renderer.material = _normalMaterial;
             _search.MovableTile.Clear();
-            _search._piece = null;
+            _search.piece = null;
             _search.pieceInfo = null;
         }
     }
