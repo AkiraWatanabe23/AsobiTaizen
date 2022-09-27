@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Panelに設置したボタンの駒を選ぶスクリプト
+/// マスに配置する駒を選ぶ
 /// </summary>
 public class SelectPiece : MonoBehaviour
 {

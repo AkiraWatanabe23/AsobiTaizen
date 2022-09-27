@@ -31,10 +31,11 @@ public class Bishop : MonoBehaviour
         _vecX = 6f;
         _vecY = 15f;
         _vecZ = 6f;
-        for (int i = 0; i < 8 - _search._tileRank; i++)
+        for (int i = 0; i < 7; i++)
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -42,6 +43,7 @@ public class Bishop : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
+                //’Tõæ‚ª–¡•û‚¶‚á‚È‚©‚Á‚½(“G‹îorƒ}ƒX)ê‡
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 6f;
@@ -53,6 +55,8 @@ public class Bishop : MonoBehaviour
                     }
                     _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    /**************************************************/
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -79,6 +83,7 @@ public class Bishop : MonoBehaviour
                             break;
                         }
                     }
+                    /**************************************************/
                 }
             }
             else
@@ -90,10 +95,11 @@ public class Bishop : MonoBehaviour
         _vecX = 6f;
         _vecY = 15f;
         _vecZ = 6f;
-        for (int j = _search._tileRank; j > 1; j--)
+        for (int j = 0; j < 7; j++)
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -101,6 +107,7 @@ public class Bishop : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
+                //’Tõæ‚ª–¡•û‚¶‚á‚È‚©‚Á‚½(“G‹îorƒ}ƒX)ê‡
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 6f;
@@ -112,6 +119,8 @@ public class Bishop : MonoBehaviour
                     }
                     _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    /**************************************************/
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -138,6 +147,7 @@ public class Bishop : MonoBehaviour
                             break;
                         }
                     }
+                    /**************************************************/
                 }
             }
             else
@@ -149,10 +159,11 @@ public class Bishop : MonoBehaviour
         _vecX = 6f;
         _vecY = 15f;
         _vecZ = 6f;
-        for (int k = _search._tileFile; k > 1; k--)
+        for (int k = 0; k < 7; k++)
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -160,6 +171,7 @@ public class Bishop : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
+                //’Tõæ‚ª–¡•û‚¶‚á‚È‚©‚Á‚½(“G‹îorƒ}ƒX)ê‡
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 6f;
@@ -171,6 +183,8 @@ public class Bishop : MonoBehaviour
                     }
                     _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    /**************************************************/
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -197,6 +211,7 @@ public class Bishop : MonoBehaviour
                             break;
                         }
                     }
+                    /**************************************************/
                 }
             }
             else
@@ -208,10 +223,11 @@ public class Bishop : MonoBehaviour
         _vecX = 6f;
         _vecY = 15f;
         _vecZ = 6f;
-        for (int l = 0; l < 8 - _search._tileFile; l++)
+        for (int l = 0; l < 7; l++)
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
@@ -219,6 +235,7 @@ public class Bishop : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name + "‚æ‚èæ‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
                     break;
                 }
+                //’Tõæ‚ª–¡•û‚¶‚á‚È‚©‚Á‚½(“G‹îorƒ}ƒX)ê‡
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 6f;
@@ -230,6 +247,8 @@ public class Bishop : MonoBehaviour
                     }
                     _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "‚Éi‚Ş‚±‚Æ‚ªo—ˆ‚Ü‚·");
+                    /**************************************************/
+                    //’Tõæ‚ÉŠl‚ê‚é‹î‚ª‚ ‚Á‚½ê‡
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
@@ -256,6 +275,7 @@ public class Bishop : MonoBehaviour
                             break;
                         }
                     }
+                    /**************************************************/
                 }
             }
             else

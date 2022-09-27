@@ -2060,8 +2060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20327aa6d63e35d4b970bfc33c29f5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _set: {fileID: 0}
-  _selectPieceCount: 000000000000000000000000000000000000000000000000
+  setPiece: {fileID: 0}
+  SelectPieceCount: 000000000000000000000000000000000000000000000000
   _countText:
   - {fileID: 1185407279}
   - {fileID: 1250969151}
@@ -2079,7 +2079,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _whereText: {fileID: 1769029656}
-  _phase: 0
+  phase: 0
   _offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &519339948
 GameObject:
@@ -6387,6 +6387,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: king
+      value: 
+      objectReference: {fileID: 100164234}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: pawn
+      value: 
+      objectReference: {fileID: 100164239}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: rook
+      value: 
+      objectReference: {fileID: 100164236}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
       propertyPath: _king
       value: 
       objectReference: {fileID: 100164234}
@@ -6399,9 +6411,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 100164236}
     - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: queen
+      value: 
+      objectReference: {fileID: 100164235}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
       propertyPath: _queen
       value: 
       objectReference: {fileID: 100164235}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: bishop
+      value: 
+      objectReference: {fileID: 100164237}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: knight
+      value: 
+      objectReference: {fileID: 100164238}
     - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
       propertyPath: _bishop
       value: 
@@ -6410,6 +6434,10 @@ PrefabInstance:
       propertyPath: _knight
       value: 
       objectReference: {fileID: 100164238}
+    - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 108527186}
     - target: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
       propertyPath: _manager
       value: 
@@ -8371,11 +8399,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 108527185}
     m_Modifications:
     - target: {fileID: -8946732098627762041, guid: d992acfff4e84c44e97513dc227b06b7, type: 3}
-      propertyPath: _piece
+      propertyPath: piece
       value: 
       objectReference: {fileID: 108527186}
     - target: {fileID: -8946732098627762041, guid: d992acfff4e84c44e97513dc227b06b7, type: 3}
-      propertyPath: _search
+      propertyPath: search
       value: 
       objectReference: {fileID: 1369232524}
     - target: {fileID: 1000013557280178, guid: d992acfff4e84c44e97513dc227b06b7, type: 3}
@@ -9698,11 +9726,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8479516416826629409, guid: 1700328aaf96fd243a71d862897619a4, type: 3}
-      propertyPath: _piece
+      propertyPath: piece
       value: 
       objectReference: {fileID: 108527186}
     - target: {fileID: 8479516416826629409, guid: 1700328aaf96fd243a71d862897619a4, type: 3}
-      propertyPath: _search
+      propertyPath: search
       value: 
       objectReference: {fileID: 1369232524}
     m_RemovedComponents: []

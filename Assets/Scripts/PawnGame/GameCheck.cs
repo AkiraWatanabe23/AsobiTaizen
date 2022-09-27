@@ -19,7 +19,7 @@ public class GameCheck : MonoBehaviour
     }
 
     /// <summary>
-    /// 8•ûŒü‚ÉRay‚ğ”ò‚Î‚µAğŒ‚É‰ˆ‚Á‚Ä‹î‚ª•À‚ñ‚Å‚¢‚é‚©‚ğ”»’è‚·‚é
+    /// ğŒ‚É‰ˆ‚Á‚Ä‹î‚ª•À‚ñ‚Å‚¢‚é‚©‚ğ”»’è‚·‚é
     /// </summary>
     public void Check()
     {

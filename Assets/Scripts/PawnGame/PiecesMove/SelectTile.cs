@@ -16,7 +16,7 @@ public class SelectTile : MonoBehaviour
     [SerializeField] LayerMask _blackLayer;
     [SerializeField] public Text _whereText;
     public SelectPhase phase = SelectPhase.Piece;
-    //駒を配置する時の位置修正
+    //駒を配置する時の位置修正(マスの位置に駒を置くと駒のColliderとマスのColliderがぶつかるため)
     [SerializeField] Vector3 _offset = Vector3.up;
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class SelectTile : MonoBehaviour
             Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             float _rayDistance = 100;
 
-            //駒を選んだらそこには置けない
+            //駒が既にあるマスには置けない
             if (Physics.Raycast(_ray, out _hit, _rayDistance, _whiteLayer))
             {
                 Debug.Log("ここには置けない White");
@@ -87,7 +87,7 @@ public class SelectTile : MonoBehaviour
         }
         else if (phase == SelectPhase.Piece)
         {
-            //ObjectのSetActiveをif文で判定(boolを返す)
+            //gameObjectのSetActiveをif文で判定(boolを返す)
             if (_whereText.gameObject.activeSelf)
             {
                 phase = SelectPhase.Tile;

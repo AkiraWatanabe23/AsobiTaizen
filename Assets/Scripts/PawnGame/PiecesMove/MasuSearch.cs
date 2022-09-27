@@ -13,16 +13,16 @@ public class MasuSearch : MonoBehaviour
     [SerializeField] public PieceMove piece = default;
     [SerializeField] public PuzzlePiece puzzle = default;
     [SerializeField] public GameObject pieceInfo;
-    [Tooltip("駒のいるマスのファイル(縦) a～h")] public int _tileFile = 0;
-    [Tooltip("駒のいるマスのランク(横) 1～8")] public int _tileRank = 0;
+    [Tooltip("駒のいるマスのファイル(縦) a～h")] public int tileFile = 0;
+    [Tooltip("駒のいるマスのランク(横) 1～8")] public int tileRank = 0;
     RaycastHit _hit;
-    [SerializeField] public PieceManager manager;
-    [SerializeField] public Pawn _pawn;
-    [SerializeField] public Knight _knight;
-    [SerializeField] public Bishop _bishop;
-    [SerializeField] public Rook _rook;
-    [SerializeField] public Queen _queen;
-    [SerializeField] public King _king;
+    [SerializeField] PieceManager manager;
+    [SerializeField] Pawn _pawn;
+    [SerializeField] Knight _knight;
+    [SerializeField] Bishop _bishop;
+    [SerializeField] Rook _rook;
+    [SerializeField] Queen _queen;
+    [SerializeField] King _king;
 
     // Start is called before the first frame update
     void Start()
@@ -109,39 +109,39 @@ public class MasuSearch : MonoBehaviour
             if (Physics.Raycast(pieceInfo.transform.position, Vector3.down, out _hit, 5))
             {
                 //マス番号取得(ランク)
-                _tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());
+                tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());
                 //マス番号取得(ファイル)
                 if (_hit.collider.gameObject.name[0] == 'a')
                 {
-                    _tileFile = 1;
+                    tileFile = 1;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'b')
                 {
-                    _tileFile = 2;
+                    tileFile = 2;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'c')
                 {
-                    _tileFile = 3;
+                    tileFile = 3;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'd')
                 {
-                    _tileFile = 4;
+                    tileFile = 4;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'e')
                 {
-                    _tileFile = 5;
+                    tileFile = 5;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'f')
                 {
-                    _tileFile = 6;
+                    tileFile = 6;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'g')
                 {
-                    _tileFile = 7;
+                    tileFile = 7;
                 }
                 else if (_hit.collider.gameObject.name[0] == 'h')
                 {
-                    _tileFile = 8;
+                    tileFile = 8;
                 }
             }
         }

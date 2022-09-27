@@ -35,13 +35,12 @@ public class Knight : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
-                //’Tõæ‚É‚¢‚½‚Ì‚ª–¡•û‚Ì‹î‚¾‚Á‚½‚ç
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
-                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -70,12 +69,12 @@ public class Knight : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, -_vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
-                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -104,12 +103,12 @@ public class Knight : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
-                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -138,12 +137,12 @@ public class Knight : MonoBehaviour
         {
             if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 30))
             {
+                //’Tõæ‚É–¡•û‚Ì‹î‚ª‚ ‚Á‚½ê‡
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
                     _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "‚É‚Í‚·‚·‚ß‚Ü‚¹‚ñ");
-                    //break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
@@ -175,7 +174,7 @@ public class Knight : MonoBehaviour
     /// <summary>
     /// ‹î‚ğ’D‚¦‚éê‡‚Ìˆ—
     /// </summary>
-    public void GetablePiece()
+    void GetablePiece()
     {
         if (_pieceInfo.tag == "WhitePiece")
         {

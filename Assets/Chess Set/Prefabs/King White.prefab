@@ -112,11 +112,11 @@ MonoBehaviour:
   _blackLayer:
     serializedVersion: 2
     m_Bits: 512
-  _search: {fileID: 0}
-  _piece: {fileID: 0}
-  _moveCount: 0
-  _currentPieceTile: {fileID: 0}
-  _movedPieceTile: {fileID: 0}
+  search: {fileID: 0}
+  piece: {fileID: 0}
+  moveCount: 0
+  currentPieceTile: {fileID: 0}
+  movedPieceTile: {fileID: 0}
 --- !u!114 &7371857789872219103
 MonoBehaviour:
   m_ObjectHideFlags: 0

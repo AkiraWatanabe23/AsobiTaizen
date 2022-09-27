@@ -30,7 +30,7 @@ public class King : MonoBehaviour
         //////////前後左右の動き//////////
         //前後方向
         _vecX = 0f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 6f;
         if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
@@ -51,7 +51,7 @@ public class King : MonoBehaviour
 
         //左右方向
         _vecX = 6f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 0f;
         if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
@@ -73,7 +73,7 @@ public class King : MonoBehaviour
         //////////斜め方向の動き//////////
         //斜め前2方向
         _vecX = 6f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 6f;
         if (Physics.Raycast(_pieceInfo.transform.position + new Vector3(-_vecX, _vecY, _vecZ), Vector3.down, out _hit, 20))
         {
@@ -119,12 +119,14 @@ public class King : MonoBehaviour
 
     private void MovableCheck()
     {
+        //探索先に味方の駒があった場合
         if (_hit.collider.gameObject.tag == _pieceInfo.tag)
         {
             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
             _search.ImmovablePieces.Add(_hit.collider.gameObject);
             Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
         }
+        //探索先が味方じゃなかった(敵駒orマス)場合
         else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
         {
             if (!_search.MovableTile.Contains(_hit.collider))
@@ -134,6 +136,7 @@ public class King : MonoBehaviour
             }
             _search.Tile.Remove(_hit.collider);
             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
+            /**************************************************/
             //探索先に獲れる駒があった場合
             if (_pieceInfo.tag == "WhitePiece")
             {
@@ -159,6 +162,7 @@ public class King : MonoBehaviour
                     _piece.WhitePieces.Remove(_hit.collider.gameObject);
                 }
             }
+            /**************************************************/
         }
     }
 }
