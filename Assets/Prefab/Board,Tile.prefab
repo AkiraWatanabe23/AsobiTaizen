@@ -114,9 +114,9 @@ MonoBehaviour:
   piece: {fileID: 0}
   puzzle: {fileID: 0}
   pieceInfo: {fileID: 0}
-  _tileFile: 0
-  _tileRank: 0
-  _manager: {fileID: 0}
+  tileFile: 0
+  tileRank: 0
+  manager: {fileID: 0}
   _pawn: {fileID: 0}
   _knight: {fileID: 0}
   _bishop: {fileID: 0}

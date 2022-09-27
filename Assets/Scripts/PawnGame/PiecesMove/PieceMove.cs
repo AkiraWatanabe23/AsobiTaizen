@@ -171,7 +171,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     GameObject _hitTile = hitTile.collider.gameObject;
                     print($"‹î‚Í {_hitTile.name} ‚ÉˆÚ“®‚µ‚½");
                 }
-                _manager._getPiece = target.name;
+                _manager.getPiece = target.name;
                 return true;
             }
         }
@@ -206,7 +206,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 {
                     movedPieceTile = _hit.collider.gameObject;
                 }
-                _manager._getPiece = target.name;
+                _manager.getPiece = target.name;
                 return true;
             }
         }

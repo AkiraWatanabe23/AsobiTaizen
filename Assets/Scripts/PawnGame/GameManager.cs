@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
     int _beFrPlayer; //(BeforeFramePlayer)
 
     //↓Panel(UI)は、Image(UI)として扱う
-    [SerializeField] public Image _resultPanel;
+    [SerializeField] Image _resultPanel;
     [SerializeField] public static Phase phase = Phase.White;
     [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
     [SerializeField] Button _whiteSelect;
     [SerializeField] Button _blackSelect;
-    public string _getPiece;
+    public string getPiece;
     PieceManager _piece;
 
 
@@ -140,9 +140,9 @@ public class GameManager : MonoBehaviour
     {
         //勝利時のシーン遷移
         //敵のキングを獲ったとき、または条件を満たして1列揃えたとき
-        if (_getPiece != null)
+        if (getPiece != null)
         {
-            if (_getPiece.Contains("King"))
+            if (getPiece.Contains("King"))
             {
                 _resultPanel.gameObject.SetActive(true);
                 Invoke("SceneSwitch", 2f);
@@ -216,12 +216,12 @@ public class GameManager : MonoBehaviour
     void SceneSwitch()
     {
         //黒が勝ったら
-        if (_getPiece.Contains("White"))
+        if (getPiece.Contains("White"))
         {
             ResultSceneManager._win = 1;
         }
         //白が勝ったら
-        else if (_getPiece.Contains("Black"))
+        else if (getPiece.Contains("Black"))
         {
             ResultSceneManager._win = 2;
         }

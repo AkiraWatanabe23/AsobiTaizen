@@ -29,7 +29,7 @@ public class Rook : MonoBehaviour
 
         //‘O•ûŒü
         _vecX = 0f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 6f;
         for (int i = 0; i < 7; i++)
         {
@@ -92,7 +92,7 @@ public class Rook : MonoBehaviour
         }
         //Œã‚ë•ûŒü
         _vecX = 0f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 6f;
         for (int j = 0; j < 7; j++)
         {
@@ -155,7 +155,7 @@ public class Rook : MonoBehaviour
         }
         //¶•ûŒü
         _vecX = 6f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 0f;
         for (int k = 0; k < 7; k++)
         {
@@ -218,7 +218,7 @@ public class Rook : MonoBehaviour
         }
         //‰E•ûŒü
         _vecX = 6f;
-        _vecY = 10f;
+        _vecY = 15f;
         _vecZ = 0f;
         for (int l = 0; l < 7; l++)
         {

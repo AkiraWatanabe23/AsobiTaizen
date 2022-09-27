@@ -128,9 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normalMaterial: {fileID: 2100000, guid: b391301c47109a144bbb6408e48da028, type: 2}
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
-  _color: 0
-  _status: 0
-  _type: 3
+  color: 0
+  status: 0
+  type: 3
   _movedOffset: {x: 0, y: 1, z: 0}
   _gotOffset: {x: 0, y: -1, z: 0}
   _tileLayer:
@@ -144,6 +144,6 @@ MonoBehaviour:
     m_Bits: 512
   _search: {fileID: 0}
   _piece: {fileID: 0}
-  _moveCount: 0
-  _currentPieceTile: {fileID: 0}
-  _movedPieceTile: {fileID: 0}
+  moveCount: 0
+  currentPieceTile: {fileID: 0}
+  movedPieceTile: {fileID: 0}

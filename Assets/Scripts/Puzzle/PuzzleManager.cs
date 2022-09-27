@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PuzzleManager : MonoBehaviour
 {
     //ãÓÇÃà⁄ìÆêßå¿
-    public static int _moveCount;
-    public int _maxMoveCount;
+    public static int moveCount;
+    [SerializeField] int _maxMoveCount;
     //älÇ¡ÇΩãÓÇÃêî
     public static int _getPieceCount;
 
@@ -22,7 +22,7 @@ public class PuzzleManager : MonoBehaviour
     void Start()
     {
         _getPieceCount = 0;
-        _moveCount = _maxMoveCount;
+        moveCount = _maxMoveCount;
         _clearImage.gameObject.SetActive(false);
         _failedImage.gameObject.SetActive(false);
 
@@ -39,7 +39,7 @@ public class PuzzleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moveText.text = _moveCount.ToString();
+        _moveText.text = moveCount.ToString();
         _maxText.text = _maxMoveCount.ToString();
 
         //ÉNÉäÉAéû
@@ -48,7 +48,7 @@ public class PuzzleManager : MonoBehaviour
             _clearImage.gameObject.SetActive(true);
         }
         //é∏îséû
-        else if (_getPieceCount != _start && _moveCount == 0)
+        else if (_getPieceCount != _start && moveCount == 0)
         {
             _failedImage.gameObject.SetActive(true);
         }

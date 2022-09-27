@@ -48,7 +48,7 @@ public class MasuSearch : MonoBehaviour
         if (puzzle != null)
         {
             GetTileNum(); 
-            var _pieceNum = puzzle.gameObject.GetComponent<PuzzlePiece>()._type;
+            var _pieceNum = puzzle.gameObject.GetComponent<PuzzlePiece>().type;
             Search((int)_pieceNum);
         }
     }
