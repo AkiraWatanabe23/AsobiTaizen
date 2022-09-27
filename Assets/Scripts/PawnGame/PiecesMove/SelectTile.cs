@@ -63,21 +63,21 @@ public class SelectTile : MonoBehaviour
             }
             else if (Physics.Raycast(_ray, out _hit, _rayDistance, _tileLayer))
             {
-                GameObject _target = _hit.collider.gameObject;
+                GameObject target = _hit.collider.gameObject;
 
-                GameObject _setPiece = Instantiate(_set, _target.transform.position + _offset, _set.transform.rotation);
+                GameObject _setPiece = Instantiate(_set, target.transform.position + _offset, _set.transform.rotation);
                 if (_setPiece.tag == "WhitePiece")
                 {
-                    _piece._whitePieces.Add(_setPiece);
+                    _piece.WhitePieces.Add(_setPiece);
                 }
                 else if (_setPiece.tag == "BlackPiece")
                 {
-                    _piece._blackPieces.Add(_setPiece);
+                    _piece.BlackPieces.Add(_setPiece);
                 }
                 PieceMove _pieceInfo = _setPiece.GetComponent<PieceMove>();
                 _pieceInfo.SelectAssign();
 
-                print($"{_setPiece.name} を {_target.name} に配置した");
+                print($"{_setPiece.name} を {target.name} に配置した");
                 _set = null;
                 _whereText.gameObject.SetActive(false);
                 _phase = SelectPhase.Piece;
@@ -100,16 +100,16 @@ public class SelectTile : MonoBehaviour
     /// </summary>
     public void SwitchTurn()
     {
-        if (GameManager._player == 1)
+        if (GameManager.Player == 1)
         {
-            GameManager._player = 2;
-            GameManager._phase = Phase.Black;
+            GameManager.Player = 2;
+            GameManager.phase = Phase.Black;
             _manager.SwitchTurnWhite();
         }
-        else if (GameManager._player == 2)
+        else if (GameManager.Player == 2)
         {
-            GameManager._player = 1;
-            GameManager._phase = Phase.White;
+            GameManager.Player = 1;
+            GameManager.phase = Phase.White;
             _manager.SwitchTurnBlack();
         }
     }

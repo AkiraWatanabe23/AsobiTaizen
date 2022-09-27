@@ -25,7 +25,7 @@ public class Rook : MonoBehaviour
 
     public void RookMovement()
     {
-        _pieceInfo = _search._pieceInfo;
+        _pieceInfo = _search.pieceInfo;
 
         //ëOï˚å¸
         _vecX = 0f;
@@ -38,31 +38,31 @@ public class Rook : MonoBehaviour
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                    _search._immovablePieces.Add(_hit.collider.gameObject);
+                    _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 4f;
-                    if (!_search._movableTile.Contains(_hit.collider))
+                    if (!_search.MovableTile.Contains(_hit.collider))
                     {
-                        _search._movableTile.Add(_hit.collider);
+                        _search.MovableTile.Add(_hit.collider);
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
-                    _search._tile.Remove(_hit.collider);
+                    _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…êiÇﬁÇ±Ç∆Ç™èoóàÇ‹Ç∑");
                     //íTçıêÊÇ…älÇÍÇÈãÓÇ™Ç†Ç¡ÇΩèÍçá
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
+                            _piece.BlackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -70,12 +70,12 @@ public class Rook : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
+                            _piece.WhitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -97,31 +97,31 @@ public class Rook : MonoBehaviour
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                    _search._immovablePieces.Add(_hit.collider.gameObject);
+                    _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecZ += 4f;
-                    if (!_search._movableTile.Contains(_hit.collider))
+                    if (!_search.MovableTile.Contains(_hit.collider))
                     {
-                        _search._movableTile.Add(_hit.collider);
+                        _search.MovableTile.Add(_hit.collider);
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
-                    _search._tile.Remove(_hit.collider);
+                    _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…êiÇﬁÇ±Ç∆Ç™èoóàÇ‹Ç∑");
                     //íTçıêÊÇ…älÇÍÇÈãÓÇ™Ç†Ç¡ÇΩèÍçá
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
+                            _piece.BlackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -129,12 +129,12 @@ public class Rook : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
+                            _piece.WhitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -156,31 +156,31 @@ public class Rook : MonoBehaviour
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                    _search._immovablePieces.Add(_hit.collider.gameObject);
+                    _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 4f;
-                    if (!_search._movableTile.Contains(_hit.collider))
+                    if (!_search.MovableTile.Contains(_hit.collider))
                     {
-                        _search._movableTile.Add(_hit.collider);
+                        _search.MovableTile.Add(_hit.collider);
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
-                    _search._tile.Remove(_hit.collider);
+                    _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…êiÇﬁÇ±Ç∆Ç™èoóàÇ‹Ç∑");
                     //íTçıêÊÇ…älÇÍÇÈãÓÇ™Ç†Ç¡ÇΩèÍçá
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
+                            _piece.BlackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -188,12 +188,12 @@ public class Rook : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
+                            _piece.WhitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -215,31 +215,31 @@ public class Rook : MonoBehaviour
                 if (_hit.collider.gameObject.tag == _pieceInfo.tag)
                 {
                     _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                    _search._immovablePieces.Add(_hit.collider.gameObject);
+                    _search.ImmovablePieces.Add(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "ÇÊÇËêÊÇ…ÇÕÇ∑Ç∑ÇﬂÇ‹ÇπÇÒ");
                     break;
                 }
                 else if (_hit.collider.gameObject.tag != _pieceInfo.tag)
                 {
                     _vecX += 4f;
-                    if (!_search._movableTile.Contains(_hit.collider))
+                    if (!_search.MovableTile.Contains(_hit.collider))
                     {
-                        _search._movableTile.Add(_hit.collider);
+                        _search.MovableTile.Add(_hit.collider);
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                     }
-                    _search._tile.Remove(_hit.collider);
+                    _search.Tile.Remove(_hit.collider);
                     Debug.Log(_hit.collider.gameObject.name + "Ç…êiÇﬁÇ±Ç∆Ç™èoóàÇ‹Ç∑");
                     //íTçıêÊÇ…älÇÍÇÈãÓÇ™Ç†Ç¡ÇΩèÍçá
                     if (_pieceInfo.tag == "WhitePiece")
                     {
                         if (_hit.collider.gameObject.tag == "BlackPiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._blackPieces.Remove(_hit.collider.gameObject);
+                            _piece.BlackPieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -247,12 +247,12 @@ public class Rook : MonoBehaviour
                     {
                         if (_hit.collider.gameObject.tag == "WhitePiece")
                         {
-                            if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                            if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                             {
-                                _piece._getablePieces.Add(_hit.collider.gameObject);
+                                _piece.GetablePieces.Add(_hit.collider.gameObject);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                             }
-                            _piece._whitePieces.Remove(_hit.collider.gameObject);
+                            _piece.WhitePieces.Remove(_hit.collider.gameObject);
                             break;
                         }
                     }
@@ -264,7 +264,7 @@ public class Rook : MonoBehaviour
             }
         }
         //à⁄ìÆîÕàÕà»äOÇÃÉ}ÉXÇÃColliderÇoffÇ…Ç∑ÇÈèàóùÇèëÇ≠
-        foreach (Collider col in _search._tile)
+        foreach (Collider col in _search.Tile)
         {
             col.enabled = false;
             Debug.Log(col + "ÇÃColliderÇoffÇ…ÇµÇ‹Ç∑");

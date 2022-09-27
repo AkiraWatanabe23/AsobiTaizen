@@ -25,7 +25,7 @@ public class Pawn : MonoBehaviour
 
     public void PawnMovement()
     {
-        _pieceInfo = _search._pieceInfo;
+        _pieceInfo = _search.pieceInfo;
 
         /********************白駒の移動処理********************/
         if (_pieceInfo.tag == "WhitePiece")
@@ -43,7 +43,7 @@ public class Pawn : MonoBehaviour
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                            _search._immovablePieces.Add(_hit.collider.gameObject);
+                            _search.ImmovablePieces.Add(_hit.collider.gameObject);
                             Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
                             break;
                         }
@@ -51,12 +51,12 @@ public class Pawn : MonoBehaviour
                         {
                             _vecZ += 5f;
                             //探索中に同じ要素が何度もListに入るのを防ぐ
-                            if (!_search._movableTile.Contains(_hit.collider))
+                            if (!_search.MovableTile.Contains(_hit.collider))
                             {
-                                _search._movableTile.Add(_hit.collider);
+                                _search.MovableTile.Add(_hit.collider);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                             }
-                            _search._tile.Remove(_hit.collider);
+                            _search.Tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                             if (_hit.collider.gameObject.tag != "Tile")
                             {
@@ -66,7 +66,7 @@ public class Pawn : MonoBehaviour
                     }
                 }
                 //移動範囲以外のマスのColliderをoffにする処理を書く
-                foreach (Collider col in _search._tile)
+                foreach (Collider col in _search.Tile)
                 {
                     col.enabled = false;
                 }
@@ -82,18 +82,18 @@ public class Pawn : MonoBehaviour
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "BlackPiece")
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                        _search._immovablePieces.Add(_hit.collider.gameObject);
+                        _search.ImmovablePieces.Add(_hit.collider.gameObject);
                         Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
                     }
                     else if (_hit.collider.gameObject.tag == "Tile")
                     {
                         //探索中に同じ要素が何度もListに入るのを防ぐ
-                        if (!_search._movableTile.Contains(_hit.collider))
+                        if (!_search.MovableTile.Contains(_hit.collider))
                         {
-                            _search._movableTile.Add(_hit.collider);
+                            _search.MovableTile.Add(_hit.collider);
                             _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         }
-                        _search._tile.Remove(_hit.collider);
+                        _search.Tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                         if (_hit.collider.gameObject.tag != "Tile")
                         {
@@ -102,7 +102,7 @@ public class Pawn : MonoBehaviour
                     }
                 }
                 //移動範囲以外のマスのColliderをoffにする処理を書く
-                foreach (Collider col in _search._tile)
+                foreach (Collider col in _search.Tile)
                 {
                     col.enabled = false;
                 }
@@ -116,13 +116,13 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
-                    if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                    if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                     {
-                        _piece._getablePieces.Add(_hit.collider.gameObject);
+                        _piece.GetablePieces.Add(_hit.collider.gameObject);
                         //奪える駒のMaterialを切り替える
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
-                    _piece._blackPieces.Remove(_hit.collider.gameObject);
+                    _piece.BlackPieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -130,13 +130,13 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "BlackPiece")
                 {
-                    if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                    if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                     {
-                        _piece._getablePieces.Add(_hit.collider.gameObject);
+                        _piece.GetablePieces.Add(_hit.collider.gameObject);
                         //奪える駒のMaterialを切り替える
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
-                    _piece._blackPieces.Remove(_hit.collider.gameObject);
+                    _piece.BlackPieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -157,7 +157,7 @@ public class Pawn : MonoBehaviour
                         if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
                         {
                             _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                            _search._immovablePieces.Add(_hit.collider.gameObject);
+                            _search.ImmovablePieces.Add(_hit.collider.gameObject);
                             Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
                             break;
                         }
@@ -165,12 +165,12 @@ public class Pawn : MonoBehaviour
                         {
                             _vecZ += 5f;
                             //探索中に同じ要素が何度もListに入るのを防ぐ
-                            if (!_search._movableTile.Contains(_hit.collider))
+                            if (!_search.MovableTile.Contains(_hit.collider))
                             {
-                                _search._movableTile.Add(_hit.collider);
+                                _search.MovableTile.Add(_hit.collider);
                                 _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                             }
-                            _search._tile.Remove(_hit.collider);
+                            _search.Tile.Remove(_hit.collider);
                             Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                             if (_hit.collider.gameObject.tag != "Tile")
                             {
@@ -180,7 +180,7 @@ public class Pawn : MonoBehaviour
                     }
                 }
                 //移動範囲以外のマスのColliderをoffにする処理を書く
-                foreach (Collider col in _search._tile)
+                foreach (Collider col in _search.Tile)
                 {
                     col.enabled = false;
                 }
@@ -196,18 +196,18 @@ public class Pawn : MonoBehaviour
                     if (_hit.collider.gameObject.tag == _pieceInfo.tag || _hit.collider.gameObject.tag == "WhitePiece")
                     {
                         _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
-                        _search._immovablePieces.Add(_hit.collider.gameObject);
+                        _search.ImmovablePieces.Add(_hit.collider.gameObject);
                         Debug.Log(_hit.collider.gameObject.name + "より先にはすすめません");
                     }
                     else if (_hit.collider.gameObject.tag == "Tile")
                     {
                         //探索中に同じ要素が何度もListに入るのを防ぐ
-                        if (!_search._movableTile.Contains(_hit.collider))
+                        if (!_search.MovableTile.Contains(_hit.collider))
                         {
-                            _search._movableTile.Add(_hit.collider);
+                            _search.MovableTile.Add(_hit.collider);
                             _hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         }
-                        _search._tile.Remove(_hit.collider);
+                        _search.Tile.Remove(_hit.collider);
                         Debug.Log(_hit.collider.gameObject.name + "に進むことが出来ます");
                         if (_hit.collider.gameObject.tag != "Tile")
                         {
@@ -216,7 +216,7 @@ public class Pawn : MonoBehaviour
                     }
                 }
                 //移動範囲以外のマスのColliderをoffにする処理を書く
-                foreach (Collider col in _search._tile)
+                foreach (Collider col in _search.Tile)
                 {
                     col.enabled = false;
                 }
@@ -229,13 +229,13 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
-                    if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                    if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                     {
-                        _piece._getablePieces.Add(_hit.collider.gameObject);
+                        _piece.GetablePieces.Add(_hit.collider.gameObject);
                         //奪える駒のMaterialを切り替える
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
-                    _piece._whitePieces.Remove(_hit.collider.gameObject);
+                    _piece.WhitePieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }
@@ -243,13 +243,13 @@ public class Pawn : MonoBehaviour
             {
                 if (_hit.collider.gameObject.tag == "WhitePiece")
                 {
-                    if (!_piece._getablePieces.Contains(_hit.collider.gameObject))
+                    if (!_piece.GetablePieces.Contains(_hit.collider.gameObject))
                     {
-                        _piece._getablePieces.Add(_hit.collider.gameObject);
+                        _piece.GetablePieces.Add(_hit.collider.gameObject);
                         //奪える駒のMaterialを切り替える
                         _hit.collider.gameObject.GetComponent<MeshRenderer>().material = _getable;
                     }
-                    _piece._whitePieces.Remove(_hit.collider.gameObject);
+                    _piece.WhitePieces.Remove(_hit.collider.gameObject);
                     Debug.Log(_hit.collider.gameObject.name + "をとることが出来ます");
                 }
             }

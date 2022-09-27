@@ -40,32 +40,32 @@ public class Promotion : MonoBehaviour
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promQueenWhite, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Remove(_promWhite);
-                _piece._whitePieces.Add(_promPiece);
+                _piece.WhitePieces.Remove(_promWhite);
+                _piece.WhitePieces.Add(_promPiece);
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promRookWhite, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Remove(_promWhite);
-                _piece._whitePieces.Add(_promPiece);
+                _piece.WhitePieces.Remove(_promWhite);
+                _piece.WhitePieces.Add(_promPiece);
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promBishopWhite, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Remove(_promWhite);
-                _piece._whitePieces.Add(_promPiece);
+                _piece.WhitePieces.Remove(_promWhite);
+                _piece.WhitePieces.Add(_promPiece);
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promKnightWhite, _currentPos.position, _currentPos.rotation);
-                _piece._whitePieces.Remove(_promWhite);
-                _piece._whitePieces.Add(_promPiece);
+                _piece.WhitePieces.Remove(_promWhite);
+                _piece.WhitePieces.Add(_promPiece);
                 Debug.Log("ナイトにプロモーションします");
             }
             _promWhite = null;
@@ -78,32 +78,32 @@ public class Promotion : MonoBehaviour
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promQueenBlack, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Remove(_promBlack);
-                _piece._blackPieces.Add(_promPiece);
+                _piece.BlackPieces.Remove(_promBlack);
+                _piece.BlackPieces.Add(_promPiece);
                 Debug.Log("クイーンにプロモーションします");
             }
             else if (gameObject.name == "Rook")
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promRookBlack, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Remove(_promBlack);
-                _piece._blackPieces.Add(_promPiece);
+                _piece.BlackPieces.Remove(_promBlack);
+                _piece.BlackPieces.Add(_promPiece);
                 Debug.Log("ルークにプロモーションします");
             }
             else if (gameObject.name == "Bishop")
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promBishopBlack, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Remove(_promBlack);
-                _piece._blackPieces.Add(_promPiece);
+                _piece.BlackPieces.Remove(_promBlack);
+                _piece.BlackPieces.Add(_promPiece);
                 Debug.Log("ビショップにプロモーションします");
             }
             else if (gameObject.name == "Knight")
             {
                 PromPos();
                 GameObject _promPiece = Instantiate(_promKnightBlack, _currentPos.position, _currentPos.rotation);
-                _piece._blackPieces.Remove(_promBlack);
-                _piece._blackPieces.Add(_promPiece);
+                _piece.BlackPieces.Remove(_promBlack);
+                _piece.BlackPieces.Add(_promPiece);
                 Debug.Log("ナイトにプロモーションします");
             }
             _promWhite = null;

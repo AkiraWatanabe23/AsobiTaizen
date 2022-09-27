@@ -32,12 +32,12 @@ public class GameManager : MonoBehaviour
     /// <summary> プレイヤー(黒) </summary>
     public const int Player_Two = 2;
     /// <summary> 現在の(current)プレイヤー </summary>
-    public static int _player;
-    int _beFrPlayer;
+    public static int Player;
+    int _beFrPlayer; //(BeforeFramePlayer)
 
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] public Image _resultPanel;
-    [SerializeField] public static Phase _phase = Phase.White;
+    [SerializeField] public static Phase phase = Phase.White;
     [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
     [SerializeField] Button _whiteSelect;
@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = 1;
+        Player = 1;
         _beFrPlayer = 1;
-        _phase = Phase.White;
+        phase = Phase.White;
         _resultPanel.gameObject.SetActive(false);
         //↓ターン表示のText
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour
     {
         LineCount();
         //SelectButtonの切り替え
-        if (_player == 1)
+        if (Player == 1)
         {
             _whiteSelect.gameObject.SetActive(true);
             _blackSelect.gameObject.SetActive(false);
         }
-        else if (_player == 2)
+        else if (Player == 2)
         {
             _whiteSelect.gameObject.SetActive(false);
             _blackSelect.gameObject.SetActive(true);
@@ -84,35 +84,35 @@ public class GameManager : MonoBehaviour
     {
         //今のフレームが白のターン かつ 前のフレームが黒のターンであれば実行する(白のターンになった瞬間に一度だけ実行する)
         //または、今のフレームが黒のターン かつ 前のフレームが白のターンであれば実行する(黒のターンになった瞬間に一度だけ実行する)
-        if (_player != _beFrPlayer)
+        if (Player != _beFrPlayer)
         {
-            foreach (var i in _piece._whitePieces)
+            foreach (var i in _piece.WhitePieces)
             {
                 i.GetComponent<GameCheck>().Check();
                 PlayerWin();
                 for (int j = 0; j < 8; j++)
                 {
-                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
+                    i.GetComponent<GameCheck>().CheckCount[j] = 0;
                 }
             }
-            foreach (var i in _piece._blackPieces)
+            foreach (var i in _piece.BlackPieces)
             {
                 i.GetComponent<GameCheck>().Check();
                 PlayerWin();
                 for (int j = 0; j < 8; j++)
                 {
-                    i.GetComponent<GameCheck>()._checkCount[j] = 0;
+                    i.GetComponent<GameCheck>().CheckCount[j] = 0;
                 }
             }
             //判定中にColliderOffにした駒を元に戻す
-            foreach (var i in _piece._whitePieces)
+            foreach (var i in _piece.WhitePieces)
             {
                 if (i.GetComponent<Collider>().enabled == false)
                 {
                     i.GetComponent<Collider>().enabled = true;
                 }
             }
-            foreach (var i in _piece._blackPieces)
+            foreach (var i in _piece.BlackPieces)
             {
                 if (i.GetComponent<Collider>().enabled == false)
                 {
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //次フレームの為に現在、どちらのターンかを保存しておく(これをしないと上記の処理がたくさん実行される)
-        _beFrPlayer = _player;
+        _beFrPlayer = Player;
     }
 
     void PlayerWin()
@@ -136,11 +136,11 @@ public class GameManager : MonoBehaviour
                 Invoke("SceneSwitch", 2f);
             }
         }
-        foreach (var i in _piece._whitePieces)
+        foreach (var i in _piece.WhitePieces)
         {
             for (int j = 0; j < 8; j++)
             {
-                if (i.GetComponent<GameCheck>()._checkCount[j] >= 3)
+                if (i.GetComponent<GameCheck>().CheckCount[j] >= 3)
                 {
                     _resultPanel.gameObject.SetActive(true);
                     //白の勝ち
@@ -157,11 +157,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        foreach (var i in _piece._blackPieces)
+        foreach (var i in _piece.BlackPieces)
         {
             for (int j = 0; j < 8; j++)
             {
-                if (i.GetComponent<GameCheck>()._checkCount[j] >= 3)
+                if (i.GetComponent<GameCheck>().CheckCount[j] >= 3)
                 {
                     _resultPanel.gameObject.SetActive(true);
                     //白の勝ち

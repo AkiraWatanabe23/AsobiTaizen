@@ -10,13 +10,13 @@ public class PieceManager : MonoBehaviour
 {
     [SerializeField] Material _white;
     [SerializeField] Material _black;
-    [SerializeField] public List<GameObject> _whitePieces = new List<GameObject>();
-    [SerializeField] public List<GameObject> _blackPieces = new List<GameObject>();
-    [Tooltip("íTçıîÕàÕÇ…Ç¢ÇÈälÇÈÇ±Ç∆Ç™èoóàÇÈãÓ")] public List<GameObject> _getablePieces = new List<GameObject>();
+    [SerializeField] public List<GameObject> WhitePieces = new List<GameObject>();
+    [SerializeField] public List<GameObject> BlackPieces = new List<GameObject>();
+    [Tooltip("íTçıîÕàÕÇ…Ç¢ÇÈälÇÈÇ±Ç∆Ç™èoóàÇÈãÓ")] public List<GameObject> GetablePieces = new List<GameObject>();
     MasuSearch _search;
 
     // Start is called before the first frame update
-    public void Start()
+    private void Start()
     {
         _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
 
@@ -26,11 +26,11 @@ public class PieceManager : MonoBehaviour
             {
                 if (transform.GetChild(i).gameObject.tag == "WhitePiece")
                 {
-                    _whitePieces.Add(transform.GetChild(i).gameObject);
+                    WhitePieces.Add(transform.GetChild(i).gameObject);
                 }
                 else if (transform.GetChild(i).gameObject.tag == "BlackPiece")
                 {
-                    _blackPieces.Add(transform.GetChild(i).gameObject);
+                    BlackPieces.Add(transform.GetChild(i).gameObject);
                 }
             }
         }
@@ -41,26 +41,26 @@ public class PieceManager : MonoBehaviour
     /// </summary>
     public void UnGetPiece()
     {
-        foreach (var i in _getablePieces)
+        foreach (var i in GetablePieces)
         {
-            if (_search._pieceInfo.tag == "BlackPiece")
+            if (_search.pieceInfo.tag == "BlackPiece")
             {
                 if (i.gameObject.tag == "WhitePiece")
                 {
                     i.gameObject.GetComponent<MeshRenderer>().material = _white;
                 }
-                _whitePieces.Add(i);
+                WhitePieces.Add(i);
             }
-            else if (_search._pieceInfo.gameObject.tag == "WhitePiece")
+            else if (_search.pieceInfo.gameObject.tag == "WhitePiece")
             {
                 if (i.gameObject.tag == "BlackPiece")
                 {
                     i.gameObject.GetComponent<MeshRenderer>().material = _black;
                 }
-                _blackPieces.Add(i);
+                BlackPieces.Add(i);
             }
             i.gameObject.GetComponent<Collider>().enabled = true;
         }
-        _getablePieces.Clear();
+        GetablePieces.Clear();
     }
 }

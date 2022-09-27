@@ -99,9 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normalMaterial: {fileID: 2100000, guid: 973635ff02379f4429b7df0543346d32, type: 2}
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
-  _color: 1
-  _state: 0
-  _type: 5
+  color: 1
+  state: 0
+  type: 5
   _offset: {x: 0, y: 0.5, z: 0}
   _tileLayer:
     serializedVersion: 2
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d72e9920f7f45f49a272c7efcd9bf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkCount: 0000000000000000000000000000000000000000000000000000000000000000
+  CheckCount: 0000000000000000000000000000000000000000000000000000000000000000
 --- !u!54 &-1850663890769516856
 Rigidbody:
   m_ObjectHideFlags: 0

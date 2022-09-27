@@ -26,7 +26,7 @@ public class SelectPiece : MonoBehaviour
     public void OnClick()
     {
         //白ターン
-        if (GameManager._player == 1)
+        if (GameManager.Player == 1)
         {
             if (gameObject.name == "Rook")
             {
@@ -72,7 +72,7 @@ public class SelectPiece : MonoBehaviour
             }
         }
         //黒ターン
-        else if (GameManager._player == 2)
+        else if (GameManager.Player == 2)
         {
             if (gameObject.name == "Rook")
             {
@@ -122,11 +122,11 @@ public class SelectPiece : MonoBehaviour
 
     void UISwitch()
     {
-        if (GameManager._player == 1)
+        if (GameManager.Player == 1)
         {
             _whitePanel.gameObject.SetActive(false);
         }
-        else if (GameManager._player == 2)
+        else if (GameManager.Player == 2)
         {
             _blackPanel.gameObject.SetActive(false);
         }

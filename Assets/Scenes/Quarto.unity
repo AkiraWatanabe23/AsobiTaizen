@@ -391,9 +391,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _white: {fileID: 2100000, guid: b391301c47109a144bbb6408e48da028, type: 2}
   _black: {fileID: 2100000, guid: 973635ff02379f4429b7df0543346d32, type: 2}
-  _whitePieces: []
-  _blackPieces: []
-  _getablePieces: []
+  WhitePieces: []
+  BlackPieces: []
+  GetablePieces: []
 --- !u!1 &116253624
 GameObject:
   m_ObjectHideFlags: 0
@@ -8498,7 +8498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8a84dbb57b4214f9cbb1d5cbfa52b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: TitleScene
+  _sceneName: Quarto
 --- !u!1 &1814024149
 GameObject:
   m_ObjectHideFlags: 0
@@ -8702,7 +8702,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: To Title
+  m_Text: Retry
 --- !u!222 &1821875460
 CanvasRenderer:
   m_ObjectHideFlags: 0

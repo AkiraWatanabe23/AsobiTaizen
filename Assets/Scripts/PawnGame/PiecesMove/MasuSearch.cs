@@ -7,12 +7,12 @@ using UnityEngine;
 /// </summary>
 public class MasuSearch : MonoBehaviour
 {
-    [Tooltip("盤面のマス"), SerializeField] public List<Collider> _tile = new List<Collider>();
-    [Tooltip("移動可能マス"), SerializeField] public List<Collider> _movableTile = new List<Collider>();
-    [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> _immovablePieces = new List<GameObject>();
+    [Tooltip("盤面のマス"), SerializeField] public List<Collider> Tile = new List<Collider>();
+    [Tooltip("移動可能マス"), SerializeField] public List<Collider> MovableTile = new List<Collider>();
+    [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> ImmovablePieces = new List<GameObject>();
     [SerializeField] public PieceMove _piece = default;
     [SerializeField] public PuzzlePiece _puzzle = default;
-    [SerializeField] public GameObject _pieceInfo;
+    [SerializeField] public GameObject pieceInfo;
     [Tooltip("駒のいるマスのファイル(縦) a～h")] public int _tileFile = 0;
     [Tooltip("駒のいるマスのランク(横) 1～8")] public int _tileRank = 0;
     RaycastHit _hit;
@@ -30,8 +30,8 @@ public class MasuSearch : MonoBehaviour
         //マスを取得し、色を非表示にする
         for (int i = 0; i < 64; i++)
         {
-            _tile.Add(gameObject.transform.GetChild(i).GetComponent<Collider>());
-            _tile[i].GetComponent<MeshRenderer>().enabled = false;
+            Tile.Add(gameObject.transform.GetChild(i).GetComponent<Collider>());
+            Tile[i].GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -41,7 +41,7 @@ public class MasuSearch : MonoBehaviour
         if (_piece != null)
         {
             GetTileNum();
-            var _pieceNum = _piece.gameObject.GetComponent<PieceMove>()._type;
+            var _pieceNum = _piece.gameObject.GetComponent<PieceMove>().type;
             Search((int)_pieceNum);
         }
 
@@ -81,7 +81,7 @@ public class MasuSearch : MonoBehaviour
                 break;
         }
         //移動範囲外の駒のColliderをoffにする処理
-        foreach (var pieces in _manager._whitePieces)
+        foreach (var pieces in _manager.WhitePieces)
         {
             //Listの要素がMissingだった場合、無視する
             if (pieces != null)
@@ -89,7 +89,7 @@ public class MasuSearch : MonoBehaviour
                 pieces.GetComponent<Collider>().enabled = false;
             }
         }
-        foreach (var pieces in _manager._blackPieces)
+        foreach (var pieces in _manager.BlackPieces)
         {
             //Listの要素がMissingだった場合、無視する
             if (pieces != null)
@@ -104,9 +104,9 @@ public class MasuSearch : MonoBehaviour
     /// </summary>
     void GetTileNum()
     {
-        if (_pieceInfo != null)
+        if (pieceInfo != null)
         {
-            if (Physics.Raycast(_pieceInfo.transform.position, Vector3.down, out _hit, 5))
+            if (Physics.Raycast(pieceInfo.transform.position, Vector3.down, out _hit, 5))
             {
                 //マス番号取得(ランク)
                 _tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());

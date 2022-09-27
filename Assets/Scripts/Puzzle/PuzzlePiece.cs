@@ -81,44 +81,44 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             Debug.Log("選び直し");
 
             //マスを元の状態に戻す
-            for (int i = 0; i < _search._movableTile.Count; i++)
+            for (int i = 0; i < _search.MovableTile.Count; i++)
             {
-                if (_search._movableTile[i].tag == "Tile")
+                if (_search.MovableTile[i].tag == "Tile")
                 {
-                    _search._movableTile[i].GetComponent<MeshRenderer>().enabled = false;
-                    _search._tile.Add(_search._movableTile[i]);
+                    _search.MovableTile[i].GetComponent<MeshRenderer>().enabled = false;
+                    _search.Tile.Add(_search.MovableTile[i]);
                 }
             }
-            foreach (var tiles in _search._tile)
+            foreach (var tiles in _search.Tile)
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
 
-            foreach (var piece in _search._immovablePieces)
+            foreach (var piece in _search.ImmovablePieces)
             {
                 piece.GetComponent<Collider>().enabled = true;
             }
-            _search._immovablePieces.Clear();
+            _search.ImmovablePieces.Clear();
 
             if (gameObject.tag == "WhitePiece")
             {
-                foreach (var pieces in _piece._whitePieces)
+                foreach (var pieces in _piece.WhitePieces)
                 {
                     pieces.GetComponent<Collider>().enabled = true;
                 }
-                _piece._whitePieces.Add(gameObject);
+                _piece.WhitePieces.Add(gameObject);
             }
             else if (gameObject.tag == "BlackPiece")
             {
-                foreach (var pieces in _piece._blackPieces)
+                foreach (var pieces in _piece.BlackPieces)
                 {
                     pieces.GetComponent<Collider>().enabled = true;
                 }
-                _piece._blackPieces.Add(gameObject);
+                _piece.BlackPieces.Add(gameObject);
             }
 
             //獲れる駒を獲らなかった場合にListに戻す
-            if (_piece._getablePieces != null)
+            if (_piece.GetablePieces != null)
             {
                 _piece.UnGetPiece();
             }
@@ -126,9 +126,9 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             //駒の状態をもとに戻す
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
-            _search._movableTile.Clear();
+            _search.MovableTile.Clear();
             _search._piece = null;
-            _search._pieceInfo = null;
+            _search.pieceInfo = null;
         }
     }
 
@@ -154,8 +154,8 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = _target.transform.position + _gotOffset;
-            GameManager._player = GameManager.Player_Two;
-            GameManager._phase = Phase.Black;
+            GameManager.Player = GameManager.Player_Two;
+            GameManager.phase = Phase.Black;
 
             print($"駒は {_target.name} をとった");
 
@@ -172,14 +172,14 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
         //白番目線のRayの処理(移動処理)
         else if (Physics.Raycast(_ray, out _hit, _rayDistance, _tileLayer))
         {
-            foreach (var i in _search._movableTile)
+            foreach (var i in _search.MovableTile)
             {
                 GameObject _target = _hit.collider.gameObject;
                 if (_target == i.gameObject)
                 {
                     this.transform.position = _target.transform.position + _movedOffset;
-                    GameManager._player = GameManager.Player_Two;
-                    GameManager._phase = Phase.Black;
+                    GameManager.Player = GameManager.Player_Two;
+                    GameManager.phase = Phase.Black;
 
                     print($"駒は {_target.name} に移動した");
                 }
@@ -266,8 +266,8 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             _search._puzzle = this;
-            _search._pieceInfo = gameObject;
-            _piece._whitePieces.Remove(gameObject);
+            _search.pieceInfo = gameObject;
+            _piece.WhitePieces.Remove(gameObject);
         }
         //通常状態→選択状態(黒)
         else if (_status == Status.Normal && _color == PieceColor.Black && _currentPieceTile != _movedPieceTile)
@@ -279,8 +279,8 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             _status = Status.Move;
             _renderer.material = _moveMaterial;
             _search._puzzle = this;
-            _search._pieceInfo = gameObject;
-            _piece._blackPieces.Remove(gameObject);
+            _search.pieceInfo = gameObject;
+            _piece.BlackPieces.Remove(gameObject);
         }
         //選択状態→通常状態(駒が移動した後の処理)
         else if (_status == Status.Move)
@@ -292,34 +292,34 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             //マスを元の状態に戻す
-            for (int i = 0; i < _search._movableTile.Count; i++)
+            for (int i = 0; i < _search.MovableTile.Count; i++)
             {
-                if (_search._movableTile[i].tag == "Tile")
+                if (_search.MovableTile[i].tag == "Tile")
                 {
-                    _search._movableTile[i].GetComponent<MeshRenderer>().enabled = false;
-                    _search._tile.Add(_search._movableTile[i]);
+                    _search.MovableTile[i].GetComponent<MeshRenderer>().enabled = false;
+                    _search.Tile.Add(_search.MovableTile[i]);
                 }
             }
-            foreach (var tiles in _search._tile)
+            foreach (var tiles in _search.Tile)
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
 
-            foreach (var piece in _search._immovablePieces)
+            foreach (var piece in _search.ImmovablePieces)
             {
                 piece.GetComponent<Collider>().enabled = true;
             }
-            _search._immovablePieces.Clear();
+            _search.ImmovablePieces.Clear();
 
             //ColliderOffにした駒をもとに戻す
-            foreach (var pieces in _piece._whitePieces)
+            foreach (var pieces in _piece.WhitePieces)
             {
                 if (pieces != null)
                 {
                     pieces.GetComponent<Collider>().enabled = true;
                 }
             }
-            foreach (var pieces in _piece._blackPieces)
+            foreach (var pieces in _piece.BlackPieces)
             {
                 if (pieces != null)
                 {
@@ -328,11 +328,11 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
             if (gameObject.tag == "WhitePiece")
             {
-                _piece._whitePieces.Add(gameObject);
+                _piece.WhitePieces.Add(gameObject);
             }
             else if (gameObject.tag == "BlackPiece")
             {
-                _piece._blackPieces.Add(gameObject);
+                _piece.BlackPieces.Add(gameObject);
             }
 
             //駒を獲った時に移動したマスを_movedPieceTileに代入する
@@ -346,7 +346,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             //獲れる駒を獲らなかった場合にListに戻す
-            if (_piece._getablePieces != null)
+            if (_piece.GetablePieces != null)
             {
                 _piece.UnGetPiece();
             }
@@ -354,9 +354,9 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             //駒の状態をもとに戻す
             _status = Status.Normal;
             _renderer.material = _normalMaterial;
-            _search._movableTile.Clear();
+            _search.MovableTile.Clear();
             _search._piece = null;
-            _search._pieceInfo = null;
+            _search.pieceInfo = null;
             _search._puzzle = null;
         }
     }
