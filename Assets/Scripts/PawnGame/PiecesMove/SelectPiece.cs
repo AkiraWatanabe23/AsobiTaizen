@@ -32,7 +32,7 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_select.SelectPieceCount[0] != 0)
                 {
-                    _select.setPiece = _selectPieces[0];
+                    _select.SetPiece = _selectPieces[0];
                     _select.SelectPieceCount[0]--;
                     print($"白ルークはあと {_select.SelectPieceCount[0]} 個");
                     UISwitch();
@@ -46,7 +46,7 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_select.SelectPieceCount[1] != 0)
                 {
-                    _select.setPiece = _selectPieces[1];
+                    _select.SetPiece = _selectPieces[1];
                     _select.SelectPieceCount[1]--;
                     print($"白ビショップはあと {_select.SelectPieceCount[1]} 個");
                     UISwitch();
@@ -60,7 +60,7 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_select.SelectPieceCount[2] != 0)
                 {
-                    _select.setPiece = _selectPieces[2];
+                    _select.SetPiece = _selectPieces[2];
                     _select.SelectPieceCount[2]--;
                     print($"白ナイトはあと {_select.SelectPieceCount[2]} 個");
                     UISwitch();
@@ -78,7 +78,7 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_select.SelectPieceCount[3] != 0)
                 {
-                    _select.setPiece = _selectPieces[3];
+                    _select.SetPiece = _selectPieces[3];
                     _select.SelectPieceCount[3]--;
                     print($"黒ルークはあと {_select.SelectPieceCount[3]} 個");
                     UISwitch();
@@ -92,7 +92,7 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_select.SelectPieceCount[4] != 0)
                 {
-                    _select.setPiece = _selectPieces[4];
+                    _select.SetPiece = _selectPieces[4];
                     _select.SelectPieceCount[4]--;
                     print($"黒ルークはあと {_select.SelectPieceCount[4]} 個");
                     UISwitch();
@@ -106,7 +106,7 @@ public class SelectPiece : MonoBehaviour
             {
                 if (_select.SelectPieceCount[5] != 0)
                 {
-                    _select.setPiece = _selectPieces[5];
+                    _select.SetPiece = _selectPieces[5];
                     _select.SelectPieceCount[5]--;
                     print($"黒ルークはあと {_select.SelectPieceCount[5]} 個");
                     UISwitch();
@@ -117,7 +117,7 @@ public class SelectPiece : MonoBehaviour
                 }
             }
         }
-        _select.SetPiece();
+        _select.SettingPiece();
     }
 
     void UISwitch()
@@ -130,6 +130,6 @@ public class SelectPiece : MonoBehaviour
         {
             _blackPanel.gameObject.SetActive(false);
         }
-        _select._whereText.gameObject.SetActive(true);
+        _select.WhereText.gameObject.SetActive(true);
     }
 }

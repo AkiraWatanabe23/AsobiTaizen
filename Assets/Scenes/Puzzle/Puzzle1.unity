@@ -223,17 +223,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!114 &164304477 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7766336645791819350, guid: fa4b5a85d1da61d46900301f75e98f3b, type: 3}
-  m_PrefabInstance: {fileID: 768795966}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dcc9aa62d6af643916e9fcbd3032aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &657290642
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,22 +729,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6033752119209944633, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
-      propertyPath: _search
-      value: 
-      objectReference: {fileID: 164304477}
-    - target: {fileID: 6033752119452739585, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
-      propertyPath: _search
-      value: 
-      objectReference: {fileID: 164304477}
-    - target: {fileID: 6033752119745020062, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
-      propertyPath: _search
-      value: 
-      objectReference: {fileID: 164304477}
-    - target: {fileID: 6033752120118796201, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
-      propertyPath: _search
-      value: 
-      objectReference: {fileID: 164304477}
     - target: {fileID: 7590277187348779745, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
       propertyPath: m_Name
       value: Piece
@@ -804,10 +777,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7947539019368754464, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
-      propertyPath: _search
-      value: 
-      objectReference: {fileID: 164304477}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c22b1b4012e844bac2551cbdca682f, type: 3}
 --- !u!1001 &7974036180959298698

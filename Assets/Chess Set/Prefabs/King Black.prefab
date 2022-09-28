@@ -99,9 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normalMaterial: {fileID: 2100000, guid: 973635ff02379f4429b7df0543346d32, type: 2}
   _moveMaterial: {fileID: 2100000, guid: f0af01764f3344467b46574de4f027ba, type: 2}
-  color: 1
-  state: 0
-  type: 6
+  _color: 1
+  _type: 6
   _offset: {x: 0, y: 0.5, z: 0}
   _tileLayer:
     serializedVersion: 2
@@ -114,9 +113,6 @@ MonoBehaviour:
     m_Bits: 512
   search: {fileID: 0}
   piece: {fileID: 0}
-  moveCount: 0
-  currentPieceTile: {fileID: 0}
-  movedPieceTile: {fileID: 0}
 --- !u!114 &-356411558522470968
 MonoBehaviour:
   m_ObjectHideFlags: 0

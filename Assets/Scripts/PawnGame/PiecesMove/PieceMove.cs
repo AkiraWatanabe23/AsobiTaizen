@@ -13,22 +13,24 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     [Tooltip("通常状態のマテリアル"), SerializeField] Material _normalMaterial;
     [Tooltip("移動状態のマテリアル"), SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    [Tooltip("白駒か黒駒かのenum")] public PieceColor color = PieceColor.White;
-    [Tooltip("駒の状態のenum")] public PieceState state = PieceState.Normal;
-    [Tooltip("駒の種類のenum")] public PieceType type;
-    RaycastHit _hit;
+    [Tooltip("白駒か黒駒かのenum"), SerializeField] PieceColor _color = PieceColor.White;
+    [Tooltip("駒の種類のenum"), SerializeField] PieceType _type;
+    [Tooltip("駒の状態のenum")] PieceState _state = PieceState.Normal;
     [SerializeField] Vector3 _offset = Vector3.up;
     //レイヤーマスク(InspectorのLayerから選択する)
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
+    RaycastHit _hit;
     //移動可能範囲の探索
-    [SerializeField] MasuSearch search;
-    [SerializeField] PieceManager piece;
+    MasuSearch _search;
+    PieceManager _piece;
     GameManager _manager;
-    [Tooltip("駒の移動回数")] public int moveCount = 0;
-    public GameObject currentPieceTile;
-    public GameObject movedPieceTile;
+    GameObject _currentPieceTile;
+    GameObject _movedPieceTile;
+    /// <summary> 駒の移動回数 </summary>
+    public int MoveCount { get; set; }
+    public PieceType Type { get => _type; set => _type = value; }
 
     //extern...UnityやVisualStudioにはない機能(関数)をとってくる{訂正:外部ファイル(dllファイル)で定義されている関数や変数を使用する、という命令}
     //[DllImport("user32.dll")]...外のどのファイル(今回は[user32.dll])からとってくるのか
@@ -48,20 +50,22 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         go.GetComponent<PieceMove>().ChangeState();
 
         //_movedPieceTile = null で駒の再選択を出来るようにする
-        if (state == PieceState.Normal && currentPieceTile == movedPieceTile)
+        if (_state == PieceState.Normal && _currentPieceTile == _movedPieceTile)
         {
-            movedPieceTile = null;
+            _movedPieceTile = null;
         }
     }
 
     void Start()
     {
         _manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
         _renderer = GetComponent<Renderer>();
 
         if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
         {
-            currentPieceTile = _hit.collider.gameObject;
+            _currentPieceTile = _hit.collider.gameObject;
         }
     }
 
@@ -72,7 +76,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
         if (Input.GetMouseButtonDown(0))
         {
             //駒が移動状態になっていたら
-            if (state == PieceState.Move)
+            if (_state == PieceState.Move)
             {
                 //移動処理
                 if (Move()) /*←return の値が true だったら[Move()はbool型の関数]*/
@@ -83,59 +87,59 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
         }
         //右クリックで非選択状態に変更
-        else if (Input.GetMouseButtonDown(1) && state == PieceState.Move)
+        else if (Input.GetMouseButtonDown(1) && _state == PieceState.Move)
         {
             Debug.Log("選び直し");
 
             //マスを元の状態に戻す
-            for (int i = 0; i < search.MovableTile.Count; i++)
+            for (int i = 0; i < _search.MovableTile.Count; i++)
             {
-                if (search.MovableTile[i].tag == "Tile")
+                if (_search.MovableTile[i].tag == "Tile")
                 {
-                    search.MovableTile[i].GetComponent<MeshRenderer>().enabled = false;
-                    search.Tile.Add(search.MovableTile[i]);
+                    _search.MovableTile[i].GetComponent<MeshRenderer>().enabled = false;
+                    _search.Tile.Add(_search.MovableTile[i]);
                 }
             }
-            foreach (var tiles in search.Tile)
+            foreach (var tiles in _search.Tile)
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
 
-            foreach (var piece in search.ImmovablePieces)
+            foreach (var piece in _search.ImmovablePieces)
             {
                 piece.GetComponent<Collider>().enabled = true;
             }
-            search.ImmovablePieces.Clear();
+            _search.ImmovablePieces.Clear();
 
             if (gameObject.tag == "WhitePiece")
             {
-                foreach (var pieces in piece.WhitePieces)
+                foreach (var pieces in _piece.WhitePieces)
                 {
                     pieces.GetComponent<Collider>().enabled = true;
                 }
-                piece.WhitePieces.Add(gameObject);
+                _piece.WhitePieces.Add(gameObject);
             }
             else if (gameObject.tag == "BlackPiece")
             {
-                foreach (var pieces in piece.BlackPieces)
+                foreach (var pieces in _piece.BlackPieces)
                 {
                     pieces.GetComponent<Collider>().enabled = true;
                 }
-                piece.BlackPieces.Add(gameObject);
+                _piece.BlackPieces.Add(gameObject);
             }
 
             //獲れる駒を獲らなかった場合にListに戻す
-            if (piece.GetablePieces != null)
+            if (_piece.GetablePieces != null)
             {
-                piece.UnGetPiece();
+                _piece.UnGetPiece();
             }
 
             //駒の状態をもとに戻す
-            state = PieceState.Normal;
+            _state = PieceState.Normal;
             _renderer.material = _normalMaterial;
-            search.MovableTile.Clear();
-            search.piece = null;
-            search.pieceInfo = null;
+            _search.MovableTile.Clear();
+            _search.Piece = null;
+            _search.PieceInfo = null;
         }
     }
 
@@ -153,16 +157,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             if (gameObject.tag == "WhitePiece")
             {
-                if (target.tag == "BlackPiece")
-                {
-                    Destroy(target);
-                }
+                Destroy(target);
                 transform.position = target.transform.position;
 
                 PhaseChange(target);
                 SetCursorPos(Screen.width / 2, Screen.height / 2);
-                GameManager.Player = GameManager.Player_Two;
-                GameManager.phase = Phase.Black;
+                GameManager.Player = GameManager.PLAYER_TWO;
+                _manager.Phase = GamePhase.Black;
 
                 print($"駒は {target.name} をとった");
 
@@ -171,7 +172,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     GameObject _hitTile = hitTile.collider.gameObject;
                     print($"駒は {_hitTile.name} に移動した");
                 }
-                _manager.getPiece = target.name;
+                _manager.GetPiece = target.name;
                 return true;
             }
         }
@@ -182,17 +183,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
             if (gameObject.tag == "BlackPiece")
             {
-                if (target.tag == "WhitePiece")
-                {
-                    Destroy(target);
-                }
-
+                Destroy(target);
                 transform.position = target.transform.position;
 
                 PhaseChange(target);
                 SetCursorPos(Screen.width / 2, Screen.height / 2);
-                GameManager.Player = GameManager.Player_One;
-                GameManager.phase = Phase.White;
+                GameManager.Player = GameManager.PLAYER_ONE;
+                _manager.Phase = GamePhase.White;
 
                 print($"駒は {target.name} をとった");
 
@@ -204,16 +201,16 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
 
                 if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
                 {
-                    movedPieceTile = _hit.collider.gameObject;
+                    _movedPieceTile = _hit.collider.gameObject;
                 }
-                _manager.getPiece = target.name;
+                _manager.GetPiece = target.name;
                 return true;
             }
         }
         //白黒共通の移動処理
         else if (Physics.Raycast(ray, out _hit, rayDistance, _tileLayer))
         {
-            foreach (var i in search.MovableTile)
+            foreach (var i in _search.MovableTile)
             {
                 GameObject target = _hit.collider.gameObject;
                 if (target == i.gameObject)
@@ -225,13 +222,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     //ターン切り替え
                     if (gameObject.tag == "WhitePiece")
                     {
-                        GameManager.Player = GameManager.Player_Two;
-                        GameManager.phase = Phase.Black;
+                        GameManager.Player = GameManager.PLAYER_TWO;
+                        _manager.Phase = GamePhase.Black;
                     }
                     else if (gameObject.tag == "BlackPiece")
                     {
-                        GameManager.Player = GameManager.Player_One;
-                        GameManager.phase = Phase.White;
+                        GameManager.Player = GameManager.PLAYER_ONE;
+                        _manager.Phase = GamePhase.White;
                     }
 
                     print($"駒は {target.name} に移動した");
@@ -241,7 +238,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                     Debug.Log("指定したマスには動けません");
                 }
             }
-            movedPieceTile = _hit.collider.gameObject;
+            _movedPieceTile = _hit.collider.gameObject;
             return true;
         }
         return false;
@@ -253,68 +250,68 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     public void ChangeState() //駒を右クリックをすると選択状態→通常状態にできる
     {
         //通常状態→選択状態(白)
-        if (state == PieceState.Normal && color == PieceColor.White && GameManager.phase == Phase.White && currentPieceTile != movedPieceTile)
+        if (_state == PieceState.Normal && _color == PieceColor.White && _manager.Phase == GamePhase.White && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
-                currentPieceTile = movedPieceTile = _hit.collider.gameObject;
+                _currentPieceTile = _movedPieceTile = _hit.collider.gameObject;
             }
-            state = PieceState.Move;
+            _state = PieceState.Move;
             _renderer.material = _moveMaterial;
-            search.piece = this;
-            search.pieceInfo = gameObject;
-            piece.WhitePieces.Remove(gameObject);
+            _search.Piece = this;
+            _search.PieceInfo = gameObject;
+            _piece.WhitePieces.Remove(gameObject);
         }
         //通常状態→選択状態(黒)
-        else if (state == PieceState.Normal && color == PieceColor.Black && GameManager.phase == Phase.Black && currentPieceTile != movedPieceTile)
+        else if (_state == PieceState.Normal && _color == PieceColor.Black && _manager.Phase == GamePhase.Black && _currentPieceTile != _movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
-                currentPieceTile = movedPieceTile = _hit.collider.gameObject;
+                _currentPieceTile = _movedPieceTile = _hit.collider.gameObject;
             }
-            state = PieceState.Move;
+            _state = PieceState.Move;
             _renderer.material = _moveMaterial;
-            search.piece = this;
-            search.pieceInfo = gameObject;
-            piece.BlackPieces.Remove(gameObject);
+            _search.Piece = this;
+            _search.PieceInfo = gameObject;
+            _piece.BlackPieces.Remove(gameObject);
         }
         //選択状態→通常状態(駒が移動した後の処理)
-        else if (state == PieceState.Move)
+        else if (_state == PieceState.Move)
         {
             //駒の移動回数を加算する(ポーンの移動制限用)
-            if (currentPieceTile != movedPieceTile && movedPieceTile.tag == "Tile")
+            if (_currentPieceTile != _movedPieceTile && _movedPieceTile.tag == "Tile")
             {
-                moveCount++;
+                MoveCount++;
             }
 
             //マスを元の状態に戻す
-            for (int i = 0; i < search.MovableTile.Count; i++)
+            for (int i = 0; i < _search.MovableTile.Count; i++)
             {
-                if (search.MovableTile[i].tag == "Tile")
+                if (_search.MovableTile[i].tag == "Tile")
                 {
-                    search.MovableTile[i].GetComponent<MeshRenderer>().enabled = false;
-                    search.Tile.Add(search.MovableTile[i]);
+                    _search.MovableTile[i].GetComponent<MeshRenderer>().enabled = false;
+                    _search.Tile.Add(_search.MovableTile[i]);
                 }
             }
-            foreach (var tiles in search.Tile)
+            foreach (var tiles in _search.Tile)
             {
                 tiles.GetComponent<Collider>().enabled = true;
             }
-            foreach (var piece in search.ImmovablePieces)
+            foreach (var piece in _search.ImmovablePieces)
             {
                 piece.GetComponent<Collider>().enabled = true;
             }
-            search.ImmovablePieces.Clear();
+            _search.ImmovablePieces.Clear();
 
             //ColliderOffにした駒をもとに戻す
-            foreach (var pieces in piece.WhitePieces)
+            foreach (var pieces in _piece.WhitePieces)
             {
                 if (pieces != null)
                 {
                     pieces.GetComponent<Collider>().enabled = true;
                 }
             }
-            foreach (var pieces in piece.BlackPieces)
+            foreach (var pieces in _piece.BlackPieces)
             {
                 if (pieces != null)
                 {
@@ -323,17 +320,17 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
             if (gameObject.tag == "WhitePiece")
             {
-                piece.WhitePieces.Add(gameObject);
+                _piece.WhitePieces.Add(gameObject);
             }
             else if (gameObject.tag == "BlackPiece")
             {
-                piece.BlackPieces.Add(gameObject);
+                _piece.BlackPieces.Add(gameObject);
             }
 
             //駒を獲った時に移動したマスを_movedPieceTileに代入する
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
-                movedPieceTile = _hit.collider.gameObject;
+                _movedPieceTile = _hit.collider.gameObject;
             }
             else
             {
@@ -341,17 +338,17 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
             }
 
             //獲れる駒を獲らなかった場合にListに戻す
-            if (piece.GetablePieces != null)
+            if (_piece.GetablePieces != null)
             {
-                piece.UnGetPiece();
+                _piece.UnGetPiece();
             }
 
             //駒の状態をもとに戻す
-            state = PieceState.Normal;
+            _state = PieceState.Normal;
             _renderer.material = _normalMaterial;
-            search.MovableTile.Clear();
-            search.piece = null;
-            search.pieceInfo = null;
+            _search.MovableTile.Clear();
+            _search.Piece = null;
+            _search.PieceInfo = null;
         }
     }
 
@@ -361,13 +358,13 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// <param name="_target"></param>
     public void PhaseChange(GameObject _target)
     {
-        switch (color)
+        switch (_color)
         {
             case PieceColor.White:
                 _manager.SwitchTurnWhite();
                 if (_target.tag == "WhitePiece")
                 {
-                    state = PieceState.Normal;
+                    _state = PieceState.Normal;
                 }
                 break;
 
@@ -375,7 +372,7 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
                 _manager.SwitchTurnBlack();
                 if (_target.tag == "BlackPiece")
                 {
-                    state = PieceState.Normal;
+                    _state = PieceState.Normal;
                 }
                 break;
         }
@@ -386,8 +383,8 @@ public class PieceMove : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void SelectAssign()
     {
-        search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
-        piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
     }
 
     /// <summary> 通常状態、選択状態 </summary>

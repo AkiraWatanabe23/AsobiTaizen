@@ -6,9 +6,10 @@ public class GameCheck : MonoBehaviour
 {
     float _checkX;
     float _checkZ;
-    /// <summary> èåèÇñûÇΩÇµÇΩãÓÇ™Ç¢Ç≠Ç¬ï¿ÇÒÇ≈Ç¢ÇÈÇ©(íTçıï˚å¸ñà) </summary>
-    public int[] CheckCount = new int[8];
+    int[] _checkCount = new int[8];
     RaycastHit _hit;
+    /// <summary> èåèÇñûÇΩÇµÇΩãÓÇ™Ç¢Ç≠Ç¬ï¿ÇÒÇ≈Ç¢ÇÈÇ©(íTçıï˚å¸ñà) </summary>
+    public int[] CheckCount { get => _checkCount; set => _checkCount = value; }
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[0]++;
                     _checkZ += 6f;
@@ -60,7 +61,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[1]++;
                     _checkZ += 6f;
@@ -84,7 +85,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[2]++;
                     _checkX += 6f;
@@ -108,7 +109,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[3]++;
                     _checkX += 6f;
@@ -134,7 +135,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[4]++;
                     _checkX += 6f;
@@ -159,7 +160,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[5]++;
                     _checkX += 6f;
@@ -184,7 +185,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[6]++;
                     _checkX += 6f;
@@ -209,7 +210,7 @@ public class GameCheck : MonoBehaviour
                     break;
                 }
                 else if (_hit.collider.gameObject.tag == gameObject.tag ||
-                    _hit.collider.gameObject.GetComponent<PieceMove>().type == gameObject.GetComponent<PieceMove>().type)
+                    _hit.collider.gameObject.GetComponent<PieceMove>().Type == gameObject.GetComponent<PieceMove>().Type)
                 {
                     CheckCount[7]++;
                     _checkX += 6f;

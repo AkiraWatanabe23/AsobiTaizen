@@ -7,26 +7,28 @@ using UnityEngine;
 /// </summary>
 public class MasuSearch : MonoBehaviour
 {
-    [Tooltip("盤面のマス"), SerializeField] public List<Collider> Tile = new List<Collider>();
-    [Tooltip("移動可能マス"), SerializeField] public List<Collider> MovableTile = new List<Collider>();
-    [Tooltip("探索先にいた味方駒"), SerializeField] public List<GameObject> ImmovablePieces = new List<GameObject>();
-    [SerializeField] public PieceMove piece = default;
-    [SerializeField] public PuzzlePiece puzzle = default;
-    [SerializeField] public GameObject pieceInfo;
-    [Tooltip("駒のいるマスのファイル(縦) a～h")] public int tileFile = 0;
-    [Tooltip("駒のいるマスのランク(横) 1～8")] public int tileRank = 0;
-    RaycastHit _hit;
-    [SerializeField] PieceManager manager;
+    [Tooltip("盤面のマス"), SerializeField] List<Collider> _tile = new List<Collider>();
+    [Tooltip("移動可能マス"), SerializeField] List<Collider> _movableTile = new List<Collider>();
+    [Tooltip("探索先にいた味方駒"), SerializeField] List<GameObject> _immovablePieces = new List<GameObject>();
+    PieceManager _manager;
+    [Header("駒の個別移動処理")]
     [SerializeField] Pawn _pawn;
     [SerializeField] Knight _knight;
     [SerializeField] Bishop _bishop;
     [SerializeField] Rook _rook;
     [SerializeField] Queen _queen;
     [SerializeField] King _king;
+    public List<Collider> Tile { get => _tile; set => _tile = value; }
+    public List<Collider> MovableTile { get => _movableTile; set => _movableTile = value; }
+    public List<GameObject> ImmovablePieces { get => _immovablePieces; set => _immovablePieces = value; }
+    public PieceMove Piece { get; set; }
+    public PuzzlePiece Puzzle { get; set; }
+    public GameObject PieceInfo { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        _manager = GameObject.Find("Piece").GetComponent<PieceManager>();
         //マスを取得し、色を非表示にする
         for (int i = 0; i < 64; i++)
         {
@@ -38,17 +40,15 @@ public class MasuSearch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (piece != null)
+        if (Piece != null)
         {
-            GetTileNum();
-            var _pieceNum = piece.gameObject.GetComponent<PieceMove>().type;
+            var _pieceNum = Piece.gameObject.GetComponent<PieceMove>().Type;
             Search((int)_pieceNum);
         }
 
-        if (puzzle != null)
+        if (Puzzle != null)
         {
-            GetTileNum(); 
-            var _pieceNum = puzzle.gameObject.GetComponent<PuzzlePiece>().type;
+            var _pieceNum = Puzzle.gameObject.GetComponent<PuzzlePiece>().Type;
             Search((int)_pieceNum);
         }
     }
@@ -81,7 +81,7 @@ public class MasuSearch : MonoBehaviour
                 break;
         }
         //移動範囲外の駒のColliderをoffにする処理
-        foreach (var pieces in manager.WhitePieces)
+        foreach (var pieces in _manager.WhitePieces)
         {
             //Listの要素がMissingだった場合、無視する
             if (pieces != null)
@@ -89,60 +89,12 @@ public class MasuSearch : MonoBehaviour
                 pieces.GetComponent<Collider>().enabled = false;
             }
         }
-        foreach (var pieces in manager.BlackPieces)
+        foreach (var pieces in _manager.BlackPieces)
         {
             //Listの要素がMissingだった場合、無視する
             if (pieces != null)
             {
                 pieces.GetComponent<Collider>().enabled = false;
-            }
-        }
-    }
-
-    /// <summary>
-    /// マスの番号を取得する
-    /// </summary>
-    void GetTileNum()
-    {
-        if (pieceInfo != null)
-        {
-            if (Physics.Raycast(pieceInfo.transform.position, Vector3.down, out _hit, 5))
-            {
-                //マス番号取得(ランク)
-                tileRank = int.Parse(_hit.collider.gameObject.name[1].ToString());
-                //マス番号取得(ファイル)
-                if (_hit.collider.gameObject.name[0] == 'a')
-                {
-                    tileFile = 1;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'b')
-                {
-                    tileFile = 2;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'c')
-                {
-                    tileFile = 3;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'd')
-                {
-                    tileFile = 4;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'e')
-                {
-                    tileFile = 5;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'f')
-                {
-                    tileFile = 6;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'g')
-                {
-                    tileFile = 7;
-                }
-                else if (_hit.collider.gameObject.name[0] == 'h')
-                {
-                    tileFile = 8;
-                }
             }
         }
     }

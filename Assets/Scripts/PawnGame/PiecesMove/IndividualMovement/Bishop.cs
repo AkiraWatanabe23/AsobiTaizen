@@ -25,7 +25,7 @@ public class Bishop : MonoBehaviour
 
     public void BishopMovement()
     {
-        _pieceInfo = _search.pieceInfo;
+        _pieceInfo = _search.PieceInfo;
 
         //¶Î‚ß‘O•ûŒü
         _vecX = 6f;

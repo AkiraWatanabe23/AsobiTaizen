@@ -25,13 +25,13 @@ public class Pawn : MonoBehaviour
 
     public void PawnMovement()
     {
-        _pieceInfo = _search.pieceInfo;
+        _pieceInfo = _search.PieceInfo;
 
         /********************白駒の移動処理********************/
         if (_pieceInfo.tag == "WhitePiece")
         {
             //1,1回目の動き...2マス移動可
-            if (_pieceInfo.GetComponent<PieceMove>().moveCount == 0)
+            if (_pieceInfo.GetComponent<PieceMove>().MoveCount == 0)
             {
                 _vecX = 0f;
                 _vecY = 15f;
@@ -72,7 +72,7 @@ public class Pawn : MonoBehaviour
                 }
             }
             //2,2回目以降は1マス移動
-            else if (_pieceInfo.GetComponent<PieceMove>().moveCount != 0)
+            else if (_pieceInfo.GetComponent<PieceMove>().MoveCount != 0)
             {
                 _vecX = 0f;
                 _vecY = 15f;
@@ -145,7 +145,7 @@ public class Pawn : MonoBehaviour
         else if (_pieceInfo.tag == "BlackPiece")
         {
             //1,1回目の動き...2マス移動可
-            if (_pieceInfo.GetComponent<PieceMove>().moveCount == 0)
+            if (_pieceInfo.GetComponent<PieceMove>().MoveCount == 0)
             {
                 _vecX = 0f;
                 _vecY = 15f;
@@ -186,7 +186,7 @@ public class Pawn : MonoBehaviour
                 }
             }
             //2,2回目以降は1マス移動
-            else if (_pieceInfo.GetComponent<PieceMove>().moveCount != 0)
+            else if (_pieceInfo.GetComponent<PieceMove>().MoveCount != 0)
             {
                 _vecX = 0f;
                 _vecY = 15f;

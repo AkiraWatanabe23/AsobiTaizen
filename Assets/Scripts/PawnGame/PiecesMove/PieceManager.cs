@@ -10,11 +10,13 @@ public class PieceManager : MonoBehaviour
 {
     [SerializeField] Material _white;
     [SerializeField] Material _black;
-    [SerializeField] public List<GameObject> WhitePieces = new List<GameObject>();
-    [SerializeField] public List<GameObject> BlackPieces = new List<GameObject>();
-    [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚éŠl‚é‚±‚Æ‚ªo—ˆ‚é‹î")] public List<GameObject> GetablePieces = new List<GameObject>();
-    [Tooltip("Œ»İ‘I‚ñ‚Å‚¢‚é‹î")] public GameObject CurrentPiece;
+    [SerializeField] List<GameObject> _whitePieces = new List<GameObject>();
+    [SerializeField] List<GameObject> _blackPieces = new List<GameObject>();
+    [Tooltip("’Tõ”ÍˆÍ‚É‚¢‚éŠl‚é‚±‚Æ‚ªo—ˆ‚é‹î"), SerializeField] List<GameObject> _getablePieces = new List<GameObject>();
     MasuSearch _search;
+    public List<GameObject> WhitePieces { get => _whitePieces; set => _whitePieces = value; }
+    public List<GameObject> BlackPieces { get => _blackPieces; set => _blackPieces = value; }
+    public List<GameObject> GetablePieces { get => _getablePieces; set => _getablePieces = value; }
 
     // Start is called before the first frame update
     private void Start()
@@ -44,7 +46,7 @@ public class PieceManager : MonoBehaviour
     {
         foreach (var i in GetablePieces)
         {
-            if (_search.pieceInfo.tag == "BlackPiece")
+            if (_search.PieceInfo.tag == "BlackPiece")
             {
                 if (i.gameObject.tag == "WhitePiece")
                 {
@@ -52,7 +54,7 @@ public class PieceManager : MonoBehaviour
                 }
                 WhitePieces.Add(i);
             }
-            else if (_search.pieceInfo.gameObject.tag == "WhitePiece")
+            else if (_search.PieceInfo.gameObject.tag == "WhitePiece")
             {
                 if (i.gameObject.tag == "BlackPiece")
                 {

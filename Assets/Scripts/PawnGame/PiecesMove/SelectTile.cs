@@ -7,23 +7,29 @@ public class SelectTile : MonoBehaviour
 {
     GameManager _manager;
     PieceManager _piece;
-    public GameObject setPiece;
     RaycastHit _hit;
-    public int[] SelectPieceCount = new int[6];
+    int[] _selectPieceCount = new int[6];
     [SerializeField] Text[] _countText = new Text[6];
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
-    [SerializeField] public Text _whereText;
-    public SelectPhase phase = SelectPhase.Piece;
+    [SerializeField] Text _whereText;
+    /// <summary> 配置する駒を選んだら再選択できないようにボタンの上にあるPanel </summary>
+    [Tooltip("配置する駒の再選択不可")] Image _unselectable;
+    SelectPhase _phase = SelectPhase.Piece;
     //駒を配置する時の位置修正(マスの位置に駒を置くと駒のColliderとマスのColliderがぶつかるため)
     [SerializeField] Vector3 _offset = Vector3.up;
+    public GameObject SetPiece { get; set; }
+    public int[] SelectPieceCount { get => _selectPieceCount; set => _selectPieceCount = value; }
+    public Text WhereText { get => _whereText; set => _whereText = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         _manager = GetComponent<GameManager>();
         _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
+
+        _unselectable = GameObject.Find("UnselectablePanel").GetComponent<Image>();
         for (int i = 0; i < SelectPieceCount.Length; i++)
         {
             SelectPieceCount[i] = 4;
@@ -34,7 +40,7 @@ public class SelectTile : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SetPiece();
+            SettingPiece();
         }
 
         for (int i = 0; i < 6; i++)
@@ -43,54 +49,56 @@ public class SelectTile : MonoBehaviour
         }
     }
 
-    public void SetPiece()
+    public void SettingPiece()
     {
-        if (phase == SelectPhase.Tile)
+        if (_phase == SelectPhase.Tile)
         {
-            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float _rayDistance = 100;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            float rayDistance = 100;
 
             //駒が既にあるマスには置けない
-            if (Physics.Raycast(_ray, out _hit, _rayDistance, _whiteLayer))
+            if (Physics.Raycast(ray, out _hit, rayDistance, _whiteLayer))
             {
                 Debug.Log("ここには置けない White");
                 _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
             }
-            else if (Physics.Raycast(_ray, out _hit, _rayDistance, _blackLayer))
+            else if (Physics.Raycast(ray, out _hit, rayDistance, _blackLayer))
             {
                 Debug.Log("ここには置けない Black");
                 _hit.collider.gameObject.GetComponent<Collider>().enabled = false;
             }
-            else if (Physics.Raycast(_ray, out _hit, _rayDistance, _tileLayer))
+            else if (Physics.Raycast(ray, out _hit, rayDistance, _tileLayer))
             {
                 GameObject target = _hit.collider.gameObject;
 
-                GameObject _setPiece = Instantiate(setPiece, target.transform.position + _offset, setPiece.transform.rotation);
-                if (_setPiece.tag == "WhitePiece")
+                //deploy...配置する
+                GameObject deployPiece = Instantiate(SetPiece, target.transform.position + _offset, SetPiece.transform.rotation);
+                if (deployPiece.tag == "WhitePiece")
                 {
-                    _piece.WhitePieces.Add(_setPiece);
+                    _piece.WhitePieces.Add(deployPiece);
                 }
-                else if (_setPiece.tag == "BlackPiece")
+                else if (deployPiece.tag == "BlackPiece")
                 {
-                    _piece.BlackPieces.Add(_setPiece);
+                    _piece.BlackPieces.Add(deployPiece);
                 }
-                PieceMove _pieceInfo = _setPiece.GetComponent<PieceMove>();
-                _pieceInfo.SelectAssign();
+                PieceMove pieceInfo = deployPiece.GetComponent<PieceMove>();
+                pieceInfo.SelectAssign();
 
-                print($"{_setPiece.name} を {target.name} に配置した");
-                setPiece = null;
-                _whereText.gameObject.SetActive(false);
-                phase = SelectPhase.Piece;
+                print($"{deployPiece.name} を {target.name} に配置した");
+                SetPiece = null;
+                WhereText.gameObject.SetActive(false);
+                _unselectable.raycastTarget = false;
+                _phase = SelectPhase.Piece;
                 _manager.LineCount();
                 SwitchTurn();
             }
         }
-        else if (phase == SelectPhase.Piece)
+        else if (_phase == SelectPhase.Piece)
         {
             //gameObjectのSetActiveをif文で判定(boolを返す)
-            if (_whereText.gameObject.activeSelf)
+            if (WhereText.gameObject.activeSelf)
             {
-                phase = SelectPhase.Tile;
+                _phase = SelectPhase.Tile;
             }
         }
     }
@@ -103,13 +111,13 @@ public class SelectTile : MonoBehaviour
         if (GameManager.Player == 1)
         {
             GameManager.Player = 2;
-            GameManager.phase = Phase.Black;
+            _manager.Phase = GamePhase.Black;
             _manager.SwitchTurnWhite();
         }
         else if (GameManager.Player == 2)
         {
             GameManager.Player = 1;
-            GameManager.phase = Phase.White;
+            _manager.Phase = GamePhase.White;
             _manager.SwitchTurnBlack();
         }
     }

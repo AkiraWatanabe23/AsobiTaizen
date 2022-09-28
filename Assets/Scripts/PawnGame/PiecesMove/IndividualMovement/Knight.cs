@@ -25,7 +25,7 @@ public class Knight : MonoBehaviour
 
     public void KnightMovement ()
     {
-        _pieceInfo = _search.pieceInfo;
+        _pieceInfo = _search.PieceInfo;
 
         //Œj”n ‘O•ûŒü
         _vecX = 6f;

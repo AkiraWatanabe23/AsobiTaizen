@@ -25,7 +25,7 @@ public class King : MonoBehaviour
 
     public void KingMovement()
     {
-        _pieceInfo = _search.pieceInfo;
+        _pieceInfo = _search.PieceInfo;
 
         //////////‘OŒã¶‰E‚Ì“®‚«//////////
         //‘OŒã•ûŒü

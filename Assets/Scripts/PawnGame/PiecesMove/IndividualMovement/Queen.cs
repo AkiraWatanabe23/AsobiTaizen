@@ -25,7 +25,7 @@ public class Queen : MonoBehaviour
 
     public void QueenMovement()
     {
-        _pieceInfo = _search.pieceInfo;
+        _pieceInfo = _search.PieceInfo;
 
         /*==========‘OŒã¶‰E‚Ì“®‚«==========*/
         //‘O•ûŒü

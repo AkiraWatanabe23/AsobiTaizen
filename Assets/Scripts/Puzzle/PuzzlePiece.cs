@@ -11,10 +11,9 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
     [Tooltip("通常状態のマテリアル"), SerializeField] Material _normalMaterial;
     [Tooltip("移動状態のマテリアル"), SerializeField] Material _moveMaterial;
     Renderer _renderer;
-    [Tooltip("白駒か黒駒かのenum")] public PieceColor color = PieceColor.White;
-    [Tooltip("駒の状態のenum")] public Status status = Status.Normal;
-    [Tooltip("駒の種類のenum")] public PieceType type;
-    RaycastHit _hit;
+    [Tooltip("駒の種類のenum"), SerializeField] PieceType _type;
+    [Tooltip("白駒か黒駒かのenum")] PieceColor _color = PieceColor.White;
+    [Tooltip("駒の状態のenum")] Status _status = Status.Normal;
     [Header("移動後の位置調整")]
     [SerializeField] Vector3 _movedOffset = Vector3.up;
     [SerializeField] Vector3 _gotOffset = Vector3.down;
@@ -22,12 +21,14 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
     [SerializeField] LayerMask _tileLayer;
     [SerializeField] LayerMask _whiteLayer;
     [SerializeField] LayerMask _blackLayer;
+    RaycastHit _hit;
     //移動可能範囲の探索
-    [SerializeField] MasuSearch _search;
-    [SerializeField] PieceManager _piece;
-    [Tooltip("駒の移動回数")] public int moveCount = 0;
-    public GameObject currentPieceTile;
-    public GameObject movedPieceTile;
+    MasuSearch _search;
+    PieceManager _piece;
+    [Tooltip("駒の移動回数")] int moveCount = 0;
+    GameObject currentPieceTile;
+    GameObject movedPieceTile;
+    public PieceType Type { get => _type; set => _type = value; }
 
     /// <summary>
     /// オブジェクトをクリックした時の処理
@@ -38,13 +39,14 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
         var go = eventData.pointerCurrentRaycast.gameObject;
 
         print($"{ name } を選んだ");
+        //黒の駒(獲るべき駒は選択できない)
         if (go.gameObject.tag == "WhitePiece")
         {
             go.GetComponent<PuzzlePiece>().ChangeState();
         }
 
         //_movedPieceTile = null で駒の再選択を出来るようにする
-        if (status == Status.Normal && currentPieceTile == movedPieceTile)
+        if (_status == Status.Normal && currentPieceTile == movedPieceTile)
         {
             movedPieceTile = null;
         }
@@ -54,6 +56,8 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         _renderer = GetComponent<Renderer>();
+        _search = GameObject.Find("Board,Tile").GetComponent<MasuSearch>();
+        _piece = GameObject.Find("Piece").GetComponent<PieceManager>();
 
         if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
         {
@@ -68,7 +72,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
         if (Input.GetMouseButtonDown(0))
         {
             //駒が移動状態になっていたら
-            if (status == Status.Move)
+            if (_status == Status.Move)
             {
                 //移動処理
                 if (Move()) /*←return の値が true だったら*/
@@ -79,7 +83,7 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
         }
         //右クリックで非選択状態に変更
-        else if (Input.GetMouseButtonDown(1) && status == Status.Move)
+        else if (Input.GetMouseButtonDown(1) && _status == Status.Move)
         {
             Debug.Log("選び直し");
 
@@ -127,11 +131,11 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             //駒の状態をもとに戻す
-            status = Status.Normal;
+            _status = Status.Normal;
             _renderer.material = _normalMaterial;
             _search.MovableTile.Clear();
-            _search.piece = null;
-            _search.pieceInfo = null;
+            _search.Piece = null;
+            _search.PieceInfo = null;
         }
     }
 
@@ -153,8 +157,6 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             this.transform.position = target.transform.position + _gotOffset;
-            GameManager.Player = GameManager.Player_Two;
-            GameManager.phase = Phase.Black;
 
             print($"駒は {target.name} をとった");
 
@@ -163,7 +165,6 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
                 GameObject _hitTile = hitTile.collider.gameObject;
                 print($"駒は {_hitTile.name} に移動した");
             }
-
             PuzzleManager.moveCount--;
 
             return true;
@@ -177,9 +178,6 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
                 if (_target == i.gameObject)
                 {
                     this.transform.position = _target.transform.position + _movedOffset;
-                    GameManager.Player = GameManager.Player_Two;
-                    GameManager.phase = Phase.Black;
-
                     print($"駒は {_target.name} に移動した");
                 }
                 else
@@ -200,33 +198,33 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
     public void ChangeState()
     {
         //通常状態→選択状態(白)
-        if (status == Status.Normal && color == PieceColor.White && currentPieceTile != movedPieceTile)
+        if (_status == Status.Normal && _color == PieceColor.White && currentPieceTile != movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
                 currentPieceTile = movedPieceTile = _hit.collider.gameObject;
             }
-            status = Status.Move;
+            _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search.puzzle = this;
-            _search.pieceInfo = gameObject;
+            _search.Puzzle = this;
+            _search.PieceInfo = gameObject;
             _piece.WhitePieces.Remove(gameObject);
         }
         //通常状態→選択状態(黒)
-        else if (status == Status.Normal && color == PieceColor.Black && currentPieceTile != movedPieceTile)
+        else if (_status == Status.Normal && _color == PieceColor.Black && currentPieceTile != movedPieceTile)
         {
             if (Physics.Raycast(gameObject.transform.position, Vector3.down, out _hit, 10))
             {
                 currentPieceTile = movedPieceTile = _hit.collider.gameObject;
             }
-            status = Status.Move;
+            _status = Status.Move;
             _renderer.material = _moveMaterial;
-            _search.puzzle = this;
-            _search.pieceInfo = gameObject;
+            _search.Puzzle = this;
+            _search.PieceInfo = gameObject;
             _piece.BlackPieces.Remove(gameObject);
         }
         //選択状態→通常状態(駒が移動した後の処理)
-        else if (status == Status.Move)
+        else if (_status == Status.Move)
         {
             //駒の移動回数を加算する(ポーンの移動制限用)
             if (currentPieceTile != movedPieceTile && movedPieceTile.tag == "Tile")
@@ -295,12 +293,12 @@ public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
             }
 
             //駒の状態をもとに戻す
-            status = Status.Normal;
+            _status = Status.Normal;
             _renderer.material = _normalMaterial;
             _search.MovableTile.Clear();
-            _search.piece = null;
-            _search.pieceInfo = null;
-            _search.puzzle = null;
+            _search.Piece = null;
+            _search.PieceInfo = null;
+            _search.Puzzle = null;
         }
     }
 

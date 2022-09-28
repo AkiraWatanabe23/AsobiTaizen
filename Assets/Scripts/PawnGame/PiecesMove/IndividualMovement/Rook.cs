@@ -25,7 +25,7 @@ public class Rook : MonoBehaviour
 
     public void RookMovement()
     {
-        _pieceInfo = _search.pieceInfo;
+        _pieceInfo = _search.PieceInfo;
 
         //‘O•ûŒü
         _vecX = 0f;

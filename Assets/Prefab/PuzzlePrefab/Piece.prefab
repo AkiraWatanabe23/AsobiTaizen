@@ -50,10 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _white: {fileID: 2100000, guid: b391301c47109a144bbb6408e48da028, type: 2}
   _black: {fileID: 2100000, guid: 973635ff02379f4429b7df0543346d32, type: 2}
-  WhitePieces: []
-  BlackPieces: []
-  GetablePieces: []
-  CurrentPiece: {fileID: 0}
+  _whitePieces: []
+  _blackPieces: []
+  _getablePieces: []
 --- !u!1001 &7590277187218135945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,6 +110,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 512636586327062185, guid: fd76aa3ba8c7a9b4293a2bef936764ff, type: 3}
       propertyPath: type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 512636586327062185, guid: fd76aa3ba8c7a9b4293a2bef936764ff, type: 3}
+      propertyPath: _type
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 512636586327062185, guid: fd76aa3ba8c7a9b4293a2bef936764ff, type: 3}
@@ -271,6 +274,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245246790223122977, guid: 4bbb0a19925b04643b18ed6efd63ba50, type: 3}
       propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245246790223122977, guid: 4bbb0a19925b04643b18ed6efd63ba50, type: 3}
+      propertyPath: _type
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4245246790223122977, guid: 4bbb0a19925b04643b18ed6efd63ba50, type: 3}

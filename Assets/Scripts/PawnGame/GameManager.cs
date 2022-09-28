@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// どっちのターンか
 /// </summary>
-public enum Phase
+public enum GamePhase
 {
     White = 0,
     Black = 1,
@@ -28,22 +28,23 @@ public enum SelectPhase
 public class GameManager : MonoBehaviour
 {
     /// <summary> プレイヤー(白) </summary>
-    public const int Player_One = 1;
+    public const int PLAYER_ONE = 1;
     /// <summary> プレイヤー(黒) </summary>
-    public const int Player_Two = 2;
+    public const int PLAYER_TWO = 2;
     /// <summary> 現在の(current)プレイヤー </summary>
     public static int Player;
     int _beFrPlayer; //(BeforeFramePlayer)
 
     //↓Panel(UI)は、Image(UI)として扱う
     [SerializeField] Image _resultPanel;
-    [SerializeField] public static Phase phase = Phase.White;
+    [SerializeField] GamePhase _phase = GamePhase.White;
     [Tooltip("どっちのターンか(白)")] Text _whiteTurn;
     [Tooltip("どっちのターンか(黒)")] Text _blackTurn;
     [SerializeField] Button _whiteSelect;
     [SerializeField] Button _blackSelect;
-    public string getPiece;
     PieceManager _piece;
+    public GamePhase Phase { get; set; }
+    public string GetPiece { get; set; }
 
 
     // Start is called before the first frame update
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         Player = 1;
         _beFrPlayer = 1;
-        phase = Phase.White;
+        Phase = GamePhase.White;
         _resultPanel.gameObject.SetActive(false);
         //↓ターン表示のText
         _whiteTurn = GameObject.Find("WhiteText").GetComponent<Text>();
@@ -140,9 +141,9 @@ public class GameManager : MonoBehaviour
     {
         //勝利時のシーン遷移
         //敵のキングを獲ったとき、または条件を満たして1列揃えたとき
-        if (getPiece != null)
+        if (GetPiece != null)
         {
-            if (getPiece.Contains("King"))
+            if (GetPiece.Contains("King"))
             {
                 _resultPanel.gameObject.SetActive(true);
                 Invoke("SceneSwitch", 2f);
@@ -160,12 +161,12 @@ public class GameManager : MonoBehaviour
                         //白の勝ち
                         if (_beFrPlayer == 1)
                         {
-                            ResultSceneManager._win = 2;
+                            ResultSceneManager.Win = 2;
                         }
                         //黒の勝ち
                         else if (_beFrPlayer == 2)
                         {
-                            ResultSceneManager._win = 1;
+                            ResultSceneManager.Win = 1;
                         }
                         Invoke("SceneSwitch", 2f);
                     }
@@ -184,12 +185,12 @@ public class GameManager : MonoBehaviour
                         //白の勝ち
                         if (_beFrPlayer == 1)
                         {
-                            ResultSceneManager._win = 2;
+                            ResultSceneManager.Win = 2;
                         }
                         //黒の勝ち
                         else if (_beFrPlayer == 2)
                         {
-                            ResultSceneManager._win = 1;
+                            ResultSceneManager.Win = 1;
                         }
                         Invoke("SceneSwitch", 2f);
                     }
@@ -216,14 +217,14 @@ public class GameManager : MonoBehaviour
     void SceneSwitch()
     {
         //黒が勝ったら
-        if (getPiece.Contains("White"))
+        if (GetPiece.Contains("White"))
         {
-            ResultSceneManager._win = 1;
+            ResultSceneManager.Win = 1;
         }
         //白が勝ったら
-        else if (getPiece.Contains("Black"))
+        else if (GetPiece.Contains("Black"))
         {
-            ResultSceneManager._win = 2;
+            ResultSceneManager.Win = 2;
         }
         SceneManager.LoadScene("ChessResult");
     }
