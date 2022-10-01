@@ -216,15 +216,18 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void SceneSwitch()
     {
-        //•‚ªŸ‚Á‚½‚ç
-        if (GetPiece.Contains("White"))
+        if (GetPiece != null)
         {
-            ResultSceneManager.Win = 1;
-        }
-        //”’‚ªŸ‚Á‚½‚ç
-        else if (GetPiece.Contains("Black"))
-        {
-            ResultSceneManager.Win = 2;
+            //•‚ªŸ‚Á‚½‚ç
+            if (GetPiece.Contains("White"))
+            {
+                ResultSceneManager.Win = 1;
+            }
+            //”’‚ªŸ‚Á‚½‚ç
+            else if (GetPiece.Contains("Black"))
+            {
+                ResultSceneManager.Win = 2;
+            }
         }
         SceneManager.LoadScene("ChessResult");
     }
